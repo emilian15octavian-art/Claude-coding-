@@ -5,6 +5,8 @@
   "name": "claude-coding",
   "compatibility_date": "2025-09-01",
   "build": { "command": "npm run build" },
+  // Needed by `wrangler preview`, which Cloudflare runs for pull-request preview builds.
+  "previews": {},
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page",
