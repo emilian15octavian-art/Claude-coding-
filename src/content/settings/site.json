@@ -1,10 +1,10 @@
 {
   "legalEntity": {
-    "name": "[Întreprindere familială name]",
+    "name": "MARINESCU OCTAVIAN-EMILIAN ÎNTREPRINDERE FAMILIALĂ",
     "type": "Întreprindere familială (IF)",
-    "cui": "[CUI / CIF]",
-    "regCom": "[Nr. Reg. Com., e.g. F40/1234/2026]",
-    "address": "[Registered address, city, county, postal code, Romania]",
+    "cui": "54213733",
+    "regCom": "F2026012827000",
+    "address": "București, Sector 3, România",
     "phone": null,
     "vatPayer": false
   },
