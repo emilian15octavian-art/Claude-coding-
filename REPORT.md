@@ -78,11 +78,11 @@ The logo is pure **#000000 / #FFFFFF**, and those are kept exactly as the main c
 2. **Band facts:** you haven't given me the city, founding year, member names/roles, e-mails or legal entity yet, so these are clearly marked placeholders. Pages hide what is missing; nothing fake is published.
 3. **Photos and PDFs** are brand-style placeholders. The tech rider and stage plot are templates.
 4. **Translations are drafts**, marked `needs native review`, especially Arabic, Russian and Greek. **Legal texts need a lawyer's review**, the Romanian version first.
-5. **Arabic share images** show the page name in English, because the image generator (Satori) cannot shape Arabic text. The Arabic `og:title` and description are in Arabic.
+5. ~~Arabic share images in English~~ **Fixed:** Arabic share images now show the heading in Arabic, shaped and right-to-left (drawn by resvg with Noto Sans Arabic).
 6. **Stripe Checkout has no Arabic**, so Arabic visitors see an English checkout. All other languages are passed with `?locale=`.
 7. **Turnstile needs a server-side check**, so the contact form uses one tiny Cloudflare Pages Function (free). Everything else is static. Web3Forms may restrict server-side submissions on its free plan, so the function also supports Formspree.
 8. **The ANPC SAL badge** is a text badge. Download the official pictogram from anpc.ro (instructions are in the component). The SOL/ODR link is intentionally left out because the EU ODR platform closed on 20 July 2025.
-9. **GitHub Actions workflows** were validated (YAML syntax) and every script they call was run locally. They have not run on GitHub yet: that happens on your first push to `main`. I could not run actionlint because downloading it was not permitted here.
+9. **GitHub Actions workflows** pass schema validation (action-validator) and every script they call was run locally. They have not run on GitHub yet: that happens on your first push to `main`.
 10. **Uptime:** GitHub's scheduler runs at most every 5–10 minutes and is sometimes late. For exact 5-minute checks and a status page, set up Upptime or UptimeRobot (both free, described in MAINTENANCE.md).
-11. **npm audit:** 2 *moderate* issues remain in a build-time library (satori → fflate, ZIP parsing that the site never uses). Nothing vulnerable is shipped to visitors. Dependabot will update it when a fix is released. The high-severity issue (basic-ftp via Lighthouse CI) was fixed with an override.
+11. ~~npm audit warnings~~ **Fixed:** `npm audit` reports **0 vulnerabilities** (basic-ftp and fflate pinned to patched versions with `overrides` in package.json).
 12. **pages.dev:** HSTS is sent, but HSTS *preload* and a custom e-mail domain need your own domain (paid), so they are not included.

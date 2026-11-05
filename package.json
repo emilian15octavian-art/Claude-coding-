@@ -51,6 +51,7 @@
     "typescript": "^6.0.3"
   },
   "overrides": {
-    "basic-ftp": "^6.2.6"
+    "basic-ftp": "^6.2.6",
+    "fflate": "^0.8.3"
   }
 }
