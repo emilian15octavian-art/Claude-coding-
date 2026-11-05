@@ -11,7 +11,7 @@
   "services": {
     "brevoFormAction": null,
     "web3formsEnabled": false,
-    "web3formsAccessKey": null,
+    "web3formsAccessKey": "909883ea-e15b-43bf-8898-eaed43a29dae",
     "turnstileSiteKey": null,
     "cloudflareAnalyticsToken": null,
     "googleSiteVerification": null,
