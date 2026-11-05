@@ -49,6 +49,7 @@ Tick the boxes as you go. Estimated time: one afternoon for steps 1 to 8, the re
 3. GitHub repository → **Settings → Secrets and variables → Actions → New repository secret**:
    - `CLOUDFLARE_API_TOKEN` = the token
    - `CLOUDFLARE_ACCOUNT_ID` = the account ID
+   - (On a phone, the shorter names `CFTOKEN` and `CFACCOUNT` work too.)
 4. GitHub → **Actions** → **Check and deploy** → **Run workflow**. After about 10 minutes it should be green and the site live.
    - [ ] Open <https://bleedingdebts316.pages.dev/> and <https://bleedingdebts316.pages.dev/health.json>.
 
