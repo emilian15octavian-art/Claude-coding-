@@ -18,6 +18,8 @@ Le responsable du traitement est l'entité juridique indiquée dans l'encadré c
 
 **Newsletter.** Si vous vous inscrivez, nous conservons votre adresse e-mail, la langue choisie ainsi que la date et la preuve de votre consentement. Vous confirmez votre inscription en cliquant sur un lien reçu par e-mail (double opt-in). La newsletter est envoyée avec Brevo (Sendinblue SAS, France), qui stocke les données dans l'UE. Base légale : votre consentement (art. 6, par. 1, a)). Vous pouvez vous désinscrire à tout moment via le lien présent dans chaque e-mail.
 
+*Fonctionnement actuel :* tant que nous n'utilisons pas encore Brevo, chaque inscription (adresse e-mail, langue et consentement) est transmise par Web3Forms à la boîte mail du groupe (Gmail, Google) et conservée uniquement pour la newsletter. Vous pouvez nous demander de la supprimer à tout moment.
+
 **Commandes en boutique.** Les paiements sont traités par Stripe. Stripe collecte directement vos données de carte ; nous ne les voyons jamais. Pour livrer votre commande, nous recevons votre nom, votre adresse de livraison, votre e-mail et le détail de la commande. Base légale : exécution du contrat (art. 6, par. 1, b)) et nos obligations légales (art. 6, par. 1, c)), par exemple la conservation des documents comptables pendant la durée prévue par la loi roumaine (loi n° 82/1991).
 
 **Vidéos et lecteurs audio.** Les lecteurs YouTube, Spotify et Bandcamp ne se chargent **qu'après votre clic**. Avant cela, aucune donnée n'est envoyée à ces services. Après le clic, leurs propres politiques de confidentialité s'appliquent.

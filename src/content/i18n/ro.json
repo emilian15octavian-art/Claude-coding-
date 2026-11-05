@@ -1,22 +1,106 @@
 {
-  "_meta": { "language": "Română", "status": "needs native review", "note": "Traducere preliminară. Trebuie verificată de un vorbitor nativ." },
+  "_meta": {
+    "language": "Română",
+    "status": "needs native review",
+    "note": "Traducere preliminară. Trebuie verificată de un vorbitor nativ."
+  },
   "pages": {
-    "home": { "nav": "Acasă", "title": "Bleeding Debts 316 | Site oficial: muzică grea despre credință, îndoială și har", "description": "Site-ul oficial Bleeding Debts 316, metal original din România. Ascultă cea mai nouă lansare, vezi concertele, magazinul și abonează-te la newsletter.", "heading": "Bleeding Debts 316" },
-    "music": { "nav": "Muzică", "title": "Muzică și discografie | Bleeding Debts 316", "description": "Toate lansările Bleeding Debts 316, cu coperți, date de lansare și linkuri către Spotify, Apple Music, YouTube Music și Bandcamp.", "heading": "Muzică" },
-    "videos": { "nav": "Videoclipuri", "title": "Videoclipuri | Bleeding Debts 316", "description": "Videoclipuri oficiale și clipuri live Bleeding Debts 316. Videoclipurile se încarcă doar când apeși pe redare.", "heading": "Videoclipuri" },
-    "shows": { "nav": "Concerte", "title": "Concerte și date de turneu | Bleeding Debts 316", "description": "Următoarele concerte Bleeding Debts 316, cu bilete și adăugare în calendar, plus arhiva concertelor trecute.", "heading": "Concerte" },
-    "shop": { "nav": "Magazin", "title": "Magazin oficial de merch | Bleeding Debts 316", "description": "Merch oficial Bleeding Debts 316, prețuri în RON și EUR, plată securizată prin Stripe și livrare în toată Europa.", "heading": "Magazin" },
-    "about": { "nav": "Despre", "title": "Despre trupă | Bleeding Debts 316", "description": "Cine este Bleeding Debts 316: povestea, membrii și informațiile de bază despre trupa de metal original din România.", "heading": "Despre" },
-    "gallery": { "nav": "Galerie", "title": "Galerie foto | Bleeding Debts 316", "description": "Fotografii live și de studio cu Bleeding Debts 316, cu numele fotografilor.", "heading": "Galerie" },
-    "press": { "nav": "Presă", "title": "Kit de presă (EPK) | Bleeding Debts 316", "description": "Kitul de presă Bleeding Debts 316: biografii, fotografii la rezoluție mare, logouri, rider tehnic, stage plot, citate din presă și contact pentru booking.", "heading": "Kit de presă" },
-    "newsletter": { "nav": "Newsletter", "title": "Newsletter | Bleeding Debts 316", "description": "Primește pe e-mail muzica nouă, anunțurile de concerte și noul merch Bleeding Debts 316. Fără spam, te poți dezabona oricând.", "heading": "Newsletter" },
-    "contact": { "nav": "Contact", "title": "Contact și booking | Bleeding Debts 316", "description": "Rezervă Bleeding Debts 316 pentru concerte și festivaluri sau trimite un mesaj trupei.", "heading": "Contact și booking" },
-    "links": { "nav": "Linkuri", "title": "Toate linkurile | Bleeding Debts 316", "description": "Toate linkurile oficiale Bleeding Debts 316 într-un singur loc: muzică, videoclipuri, rețele sociale, concerte și merch.", "heading": "Bleeding Debts 316" },
-    "privacy": { "nav": "Politica de confidențialitate", "title": "Politica de confidențialitate | Bleeding Debts 316", "description": "Cum prelucrează Bleeding Debts 316 datele cu caracter personal conform GDPR.", "heading": "Politica de confidențialitate" },
-    "cookies": { "nav": "Politica de cookie-uri", "title": "Politica de cookie-uri | Bleeding Debts 316", "description": "Acest site nu folosește cookie-uri de urmărire. Iată exact ce se stochează și ce nu pe dispozitivul tău.", "heading": "Politica de cookie-uri" },
-    "terms": { "nav": "Termeni și condiții", "title": "Termeni și condiții | Bleeding Debts 316", "description": "Termenii și condițiile de utilizare a site-ului Bleeding Debts 316 și de cumpărare din magazinul oficial.", "heading": "Termeni și condiții" },
-    "shipping": { "nav": "Livrare și retur", "title": "Livrare și retur | Bleeding Debts 316", "description": "Termene și costuri de livrare, dreptul de retragere de 14 zile și cum returnezi o comandă din magazinul Bleeding Debts 316.", "heading": "Livrare și retur" },
-    "notFound": { "nav": "Pagină negăsită", "title": "Pagină negăsită | Bleeding Debts 316", "description": "Această pagină nu există.", "heading": "Pagina asta a sângerat de tot" }
+    "home": {
+      "nav": "Acasă",
+      "title": "Bleeding Debts 316 | Site oficial: muzică grea despre credință, îndoială și har",
+      "description": "Site-ul oficial Bleeding Debts 316, metal original din România. Ascultă cea mai nouă lansare, vezi concertele, magazinul și abonează-te la newsletter.",
+      "heading": "Bleeding Debts 316"
+    },
+    "music": {
+      "nav": "Muzică",
+      "title": "Muzică și discografie | Bleeding Debts 316",
+      "description": "Toate lansările Bleeding Debts 316, cu coperți, date de lansare și linkuri către Spotify, Apple Music, YouTube Music și Bandcamp.",
+      "heading": "Muzică"
+    },
+    "videos": {
+      "nav": "Videoclipuri",
+      "title": "Videoclipuri | Bleeding Debts 316",
+      "description": "Videoclipuri oficiale și clipuri live Bleeding Debts 316. Videoclipurile se încarcă doar când apeși pe redare.",
+      "heading": "Videoclipuri"
+    },
+    "shows": {
+      "nav": "Concerte",
+      "title": "Concerte și date de turneu | Bleeding Debts 316",
+      "description": "Următoarele concerte Bleeding Debts 316, cu bilete și adăugare în calendar, plus arhiva concertelor trecute.",
+      "heading": "Concerte"
+    },
+    "shop": {
+      "nav": "Magazin",
+      "title": "Magazin oficial de merch | Bleeding Debts 316",
+      "description": "Merch oficial Bleeding Debts 316, prețuri în RON și EUR, plată securizată prin Stripe și livrare în toată Europa.",
+      "heading": "Magazin"
+    },
+    "about": {
+      "nav": "Despre",
+      "title": "Despre trupă | Bleeding Debts 316",
+      "description": "Cine este Bleeding Debts 316: povestea, membrii și informațiile de bază despre trupa de metal original din România.",
+      "heading": "Despre"
+    },
+    "gallery": {
+      "nav": "Galerie",
+      "title": "Galerie foto | Bleeding Debts 316",
+      "description": "Fotografii live și de studio cu Bleeding Debts 316, cu numele fotografilor.",
+      "heading": "Galerie"
+    },
+    "press": {
+      "nav": "Presă",
+      "title": "Kit de presă (EPK) | Bleeding Debts 316",
+      "description": "Kitul de presă Bleeding Debts 316: biografii, fotografii la rezoluție mare, logouri, rider tehnic, stage plot, citate din presă și contact pentru booking.",
+      "heading": "Kit de presă"
+    },
+    "newsletter": {
+      "nav": "Newsletter",
+      "title": "Newsletter | Bleeding Debts 316",
+      "description": "Primește pe e-mail muzica nouă, anunțurile de concerte și noul merch Bleeding Debts 316. Fără spam, te poți dezabona oricând.",
+      "heading": "Newsletter"
+    },
+    "contact": {
+      "nav": "Contact",
+      "title": "Contact și booking | Bleeding Debts 316",
+      "description": "Rezervă Bleeding Debts 316 pentru concerte și festivaluri sau trimite un mesaj trupei.",
+      "heading": "Contact și booking"
+    },
+    "links": {
+      "nav": "Linkuri",
+      "title": "Toate linkurile | Bleeding Debts 316",
+      "description": "Toate linkurile oficiale Bleeding Debts 316 într-un singur loc: muzică, videoclipuri, rețele sociale, concerte și merch.",
+      "heading": "Bleeding Debts 316"
+    },
+    "privacy": {
+      "nav": "Politica de confidențialitate",
+      "title": "Politica de confidențialitate | Bleeding Debts 316",
+      "description": "Cum prelucrează Bleeding Debts 316 datele cu caracter personal conform GDPR.",
+      "heading": "Politica de confidențialitate"
+    },
+    "cookies": {
+      "nav": "Politica de cookie-uri",
+      "title": "Politica de cookie-uri | Bleeding Debts 316",
+      "description": "Acest site nu folosește cookie-uri de urmărire. Iată exact ce se stochează și ce nu pe dispozitivul tău.",
+      "heading": "Politica de cookie-uri"
+    },
+    "terms": {
+      "nav": "Termeni și condiții",
+      "title": "Termeni și condiții | Bleeding Debts 316",
+      "description": "Termenii și condițiile de utilizare a site-ului Bleeding Debts 316 și de cumpărare din magazinul oficial.",
+      "heading": "Termeni și condiții"
+    },
+    "shipping": {
+      "nav": "Livrare și retur",
+      "title": "Livrare și retur | Bleeding Debts 316",
+      "description": "Termene și costuri de livrare, dreptul de retragere de 14 zile și cum returnezi o comandă din magazinul Bleeding Debts 316.",
+      "heading": "Livrare și retur"
+    },
+    "notFound": {
+      "nav": "Pagină negăsită",
+      "title": "Pagină negăsită | Bleeding Debts 316",
+      "description": "Această pagină nu există.",
+      "heading": "Pagina asta a sângerat de tot"
+    }
   },
   "ui": {
     "skipToContent": "Sari la conținut",
@@ -57,7 +141,11 @@
     "noReleases": "Prima lansare e pe drum. Abonează-te la newsletter ca s-o asculți primul.",
     "playEmbed": "Redă aici cu {service}",
     "coverAlt": "Coperta {title} de Bleeding Debts 316",
-    "type": { "album": "Album", "ep": "EP", "single": "Single" }
+    "type": {
+      "album": "Album",
+      "ep": "EP",
+      "single": "Single"
+    }
   },
   "videos": {
     "play": "Redă videoclipul: {title}",
@@ -74,7 +162,13 @@
     "noUpcoming": "Momentan nu avem concerte programate. Urmărește-ne sau abonează-te la newsletter ca să afli primul de datele noi.",
     "noPast": "Încă nu există concerte trecute.",
     "localTime": "Orele sunt afișate în ora locală a locației.",
-    "status": { "scheduled": "Confirmat", "cancelled": "Anulat", "postponed": "Amânat", "rescheduled": "Reprogramat", "soldout": "Sold out" },
+    "status": {
+      "scheduled": "Confirmat",
+      "cancelled": "Anulat",
+      "postponed": "Amânat",
+      "rescheduled": "Reprogramat",
+      "soldout": "Sold out"
+    },
     "bookUs": "Ne vrei în orașul tău? Scrie-ne."
   },
   "shop": {
@@ -137,7 +231,11 @@
     "emailLabel": "Adresă de e-mail",
     "consent": "Sunt de acord să primesc newsletterul Bleeding Debts 316. Voi primi un e-mail de confirmare a abonării și mă pot dezabona oricând.",
     "submit": "Abonează-te",
-    "privacy": "Folosim Brevo pentru trimiterea e-mailurilor. Adresa ta este stocată în UE și nu este transmisă nimănui. Detalii în politica de confidențialitate."
+    "privacy": "Folosim Brevo pentru trimiterea e-mailurilor. Adresa ta este stocată în UE și nu este transmisă nimănui. Detalii în politica de confidențialitate.",
+    "consentSimple": "Sunt de acord să primesc newsletterul Bleeding Debts 316 pe e-mail. Mă pot dezabona oricând răspunzând „dezabonare”.",
+    "privacySimple": "Adresa ta ajunge doar în căsuța de e-mail a trupei și este folosită doar pentru newsletter. Detalii în politica de confidențialitate.",
+    "success": "Ești pe listă. Mulțumim!",
+    "error": "Ceva nu a mers. Te rugăm să încerci din nou."
   },
   "contact": {
     "intro": "Booking, presă, colaborări sau doar un mesaj: citim tot.",

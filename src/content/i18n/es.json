@@ -1,22 +1,106 @@
 {
-  "_meta": { "language": "Español", "status": "needs native review", "note": "Borrador de traducción. Debe revisarlo un hablante nativo." },
+  "_meta": {
+    "language": "Español",
+    "status": "needs native review",
+    "note": "Borrador de traducción. Debe revisarlo un hablante nativo."
+  },
   "pages": {
-    "home": { "nav": "Inicio", "title": "Bleeding Debts 316 | Web oficial: música pesada sobre fe, duda y gracia", "description": "Web oficial de Bleeding Debts 316, metal original de Rumanía. Escucha el último lanzamiento, consulta los próximos conciertos, la tienda y el boletín.", "heading": "Bleeding Debts 316" },
-    "music": { "nav": "Música", "title": "Música y discografía | Bleeding Debts 316", "description": "Todos los lanzamientos de Bleeding Debts 316 con portadas, fechas de lanzamiento y enlaces a Spotify, Apple Music, YouTube Music y Bandcamp.", "heading": "Música" },
-    "videos": { "nav": "Vídeos", "title": "Vídeos | Bleeding Debts 316", "description": "Videoclips oficiales y vídeos en directo de Bleeding Debts 316. Los vídeos solo se cargan cuando pulsas reproducir.", "heading": "Vídeos" },
-    "shows": { "nav": "Conciertos", "title": "Conciertos y fechas de gira | Bleeding Debts 316", "description": "Próximos conciertos de Bleeding Debts 316 con entradas y enlace al calendario, además del archivo de conciertos pasados.", "heading": "Conciertos" },
-    "shop": { "nav": "Tienda", "title": "Tienda oficial de merch | Bleeding Debts 316", "description": "Merch oficial de Bleeding Debts 316 con precios en RON y EUR, pago seguro con Stripe y envíos a toda Europa.", "heading": "Tienda" },
-    "about": { "nav": "Sobre nosotros", "title": "Sobre la banda | Bleeding Debts 316", "description": "Quiénes son Bleeding Debts 316: la historia, los miembros y los datos de la banda de metal original de Rumanía.", "heading": "Sobre nosotros" },
-    "gallery": { "nav": "Galería", "title": "Galería de fotos | Bleeding Debts 316", "description": "Fotos en directo y de estudio de Bleeding Debts 316, con créditos de los fotógrafos.", "heading": "Galería" },
-    "press": { "nav": "Prensa", "title": "Dossier de prensa (EPK) | Bleeding Debts 316", "description": "Dossier de prensa electrónico de Bleeding Debts 316: biografías, fotos en alta resolución, logotipos, rider técnico, stage plot, citas de prensa y contacto de booking.", "heading": "Dossier de prensa" },
-    "newsletter": { "nav": "Boletín", "title": "Boletín | Bleeding Debts 316", "description": "Recibe por correo la música nueva, los anuncios de conciertos y el nuevo merch de Bleeding Debts 316. Sin spam, date de baja cuando quieras.", "heading": "Boletín" },
-    "contact": { "nav": "Contacto", "title": "Contacto y booking | Bleeding Debts 316", "description": "Contrata a Bleeding Debts 316 para conciertos y festivales o envía un mensaje a la banda.", "heading": "Contacto y booking" },
-    "links": { "nav": "Enlaces", "title": "Todos los enlaces | Bleeding Debts 316", "description": "Todos los enlaces oficiales de Bleeding Debts 316 en un solo lugar: música, vídeos, redes sociales, conciertos y merch.", "heading": "Bleeding Debts 316" },
-    "privacy": { "nav": "Política de privacidad", "title": "Política de privacidad | Bleeding Debts 316", "description": "Cómo trata Bleeding Debts 316 los datos personales conforme al RGPD.", "heading": "Política de privacidad" },
-    "cookies": { "nav": "Política de cookies", "title": "Política de cookies | Bleeding Debts 316", "description": "Este sitio no usa cookies de seguimiento. Esto es exactamente lo que se guarda y lo que no en tu dispositivo.", "heading": "Política de cookies" },
-    "terms": { "nav": "Términos y condiciones", "title": "Términos y condiciones | Bleeding Debts 316", "description": "Términos y condiciones de uso de la web de Bleeding Debts 316 y de compra en la tienda oficial.", "heading": "Términos y condiciones" },
-    "shipping": { "nav": "Envíos y devoluciones", "title": "Envíos y devoluciones | Bleeding Debts 316", "description": "Plazos y costes de envío, derecho de desistimiento de 14 días y cómo devolver un pedido de la tienda de Bleeding Debts 316.", "heading": "Envíos y devoluciones" },
-    "notFound": { "nav": "Página no encontrada", "title": "Página no encontrada | Bleeding Debts 316", "description": "Esta página no existe.", "heading": "Esta página se ha desangrado" }
+    "home": {
+      "nav": "Inicio",
+      "title": "Bleeding Debts 316 | Web oficial: música pesada sobre fe, duda y gracia",
+      "description": "Web oficial de Bleeding Debts 316, metal original de Rumanía. Escucha el último lanzamiento, consulta los próximos conciertos, la tienda y el boletín.",
+      "heading": "Bleeding Debts 316"
+    },
+    "music": {
+      "nav": "Música",
+      "title": "Música y discografía | Bleeding Debts 316",
+      "description": "Todos los lanzamientos de Bleeding Debts 316 con portadas, fechas de lanzamiento y enlaces a Spotify, Apple Music, YouTube Music y Bandcamp.",
+      "heading": "Música"
+    },
+    "videos": {
+      "nav": "Vídeos",
+      "title": "Vídeos | Bleeding Debts 316",
+      "description": "Videoclips oficiales y vídeos en directo de Bleeding Debts 316. Los vídeos solo se cargan cuando pulsas reproducir.",
+      "heading": "Vídeos"
+    },
+    "shows": {
+      "nav": "Conciertos",
+      "title": "Conciertos y fechas de gira | Bleeding Debts 316",
+      "description": "Próximos conciertos de Bleeding Debts 316 con entradas y enlace al calendario, además del archivo de conciertos pasados.",
+      "heading": "Conciertos"
+    },
+    "shop": {
+      "nav": "Tienda",
+      "title": "Tienda oficial de merch | Bleeding Debts 316",
+      "description": "Merch oficial de Bleeding Debts 316 con precios en RON y EUR, pago seguro con Stripe y envíos a toda Europa.",
+      "heading": "Tienda"
+    },
+    "about": {
+      "nav": "Sobre nosotros",
+      "title": "Sobre la banda | Bleeding Debts 316",
+      "description": "Quiénes son Bleeding Debts 316: la historia, los miembros y los datos de la banda de metal original de Rumanía.",
+      "heading": "Sobre nosotros"
+    },
+    "gallery": {
+      "nav": "Galería",
+      "title": "Galería de fotos | Bleeding Debts 316",
+      "description": "Fotos en directo y de estudio de Bleeding Debts 316, con créditos de los fotógrafos.",
+      "heading": "Galería"
+    },
+    "press": {
+      "nav": "Prensa",
+      "title": "Dossier de prensa (EPK) | Bleeding Debts 316",
+      "description": "Dossier de prensa electrónico de Bleeding Debts 316: biografías, fotos en alta resolución, logotipos, rider técnico, stage plot, citas de prensa y contacto de booking.",
+      "heading": "Dossier de prensa"
+    },
+    "newsletter": {
+      "nav": "Boletín",
+      "title": "Boletín | Bleeding Debts 316",
+      "description": "Recibe por correo la música nueva, los anuncios de conciertos y el nuevo merch de Bleeding Debts 316. Sin spam, date de baja cuando quieras.",
+      "heading": "Boletín"
+    },
+    "contact": {
+      "nav": "Contacto",
+      "title": "Contacto y booking | Bleeding Debts 316",
+      "description": "Contrata a Bleeding Debts 316 para conciertos y festivales o envía un mensaje a la banda.",
+      "heading": "Contacto y booking"
+    },
+    "links": {
+      "nav": "Enlaces",
+      "title": "Todos los enlaces | Bleeding Debts 316",
+      "description": "Todos los enlaces oficiales de Bleeding Debts 316 en un solo lugar: música, vídeos, redes sociales, conciertos y merch.",
+      "heading": "Bleeding Debts 316"
+    },
+    "privacy": {
+      "nav": "Política de privacidad",
+      "title": "Política de privacidad | Bleeding Debts 316",
+      "description": "Cómo trata Bleeding Debts 316 los datos personales conforme al RGPD.",
+      "heading": "Política de privacidad"
+    },
+    "cookies": {
+      "nav": "Política de cookies",
+      "title": "Política de cookies | Bleeding Debts 316",
+      "description": "Este sitio no usa cookies de seguimiento. Esto es exactamente lo que se guarda y lo que no en tu dispositivo.",
+      "heading": "Política de cookies"
+    },
+    "terms": {
+      "nav": "Términos y condiciones",
+      "title": "Términos y condiciones | Bleeding Debts 316",
+      "description": "Términos y condiciones de uso de la web de Bleeding Debts 316 y de compra en la tienda oficial.",
+      "heading": "Términos y condiciones"
+    },
+    "shipping": {
+      "nav": "Envíos y devoluciones",
+      "title": "Envíos y devoluciones | Bleeding Debts 316",
+      "description": "Plazos y costes de envío, derecho de desistimiento de 14 días y cómo devolver un pedido de la tienda de Bleeding Debts 316.",
+      "heading": "Envíos y devoluciones"
+    },
+    "notFound": {
+      "nav": "Página no encontrada",
+      "title": "Página no encontrada | Bleeding Debts 316",
+      "description": "Esta página no existe.",
+      "heading": "Esta página se ha desangrado"
+    }
   },
   "ui": {
     "skipToContent": "Saltar al contenido",
@@ -57,7 +141,11 @@
     "noReleases": "El primer lanzamiento está en camino. Suscríbete al boletín para escucharlo el primero.",
     "playEmbed": "Reproducir aquí con {service}",
     "coverAlt": "Portada de {title} de Bleeding Debts 316",
-    "type": { "album": "Álbum", "ep": "EP", "single": "Sencillo" }
+    "type": {
+      "album": "Álbum",
+      "ep": "EP",
+      "single": "Sencillo"
+    }
   },
   "videos": {
     "play": "Reproducir vídeo: {title}",
@@ -74,7 +162,13 @@
     "noUpcoming": "Ahora mismo no hay conciertos programados. Síguenos o suscríbete al boletín para conocer las nuevas fechas antes que nadie.",
     "noPast": "Todavía no hay conciertos pasados.",
     "localTime": "Los horarios están en la hora local de la sala.",
-    "status": { "scheduled": "Confirmado", "cancelled": "Cancelado", "postponed": "Aplazado", "rescheduled": "Nueva fecha", "soldout": "Entradas agotadas" },
+    "status": {
+      "scheduled": "Confirmado",
+      "cancelled": "Cancelado",
+      "postponed": "Aplazado",
+      "rescheduled": "Nueva fecha",
+      "soldout": "Entradas agotadas"
+    },
     "bookUs": "¿Nos quieres en tu ciudad? Escríbenos."
   },
   "shop": {
@@ -137,7 +231,11 @@
     "emailLabel": "Correo electrónico",
     "consent": "Acepto recibir el boletín de Bleeding Debts 316. Recibiré un correo para confirmar mi suscripción y puedo darme de baja en cualquier momento.",
     "submit": "Suscribirme",
-    "privacy": "Usamos Brevo para enviar los correos. Tu dirección se guarda en la UE y nunca se comparte. Más detalles en nuestra política de privacidad."
+    "privacy": "Usamos Brevo para enviar los correos. Tu dirección se guarda en la UE y nunca se comparte. Más detalles en nuestra política de privacidad.",
+    "consentSimple": "Acepto recibir el boletín de Bleeding Debts 316 por correo. Puedo darme de baja en cualquier momento respondiendo «baja».",
+    "privacySimple": "Tu dirección llega solo al buzón de la banda y se usa solo para el boletín. Más detalles en nuestra política de privacidad.",
+    "success": "Ya estás en la lista. ¡Gracias!",
+    "error": "Algo ha fallado. Inténtalo de nuevo."
   },
   "contact": {
     "intro": "Booking, prensa, colaboraciones o simplemente un mensaje: lo leemos todo.",

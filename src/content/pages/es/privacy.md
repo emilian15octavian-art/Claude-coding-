@@ -18,6 +18,8 @@ El responsable del tratamiento es la entidad jurídica que aparece en el recuadr
 
 **Boletín.** Si te suscribes, guardamos tu correo, el idioma elegido y la fecha y prueba de tu consentimiento. Confirmas la suscripción con el enlace que te enviamos por correo (doble opt-in). El boletín se envía con Brevo (Sendinblue SAS, Francia), que almacena los datos en la UE. Base jurídica: tu consentimiento (art. 6.1.a). Puedes darte de baja en cualquier momento con el enlace de cada correo.
 
+*Funcionamiento actual:* hasta que empecemos a usar Brevo, cada suscripción (dirección de correo, idioma y consentimiento) se envía mediante Web3Forms al buzón de la banda (Gmail, Google) y se guarda solo para el boletín. Puedes pedirnos que la borremos en cualquier momento.
+
 **Pedidos en la tienda.** Los pagos los procesa Stripe, que recoge directamente los datos de tu tarjeta; nosotros nunca los vemos. Para entregar tu pedido recibimos tu nombre, dirección de entrega, correo y detalles del pedido. Base jurídica: ejecución del contrato (art. 6.1.b) y nuestras obligaciones legales (art. 6.1.c), por ejemplo conservar la contabilidad durante el plazo que exige la ley rumana (Ley n.º 82/1991).
 
 **Vídeos y reproductores de música.** Los reproductores de YouTube, Spotify y Bandcamp se cargan **solo después de que hagas clic**. Hasta entonces no se envía ningún dato a esos servicios. Después del clic se aplican sus propias políticas.

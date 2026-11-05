@@ -18,6 +18,8 @@ Operatorul de date este entitatea juridică indicată în caseta de mai sus (den
 
 **Newsletter.** Dacă te abonezi, stocăm adresa de e-mail, limba aleasă, precum și momentul și dovada consimțământului. Confirmi abonarea dând clic pe linkul primit pe e-mail (dublă confirmare). Newsletterul este trimis prin Brevo (Sendinblue SAS, Franța), care stochează datele în UE. Temei legal: consimțământul tău (art. 6 alin. (1) lit. a)). Te poți dezabona oricând prin linkul din fiecare e-mail.
 
+*Configurația actuală:* până când vom începe să folosim Brevo, fiecare abonare (adresa de e-mail, limba și consimțământul) este transmisă prin Web3Forms în căsuța de e-mail a trupei (Gmail, Google) și păstrată doar pentru newsletter. Ne poți cere oricând să o ștergem.
+
 **Comenzi din magazin.** Plățile sunt procesate de Stripe. Stripe colectează direct datele cardului; noi nu le vedem niciodată. Pentru a livra comanda primim numele, adresa de livrare, adresa de e-mail și detaliile comenzii. Temei legal: executarea contractului (art. 6 alin. (1) lit. b)) și obligațiile noastre legale (art. 6 alin. (1) lit. c)), de exemplu păstrarea documentelor contabile pe durata prevăzută de Legea contabilității nr. 82/1991.
 
 **Videoclipuri și playere audio.** Playerele YouTube, Spotify și Bandcamp se încarcă **doar după ce dai clic** pe ele. Până atunci nu se trimit date către aceste servicii. După clic, se aplică politicile lor de confidențialitate.
