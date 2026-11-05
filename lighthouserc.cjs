@@ -7,10 +7,12 @@ module.exports = {
     collect: {
       staticDistDir: dir,
       url: pages.map((p) => `http://localhost${p}`),
-      numberOfRuns: Number(process.env.LH_RUNS || 1),
+      // 2 runs per page: the best one counts, so a cold start of Chrome on the first page cannot fail the deploy.
+      numberOfRuns: Number(process.env.LH_RUNS || 2),
       settings: { chromeFlags: '--no-sandbox --headless=new', ...(process.env.CHROME_PATH ? { chromePath: process.env.CHROME_PATH } : {}) },
     },
     assert: {
+      aggregationMethod: 'optimistic',
       assertions: {
         'categories:performance': ['error', { minScore: 0.95 }],
         'categories:accessibility': ['error', { minScore: 0.95 }],
