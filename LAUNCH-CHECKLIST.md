@@ -35,13 +35,8 @@ Tick the boxes as you go. Estimated time: one afternoon for steps 1 to 8, the re
 ## 2. Free Cloudflare account and Pages project (10 min)
 
 1. Sign up at <https://dash.cloudflare.com/sign-up> (free plan; no domain needed).
-2. Install nothing yet. In your project folder run:
-   ```bash
-   npx wrangler login
-   npx wrangler pages project create bleedingdebts316 --production-branch=main
-   ```
-   This creates the project and the free address **https://bleedingdebts316.pages.dev**.
-   If the name is taken, choose another (for example `bleedingdebts316-band`). Then in GitHub → **Settings → Secrets and variables → Actions → Variables** add `CF_PAGES_PROJECT` = your project name and `SITE_URL` = `https://your-name.pages.dev`.
+2. Nothing to install: the first deploy from GitHub creates the Pages project and the free address **https://bleedingdebts316.pages.dev** automatically.
+   If the name is taken (the deploy log says so), choose another (for example `bleedingdebts316-band`). Then in GitHub → **Settings → Secrets and variables → Actions → Variables** add `CF_PAGES_PROJECT` = your project name and `SITE_URL` = `https://your-name.pages.dev`.
 3. **Do not connect the Git repository in Cloudflare.** Deploys come from GitHub Actions so that a failing check can block them.
 
 ## 3. Connect GitHub to Cloudflare (5 min)

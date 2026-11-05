@@ -70,6 +70,8 @@ jobs:
             echo "::warning::Cloudflare secrets are not set yet, so nothing was deployed. See LAUNCH-CHECKLIST.md step 3."
             exit 0
           fi
+          # Create the Pages project the first time (no-op afterwards)
+          npx wrangler pages project list | grep -qw "$CF_PAGES_PROJECT" || npx wrangler pages project create "$CF_PAGES_PROJECT" --production-branch=main
           npx wrangler pages deploy dist --project-name="$CF_PAGES_PROJECT" --branch=main --commit-hash="$GITHUB_SHA" --commit-dirty=true
 
       - name: Smoke test the live site
