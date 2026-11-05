@@ -56,7 +56,7 @@ export const GET: APIRoute = async ({ params, site }) => {
       rtl
         ? h('div', { display: 'flex', height: 96 }, ' ')
         : h('div', { display: 'flex', fontSize: page === 'home' ? 58 : 76, fontWeight: 900, color: '#fff', lineHeight: 1.1, maxWidth: 1050 }, heading),
-      h('div', { display: 'flex', fontSize: 28, color: '#b3b3b3', fontWeight: 900 }, `${site!.host}`),
+      h('div', { display: 'flex', fontSize: 28, color: '#b3b3b3', fontWeight: 900 }, 'Bleeding Debts 316'),
     ]),
   ]);
   let svg = await satori(tree as never, { width: 1200, height: 630, fonts: loadFonts() });
