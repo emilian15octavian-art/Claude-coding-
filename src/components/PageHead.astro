@@ -1,0 +1,15 @@
+---
+import { type Locale } from '../i18n/locales';
+import { type PageKey } from '../i18n/routes';
+import { t } from '../i18n/t';
+interface Props { lang: Locale; pageKey: PageKey; lead?: string }
+const { lang, pageKey, lead } = Astro.props;
+const heading = t(lang, `pages.${pageKey}.heading`);
+// Put the logo's inverted "box" on the first word of the heading
+const [first, ...rest] = heading.split(' ');
+---
+<header class="page-head container stack">
+  <h1><span class="box">{first}</span>{rest.length ? ' ' + rest.join(' ') : ''}</h1>
+  {lead && <p class="lead muted">{lead}</p>}
+  <slot />
+</header>

@@ -1,0 +1,42 @@
+# Runs the same checks on pull requests (including Dependabot updates). Nothing is deployed.
+# Dependabot pull requests are merged automatically once every check is green.
+name: Pull request checks
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check
+      - run: npm run check:lighthouse
+      - name: Also check the example content (exercises shows, shop, releases and their schema)
+        run: npm run check:examples
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: check-reports
+          path: reports/
+
+  dependabot-automerge:
+    needs: checks
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge the Dependabot update (all checks passed)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr merge --auto --squash "${{ github.event.pull_request.html_url }}"

@@ -1,0 +1,34 @@
+# Every day: checks that future shows still have working ticket links and complete details.
+# (The daily rebuild that moves past shows to the archive is part of "Check and deploy".)
+name: Daily show check
+
+on:
+  schedule:
+    - cron: '41 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  tickets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Check ticket links and show details
+        id: check
+        continue-on-error: true
+        run: node scripts/checks/tickets.mjs
+      - name: Report problems as an issue
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create shows --color FBCA04 --description "Show / ticket problems" --force >/dev/null
+          { echo "@${{ github.repository_owner }} one or more upcoming shows need attention:"; echo; cat reports/tickets.md; } > issue.md
+          existing=$(gh issue list --label shows --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then gh issue comment "$existing" --body-file issue.md; else gh issue create --title "Upcoming show needs attention" --label shows --body-file issue.md; fi

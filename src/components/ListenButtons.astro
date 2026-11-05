@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import { platforms } from '../lib/data';
+import Icon from './Icon.astro';
+interface Props { lang: Locale; release: CollectionEntry<'releases'> }
+const { lang, release } = Astro.props;
+const links = (Object.keys(platforms) as Array<keyof typeof platforms>)
+  .filter((k) => release.data.links[k])
+  .map((k) => ({ key: k, href: release.data.links[k]!, name: platforms[k] }));
+---
+{links.length > 0 && (
+  <ul class="listen" role="list">
+    {links.map((l, i) => (
+      <li>
+        <a class:list={['btn btn-small', i === 0 && 'btn-primary']} href={l.href} rel="noopener noreferrer">
+          <Icon name={l.key} size={18} />
+          <span><span class="visually-hidden">{t(lang, 'music.listenOn', { platform: '' }).trim()} </span>{l.name}</span>
+          <span class="visually-hidden">: {release.data.title}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+<style>
+  .listen { display: flex; flex-wrap: wrap; gap: var(--space-xs); list-style: none; padding: 0; }
+</style>

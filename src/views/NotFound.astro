@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { type Locale } from '../i18n/locales';
+import { path } from '../i18n/routes';
+import { t } from '../i18n/t';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const [first, ...rest] = t(lang, 'pages.notFound.heading').split(' ');
+---
+<Base lang={lang} pageKey="notFound" noindex>
+  <section class="nf container">
+    <p class="code ltr" aria-hidden="true"><span class="box">4</span>0<span class="box">4</span></p>
+    <h1><span class="box">{first}</span> {rest.join(' ')}</h1>
+    <p class="lead muted">{t(lang, 'notFound.text')}</p>
+    <p><a class="btn btn-primary" href={path('home', lang)}>{t(lang, 'notFound.home')}</a></p>
+  </section>
+</Base>
+<style>
+  .nf { display: grid; gap: var(--space-m); justify-items: start; padding-block: var(--space-2xl); }
+  .code { font-size: clamp(5rem, 20vw, 12rem); font-weight: 900; line-height: 1; letter-spacing: 0.02em; }
+</style>

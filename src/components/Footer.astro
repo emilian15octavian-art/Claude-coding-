@@ -1,0 +1,63 @@
+---
+import { type Locale } from '../i18n/locales';
+import { path, type PageKey } from '../i18n/routes';
+import { t } from '../i18n/t';
+import { getBand, socialNames, socialOrder } from '../lib/data';
+import Icon from './Icon.astro';
+import LangSwitcher from './LangSwitcher.astro';
+import AnpcBadges from './AnpcBadges.astro';
+
+interface Props { lang: Locale; alternates: Record<Locale, string> }
+const { lang, alternates } = Astro.props;
+const band = await getBand();
+const socials = socialOrder.filter((k) => band.profiles[k]).map((k) => ({ key: k, href: band.profiles[k]!, name: socialNames[k] }));
+const site: PageKey[] = ['newsletter', 'links', 'press', 'contact'];
+const legal: PageKey[] = ['privacy', 'cookies', 'terms', 'shipping'];
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container grid-foot">
+    <div class="col">
+      <a href={path('home', lang)} class="foot-logo" aria-label={`Bleeding Debts 316: ${t(lang, 'pages.home.nav')}`}>
+        <svg class="ltr" viewBox="0 0 1224 616" width="140" height="70" aria-hidden="true" focusable="false"><use href="/logo.svg#logo" /></svg>
+      </a>
+      <p class="muted tagline">{t(lang, 'home.tagline')}</p>
+      {socials.length > 0 && (
+        <ul class="socials" role="list" aria-label={t(lang, 'footer.follow')}>
+          {socials.map((s) => (
+            <li><a href={s.href} rel="me noopener noreferrer"><Icon name={s.key} size={22} /><span class="visually-hidden">{s.name}</span></a></li>
+          ))}
+        </ul>
+      )}
+    </div>
+    <nav class="col" aria-label={t(lang, 'ui.footerNav')}>
+      <ul role="list" class="links">
+        {site.map((k) => <li><a href={path(k, lang)}>{t(lang, `pages.${k}.nav`)}</a></li>)}
+      </ul>
+    </nav>
+    <nav class="col" aria-label={t(lang, 'footer.legal')}>
+      <ul role="list" class="links">
+        {legal.map((k) => <li><a href={path(k, lang)}>{t(lang, `pages.${k}.nav`)}</a></li>)}
+      </ul>
+    </nav>
+    <div class="col">
+      <AnpcBadges lang={lang} />
+    </div>
+  </div>
+  <div class="container bottom">
+    <LangSwitcher lang={lang} alternates={alternates} variant="list" />
+    <p class="muted copy">{t(lang, 'footer.copyright', { year })}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { margin-block-start: var(--space-2xl); padding-block: var(--space-xl) var(--space-l); background: var(--surface); border-block-start: 1px solid var(--border); font-size: var(--step--1); }
+  .grid-foot { display: grid; gap: var(--space-l); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  .foot-logo { display: inline-block; color: var(--text); }
+  .tagline { margin-block: var(--space-s); }
+  .socials { display: flex; flex-wrap: wrap; gap: 0.25rem; list-style: none; padding: 0; }
+  .socials a { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border-radius: 999px; &:hover { background: var(--surface-2); } }
+  .links { list-style: none; padding: 0; }
+  .links a { display: inline-flex; align-items: center; min-block-size: 44px; }
+  .bottom { display: grid; gap: var(--space-s); margin-block-start: var(--space-l); padding-block-start: var(--space-m); border-block-start: 1px solid var(--border); }
+</style>

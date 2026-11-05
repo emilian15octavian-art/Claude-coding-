@@ -1,0 +1,44 @@
+# First day of every month: Lighthouse for every language on the live site, saved as a downloadable
+# artifact, plus a summary issue that compares the scores with the previous month.
+name: Monthly Lighthouse report
+
+on:
+  schedule:
+    - cron: '37 7 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://bleedingdebts316.pages.dev' }}
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Run Lighthouse on the live site (all 8 languages)
+        run: npx lhci collect --config=./lighthouserc.live.cjs && npx lhci upload --config=./lighthouserc.live.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-live-${{ github.run_number }}
+          path: reports/lighthouse-live/
+          retention-days: 400
+      - name: Compare with last month and open the summary issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create lighthouse --color 0E8A16 --description "Monthly Lighthouse report" --force >/dev/null
+          last=$(gh issue list --label lighthouse --state all --limit 1 --json body --jq '.[0].body' || true)
+          echo "$last" | sed -n 's/.*<!-- lighthouse-data \(.*\) -->.*/\1/p' > previous.json
+          node scripts/lighthouse-summary.mjs reports/lighthouse-live previous.json > summary.md
+          for n in $(gh issue list --label lighthouse --state open --json number --jq '.[].number'); do gh issue close "$n"; done
+          gh issue create --title "Lighthouse report $(date +%Y-%m)" --label lighthouse --body-file summary.md

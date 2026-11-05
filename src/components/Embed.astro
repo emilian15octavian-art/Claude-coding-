@@ -1,0 +1,70 @@
+---
+/**
+ * Click-to-load facade for YouTube, Spotify and Bandcamp.
+ * Nothing is requested from those services (no cookies, no scripts) until the visitor clicks.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Locale;
+  service: 'YouTube' | 'Spotify' | 'Bandcamp';
+  src: string;
+  title: string;
+  label: string;
+  thumbnail?: ImageMetadata | string;
+  thumbnailAlt?: string;
+}
+const { lang, service, src, title, label, thumbnail, thumbnailAlt = '' } = Astro.props;
+---
+<div class="embed ltr" data-embed data-kind={service.toLowerCase()} data-src={src} data-title={title}>
+  {thumbnail && (
+    typeof thumbnail === 'string'
+      ? <Image src={thumbnail} alt={thumbnailAlt} width={640} height={360} loading="lazy" class="thumb" inferSize={false} />
+      : <Image src={thumbnail} alt={thumbnailAlt} widths={[480, 800, 1200]} sizes="(min-width: 72rem) 36rem, 100vw" loading="lazy" class="thumb" />
+  )}
+  <button type="button" class="play" data-embed-play>
+    <span class="play-icon"><Icon name="play" size={28} /></span>
+    <span class="play-text">
+      <span class="play-label">{label}</span>
+      <span class="play-note">{t(lang, 'ui.loadExternal', { service })}</span>
+    </span>
+  </button>
+</div>
+
+<style>
+  .embed[data-kind='youtube'] { aspect-ratio: 16 / 9; }
+  .embed[data-kind='spotify'] { block-size: 352px; }
+  .embed[data-kind='bandcamp'] { block-size: 120px; }
+  .embed { position: relative; inline-size: 100%; overflow: hidden; border-radius: var(--radius); background: var(--surface-2); isolation: isolate; }
+  .thumb { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; z-index: -1; opacity: 0.75; }
+  .play {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: var(--space-s);
+    padding: var(--space-m); border: 0; cursor: pointer; text-align: start; color: #fff;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.85), rgb(0 0 0 / 0.35));
+  }
+  .play-icon { display: grid; place-items: center; inline-size: 56px; block-size: 56px; flex: none; border-radius: 999px; background: #fff; color: #000; transition: scale 0.2s var(--ease); }
+  .play:hover .play-icon, .play:focus-visible .play-icon { scale: 1.08; box-shadow: 0 0 0 3px #e5383b; }
+  .play-text { display: grid; gap: 0.15rem; }
+  .play-label { font-weight: 800; }
+  .play-note { font-size: var(--step--1); color: #d9d9d9; }
+  .embed :global(iframe) { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; border: 0; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-embed]').forEach((box) => {
+    box.querySelector('[data-embed-play]')?.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = box.dataset.src!;
+      f.title = box.dataset.title!;
+      f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write';
+      f.allowFullscreen = true;
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      box.replaceChildren(f);
+      f.focus();
+    }, { once: true });
+  });
+</script>

@@ -1,6 +1,6 @@
 # bleeding debts316: Official Website Plan (Stage 1 of 4)
 
-Status: **waiting for approval and band details** (see section 12).
+Status: **approved and built**. See README.md, REPORT.md, MAINTENANCE.md and LAUNCH-CHECKLIST.md.
 Stages: 1. Plan ← *you are here* · 2. Build · 3. Audit and fix · 4. Deliver (zip + docs).
 
 ---

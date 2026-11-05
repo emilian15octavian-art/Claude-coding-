@@ -1,0 +1,12 @@
+{
+  "start": "2099-03-14T20:30",
+  "end": "2099-03-14T23:00",
+  "doors": "19:30",
+  "timeZone": "Europe/Bucharest",
+  "status": "scheduled",
+  "venue": { "name": "Example Venue", "street": "Strada Exemplu 1", "city": "București", "postalCode": "010101", "country": "RO" },
+  "ticketUrl": "https://www.iabilet.ro/",
+  "price": { "amount": 50, "currency": "RON" },
+  "lineup": ["Bleeding Debts 316", "Example Support Band"],
+  "notes": { "en": "EXAMPLE ONLY. Copy this file to src/content/shows/ and edit it." }
+}

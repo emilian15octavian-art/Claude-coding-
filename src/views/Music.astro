@@ -1,0 +1,28 @@
+---
+import { getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import ReleaseCard from '../components/ReleaseCard.astro';
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import { getReleases } from '../lib/data';
+import { releaseNode } from '../lib/schema';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const site = Astro.site!.toString().replace(/\/$/, '');
+const releases = await getReleases();
+const schema = await Promise.all(releases.map(async (r) => {
+  const img = await getImage({ src: r.data.cover, width: 1200, format: 'jpg' });
+  return releaseNode(site, lang, r, `${site}${img.src}`);
+}));
+---
+<Base lang={lang} pageKey="music" pageType="CollectionPage" schema={schema}>
+  <PageHead lang={lang} pageKey="music" />
+  <section class="container section-tight" aria-labelledby="disco">
+    <h2 id="disco" class="visually-hidden">{t(lang, 'music.discography')}</h2>
+    {releases.length ? (
+      <div class="stack-l list">{releases.map((r, i) => <ReleaseCard lang={lang} release={r} eager={i === 0} />)}</div>
+    ) : <p class="empty">{t(lang, 'music.noReleases')}</p>}
+  </section>
+</Base>
+<style>.list > :global(* + *) { padding-block-start: var(--space-xl); border-block-start: 1px solid var(--border); }</style>

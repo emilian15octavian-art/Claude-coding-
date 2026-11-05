@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import { type Locale } from '../i18n/locales';
+import { pick, t } from '../i18n/t';
+import { formatMoney } from '../lib/format';
+import Icon from './Icon.astro';
+interface Props { lang: Locale; product: CollectionEntry<'merch'> }
+const { lang, product } = Astro.props;
+const d = product.data;
+const name = pick(lang, d.name);
+// Stripe Checkout picks the language from the visitor's browser; ?locale= is also passed where Stripe supports it.
+const stripeLocales: Partial<Record<Locale, string>> = { en: 'en', fr: 'fr', ro: 'ro', it: 'it', es: 'es', ru: 'ru', el: 'el' };
+const withLocale = (href: string) => { const u = new URL(href); if (stripeLocales[lang]) u.searchParams.set('locale', stripeLocales[lang]!); return u.toString(); };
+const perSize = typeof d.stripeLink === 'object';
+const links = perSize ? Object.entries(d.stripeLink as Record<string, string>) : [];
+---
+<article class="product card" id={product.id}>
+  <Picture src={d.images[0]} alt={pick(lang, d.imageAlt)} formats={['avif', 'webp']} widths={[320, 480, 720]} sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 45vw, 100vw" loading="lazy" class="img" />
+  <div class="card-body stack">
+    <h2 class="p-name">{name}</h2>
+    <p class="muted" dir="auto" lang={d.description[lang] ? undefined : 'en'}>{pick(lang, d.description)}</p>
+    <p class="price"><strong>{formatMoney(lang, d.priceRON, 'RON')}</strong> <span class="muted">≈ {formatMoney(lang, d.priceEUR, 'EUR')}</span></p>
+    {d.sizes.length > 0 && <p class="muted small">{t(lang, 'shop.sizes')}: <span class="ltr">{d.sizes.join(', ')}</span></p>}
+    {!d.inStock ? (
+      <p><span class="badge">{t(lang, 'shop.outOfStock')}</span></p>
+    ) : perSize ? (
+      <fieldset class="sizes">
+        <legend>{t(lang, 'shop.chooseSize')}</legend>
+        <div class="btn-row">
+          {links.map(([size, href]) => <a class="btn btn-small" href={withLocale(href)} rel="noopener noreferrer"><span class="visually-hidden">{t(lang, 'shop.buy')} {name}, </span>{size}</a>)}
+        </div>
+      </fieldset>
+    ) : (
+      <a class="btn btn-primary" href={withLocale(d.stripeLink as string)} rel="noopener noreferrer">
+        <Icon name="cart" size={18} />{t(lang, 'shop.buy')}<span class="visually-hidden">: {t(lang, 'shop.buyLabel', { name })}</span>
+      </a>
+    )}
+  </div>
+</article>
+<style>
+  .img :global(img), .img { inline-size: 100%; aspect-ratio: 1; object-fit: cover; }
+  .p-name { font-size: var(--step-1); }
+  .price { font-size: var(--step-1); }
+  .small { font-size: var(--step--1); }
+  .sizes { border: 0; padding: 0; } .sizes legend { font-weight: 800; margin-block-end: var(--space-xs); }
+</style>

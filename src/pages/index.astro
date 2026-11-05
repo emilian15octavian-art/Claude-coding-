@@ -1,0 +1,53 @@
+---
+/**
+ * The root address "/" shows the English home page. It never redirects (search engines
+ * must reach every language). A small notice suggests the visitor's own language.
+ */
+import Home from '../views/Home.astro';
+import { locales } from '../i18n/locales';
+import { t } from '../i18n/t';
+import { path } from '../i18n/routes';
+const notices = locales.filter((l) => l !== 'en').map((l) => ({ lang: l, text: t(l, 'ui.langNotice'), action: t(l, 'ui.langNoticeSwitch'), dismiss: t(l, 'ui.langNoticeDismiss'), href: path('home', l) }));
+---
+<Home lang="en" isRoot>
+  <div slot="notice" class="lang-notice" data-lang-notice hidden>
+    <div class="container ln-inner">
+      <p data-ln-text></p>
+      <div class="btn-row">
+        <a class="btn btn-small btn-primary" data-ln-link href="/en/"></a>
+        <button type="button" class="btn btn-small" data-ln-dismiss></button>
+      </div>
+    </div>
+    <script type="application/json" data-ln-data set:html={JSON.stringify(notices)} />
+  </div>
+</Home>
+
+<style is:global>
+  .lang-notice { background: var(--surface); border-block-end: 1px solid var(--border); padding-block: var(--space-s); }
+  .lang-notice .ln-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-s); }
+</style>
+
+<script>
+  // Suggest (never force) the visitor's browser language.
+  const box = document.querySelector<HTMLElement>('[data-lang-notice]');
+  try {
+    if (box && !localStorage.getItem('langNoticeDismissed')) {
+      const data: Array<{ lang: string; text: string; action: string; dismiss: string; href: string }> = JSON.parse(box.querySelector('[data-ln-data]')!.textContent!);
+      const wanted = navigator.languages.map((l) => l.toLowerCase().split('-')[0]);
+      // the visitor's most preferred language that this site offers
+      const first = wanted.find((w) => w === 'en' || data.some((d) => d.lang === w));
+      const match = first && first !== 'en' ? data.find((d) => d.lang === first) : undefined;
+      if (match) {
+        const p = box.querySelector<HTMLElement>('[data-ln-text]')!;
+        p.textContent = match.text; p.lang = match.lang;
+        const a = box.querySelector<HTMLAnchorElement>('[data-ln-link]')!;
+        a.textContent = match.action; a.href = match.href; a.lang = match.lang; a.hreflang = match.lang;
+        const b = box.querySelector<HTMLButtonElement>('[data-ln-dismiss]')!;
+        b.textContent = match.dismiss; b.lang = match.lang;
+        box.dir = match.lang === 'ar' ? 'rtl' : 'ltr';
+        box.hidden = false;
+        b.addEventListener('click', () => { box.hidden = true; try { localStorage.setItem('langNoticeDismissed', '1'); } catch {} });
+      }
+    }
+  } catch {}
+</script>

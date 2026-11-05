@@ -1,0 +1,99 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Email from '../components/Email.astro';
+import Icon from '../components/Icon.astro';
+import { type Locale } from '../i18n/locales';
+import { pick, t } from '../i18n/t';
+import { getBand, getMembers, getPage, getPress, isPlaceholder } from '../lib/data';
+import { countryName, formatDate } from '../lib/format';
+import pressPhoto from '../assets/images/press/press-photo-1.jpg';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const [band, members, quotes, bio] = await Promise.all([getBand(), getMembers(), getPress(), getPage(lang, 'bio')]);
+const { Content } = await render(bio.entry);
+// Full-resolution original for download (kept as JPEG, max 3000 px)
+const hiRes = await getImage({ src: pressPhoto, width: 3000, format: 'jpg', quality: 90 });
+const logos = [
+  ['logoWhite', '/press/logo/bleeding-debts-316-logo-white.svg'],
+  ['logoBlack', '/press/logo/bleeding-debts-316-logo-black.svg'],
+  ['logoOnBlack', '/press/logo/bleeding-debts-316-logo-on-black.png'],
+  ['logoOnWhite', '/press/logo/bleeding-debts-316-logo-on-white.png'],
+  ['logoWhiteTransparent', '/press/logo/bleeding-debts-316-logo-white-transparent.png'],
+  ['logoBlackTransparent', '/press/logo/bleeding-debts-316-logo-black-transparent.png'],
+];
+const docs = [['techRider', '/press/bleeding-debts-316-tech-rider.pdf'], ['stagePlot', '/press/bleeding-debts-316-stage-plot.pdf']];
+const named = members.filter((m) => !isPlaceholder(m.data.name));
+---
+<Base lang={lang} pageKey="press">
+  <PageHead lang={lang} pageKey="press" lead={t(lang, 'press.intro')} />
+  <div class="container press stack-l">
+    <section aria-labelledby="short" class="block">
+      <h2 id="short">{t(lang, 'press.shortBio')}</h2>
+      <p class="lead">{pick(lang, band.shortBio)}</p>
+    </section>
+    <section aria-labelledby="facts" class="block">
+      <h2 id="facts">{t(lang, 'press.facts')}</h2>
+      <ul class="facts">
+        <li><strong>{t(lang, 'about.factName')}:</strong> <span translate="no">Bleeding Debts 316</span></li>
+        <li><strong>{t(lang, 'about.factGenre')}:</strong> {band.genre.join(', ')}</li>
+        <li><strong>{t(lang, 'about.factOrigin')}:</strong> {[band.city, countryName(lang, band.countryCode)].filter(Boolean).join(', ')}</li>
+        {band.foundingYear && <li><strong>{t(lang, 'about.factFounded')}:</strong> {band.foundingYear}</li>}
+        {named.length > 0 && <li><strong>{t(lang, 'about.factMembers')}:</strong> {named.map((m) => `${m.data.name} (${pick(lang, m.data.role)})`).join(', ')}</li>}
+      </ul>
+    </section>
+    <section aria-labelledby="long" class="block">
+      <h2 id="long">{t(lang, 'press.longBio')}</h2>
+      <div class="prose" lang={bio.isFallback ? 'en' : undefined}><Content /></div>
+    </section>
+    <section aria-labelledby="photos" class="block">
+      <h2 id="photos">{t(lang, 'press.photos')}</h2>
+      <figure class="photo">
+        <Picture src={pressPhoto} alt="Bleeding Debts 316" formats={['avif', 'webp']} widths={[480, 960, 1440]} sizes="(min-width: 72rem) 48rem, 100vw" loading="lazy" />
+        <figcaption><a class="btn btn-small" href={hiRes.src} download="bleeding-debts-316-press-photo-1.jpg"><Icon name="download" size={18} />{t(lang, 'press.downloadFile', { file: 'JPG 3000 px' })}</a></figcaption>
+      </figure>
+    </section>
+    <section aria-labelledby="logos" class="block">
+      <h2 id="logos">{t(lang, 'press.logoPack')}</h2>
+      <ul class="dl" role="list">
+        {logos.map(([k, href]) => <li><a class="btn btn-small" href={href} download><Icon name="download" size={18} />{t(lang, `press.${k}`)}</a></li>)}
+      </ul>
+    </section>
+    <section aria-labelledby="docs" class="block">
+      <h2 id="docs">{t(lang, 'press.documents')}</h2>
+      <ul class="dl" role="list">
+        {docs.map(([k, href]) => <li><a class="btn btn-small" href={href} download><Icon name="download" size={18} />{t(lang, `press.${k}`)}</a></li>)}
+      </ul>
+    </section>
+    {quotes.length > 0 && (
+      <section aria-labelledby="quotes" class="block">
+        <h2 id="quotes">{t(lang, 'press.quotes')}</h2>
+        <ul class="quotes" role="list">
+          {quotes.map((q) => (
+            <li>
+              <figure>
+                <blockquote lang={q.data.quoteLang} cite={q.data.url}><p>“{q.data.quote}”</p></blockquote>
+                <figcaption class="muted">{q.data.url ? <a href={q.data.url} rel="noopener noreferrer">{q.data.source}</a> : q.data.source}{q.data.date && <>, <time datetime={q.data.date}>{formatDate(lang, q.data.date)}</time></>}</figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    <section aria-labelledby="pc" class="block">
+      <h2 id="pc">{t(lang, 'press.contact')}</h2>
+      <p><Email lang={lang} email={band.pressEmail} /></p>
+    </section>
+  </div>
+</Base>
+<style>
+  .press { max-inline-size: 56rem; }
+  .block h2 { font-size: var(--step-2); margin-block-end: var(--space-s); }
+  .facts { padding-inline-start: 1.2em; }
+  .photo { display: grid; gap: var(--space-s); } .photo :global(img) { border-radius: var(--radius); inline-size: 100%; }
+  .dl { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+  .quotes { list-style: none; padding: 0; display: grid; gap: var(--space-l); }
+  blockquote { border-inline-start: 4px solid var(--accent); padding-inline-start: var(--space-m); font-size: var(--step-1); font-weight: 700; }
+</style>

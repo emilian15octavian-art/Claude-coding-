@@ -1,0 +1,48 @@
+# Uptime check every 10 minutes (GitHub may delay scheduled runs by a few minutes).
+# Opens an issue (which e-mails you) when the site is down and closes it when it is back.
+# For a public status page and exact 5-minute checks, also set up Upptime or UptimeRobot (see MAINTENANCE.md).
+name: Uptime
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://bleedingdebts316.pages.dev' }}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check the home page and health.json
+        id: ping
+        continue-on-error: true
+        run: |
+          ok=0
+          for i in 1 2 3; do
+            home=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$SITE_URL/en/")
+            health=$(curl -s --max-time 20 "$SITE_URL/health.json" | grep -c '"status": "ok"' || true)
+            if [ "$home" = "200" ] && [ "$health" -ge 1 ]; then ok=1; break; fi
+            sleep 30
+          done
+          echo "home=$home health=$health"
+          [ "$ok" = "1" ]
+      - name: Open or close the downtime issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          open=$(gh issue list --label downtime --state open --json number --jq '.[0].number')
+          if [ "${{ steps.ping.outcome }}" = "failure" ] && [ -z "$open" ]; then
+            gh label create downtime --color D93F0B --description "Site is down" --force >/dev/null
+            gh issue create --label downtime --title "🔴 Site is down" --body "@${{ github.repository_owner }} $SITE_URL did not answer correctly at $(date -u '+%F %H:%M UTC').
+
+          **What to do:** open the site yourself. If it is down, check https://www.cloudflarestatus.com and the Cloudflare Pages dashboard (Deployments). Rolling back: Cloudflare → Pages → bleedingdebts316 → Deployments → pick the last good one → Rollback. This issue closes itself when the site is back."
+          elif [ "${{ steps.ping.outcome }}" = "success" ] && [ -n "$open" ]; then
+            gh issue close "$open" --comment "🟢 The site is back up ($(date -u '+%F %H:%M UTC'))."
+          fi

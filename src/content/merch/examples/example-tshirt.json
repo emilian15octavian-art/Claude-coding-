@@ -1,0 +1,12 @@
+{
+  "name": { "en": "Example logo T-shirt", "fr": "T-shirt logo (exemple)", "ro": "Tricou cu logo (exemplu)", "it": "T-shirt con logo (esempio)", "es": "Camiseta con logo (ejemplo)", "ar": "قميص بالشعار (مثال)", "ru": "Футболка с логотипом (пример)", "el": "Μπλουζάκι με λογότυπο (παράδειγμα)" },
+  "description": { "en": "EXAMPLE ONLY. Black heavyweight cotton T-shirt with the white logo." },
+  "sku": "EX-TEE-001",
+  "images": ["../../../assets/images/merch/example-tshirt.jpg"],
+  "imageAlt": { "en": "Black T-shirt with the white Bleeding Debts 316 logo" },
+  "priceRON": 100,
+  "priceEUR": 20,
+  "sizes": ["S", "M", "L", "XL", "XXL"],
+  "stripeLink": "https://buy.stripe.com/test_example",
+  "inStock": true
+}

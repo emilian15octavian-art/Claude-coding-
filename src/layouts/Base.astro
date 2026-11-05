@@ -1,0 +1,126 @@
+---
+import '../styles/global.css';
+import Fonts from '../components/Fonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { locales, localeInfo, type Locale } from '../i18n/locales';
+import { path, type PageKey } from '../i18n/routes';
+import { t } from '../i18n/t';
+import { getBand, getMembers, getReleases, getSettings } from '../lib/data';
+import { breadcrumbList, logoNode, musicGroup, webPage, website } from '../lib/schema';
+
+interface Props {
+  lang: Locale;
+  pageKey: PageKey;
+  /** Extra JSON-LD nodes for this page (events, products, releases…). */
+  schema?: Record<string, unknown>[];
+  /** Schema.org page type, e.g. AboutPage, ContactPage, CollectionPage. */
+  pageType?: string;
+  /** Set on the root "/" page, which is English but has its own URL. */
+  isRoot?: boolean;
+  noindex?: boolean;
+}
+const { lang, pageKey, schema = [], pageType = 'WebPage', isRoot = false, noindex = false } = Astro.props;
+const site = (Astro.site?.toString() ?? 'https://bleedingdebts316.pages.dev/').replace(/\/$/, '');
+const info = localeInfo[lang];
+const title = t(lang, `pages.${pageKey}.title`);
+const description = t(lang, `pages.${pageKey}.description`);
+const selfPath = isRoot ? '/' : path(pageKey, lang);
+const canonical = `${site}${selfPath}`;
+const isNotFound = pageKey === 'notFound';
+// Alternates: the same page in every language (404 links to each language's home page instead)
+const alternates = Object.fromEntries(locales.map((l) => [l, path(isNotFound ? 'home' : pageKey, l)])) as Record<Locale, string>;
+const xDefault = pageKey === 'home' ? '/' : alternates.en;
+const ogImage = `${site}/og/${lang}/${isNotFound ? 'home' : pageKey}.png`;
+
+const [band, settings, members, releases] = await Promise.all([getBand(), getSettings(), getMembers(), getReleases()]);
+const showBreadcrumb = pageKey !== 'home' && !isNotFound;
+const crumbs = showBreadcrumb
+  ? [{ name: t(lang, 'pages.home.nav'), url: `${site}${path('home', lang)}` }, { name: t(lang, `pages.${pageKey}.nav`), url: canonical }]
+  : [];
+const graph = isNotFound ? [] : [
+  website(site, lang), logoNode(site), musicGroup(site, lang, band, members, releases, ogImage),
+  webPage(site, lang, canonical, title, description, ogImage, pageType, showBreadcrumb),
+  ...(showBreadcrumb ? [breadcrumbList(canonical, crumbs)] : []),
+  ...schema,
+];
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+const sv = settings.services;
+---
+<!doctype html>
+<html lang={lang} dir={info.dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex || isNotFound ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large" />}
+    {!isNotFound && <link rel="canonical" href={canonical} />}
+    {!isNotFound && locales.map((l) => <link rel="alternate" hreflang={l} href={`${site}${alternates[l]}`} />)}
+    {!isNotFound && <link rel="alternate" hreflang="x-default" href={`${site}${xDefault}`} />}
+    <script is:inline>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+    <Fonts lang={lang} />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <slot name="head" />
+
+    <meta property="og:type" content={pageKey === 'home' ? 'music.musician' : 'website'} />
+    <meta property="og:site_name" content="Bleeding Debts 316" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${band.name}: ${t(lang, `pages.${pageKey}.nav`)}`} />
+    <meta property="og:locale" content={info.og} />
+    {locales.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={localeInfo[l].og} />)}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- SEARCH ENGINE VERIFICATION
+         Paste your codes into src/content/settings/site.json → services.googleSiteVerification / bingSiteVerification.
+         They will appear here as:
+         <meta name="google-site-verification" content="YOUR-GOOGLE-CODE" />
+         <meta name="msvalidate.01" content="YOUR-BING-CODE" /> -->
+    {sv.googleSiteVerification && <meta name="google-site-verification" content={sv.googleSiteVerification} />}
+    {sv.bingSiteVerification && <meta name="msvalidate.01" content={sv.bingSiteVerification} />}
+
+    {graph.length > 0 && <script type="application/ld+json" set:html={jsonLd} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t(lang, 'ui.skipToContent')}</a>
+    <Header lang={lang} pageKey={pageKey} alternates={alternates} />
+    <main id="main" tabindex="-1">
+      {showBreadcrumb && (
+        <nav class="breadcrumb container" aria-label={t(lang, 'ui.breadcrumb')}>
+          <ol>
+            <li><a href={path('home', lang)}>{t(lang, 'pages.home.nav')}</a></li>
+            <li aria-current="page">{t(lang, `pages.${pageKey}.nav`)}</li>
+          </ol>
+        </nav>
+      )}
+      <slot />
+    </main>
+    <Footer lang={lang} alternates={alternates} />
+    {sv.cloudflareAnalyticsToken && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token":"${sv.cloudflareAnalyticsToken}"}`}></script>
+    )}
+  </body>
+</html>
+
+<style>
+  .breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5ch; list-style: none; padding: var(--space-m) 0 0; font-size: var(--step--1); color: var(--text-muted); }
+  .breadcrumb li { display: flex; align-items: center; }
+  .breadcrumb li + li::before { content: '/'; margin-inline-end: 0.5ch; }
+  .breadcrumb a { display: inline-flex; align-items: center; min-block-size: 44px; }
+  main:focus { outline: none; }
+</style>

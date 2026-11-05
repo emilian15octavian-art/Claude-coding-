@@ -1,0 +1,273 @@
+{
+  "_meta": {
+    "language": "English",
+    "status": "source",
+    "note": "English is the source language. Other files are drafts marked 'needs native review'."
+  },
+  "pages": {
+    "home": {
+      "nav": "Home",
+      "title": "Bleeding Debts 316 | Official site: heavy music about faith, doubt and grace",
+      "description": "Official website of Bleeding Debts 316, original metal from Romania. Listen to the latest release, see upcoming shows, shop merch and join the newsletter.",
+      "heading": "Bleeding Debts 316"
+    },
+    "music": {
+      "nav": "Music",
+      "title": "Music and discography | Bleeding Debts 316",
+      "description": "Every Bleeding Debts 316 release with cover art, release dates and links to Spotify, Apple Music, YouTube Music and Bandcamp.",
+      "heading": "Music"
+    },
+    "videos": {
+      "nav": "Videos",
+      "title": "Videos | Bleeding Debts 316",
+      "description": "Official music videos and live clips from Bleeding Debts 316. Videos load only when you press play.",
+      "heading": "Videos"
+    },
+    "shows": {
+      "nav": "Shows",
+      "title": "Shows and tour dates | Bleeding Debts 316",
+      "description": "Upcoming Bleeding Debts 316 concerts with tickets and calendar links, plus an archive of past shows.",
+      "heading": "Shows"
+    },
+    "shop": {
+      "nav": "Shop",
+      "title": "Official merch shop | Bleeding Debts 316",
+      "description": "Official Bleeding Debts 316 merch with prices in RON and EUR, secure checkout by Stripe and shipping across Europe.",
+      "heading": "Shop"
+    },
+    "about": {
+      "nav": "About",
+      "title": "About the band | Bleeding Debts 316",
+      "description": "Who Bleeding Debts 316 are: the story, the members and the facts about the original metal band from Romania.",
+      "heading": "About"
+    },
+    "gallery": {
+      "nav": "Gallery",
+      "title": "Photo gallery | Bleeding Debts 316",
+      "description": "Live and studio photos of Bleeding Debts 316, with photographer credits.",
+      "heading": "Gallery"
+    },
+    "press": {
+      "nav": "Press",
+      "title": "Press kit (EPK) | Bleeding Debts 316",
+      "description": "Electronic press kit for Bleeding Debts 316: bios, high-resolution photos, logo pack, tech rider, stage plot, press quotes and booking contact.",
+      "heading": "Press kit"
+    },
+    "newsletter": {
+      "nav": "Newsletter",
+      "title": "Newsletter | Bleeding Debts 316",
+      "description": "Get new music, show announcements and merch drops from Bleeding Debts 316 by email. No spam, unsubscribe any time.",
+      "heading": "Newsletter"
+    },
+    "contact": {
+      "nav": "Contact",
+      "title": "Contact and booking | Bleeding Debts 316",
+      "description": "Book Bleeding Debts 316 for concerts and festivals, or send the band a message.",
+      "heading": "Contact and booking"
+    },
+    "links": {
+      "nav": "Links",
+      "title": "All links | Bleeding Debts 316",
+      "description": "Every official Bleeding Debts 316 link in one place: music, videos, socials, shows and merch.",
+      "heading": "Bleeding Debts 316"
+    },
+    "privacy": {
+      "nav": "Privacy policy",
+      "title": "Privacy policy | Bleeding Debts 316",
+      "description": "How Bleeding Debts 316 handles personal data under the GDPR.",
+      "heading": "Privacy policy"
+    },
+    "cookies": {
+      "nav": "Cookie policy",
+      "title": "Cookie policy | Bleeding Debts 316",
+      "description": "This site uses no tracking cookies. Here is exactly what is and is not stored on your device.",
+      "heading": "Cookie policy"
+    },
+    "terms": {
+      "nav": "Terms and conditions",
+      "title": "Terms and conditions | Bleeding Debts 316",
+      "description": "Terms and conditions for using the Bleeding Debts 316 website and buying from the official shop.",
+      "heading": "Terms and conditions"
+    },
+    "shipping": {
+      "nav": "Shipping and returns",
+      "title": "Shipping and returns | Bleeding Debts 316",
+      "description": "Shipping times and costs, the 14-day right of withdrawal and how to return an order from the Bleeding Debts 316 shop.",
+      "heading": "Shipping and returns"
+    },
+    "notFound": {
+      "nav": "Page not found",
+      "title": "Page not found | Bleeding Debts 316",
+      "description": "This page does not exist.",
+      "heading": "This page bled out"
+    }
+  },
+  "ui": {
+    "skipToContent": "Skip to content",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "footerNav": "Footer navigation",
+    "language": "Language",
+    "chooseLanguage": "Choose language",
+    "themeToggle": "Switch colour theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "breadcrumb": "Breadcrumb",
+    "logoAlt": "Bleeding Debts 316 logo",
+    "langNotice": "This site is also available in English.",
+    "langNoticeSwitch": "Switch to English",
+    "langNoticeDismiss": "Dismiss",
+    "loadExternal": "Loads content from {service}, which may set cookies.",
+    "newTab": "opens in a new tab",
+    "comingSoon": "Coming soon."
+  },
+  "home": {
+    "tagline": "The scars don't get the final word.",
+    "latestRelease": "Latest release",
+    "nextShow": "Next show",
+    "noShows": "No shows announced yet. Join the newsletter to hear first.",
+    "allShows": "All shows",
+    "allMusic": "All music",
+    "newsletterTitle": "Hear it first",
+    "newsletterText": "New music, show announcements and merch drops. A few emails a year, never spam."
+  },
+  "music": {
+    "discography": "Discography",
+    "released": "Released",
+    "tracklist": "Tracklist",
+    "listenOn": "Listen on {platform}",
+    "listen": "Listen",
+    "noReleases": "The first release is on its way. Join the newsletter to hear it first.",
+    "playEmbed": "Play here with {service}",
+    "coverAlt": "Cover art of {title} by Bleeding Debts 316",
+    "type": {
+      "album": "Album",
+      "ep": "EP",
+      "single": "Single"
+    }
+  },
+  "videos": {
+    "play": "Play video: {title}",
+    "noVideos": "Videos are coming soon."
+  },
+  "shows": {
+    "upcoming": "Upcoming shows",
+    "past": "Past shows",
+    "tickets": "Tickets",
+    "ticketsFor": "Tickets for {venue}, {date}",
+    "addToCalendar": "Add to calendar",
+    "doors": "Doors {time}",
+    "free": "Free entry",
+    "noUpcoming": "No upcoming shows right now. Follow us or join the newsletter to hear about new dates first.",
+    "noPast": "No past shows yet.",
+    "localTime": "Times are in the venue's local time.",
+    "status": {
+      "scheduled": "Confirmed",
+      "cancelled": "Cancelled",
+      "postponed": "Postponed",
+      "rescheduled": "Rescheduled",
+      "soldout": "Sold out"
+    },
+    "bookUs": "Want us in your city? Get in touch."
+  },
+  "shop": {
+    "intro": "Official merch, packed by the band. Every order helps us record, tour and keep going.",
+    "sizes": "Sizes",
+    "buy": "Buy",
+    "buyLabel": "Buy {name} (secure checkout by Stripe)",
+    "chooseSize": "Choose size",
+    "outOfStock": "Out of stock",
+    "noProducts": "The first merch drop is coming soon. Join the newsletter to be first in line.",
+    "priceNote": "Prices include VAT where applicable. EUR prices are indicative; you are charged in the currency shown at checkout.",
+    "stripeNote": "Payments are processed securely by Stripe. We never see your card details.",
+    "shippingTitle": "Shipping, returns and contact",
+    "shippingSummary": "We ship within Romania and across Europe. You have 14 days to withdraw from your order without giving a reason.",
+    "shippingLink": "Read the full shipping and returns policy",
+    "questions": "Questions about an order? Write to us."
+  },
+  "about": {
+    "story": "Our story",
+    "facts": "The facts",
+    "factName": "Name",
+    "factGenre": "Genre",
+    "factOrigin": "From",
+    "factFounded": "Founded",
+    "factMembers": "Members",
+    "members": "Members",
+    "creed": "Our creed"
+  },
+  "gallery": {
+    "open": "Open photo: {alt}",
+    "close": "Close",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "photoBy": "Photo: {name}",
+    "counter": "{n} of {total}",
+    "noPhotos": "Photos are coming soon."
+  },
+  "press": {
+    "intro": "Everything journalists, promoters and festivals need. All files are free to use for coverage of Bleeding Debts 316; please credit the photographer.",
+    "shortBio": "Short bio",
+    "longBio": "Long bio",
+    "photos": "Press photos",
+    "download": "Download",
+    "downloadFile": "Download {file}",
+    "logoPack": "Logo pack",
+    "logoWhite": "White logo (SVG)",
+    "logoBlack": "Black logo (SVG)",
+    "logoOnBlack": "Logo on black (PNG)",
+    "logoOnWhite": "Logo on white (PNG)",
+    "logoWhiteTransparent": "White logo, transparent (PNG)",
+    "logoBlackTransparent": "Black logo, transparent (PNG)",
+    "documents": "Technical documents",
+    "techRider": "Tech rider (PDF)",
+    "stagePlot": "Stage plot (PDF)",
+    "quotes": "Press quotes",
+    "contact": "Press and booking contact",
+    "facts": "Fact sheet"
+  },
+  "newsletter": {
+    "emailLabel": "Email address",
+    "consent": "I agree to receive the Bleeding Debts 316 newsletter. I will get an email to confirm my subscription and can unsubscribe at any time.",
+    "submit": "Subscribe",
+    "privacy": "We use Brevo to send emails. Your address is stored in the EU and never shared. Details in our privacy policy."
+  },
+  "contact": {
+    "intro": "Booking, press, collaborations or just a message: we read everything.",
+    "name": "Your name",
+    "email": "Your email",
+    "subject": "Subject",
+    "subjectBooking": "Booking",
+    "subjectPress": "Press",
+    "subjectShop": "Shop order",
+    "subjectOther": "Other",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending…",
+    "success": "Thank you. Your message has been sent and we will reply soon.",
+    "error": "Your message could not be sent. Please try again or email us directly.",
+    "required": "Required",
+    "honeypot": "Leave this field empty",
+    "showEmail": "Show email address",
+    "emailDirect": "Prefer email? Write to",
+    "privacy": "We only use your details to reply to you. See our privacy policy.",
+    "turnstile": "This form is protected by Cloudflare Turnstile, a privacy-friendly spam check."
+  },
+  "footer": {
+    "follow": "Follow Bleeding Debts 316",
+    "legal": "Legal",
+    "copyright": "© {year} Bleeding Debts 316. All rights reserved.",
+    "anpc": "Consumer protection (ANPC)",
+    "anpcSal": "ANPC: Alternative dispute resolution (SAL)"
+  },
+  "legal": {
+    "binding": "This translation is provided for convenience. The Romanian version is the legally binding one.",
+    "readRomanian": "Read the Romanian version",
+    "updated": "Last updated: {date}"
+  },
+  "notFound": {
+    "text": "The page you are looking for does not exist or has moved.",
+    "home": "Back to the home page"
+  }
+}

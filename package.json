@@ -1,0 +1,56 @@
+{
+  "name": "bleedingdebts316-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "dev:examples": "EXAMPLES=1 astro dev",
+    "build": "astro build && node scripts/postbuild.mjs",
+    "build:examples": "EXAMPLES=1 OUT_DIR=dist-examples astro build && OUT_DIR=dist-examples node scripts/postbuild.mjs",
+    "preview": "astro preview",
+    "check": "node scripts/checks/run-all.mjs",
+    "check:all": "node scripts/checks/run-all.mjs --lighthouse",
+    "check:build": "node scripts/checks/build.mjs",
+    "check:content": "node scripts/checks/content.mjs",
+    "check:i18n": "node scripts/checks/i18n.mjs",
+    "check:html": "node scripts/checks/html.mjs",
+    "check:links": "node scripts/checks/links.mjs",
+    "check:jsonld": "node scripts/checks/jsonld.mjs",
+    "check:hreflang": "node scripts/checks/hreflang.mjs",
+    "check:security": "node scripts/checks/security.mjs",
+    "check:a11y": "node scripts/checks/a11y.mjs",
+    "check:lighthouse": "lhci autorun --config=./lighthouserc.cjs",
+    "check:examples": "npm run build:examples && OUT_DIR=dist-examples node scripts/checks/run-all.mjs --skip-build",
+    "check:external": "node scripts/checks/external-links.mjs",
+    "check:tickets": "node scripts/checks/tickets.mjs",
+    "check:interactive": "node scripts/checks/interactive.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/noto-sans": "^5.3.0",
+    "@fontsource-variable/noto-sans-arabic": "^5.3.0",
+    "@fontsource-variable/nunito": "^5.3.0",
+    "@fontsource/noto-sans": "^5.3.0",
+    "@fontsource/noto-sans-arabic": "^5.3.0",
+    "@fontsource/nunito": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "astro": "^7.4.6",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5",
+    "simple-icons": "^16.36.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@lhci/cli": "^0.16.0",
+    "html-validate": "^11.18.0",
+    "playwright": "^1.63.0",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "basic-ftp": "^6.2.6"
+  }
+}

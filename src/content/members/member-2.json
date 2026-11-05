@@ -1,0 +1,7 @@
+{
+  "name": "[Member 2 name]",
+  "role": { "en": "[Role / instrument]", "ro": "[Rol / instrument]" },
+  "order": 2,
+  "photo": "../../assets/images/members/member-2.jpg",
+  "photoAlt": { "en": "Portrait of a member of Bleeding Debts 316", "fr": "Portrait d'un membre de Bleeding Debts 316", "ro": "Portret al unui membru Bleeding Debts 316", "it": "Ritratto di un membro dei Bleeding Debts 316", "es": "Retrato de un miembro de Bleeding Debts 316", "ar": "صورة شخصية لأحد أعضاء Bleeding Debts 316", "ru": "Портрет участника Bleeding Debts 316", "el": "Πορτρέτο μέλους των Bleeding Debts 316" }
+}

@@ -1,0 +1,8 @@
+{
+  "start": "2099-05-02T21:00",
+  "timeZone": "Europe/Athens",
+  "status": "soldout",
+  "venue": { "name": "Example Club Athens", "street": "Odos Paradeigmatos 3", "city": "Athens", "postalCode": "10552", "country": "GR" },
+  "ticketUrl": "https://www.more.com/",
+  "price": { "amount": 15, "currency": "EUR" }
+}

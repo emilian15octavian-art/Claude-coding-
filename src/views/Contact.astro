@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Email from '../components/Email.astro';
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import { getBand } from '../lib/data';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const band = await getBand();
+---
+<Base lang={lang} pageKey="contact" pageType="ContactPage">
+  <PageHead lang={lang} pageKey="contact" lead={t(lang, 'contact.intro')} />
+  <div class="container contact-grid">
+    <ContactForm lang={lang} />
+    <aside class="direct stack">
+      <h2>{t(lang, 'contact.subjectBooking')}</h2>
+      <p>{t(lang, 'contact.emailDirect')}</p>
+      <p><Email lang={lang} email={band.bookingEmail} /></p>
+    </aside>
+  </div>
+</Base>
+<style>
+  .contact-grid { display: grid; gap: var(--space-xl); }
+  @media (min-width: 56rem) { .contact-grid { grid-template-columns: 1fr 18rem; align-items: start; } }
+  .direct { padding: var(--space-l); background: var(--surface); border-radius: calc(var(--radius) * 2); }
+  .direct h2 { font-size: var(--step-1); }
+</style>

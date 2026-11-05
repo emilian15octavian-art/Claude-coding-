@@ -1,0 +1,56 @@
+# Every Monday: external links (streaming, social, tickets, Stripe, Linktree) and the HTTPS certificate.
+name: Weekly link and SSL check
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://bleedingdebts316.pages.dev' }}
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Check external links
+        id: links
+        continue-on-error: true
+        run: node scripts/checks/external-links.mjs
+      - name: Check HTTPS certificate and domain response
+        id: ssl
+        continue-on-error: true
+        run: |
+          host=$(echo "$SITE_URL" | sed -E 's#https?://([^/]+).*#\1#')
+          {
+            echo "## HTTPS and domain"
+            end=$(echo | openssl s_client -servername "$host" -connect "$host:443" 2>/dev/null | openssl x509 -noout -enddate | cut -d= -f2)
+            days=$(( ( $(date -d "$end" +%s) - $(date +%s) ) / 86400 ))
+            echo "- Certificate valid until $end ($days days)."
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE_URL/")
+            echo "- $SITE_URL/ answers HTTP $code."
+            hsts=$(curl -sI "$SITE_URL/en/" | grep -i strict-transport-security || true)
+            echo "- HSTS header: ${hsts:-missing}"
+            redirect=$(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' "http://$host/")
+            echo "- http:// redirects: $redirect"
+          } | tee reports-ssl.md
+          [ "$days" -gt 14 ] && [ "$code" = "200" ] && [ -n "$hsts" ]
+      - name: Report problems as an issue
+        if: steps.links.outcome == 'failure' || steps.ssl.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create links --color 5319E7 --description "Broken links or SSL" --force >/dev/null
+          { echo "@${{ github.repository_owner }} the weekly check found problems. Broken links are listed with how to fix them."; echo; cat reports/external-links.md 2>/dev/null; echo; cat reports-ssl.md 2>/dev/null; } > issue.md
+          gh issue create --title "Weekly check: broken links or SSL problem ($(date +%F))" --label links --body-file issue.md

@@ -1,0 +1,15 @@
+# Weekly dependency updates. Pull requests are merged automatically when all checks pass
+# (see .github/workflows/pr-checks.yml).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule: { interval: weekly, day: monday, time: '05:00', timezone: Europe/Bucharest }
+    open-pull-requests-limit: 5
+    groups:
+      astro: { patterns: ['astro', '@astrojs/*'] }
+      fonts: { patterns: ['@fontsource*'] }
+      tooling: { patterns: ['*'], exclude-patterns: ['astro', '@astrojs/*', '@fontsource*'] }
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly, day: monday, time: '05:00', timezone: Europe/Bucharest }
