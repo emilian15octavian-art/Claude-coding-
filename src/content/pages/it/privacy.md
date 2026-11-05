@@ -18,6 +18,8 @@ Il titolare del trattamento è il soggetto giuridico indicato nel riquadro qui s
 
 **Newsletter.** Se ti iscrivi, conserviamo il tuo indirizzo email, la lingua scelta e la data e la prova del consenso. Confermi l'iscrizione cliccando su un link che ti inviamo via email (doppio opt-in). La newsletter è inviata con Brevo (Sendinblue SAS, Francia), che conserva i dati nell'UE. Base giuridica: il tuo consenso (art. 6, par. 1, lett. a)). Puoi cancellarti in qualsiasi momento con il link presente in ogni email.
 
+*Configurazione attuale:* finché non inizieremo a usare Brevo, ogni iscrizione (indirizzo email, lingua e consenso) viene inviata tramite Web3Forms alla casella email della band (Gmail, Google) e conservata solo per la newsletter. Puoi chiederci di cancellarla in qualsiasi momento.
+
 **Ordini nel negozio.** I pagamenti sono gestiti da Stripe, che raccoglie direttamente i dati della carta; noi non li vediamo mai. Per consegnare l'ordine riceviamo nome, indirizzo di consegna, email e dettagli dell'ordine. Base giuridica: esecuzione del contratto (art. 6, par. 1, lett. b)) e obblighi di legge (art. 6, par. 1, lett. c)), ad esempio la conservazione delle scritture contabili per il periodo previsto dalla legge rumena (Legge n. 82/1991).
 
 **Video e lettori musicali.** I lettori YouTube, Spotify e Bandcamp si caricano **solo dopo il tuo clic**. Prima di allora nessun dato viene inviato a questi servizi. Dopo il clic si applicano le loro informative.

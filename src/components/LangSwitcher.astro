@@ -42,6 +42,9 @@ const { lang, alternates, variant = 'menu' } = Astro.props;
     list-style: none; padding: 0.4rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
     box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
   }
+  /* Language names use the device font: "Română" would otherwise make every page download
+     an extra 35 KB font file just for the letter ă. */
+  a { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif; }
   a { display: flex; align-items: center; min-block-size: 44px; padding-inline: 0.8rem; border-radius: calc(var(--radius) - 2px); text-decoration: none; }
   a:hover { background: var(--surface-2); }
   a[aria-current='true'] { font-weight: 900; box-shadow: inset 3px 0 0 var(--accent); }

@@ -35,7 +35,7 @@ Tick the boxes as you go. Estimated time: one afternoon for steps 1 to 8, the re
 ## 2. Free Cloudflare account and Pages project (10 min)
 
 1. Sign up at <https://dash.cloudflare.com/sign-up> (free plan; no domain needed).
-2. Nothing to install: the first deploy from GitHub creates the Pages project and the free address **https://bleedingdebts316.pages.dev** automatically.
+2. Nothing to install: the first deploy from GitHub creates the Pages project and the free address **https://claude-coding.emilian15octavian.workers.dev** automatically.
    If the name is taken (the deploy log says so), choose another (for example `bleedingdebts316-band`). Then in GitHub → **Settings → Secrets and variables → Actions → Variables** add `CF_PAGES_PROJECT` = your project name and `SITE_URL` = `https://your-name.pages.dev`.
 3. **Do not connect the Git repository in Cloudflare.** Deploys come from GitHub Actions so that a failing check can block them.
 
@@ -51,7 +51,7 @@ Tick the boxes as you go. Estimated time: one afternoon for steps 1 to 8, the re
    - `CLOUDFLARE_ACCOUNT_ID` = the account ID
    - (On a phone, the shorter names `CFTOKEN` and `CFACCOUNT` work too.)
 4. GitHub → **Actions** → **Check and deploy** → **Run workflow**. After about 10 minutes it should be green and the site live.
-   - [ ] Open <https://bleedingdebts316.pages.dev/> and <https://bleedingdebts316.pages.dev/health.json>.
+   - [ ] Open <https://claude-coding.emilian15octavian.workers.dev/> and <https://claude-coding.emilian15octavian.workers.dev/health.json>.
 
 ## 4. Turn on the automatic jobs and monitoring (10 min)
 
@@ -62,7 +62,7 @@ Tick the boxes as you go. Estimated time: one afternoon for steps 1 to 8, the re
 
 ## 5. Contact form: Turnstile + Web3Forms (10 min)
 
-1. **Turnstile** (spam protection): Cloudflare dashboard → **Turnstile → Add widget** → name `contact` → hostname `bleedingdebts316.pages.dev` → mode **Managed** → Create.
+1. **Turnstile** (spam protection): Cloudflare dashboard → **Turnstile → Add widget** → name `contact` → hostname `claude-coding.emilian15octavian.workers.dev` → mode **Managed** → Create.
    - Put the **Site key** in `src/content/settings/site.json` → `services.turnstileSiteKey`.
    - Put the **Secret key** in Cloudflare → **Workers & Pages → bleedingdebts316 → Settings → Variables and secrets → Add** → type *Secret*, name `TURNSTILE_SECRET`.
 2. **Web3Forms** (free, e-mails you the messages): go to <https://web3forms.com>, enter the booking e-mail address, and copy the **Access Key** from the e-mail you receive.
@@ -96,7 +96,7 @@ Tick the boxes as you go. Estimated time: one afternoon for steps 1 to 8, the re
 
 ## 8. Google Search Console and Bing (15 min)
 
-1. <https://search.google.com/search-console> → **Add property → URL prefix** → `https://bleedingdebts316.pages.dev/` → method **HTML tag**. Copy only the `content="…"` value into `site.json` → `services.googleSiteVerification`, push, wait for the deploy, then click **Verify**.
+1. <https://search.google.com/search-console> → **Add property → URL prefix** → `https://claude-coding.emilian15octavian.workers.dev/` → method **HTML tag**. Copy only the `content="…"` value into `site.json` → `services.googleSiteVerification`, push, wait for the deploy, then click **Verify**.
 2. In Search Console → **Sitemaps** → submit `sitemap.xml`.
 3. <https://www.bing.com/webmasters> → **Import from Google Search Console** (easiest) or add the site with the HTML meta tag → `services.bingSiteVerification`. Submit the sitemap there too. (IndexNow already notifies Bing after every deploy.)
 4. [ ] Test pages in the **Rich Results Test**: <https://search.google.com/test/rich-results> with `/en/shows/` (once a show exists), `/en/shop/` (once a product exists) and `/en/`.
@@ -120,7 +120,7 @@ Do these in order; each one links back to the website so Google sees one consist
 - [ ] **Wikidata**: <https://www.wikidata.org> → *Create a new item*: label *Bleeding Debts 316*, description "Romanian metal band", instance of (P31) *musical group*, country of origin (P495) *Romania*, genre (P136), inception (P571), official website (P856), MusicBrainz artist ID (P434), Spotify artist ID (P1902), Discogs artist ID (P1953). Wikidata needs references (press articles, MusicBrainz); add them as sources.
 - [ ] **Bandsintown for Artists** and **Songkick** (via Tourbox): claim the artist pages and add your shows.
 - [ ] Paste every profile link into `band.json` → `profiles` (`wikidata`, `musicbrainz`, `discogs`, `bandsintown`, `songkick` too). They go into the schema `sameAs` list automatically.
-- [ ] Update your Linktree (or replace it with `https://bleedingdebts316.pages.dev/en/links/` in your social bios; the outgoing links carry UTM tags so you can see visits in each platform's statistics).
+- [ ] Update your Linktree (or replace it with `https://claude-coding.emilian15octavian.workers.dev/en/links/` in your social bios; the outgoing links carry UTM tags so you can see visits in each platform's statistics).
 - [ ] **Google Knowledge Panel**: when a panel appears when you search for *Bleeding Debts 316*, click **Claim this knowledge panel** at the bottom of it and verify with your YouTube Official Artist Channel or Search Console. (Panels usually appear only after the entity has several consistent, linked profiles and some press coverage.)
 
 ## 11. After launch

@@ -29,7 +29,7 @@ export const getShows = async () => {
   return { all, upcoming, past };
 };
 
-export const getReleases = async () => (await getCollection('releases')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+export const getReleases = async () => (await getCollection('releases')).sort((a, b) => b.data.date.localeCompare(a.data.date) || b.id.localeCompare(a.id));
 export const getMerch = async () => (await getCollection('merch')).sort((a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id));
 export const getVideos = async () => (await getCollection('videos')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 export const getGallery = async () => (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
@@ -46,7 +46,7 @@ export const getPage = async (lang: string, key: string) => {
 /** Streaming platforms in display order, with their official names (never translated). */
 export const platforms = {
   spotify: 'Spotify', appleMusic: 'Apple Music', youtubeMusic: 'YouTube Music', bandcamp: 'Bandcamp',
-  deezer: 'Deezer', amazonMusic: 'Amazon Music', tidal: 'TIDAL', soundcloud: 'SoundCloud',
+  deezer: 'Deezer', amazonMusic: 'Amazon Music', tidal: 'TIDAL', soundcloud: 'SoundCloud', youtube: 'YouTube',
 } as const;
 
 /** Social profiles shown as footer icons, in order. */

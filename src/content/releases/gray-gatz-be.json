@@ -1,0 +1,52 @@
+{
+  "title": "Gray Gatz Be",
+  "type": "single",
+  "date": "2026-07-28",
+  "cover": "../../assets/images/covers/gray-gatz-be.jpg",
+  "description": {
+    "en": "Gray Gatz Be is about living with the past without being trapped by it. It reflects on suffering, meaning and the struggle to turn pain into movement rather than paralysis.\n\nThe sound draws from alternative metal, nu metal and emotional heavy music: a dark atmosphere, reflective tension and a core that keeps moving forward. It is both a wound and a climb, a song about crossing through the worst part to find something worth holding onto.",
+    "fr": "Une chanson sur le fait de vivre avec le passé sans en être prisonnier, sur la souffrance, le sens et la façon de transformer la douleur en mouvement plutôt qu'en paralysie. Metal alternatif, nu metal et musique lourde chargée d'émotion, à l'atmosphère sombre : à la fois une blessure et une ascension.",
+    "ro": "Gray Gatz Be vorbește despre a trăi cu trecutul fără a rămâne prizonierul lui. Reflectează asupra suferinței, a sensului și a luptei de a transforma durerea în mișcare, nu în paralizie.\n\nSunetul vine din metal alternativ, nu metal și muzică grea plină de emoție: atmosferă întunecată, tensiune reflexivă și un nucleu care merge mereu înainte. Este deopotrivă rană și urcuș, o piesă despre traversarea celui mai greu moment pentru a găsi ceva pentru care merită să te ții.",
+    "it": "Una canzone sul vivere con il passato senza restarne intrappolati, sulla sofferenza, sul senso e sul trasformare il dolore in movimento anziché in paralisi. Alternative metal, nu metal e musica pesante carica di emozione, dall'atmosfera cupa: insieme una ferita e una salita.",
+    "es": "Una canción sobre vivir con el pasado sin quedar atrapado en él, sobre el sufrimiento, el sentido y convertir el dolor en movimiento en lugar de parálisis. Metal alternativo, nu metal y música pesada emotiva de atmósfera oscura: una herida y una escalada a la vez.",
+    "ar": "أغنية عن العيش مع الماضي دون أن تكون أسيره، عن المعاناة والمعنى وتحويل الألم إلى حركة بدل الشلل. ألترناتيف ميتال ونيو ميتال وموسيقى ثقيلة عاطفية بأجواء قاتمة: جرح وصعود في آن واحد.",
+    "ru": "Песня о том, как жить с прошлым и не оставаться в его плену: о страдании, смысле и о том, как превратить боль в движение, а не в оцепенение. Альтернативный метал, ню-метал и эмоциональная тяжёлая музыка с мрачной атмосферой: одновременно рана и подъём.",
+    "el": "Ένα τραγούδι για το να ζεις με το παρελθόν χωρίς να εγκλωβίζεσαι σε αυτό, για τον πόνο, το νόημα και το να γίνεται ο πόνος κίνηση αντί για παράλυση. Alternative metal, nu metal και συναισθηματική βαριά μουσική με σκοτεινή ατμόσφαιρα: ταυτόχρονα πληγή και ανάβαση."
+  },
+  "tracks": [
+    {
+      "title": "Gray Gatz Be",
+      "duration": "PT4M2S"
+    }
+  ],
+  "links": {
+    "spotify": null,
+    "appleMusic": null,
+    "youtubeMusic": null,
+    "bandcamp": null,
+    "deezer": null,
+    "amazonMusic": null,
+    "tidal": null,
+    "soundcloud": "https://soundcloud.com/bleedingdebts316/gray-gatz-be"
+  },
+  "soundcloudEmbed": "https://soundcloud.com/bleedingdebts316/gray-gatz-be",
+  "hook": {
+    "en": "For everyone still carrying the past: an alternative and nu metal climb out of the worst part, turning pain into movement instead of paralysis.",
+    "fr": "Pour tous ceux qui portent encore leur passé : une ascension metal alternatif et nu metal hors du pire, qui transforme la douleur en mouvement plutôt qu'en paralysie.",
+    "ro": "Pentru toți cei care încă își poartă trecutul: o urcare alternative și nu metal din cel mai greu moment, care transformă durerea în mișcare, nu în paralizie.",
+    "it": "Per chi porta ancora il peso del passato: una risalita alternative e nu metal fuori dal momento peggiore, che trasforma il dolore in movimento invece che in paralisi.",
+    "es": "Para quien todavía carga con su pasado: una escalada de metal alternativo y nu metal para salir de lo peor, que convierte el dolor en movimiento y no en parálisis.",
+    "ar": "لكل من لا يزال يحمل ماضيه: صعود ألترناتيف ونيو ميتال من أسوأ اللحظات، يحوّل الألم إلى حركة بدل الشلل.",
+    "ru": "Для всех, кто всё ещё несёт своё прошлое: подъём в духе альтернативного и ню-метала из самой тёмной точки, где боль становится движением, а не оцепенением.",
+    "el": "Για όσους κουβαλούν ακόμα το παρελθόν: μια ανάβαση alternative και nu metal μέσα από το χειρότερο σημείο, που κάνει τον πόνο κίνηση αντί για παράλυση."
+  },
+  "hashtags": [
+    "#GrayGatzBe",
+    "#BleedingDebts316",
+    "#AlternativeMetal",
+    "#NuMetal",
+    "#HeavyMusic",
+    "#RomanianMetal",
+    "#UndergroundMetal"
+  ]
+}

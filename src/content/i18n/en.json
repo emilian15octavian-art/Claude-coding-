@@ -145,7 +145,11 @@
       "album": "Album",
       "ep": "EP",
       "single": "Single"
-    }
+    },
+    "about": "About the song",
+    "moreSongs": "More songs",
+    "songPage": "Open the song page",
+    "by": "by"
   },
   "videos": {
     "play": "Play video: {title}",
@@ -231,7 +235,11 @@
     "emailLabel": "Email address",
     "consent": "I agree to receive the Bleeding Debts 316 newsletter. I will get an email to confirm my subscription and can unsubscribe at any time.",
     "submit": "Subscribe",
-    "privacy": "We use Brevo to send emails. Your address is stored in the EU and never shared. Details in our privacy policy."
+    "privacy": "We use Brevo to send emails. Your address is stored in the EU and never shared. Details in our privacy policy.",
+    "consentSimple": "I agree to receive the Bleeding Debts 316 newsletter by e-mail. I can unsubscribe at any time by replying \"unsubscribe\".",
+    "privacySimple": "Your address goes only to the band's own inbox and is used only for the newsletter. Details in our privacy policy.",
+    "success": "You're on the list. Thank you!",
+    "error": "Something went wrong. Please try again."
   },
   "contact": {
     "intro": "Booking, press, collaborations or just a message: we read everything.",

@@ -1,0 +1,98 @@
+---
+/**
+ * One page per song in every language, e.g. /en/music/killer-maze/, /ro/muzica/killer-maze/.
+ * Own title, Google description (the song's hook), share image (the cover), song schema and hreflang.
+ */
+import { Picture, getImage } from 'astro:assets';
+import Base from '../../../layouts/Base.astro';
+import ListenButtons from '../../../components/ListenButtons.astro';
+import Embed from '../../../components/Embed.astro';
+import Icon from '../../../components/Icon.astro';
+import { locales, type Locale } from '../../../i18n/locales';
+import { path, slugs } from '../../../i18n/routes';
+import { pick, t } from '../../../i18n/t';
+import { getReleases, getVideos } from '../../../lib/data';
+import { formatDate, formatDuration } from '../../../lib/format';
+import { releaseNode } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+  const releases = await getReleases();
+  return locales.flatMap((lang) => releases.map((release) => ({ params: { lang, section: slugs.music[lang], song: release.id }, props: { release, releases } })));
+}
+const lang = Astro.params.lang as Locale;
+const { release, releases } = Astro.props as { release: Awaited<ReturnType<typeof getReleases>>[number]; releases: Awaited<ReturnType<typeof getReleases>> };
+const site = Astro.site!.toString().replace(/\/$/, '');
+const d = release.data;
+const songPath = (l: Locale) => `${path('music', l)}${release.id}/`;
+const paths = Object.fromEntries(locales.map((l) => [l, songPath(l)])) as Record<Locale, string>;
+const year = d.date.slice(0, 4);
+const typeName = t(lang, `music.type.${d.type}`);
+const title = `${d.title} | Bleeding Debts 316 · ${typeName} ${year}`;
+const hook = d.hook ? pick(lang, d.hook) : d.description ? pick(lang, d.description).split('\n')[0] : `${d.title}, ${typeName} ${t(lang, 'music.by')} Bleeding Debts 316`;
+const og = await getImage({ src: d.cover, width: 1200, height: 1200, format: 'jpg' });
+const ogImage = `${site}${og.src}`;
+const schema = [{ ...releaseNode(site, lang, release, ogImage), url: `${site}${songPath(lang)}`, mainEntityOfPage: { '@id': `${site}${songPath(lang)}#webpage` }, ...(d.hook ? { abstract: pick(lang, d.hook) } : {}), ...(d.hashtags.length ? { keywords: d.hashtags.map((h) => h.slice(1)).join(', ') } : {}) }];
+const about = d.description ? pick(lang, d.description) : '';
+const aboutIsFallback = d.description ? !d.description[lang] : false;
+const others = releases.filter((r) => r.id !== release.id);
+const video = (await getVideos()).find((v) => v.data.song === release.id || v.data.youtubeId === d.youtubeId);
+if (video) schema.push({
+  '@type': 'VideoObject', '@id': `${site}/#video-${video.data.youtubeId}`, name: video.data.title, description: video.data.description ? pick(lang, video.data.description) : hook,
+  uploadDate: video.data.date, thumbnailUrl: `https://i.ytimg.com/vi/${video.data.youtubeId}/maxresdefault.jpg`, embedUrl: `https://www.youtube-nocookie.com/embed/${video.data.youtubeId}`,
+  contentUrl: `https://www.youtube.com/watch?v=${video.data.youtubeId}`, author: { '@id': `${site}/#band` },
+} as never);
+---
+<Base lang={lang} pageKey="music" schema={schema} pageType="ItemPage" override={{ title, description: hook, paths, crumbName: d.title, ogImage }}>
+  <article class="container song">
+    <Picture src={d.cover} alt={t(lang, 'music.coverAlt', { title: d.title })} formats={['avif', 'webp']} widths={[320, 640, 960]} sizes="(min-width: 56rem) 26rem, 100vw" loading="eager" fetchpriority="high" class="cover" />
+    <div class="info stack">
+      <p class="meta muted"><span class="badge badge-neutral">{typeName}</span> {t(lang, 'music.released')} <time datetime={d.date}>{formatDate(lang, d.date)}</time>{d.tracks[0]?.duration && <> · <span class="ltr">{formatDuration(d.tracks[0].duration)}</span></>}</p>
+      <h1 class="title"><span translate="no">{d.title}</span> <span class="by muted">{t(lang, 'music.by')} <span translate="no">Bleeding Debts 316</span></span></h1>
+      <p class="lead" dir="auto" lang={d.hook && !d.hook[lang] ? 'en' : undefined}>{hook}</p>
+      <ListenButtons lang={lang} release={release} />
+      {video && <Embed lang={lang} service="YouTube" src={`https://www.youtube-nocookie.com/embed/${video.data.youtubeId}?autoplay=1&rel=0`} title={video.data.title} label={t(lang, 'videos.play', { title: video.data.title })} thumbnail={video.data.thumbnail ?? `https://i.ytimg.com/vi/${video.data.youtubeId}/hqdefault.jpg`} />}
+      {d.soundcloudEmbed && <Embed lang={lang} service="SoundCloud" src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(d.soundcloudEmbed)}&color=%23e5383b&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`} title={`${d.title}: SoundCloud`} label={t(lang, 'music.playEmbed', { service: 'SoundCloud' })} />}
+      {d.spotifyEmbed && <Embed lang={lang} service="Spotify" src={`https://open.spotify.com/embed/${d.spotifyEmbed}?theme=0`} title={`${d.title}: Spotify`} label={t(lang, 'music.playEmbed', { service: 'Spotify' })} />}
+    </div>
+  </article>
+  {about && (
+    <section class="container section-s" aria-labelledby="about-song">
+      <div class="narrow-l prose" dir="auto" lang={aboutIsFallback ? 'en' : undefined}>
+        <h2 id="about-song">{t(lang, 'music.about')}</h2>
+        {about.split('\n\n').map((para) => <p>{para}</p>)}
+        {d.hashtags.length > 0 && <p class="tags ltr" translate="no">{d.hashtags.join(' ')}</p>}
+      </div>
+    </section>
+  )}
+  {others.length > 0 && (
+    <section class="container section" aria-labelledby="more-songs">
+      <h2 id="more-songs" class="mh">{t(lang, 'music.moreSongs')}</h2>
+      <ul class="grid others" role="list">
+        {others.map((r) => (
+          <li>
+            <a class="other" href={`${path('music', lang)}${r.id}/`}>
+              <Picture src={r.data.cover} alt="" formats={['avif', 'webp']} widths={[240, 480]} sizes="(min-width: 48rem) 14rem, 45vw" loading="lazy" />
+              <span translate="no">{r.data.title}</span>
+              <Icon name="arrow" size={18} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Base>
+<style>
+  .song { display: grid; gap: var(--space-l); padding-block: var(--space-l); }
+  @media (min-width: 56rem) { .song { grid-template-columns: minmax(16rem, 26rem) 1fr; align-items: start; } }
+  .cover, .cover :global(img) { inline-size: 100%; block-size: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
+  .title { font-size: var(--step-4); }
+  .by { display: block; font-size: var(--step-1); font-weight: 700; }
+  .meta { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; font-size: var(--step--1); }
+  .narrow-l { max-inline-size: 46rem; }
+  .tags { color: var(--text-muted); font-weight: 700; }
+  .mh { font-size: var(--step-2); margin-block-end: var(--space-m); }
+  .others { --min: 9rem; list-style: none; padding: 0; }
+  .other { display: grid; gap: var(--space-xs); text-decoration: none; font-weight: 800; }
+  .other :global(img) { inline-size: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
+  .other :global(svg) { display: none; }
+</style>

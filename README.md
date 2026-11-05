@@ -1,7 +1,7 @@
 # Bleeding Debts 316: official website
 
 The official website of **Bleeding Debts 316** in 8 languages (English, Français, Română, Italiano, Español, العربية, Русский, Ελληνικά).
-It is free to run: the code lives on GitHub, it is hosted on Cloudflare Pages at `https://bleedingdebts316.pages.dev`, and it checks and maintains itself with GitHub Actions.
+It is free to run: the code lives on GitHub, it is hosted on Cloudflare Pages at `https://claude-coding.emilian15octavian.workers.dev`, and it checks and maintains itself with GitHub Actions.
 
 - First time? Follow **[LAUNCH-CHECKLIST.md](LAUNCH-CHECKLIST.md)** step by step.
 - Got an e-mail about a failed check? Read **[MAINTENANCE.md](MAINTENANCE.md)**.

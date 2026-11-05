@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SITE_URL: ${{ vars.SITE_URL || 'https://bleedingdebts316.pages.dev' }}
+  SITE_URL: ${{ vars.SITE_URL || 'https://claude-coding.emilian15octavian.workers.dev' }}
   CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'bleedingdebts316' }}
   # Secret names: CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID, or the short CFTOKEN / CFACCOUNT (easier to type on a phone)
   HAS_CF: ${{ (secrets.CLOUDFLARE_API_TOKEN || secrets.CFTOKEN) != '' && (secrets.CLOUDFLARE_ACCOUNT_ID || secrets.CFACCOUNT) != '' }}

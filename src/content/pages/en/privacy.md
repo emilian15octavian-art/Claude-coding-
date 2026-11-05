@@ -18,6 +18,8 @@ The data controller is the legal entity shown in the box above (name, registrati
 
 **Newsletter.** If you subscribe, we store your e-mail address, the language you chose and the time and proof of your consent. You confirm your subscription by clicking a link we e-mail you (double opt-in). The newsletter is sent with Brevo (Sendinblue SAS, France), which stores data in the EU. Legal basis: your consent (Art. 6(1)(a)). You can unsubscribe at any time with the link in every e-mail.
 
+*Current set-up:* until we start using Brevo, each sign-up (your e-mail address, language and consent) is delivered by Web3Forms to the band's mailbox (Gmail, Google) and kept there only for the newsletter. You can ask us to delete it at any time.
+
 **Shop orders.** Payments are processed by Stripe. Stripe collects your card details directly; we never see them. To deliver your order we receive your name, delivery address, e-mail address and order details. Legal basis: performance of the contract (Art. 6(1)(b)) and our legal obligations (Art. 6(1)(c)), for example keeping accounting records for the period required by Romanian law (Law no. 82/1991).
 
 **Videos and music players.** YouTube, Spotify and Bandcamp players load **only after you click** on them. Until then no data is sent to those services. After you click, their own privacy policies apply.

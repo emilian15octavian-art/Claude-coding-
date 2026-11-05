@@ -1,0 +1,54 @@
+{
+  "title": "InsurREXion (MANIA)",
+  "type": "single",
+  "date": "2026-07-28",
+  "cover": "../../assets/images/covers/insurrexion-mania.jpg",
+  "description": {
+    "en": "InsurREXion (MANIA) is about breaking cycles, rejecting destructive habits and confronting the loops that keep people stuck. It looks back with respect, honours ancestors and their lessons, and turns memory into strength.\n\nMusically it lives in metalcore, nu metal and groove metal territory, with militant energy, heavy dynamics and a sense of controlled unrest. It balances anger and reflection, pulling past and present into the same collision point.",
+    "fr": "Sur le fait de briser les cycles, de rejeter les habitudes destructrices et d'affronter les boucles qui nous enferment. Il regarde en arrière avec respect, honore les ancêtres et les leçons, et fait de la mémoire une force : metalcore, nu metal et groove metal, énergie militante et agitation maîtrisée.",
+    "ro": "InsurREXion (MANIA) vorbește despre ruperea ciclurilor, respingerea obiceiurilor distructive și înfruntarea buclelor care țin oamenii pe loc. Privește înapoi cu respect, cinstește strămoșii și lecțiile lor și transformă memoria în putere.\n\nMuzical, se mișcă în zona metalcore, nu metal și groove metal, cu energie militantă, dinamică grea și o neliniște controlată. Echilibrează furia și reflecția, aducând trecutul și prezentul în același punct de impact.",
+    "it": "Sul rompere i cicli, rifiutare le abitudini distruttive e affrontare i circoli che tengono le persone bloccate. Guarda indietro con rispetto, onora gli antenati e le lezioni e trasforma la memoria in forza: metalcore, nu metal e groove metal, con energia militante e inquietudine controllata.",
+    "es": "Sobre romper ciclos, rechazar hábitos destructivos y enfrentarse a los bucles que mantienen a la gente estancada. Mira atrás con respeto, honra a los antepasados y las lecciones, y convierte la memoria en fuerza: metalcore, nu metal y groove metal, con energía militante e inquietud contenida.",
+    "ar": "عن كسر الدوائر ورفض العادات المدمرة ومواجهة الحلقات التي تُبقي الناس عالقين. تنظر إلى الوراء باحترام، وتكرّم الأسلاف والدروس، وتحوّل الذاكرة إلى قوة: ميتالكور ونيو ميتال وغروف ميتال بطاقة نضالية واضطراب مضبوط.",
+    "ru": "О том, как разрывать круги, отказываться от разрушительных привычек и противостоять петлям, в которых застревают люди. Песня смотрит в прошлое с уважением, чтит предков и их уроки и превращает память в силу: металкор, ню-метал и грув-метал с боевой энергией и сдержанным беспокойством.",
+    "el": "Για το σπάσιμο των κύκλων, την απόρριψη των καταστροφικών συνηθειών και την αντιμετώπιση των βρόχων που κρατούν τους ανθρώπους κολλημένους. Κοιτάζει πίσω με σεβασμό, τιμά τους προγόνους και τα μαθήματα και κάνει τη μνήμη δύναμη: metalcore, nu metal και groove metal με μαχητική ενέργεια και ελεγχόμενη αναταραχή."
+  },
+  "tracks": [
+    {
+      "title": "InsurREXion (MANIA)",
+      "duration": "PT4M22S"
+    }
+  ],
+  "links": {
+    "spotify": null,
+    "appleMusic": null,
+    "youtubeMusic": null,
+    "bandcamp": null,
+    "deezer": null,
+    "amazonMusic": null,
+    "tidal": null,
+    "soundcloud": "https://soundcloud.com/bleedingdebts316/insurrextion-mania",
+    "youtube": "https://www.youtube.com/watch?v=6a5vW-o_RiQ"
+  },
+  "soundcloudEmbed": "https://soundcloud.com/bleedingdebts316/insurrextion-mania",
+  "hook": {
+    "en": "Break the loop. A militant metalcore and groove metal track about smashing destructive cycles and turning ancestral memory into strength.",
+    "fr": "Brise la boucle. Un morceau metalcore et groove metal militant sur l'art de briser les cycles destructeurs et de faire de la mémoire des ancêtres une force.",
+    "ro": "Rupe bucla. O piesă metalcore și groove metal militantă despre spargerea ciclurilor distructive și transformarea memoriei strămoșilor în putere.",
+    "it": "Spezza il cerchio. Un brano metalcore e groove metal militante sul distruggere i cicli autodistruttivi e trasformare la memoria degli antenati in forza.",
+    "es": "Rompe el bucle. Un tema militante de metalcore y groove metal sobre destrozar los ciclos destructivos y convertir la memoria de los antepasados en fuerza.",
+    "ar": "اكسر الحلقة. أغنية ميتالكور وغروف ميتال نضالية عن تحطيم الدوائر المدمّرة وتحويل ذاكرة الأسلاف إلى قوة.",
+    "ru": "Разорви петлю. Боевой металкор и грув-метал о том, как разбить разрушительные круги и превратить память предков в силу.",
+    "el": "Σπάσε τον βρόχο. Ένα μαχητικό metalcore και groove metal κομμάτι για το σπάσιμο των καταστροφικών κύκλων και τη μνήμη των προγόνων ως δύναμη."
+  },
+  "hashtags": [
+    "#InsurREXion",
+    "#BleedingDebts316",
+    "#Metalcore",
+    "#NuMetal",
+    "#GrooveMetal",
+    "#RomanianMetal",
+    "#UndergroundMetal"
+  ],
+  "youtubeId": "6a5vW-o_RiQ"
+}

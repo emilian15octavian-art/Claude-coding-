@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Picture } from 'astro:assets';
 import { type Locale } from '../i18n/locales';
+import { path } from '../i18n/routes';
 import { pick, t } from '../i18n/t';
 import { formatDate, formatDuration } from '../lib/format';
 import ListenButtons from './ListenButtons.astro';
@@ -16,11 +17,13 @@ const alt = t(lang, 'music.coverAlt', { title: d.title });
     loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} class="cover" />
   <div class="info stack">
     <p class="meta muted"><span class="badge badge-neutral">{t(lang, `music.type.${d.type}`)}</span> {t(lang, 'music.released')} <time datetime={d.date}>{formatDate(lang, d.date)}</time></p>
-    <H class="title" translate="no">{d.title}</H>
-    {d.description && <p dir="auto" lang={d.description[lang] ? undefined : 'en'}>{pick(lang, d.description)}</p>}
+    <H class="title" translate="no"><a href={`${path('music', lang)}${release.id}/`}>{d.title}</a></H>
+    {d.hook && <p class="hook" dir="auto" lang={d.hook[lang] ? undefined : 'en'}>{pick(lang, d.hook)}</p>}
+    {!d.hook && d.description && <p dir="auto" lang={d.description[lang] ? undefined : 'en'}>{pick(lang, d.description)}</p>}
     <ListenButtons lang={lang} release={release} />
     {d.spotifyEmbed && <Embed lang={lang} service="Spotify" src={`https://open.spotify.com/embed/${d.spotifyEmbed}?theme=0`} title={`${d.title}: Spotify`} label={t(lang, 'music.playEmbed', { service: 'Spotify' })} />}
-    {!d.spotifyEmbed && d.bandcampAlbumId && <Embed lang={lang} service="Bandcamp" src={`https://bandcamp.com/EmbeddedPlayer/album=${d.bandcampAlbumId}/size=large/bgcol=000000/linkcol=e5383b/tracklist=false/artwork=small/transparent=true/`} title={`${d.title}: Bandcamp`} label={t(lang, 'music.playEmbed', { service: 'Bandcamp' })} />}
+    {!d.spotifyEmbed && d.soundcloudEmbed && <Embed lang={lang} service="SoundCloud" src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(d.soundcloudEmbed)}&color=%23e5383b&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`} title={`${d.title}: SoundCloud`} label={t(lang, 'music.playEmbed', { service: 'SoundCloud' })} />}
+    {!d.spotifyEmbed && !d.soundcloudEmbed && d.bandcampAlbumId && <Embed lang={lang} service="Bandcamp" src={`https://bandcamp.com/EmbeddedPlayer/album=${d.bandcampAlbumId}/size=large/bgcol=000000/linkcol=e5383b/tracklist=false/artwork=small/transparent=true/`} title={`${d.title}: Bandcamp`} label={t(lang, 'music.playEmbed', { service: 'Bandcamp' })} />}
     {tracklist && d.tracks.length > 1 && (
       <details class="tracks">
         <summary>{t(lang, 'music.tracklist')} ({d.tracks.length})</summary>
@@ -35,6 +38,9 @@ const alt = t(lang, 'music.coverAlt', { title: d.title });
   .cover { inline-size: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
   .cover :global(img) { inline-size: 100%; block-size: auto; border-radius: var(--radius); }
   .title { font-size: var(--step-3); }
+  .title a { text-decoration: none; }
+  .title a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+  .hook { font-size: var(--step-1); }
   .meta { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; font-size: var(--step--1); }
   .tracks summary { cursor: pointer; font-weight: 800; min-block-size: 44px; display: flex; align-items: center; }
   .tracks ol { padding-inline-start: 1.5em; }

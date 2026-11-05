@@ -11,7 +11,7 @@ permissions:
   issues: write
 
 env:
-  SITE_URL: ${{ vars.SITE_URL || 'https://bleedingdebts316.pages.dev' }}
+  SITE_URL: ${{ vars.SITE_URL || 'https://claude-coding.emilian15octavian.workers.dev' }}
 
 jobs:
   links:

@@ -1,0 +1,52 @@
+{
+  "title": "Killer Maze",
+  "type": "single",
+  "date": "2026-07-28",
+  "cover": "../../assets/images/covers/killer-maze.jpg",
+  "description": {
+    "en": "Killer Maze is a prophetic metal track about collapse, denial and the tragedies humanity keeps walking toward. It paints a picture of global decay, and of what happens when we ignore the warning signs until it is too late.\n\nDark metal and groove metal collide with apocalyptic heavy music: ominous tension, crushing riffs and a constant sense of impending disaster. This is heavy music with a warning inside it.",
+    "fr": "Un morceau de metal prophétique sur l'effondrement, le déni et les tragédies vers lesquelles l'humanité continue de marcher : l'image d'un déclin mondial et des signaux d'alarme ignorés jusqu'à ce qu'il soit trop tard. Dark metal, groove metal et musique lourde apocalyptique aux riffs écrasants : une musique lourde qui porte un avertissement.",
+    "ro": "Killer Maze este o piesă metal profetică despre prăbușire, negare și tragediile spre care omenirea continuă să meargă. Pictează imaginea unei decăderi globale și a ceea ce se întâmplă când ignorăm semnalele de alarmă până e prea târziu.\n\nDark metal și groove metal se ciocnesc cu muzica grea apocaliptică: tensiune amenințătoare, riffuri zdrobitoare și senzația constantă a unui dezastru iminent. Este muzică grea care poartă un avertisment.",
+    "it": "Un brano metal profetico sul crollo, sulla negazione e sulle tragedie verso cui l'umanità continua a camminare: un'immagine del declino globale e dei segnali d'allarme ignorati finché è troppo tardi. Dark metal, groove metal e musica pesante apocalittica con riff schiaccianti: musica pesante con un avvertimento dentro.",
+    "es": "Un tema de metal profético sobre el colapso, la negación y las tragedias hacia las que la humanidad sigue caminando: una imagen de la decadencia global y de las señales de alarma ignoradas hasta que es demasiado tarde. Dark metal, groove metal y música pesada apocalíptica con riffs demoledores: música pesada con una advertencia dentro.",
+    "ar": "أغنية ميتال نبوئية عن الانهيار والإنكار والمآسي التي تواصل البشرية السير نحوها: صورة للانحدار العالمي ولتجاهل علامات الخطر حتى فوات الأوان. دارك ميتال وغروف ميتال وموسيقى ثقيلة نهاية العالم بريفات ساحقة: موسيقى ثقيلة تحمل تحذيرًا.",
+    "ru": "Пророческий метал-трек о крушении, отрицании и трагедиях, к которым человечество продолжает идти: картина глобального упадка и предупреждений, которые игнорируют, пока не станет слишком поздно. Дарк-метал, грув-метал и апокалиптическая тяжёлая музыка с сокрушительными риффами: тяжёлая музыка с предупреждением внутри.",
+    "el": "Ένα προφητικό metal κομμάτι για την κατάρρευση, την άρνηση και τις τραγωδίες προς τις οποίες συνεχίζει να βαδίζει η ανθρωπότητα: μια εικόνα παγκόσμιας παρακμής και προειδοποιήσεων που αγνοούνται μέχρι να είναι αργά. Dark metal, groove metal και αποκαλυπτική βαριά μουσική με συντριπτικά riff: βαριά μουσική με μια προειδοποίηση μέσα της."
+  },
+  "tracks": [
+    {
+      "title": "Killer Maze",
+      "duration": "PT3M9S"
+    }
+  ],
+  "links": {
+    "spotify": null,
+    "appleMusic": null,
+    "youtubeMusic": null,
+    "bandcamp": null,
+    "deezer": null,
+    "amazonMusic": null,
+    "tidal": null,
+    "soundcloud": "https://soundcloud.com/bleedingdebts316/killer-maze"
+  },
+  "soundcloudEmbed": "https://soundcloud.com/bleedingdebts316/killer-maze",
+  "hook": {
+    "en": "A prophetic metal anthem about a world walking into its own trap. Crushing groove riffs, apocalyptic dread and a warning you can't unhear.",
+    "fr": "Un hymne metal prophétique sur un monde qui marche droit dans son propre piège. Riffs groove écrasants, angoisse apocalyptique et un avertissement impossible à oublier.",
+    "ro": "Un imn metal profetic despre o lume care intră singură în propria capcană. Riffuri groove zdrobitoare, neliniște apocaliptică și un avertisment pe care nu-l mai poți uita.",
+    "it": "Un inno metal profetico su un mondo che cammina dritto nella propria trappola. Riff groove schiaccianti, angoscia apocalittica e un avvertimento impossibile da dimenticare.",
+    "es": "Un himno metal profético sobre un mundo que camina hacia su propia trampa. Riffs groove demoledores, angustia apocalíptica y una advertencia imposible de olvidar.",
+    "ar": "نشيد ميتال نبوئي عن عالم يسير بنفسه نحو فخّه. ريفات غروف ساحقة، ورهبة نهاية العالم، وتحذير لا يمكنك نسيانه.",
+    "ru": "Пророческий метал-гимн о мире, который сам идёт в собственную ловушку. Сокрушительные грув-риффы, апокалиптическая тревога и предупреждение, которое невозможно забыть.",
+    "el": "Ένας προφητικός metal ύμνος για έναν κόσμο που βαδίζει μόνος του στην παγίδα του. Συντριπτικά groove riff, αποκαλυπτικός τρόμος και μια προειδοποίηση που δεν ξεχνιέται."
+  },
+  "hashtags": [
+    "#KillerMaze",
+    "#BleedingDebts316",
+    "#GrooveMetal",
+    "#DarkMetal",
+    "#ApocalypticMetal",
+    "#RomanianMetal",
+    "#UndergroundMetal"
+  ]
+}

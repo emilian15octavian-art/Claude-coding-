@@ -1,16 +1,17 @@
 {
   "legalEntity": {
-    "name": "[LEGAL ENTITY NAME, e.g. Popescu Ion PFA or Bleeding Debts SRL]",
-    "type": "[PFA / II / SRL]",
-    "cui": "[CUI / CIF]",
-    "regCom": "[Nr. Reg. Com., e.g. F40/1234/2026]",
-    "address": "[Registered address, city, county, postal code, Romania]",
+    "name": "MARINESCU OCTAVIAN-EMILIAN ÎNTREPRINDERE FAMILIALĂ",
+    "type": "Întreprindere familială (IF)",
+    "cui": "54213733",
+    "regCom": "F2026012827000",
+    "address": "București, Sector 3, România",
     "phone": null,
     "vatPayer": false
   },
   "services": {
     "brevoFormAction": null,
     "web3formsEnabled": false,
+    "web3formsAccessKey": "909883ea-e15b-43bf-8898-eaed43a29dae",
     "turnstileSiteKey": null,
     "cloudflareAnalyticsToken": null,
     "googleSiteVerification": null,
@@ -19,10 +20,49 @@
   "shipping": {
     "romaniaRON": 20,
     "europeEUR": 12,
-    "romaniaDays": [1, 3],
-    "europeDays": [4, 10],
-    "countries": ["RO", "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "SK", "SI", "ES", "SE", "MD"],
+    "romaniaDays": [
+      1,
+      3
+    ],
+    "europeDays": [
+      4,
+      10
+    ],
+    "countries": [
+      "RO",
+      "AT",
+      "BE",
+      "BG",
+      "HR",
+      "CY",
+      "CZ",
+      "DK",
+      "EE",
+      "FI",
+      "FR",
+      "DE",
+      "GR",
+      "HU",
+      "IE",
+      "IT",
+      "LV",
+      "LT",
+      "LU",
+      "MT",
+      "NL",
+      "PL",
+      "PT",
+      "SK",
+      "SI",
+      "ES",
+      "SE",
+      "MD"
+    ],
     "returnDays": 14
   },
-  "utm": { "source": "bleedingdebts316-site", "medium": "referral", "campaign": "links" }
+  "utm": {
+    "source": "bleedingdebts316-site",
+    "medium": "referral",
+    "campaign": "links"
+  }
 }

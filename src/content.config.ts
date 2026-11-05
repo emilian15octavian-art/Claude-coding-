@@ -85,6 +85,8 @@ const settings = defineCollection({
     services: z.object({
       brevoFormAction: optionalUrl,
       web3formsEnabled: z.boolean(),
+      /** Web3Forms access key (public by design: it only lets people send messages TO your inbox). */
+      web3formsAccessKey: z.string().uuid().nullable().default(null),
       turnstileSiteKey: z.string().nullable(),
       cloudflareAnalyticsToken: z.string().nullable(),
       googleSiteVerification: z.string().nullable(),
@@ -106,8 +108,8 @@ const members = defineCollection({
     name: z.string().min(1),
     role: localized,
     order: z.number().int(),
-    photo: image(),
-    photoAlt: localized,
+    photo: image().optional(),
+    photoAlt: localized.optional(),
     bio: localized.optional(),
   }),
 });
@@ -119,7 +121,10 @@ const releases = defineCollection({
     type: z.enum(['album', 'ep', 'single']),
     date: isoDate,
     cover: image(),
+    /** One or two punchy sentences (also the Google description of the song page). */
+    hook: localized.optional(),
     description: localized.optional(),
+    hashtags: z.array(z.string().regex(/^#\w+$/, 'Hashtags start with # and have no spaces')).default([]),
     tracks: z.array(z.object({
       title: z.string().min(1),
       duration: z.string().regex(/^PT(\d+M)?(\d+S)?$/, 'Use ISO 8601 like PT3M45S').optional(),
@@ -127,10 +132,14 @@ const releases = defineCollection({
     })).min(1),
     links: z.object({
       spotify: optionalUrl, appleMusic: optionalUrl, youtubeMusic: optionalUrl, bandcamp: optionalUrl,
-      deezer: optionalUrl, amazonMusic: optionalUrl, tidal: optionalUrl, soundcloud: optionalUrl,
+      deezer: optionalUrl, amazonMusic: optionalUrl, tidal: optionalUrl, soundcloud: optionalUrl, youtube: optionalUrl,
     }),
+    /** YouTube id of the official video (shown on the song page, click to play). */
+    youtubeId: z.string().regex(/^[A-Za-z0-9_-]{11}$/).optional(),
     /** Spotify album/track id, e.g. "4aawyAB9vmqN3uQ7FjRGTy" (for the click-to-load player). */
     spotifyEmbed: z.string().regex(/^(album|track)\/[A-Za-z0-9]{22}$/, 'Use album/<id> or track/<id>').optional(),
+    /** SoundCloud track or playlist link (for the click-to-load player), e.g. https://soundcloud.com/bleedingdebts316/song */
+    soundcloudEmbed: url.optional(),
     /** Bandcamp album id number (for the click-to-load player). */
     bandcampAlbumId: z.string().regex(/^\d+$/).optional(),
     upc: z.string().optional(),
@@ -188,6 +197,8 @@ const videos = defineCollection({
     date: isoDate,
     description: localized.optional(),
     duration: z.string().regex(/^PT(\d+H)?(\d+M)?(\d+S)?$/).optional(),
+    /** id of the song (file name in src/content/releases) this video belongs to */
+    song: z.string().optional(),
   }),
 });
 
@@ -219,7 +230,7 @@ const links = defineCollection({
   schema: z.object({
     label: localized,
     url: url.nullable(),
-    icon: z.enum(['spotify', 'appleMusic', 'youtube', 'instagram', 'facebook', 'tiktok', 'bandcamp', 'linktree', 'shop', 'shows', 'mail', 'link', 'newsletter', 'soundcloud', 'deezer', 'x']),
+    icon: z.enum(['spotify', 'appleMusic', 'youtube', 'instagram', 'facebook', 'tiktok', 'bandcamp', 'linktree', 'shop', 'shows', 'mail', 'link', 'newsletter', 'soundcloud', 'deezer', 'x', 'threads']),
     order: z.number().int(),
     featured: z.boolean().default(false),
     /** Internal links (to this site) use a page key instead of a url. */

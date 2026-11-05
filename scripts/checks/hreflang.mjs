@@ -5,7 +5,7 @@ import { fileFor, htmlFiles, langs, requireDist, result, urlOf } from './lib.mjs
 
 const r = result('hreflang', 'hreflang: all 8 languages + x-default, reciprocal');
 requireDist(r);
-const site = (process.env.SITE_URL || 'https://bleedingdebts316.pages.dev').replace(/\/$/, '');
+const site = (process.env.SITE_URL || 'https://claude-coding.emilian15octavian.workers.dev').replace(/\/$/, '');
 const strip = (u) => (u.startsWith(site) ? u.slice(site.length) || '/' : u);
 const alts = new Map();
 for (const f of htmlFiles()) {

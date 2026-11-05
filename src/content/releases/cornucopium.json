@@ -1,0 +1,54 @@
+{
+  "title": "cornucopium",
+  "type": "single",
+  "date": "2026-07-28",
+  "cover": "../../assets/images/covers/cornucopium.jpg",
+  "description": {
+    "en": "cornucopium is a metal track about breakthrough, defiance and speaking your mind without apology. It pushes back against censorship, mocks the machinery of modern thought and turns frustration into force.\n\nIt lives in nu metal, groove metal and aggressive modern metal: sharp riffs, heavy rhythm work and a confrontational vocal. Built for listeners who want intensity with meaning, it stands as a statement against passivity, control and silence.",
+    "fr": "Un morceau de metal sur la percée, la défiance et le fait de dire ce que l'on pense sans s'excuser. Il s'oppose à la censure, raille la machinerie de la pensée moderne et transforme la frustration en force : nu metal, groove metal et metal moderne agressif, riffs tranchants et chant frontal.",
+    "ro": "cornucopium este o piesă metal despre izbucnire, sfidare și curajul de a-ți spune părerea fără scuze. Se opune cenzurii, ironizează mașinăria gândirii moderne și transformă frustrarea în forță.\n\nTrăiește în zona nu metal, groove metal și metal modern agresiv: riffuri tăioase, ritm greu și o voce care te înfruntă. Făcută pentru cei care vor intensitate cu sens, piesa este o declarație împotriva pasivității, a controlului și a tăcerii.",
+    "it": "Un brano metal su svolta, sfida e dire ciò che si pensa senza chiedere scusa. Si oppone alla censura, deride gli ingranaggi del pensiero moderno e trasforma la frustrazione in forza: nu metal, groove metal e metal moderno aggressivo, con riff taglienti e una voce di sfida.",
+    "es": "Un tema de metal sobre la ruptura, el desafío y decir lo que piensas sin pedir perdón. Se enfrenta a la censura, se burla de la maquinaria del pensamiento moderno y convierte la frustración en fuerza: nu metal, groove metal y metal moderno agresivo, con riffs afilados y una voz desafiante.",
+    "ar": "أغنية ميتال عن الانطلاق والتحدي وقول ما تفكر فيه دون اعتذار. تقف في وجه الرقابة، وتسخر من آلة الفكر الحديث، وتحوّل الإحباط إلى قوة: نيو ميتال وغروف ميتال وميتال حديث عنيف، بريفات حادة وغناء مواجه.",
+    "ru": "Метал-трек о прорыве, вызове и праве говорить то, что думаешь, не извиняясь. Он идёт против цензуры, высмеивает машину современного мышления и превращает раздражение в силу: ню-метал, грув-метал и агрессивный современный метал с острыми риффами и дерзким вокалом.",
+    "el": "Ένα metal κομμάτι για τη ρήξη, την αψήφηση και το να λες τη γνώμη σου χωρίς να ζητάς συγγνώμη. Αντιστέκεται στη λογοκρισία, χλευάζει τη μηχανή της σύγχρονης σκέψης και κάνει την απογοήτευση δύναμη: nu metal, groove metal και επιθετικό σύγχρονο metal, με κοφτερά riff και συγκρουσιακά φωνητικά."
+  },
+  "tracks": [
+    {
+      "title": "cornucopium",
+      "duration": "PT3M2S"
+    }
+  ],
+  "links": {
+    "spotify": null,
+    "appleMusic": null,
+    "youtubeMusic": null,
+    "bandcamp": null,
+    "deezer": null,
+    "amazonMusic": null,
+    "tidal": null,
+    "soundcloud": "https://soundcloud.com/bleedingdebts316/cornocopium",
+    "youtube": "https://www.youtube.com/watch?v=vG2KedemovY"
+  },
+  "soundcloudEmbed": "https://soundcloud.com/bleedingdebts316/cornocopium",
+  "hook": {
+    "en": "A riff-heavy war cry against censorship and silence. Nu metal and groove metal for anyone done apologising for what they think.",
+    "fr": "Un cri de guerre chargé de riffs contre la censure et le silence. Du nu metal et du groove metal pour tous ceux qui ne s'excusent plus de ce qu'ils pensent.",
+    "ro": "Un strigăt de luptă plin de riffuri împotriva cenzurii și a tăcerii. Nu metal și groove metal pentru oricine s-a săturat să-și ceară scuze pentru ce gândește.",
+    "it": "Un grido di battaglia carico di riff contro la censura e il silenzio. Nu metal e groove metal per chi ha smesso di scusarsi per ciò che pensa.",
+    "es": "Un grito de guerra cargado de riffs contra la censura y el silencio. Nu metal y groove metal para quien ya no pide perdón por lo que piensa.",
+    "ar": "صرخة حرب مليئة بالريفات ضد الرقابة والصمت. نيو ميتال وغروف ميتال لكل من توقّف عن الاعتذار عمّا يفكر فيه.",
+    "ru": "Боевой клич, полный риффов, против цензуры и молчания. Ню-метал и грув-метал для всех, кто устал извиняться за свои мысли.",
+    "el": "Μια πολεμική κραυγή γεμάτη riff ενάντια στη λογοκρισία και τη σιωπή. Nu metal και groove metal για όσους βαρέθηκαν να ζητούν συγγνώμη για ό,τι σκέφτονται."
+  },
+  "hashtags": [
+    "#Cornucopium",
+    "#BleedingDebts316",
+    "#NuMetal",
+    "#GrooveMetal",
+    "#ModernMetal",
+    "#RomanianMetal",
+    "#UndergroundMetal"
+  ],
+  "youtubeId": "vG2KedemovY"
+}

@@ -11,12 +11,23 @@ import { getSettings } from '../lib/data';
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 const { services } = await getSettings();
-const ready = services.web3formsEnabled;
+// Direct to Web3Forms when an access key is set (works on any static host); otherwise via /api/contact.
+const key = services.web3formsAccessKey;
+const ready = Boolean(key) || services.web3formsEnabled;
+const action = key ? 'https://api.web3forms.com/submit' : '/api/contact';
+const site = (Astro.site?.toString() ?? '').replace(/\/$/, '');
 ---
-<form class="contact stack" method="post" action="/api/contact" data-contact-form
+<form class="contact stack" method="post" action={action} data-contact-form
   data-msg-sending={t(lang, 'contact.sending')} data-msg-success={t(lang, 'contact.success')} data-msg-error={t(lang, 'contact.error')}>
   <input type="hidden" name="lang" value={lang} />
-  <input type="hidden" name="redirect" value={path('contact', lang)} />
+  {key ? (
+    <>
+      <input type="hidden" name="access_key" value={key} />
+      <input type="hidden" name="from_name" value="Bleeding Debts 316 website" />
+      <input type="hidden" name="redirect" value={`${site}${path('contact', lang)}?sent=1`} />
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" aria-hidden="true" />
+    </>
+  ) : <input type="hidden" name="redirect" value={path('contact', lang)} />}
   <div class="field">
     <label for="c-name">{t(lang, 'contact.name')} <span class="muted">({t(lang, 'contact.required')})</span></label>
     <input class="input" id="c-name" type="text" name="name" autocomplete="name" required maxlength="120" />
