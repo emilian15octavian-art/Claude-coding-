@@ -145,7 +145,11 @@
       "album": "Album",
       "ep": "EP",
       "single": "Single"
-    }
+    },
+    "about": "Despre piesă",
+    "moreSongs": "Alte piese",
+    "songPage": "Deschide pagina piesei",
+    "by": "de"
   },
   "videos": {
     "play": "Redă videoclipul: {title}",

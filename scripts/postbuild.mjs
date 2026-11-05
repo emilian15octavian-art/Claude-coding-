@@ -47,7 +47,7 @@ const CSP = {
   'img-src': ["'self'", 'data:'],
   'font-src': ["'self'"],
   'connect-src': ["'self'", 'https://cloudflareinsights.com', 'https://challenges.cloudflare.com', 'https://api.web3forms.com'],
-  'frame-src': ['https://www.youtube-nocookie.com', 'https://open.spotify.com', 'https://bandcamp.com', 'https://challenges.cloudflare.com'],
+  'frame-src': ['https://www.youtube-nocookie.com', 'https://open.spotify.com', 'https://bandcamp.com', 'https://w.soundcloud.com', 'https://challenges.cloudflare.com'],
   'form-action': ["'self'", 'https://*.sibforms.com', 'https://api.web3forms.com'],
   'media-src': ["'self'"],
   'manifest-src': ["'self'"],

@@ -121,7 +121,10 @@ const releases = defineCollection({
     type: z.enum(['album', 'ep', 'single']),
     date: isoDate,
     cover: image(),
+    /** One or two punchy sentences (also the Google description of the song page). */
+    hook: localized.optional(),
     description: localized.optional(),
+    hashtags: z.array(z.string().regex(/^#\w+$/, 'Hashtags start with # and have no spaces')).default([]),
     tracks: z.array(z.object({
       title: z.string().min(1),
       duration: z.string().regex(/^PT(\d+M)?(\d+S)?$/, 'Use ISO 8601 like PT3M45S').optional(),
@@ -133,6 +136,8 @@ const releases = defineCollection({
     }),
     /** Spotify album/track id, e.g. "4aawyAB9vmqN3uQ7FjRGTy" (for the click-to-load player). */
     spotifyEmbed: z.string().regex(/^(album|track)\/[A-Za-z0-9]{22}$/, 'Use album/<id> or track/<id>').optional(),
+    /** SoundCloud track or playlist link (for the click-to-load player), e.g. https://soundcloud.com/bleedingdebts316/song */
+    soundcloudEmbed: url.optional(),
     /** Bandcamp album id number (for the click-to-load player). */
     bandcampAlbumId: z.string().regex(/^\d+$/).optional(),
     upc: z.string().optional(),

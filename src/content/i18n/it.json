@@ -145,7 +145,11 @@
       "album": "Album",
       "ep": "EP",
       "single": "Singolo"
-    }
+    },
+    "about": "Il brano",
+    "moreSongs": "Altri brani",
+    "songPage": "Apri la pagina del brano",
+    "by": "di"
   },
   "videos": {
     "play": "Riproduci il video: {title}",

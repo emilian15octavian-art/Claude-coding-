@@ -5,7 +5,7 @@ import { htmlFiles, requireDist, result, urlOf } from './lib.mjs';
 
 const r = result('jsonld', 'Structured data: valid JSON-LD with Google-required fields');
 requireDist(r);
-const types = new Set(['WebSite', 'WebPage', 'AboutPage', 'ContactPage', 'CollectionPage', 'BreadcrumbList', 'ListItem', 'MusicGroup', 'Person', 'OrganizationRole',
+const types = new Set(['WebSite', 'WebPage', 'AboutPage', 'ContactPage', 'CollectionPage', 'ItemPage', 'BreadcrumbList', 'ListItem', 'MusicGroup', 'Person', 'OrganizationRole',
   'ImageObject', 'Place', 'PostalAddress', 'MusicAlbum', 'MusicRecording', 'ItemList', 'MusicEvent', 'Offer', 'Product', 'Brand', 'OfferShippingDetails',
   'MonetaryAmount', 'DefinedRegion', 'ShippingDeliveryTime', 'QuantitativeValue', 'MerchantReturnPolicy', 'VideoObject']);
 const bandIds = new Set();

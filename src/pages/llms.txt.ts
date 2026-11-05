@@ -27,7 +27,7 @@ export const GET: APIRoute = async ({ site }) => {
     '## Pages',
     ...indexablePages.filter((k) => k !== 'home').map((k) => `- [${t('en', `pages.${k}.nav`)}](${base}${path(k, 'en')}): ${t('en', `pages.${k}.description`)}`),
     '',
-    ...(releases.length ? ['## Releases', ...releases.map((r) => `- ${r.data.title} (${r.data.type}, ${r.data.date})`), ''] : []),
+    ...(releases.length ? ['## Songs', ...releases.map((r) => `- [${r.data.title}](${base}${path('music', 'en')}${r.id}/) (${r.data.type}, ${r.data.date})${r.data.hook ? `: ${r.data.hook.en}` : ''}${r.data.links.soundcloud ? ` Listen: ${r.data.links.soundcloud}` : ''}`), ''] : []),
     ...(shows.upcoming.length ? ['## Upcoming shows', ...shows.upcoming.map((s) => `- ${s.data.start.slice(0, 10)}: ${s.data.venue.name}, ${s.data.venue.city}`), ''] : []),
     ...(profiles.length ? ['## Official profiles', ...profiles.map(([k, v]) => `- ${k}: ${v}`), ''] : []),
   ];

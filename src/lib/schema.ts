@@ -102,12 +102,12 @@ export const releaseNode = (site: string, lang: Locale, r: CollectionEntry<'rele
     const tr = r.data.tracks[0];
     return clean({
       '@type': 'MusicRecording', '@id': I.release(r.id), name: r.data.title, byArtist: { '@id': I.band },
-      datePublished: r.data.date, duration: tr.duration, isrcCode: tr.isrc, image: coverUrl, url: `${site}${path('music', lang)}#${r.id}`, sameAs: listen,
+      datePublished: r.data.date, duration: tr.duration, isrcCode: tr.isrc, image: coverUrl, url: `${site}${path('music', lang)}${r.id}/`, sameAs: listen,
     });
   }
   return clean({
     '@type': 'MusicAlbum', '@id': I.release(r.id), name: r.data.title, byArtist: { '@id': I.band },
-    datePublished: r.data.date, image: coverUrl, url: `${site}${path('music', lang)}#${r.id}`,
+    datePublished: r.data.date, image: coverUrl, url: `${site}${path('music', lang)}${r.id}/`,
     albumProductionType: 'https://schema.org/StudioAlbum',
     albumReleaseType: r.data.type === 'ep' ? 'https://schema.org/EPRelease' : 'https://schema.org/AlbumRelease',
     numTracks: r.data.tracks.length, track: { '@type': 'ItemList', numberOfItems: tracks.length, itemListElement: tracks.map((x, i) => ({ '@type': 'ListItem', position: i + 1, item: x })) },

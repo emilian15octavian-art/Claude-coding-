@@ -145,7 +145,11 @@
       "album": "Album",
       "ep": "EP",
       "single": "Single"
-    }
+    },
+    "about": "About the song",
+    "moreSongs": "More songs",
+    "songPage": "Open the song page",
+    "by": "by"
   },
   "videos": {
     "play": "Play video: {title}",

@@ -145,7 +145,11 @@
       "album": "Álbum",
       "ep": "EP",
       "single": "Sencillo"
-    }
+    },
+    "about": "Sobre la canción",
+    "moreSongs": "Más canciones",
+    "songPage": "Abrir la página de la canción",
+    "by": "de"
   },
   "videos": {
     "play": "Reproducir vídeo: {title}",

@@ -19,24 +19,30 @@ interface Props {
   /** Set on the root "/" page, which is English but has its own URL. */
   isRoot?: boolean;
   noindex?: boolean;
+  /** For detail pages (e.g. one song): own title, description, URL per language, breadcrumb and share image. */
+  override?: { title: string; description: string; paths: Record<Locale, string>; crumbName: string; ogImage?: string };
 }
-const { lang, pageKey, schema = [], pageType = 'WebPage', isRoot = false, noindex = false } = Astro.props;
+const { lang, pageKey, schema = [], pageType = 'WebPage', isRoot = false, noindex = false, override } = Astro.props;
 const site = (Astro.site?.toString() ?? 'https://claude-coding.emilian15octavian.workers.dev/').replace(/\/$/, '');
 const info = localeInfo[lang];
-const title = t(lang, `pages.${pageKey}.title`);
-const description = t(lang, `pages.${pageKey}.description`);
-const selfPath = isRoot ? '/' : path(pageKey, lang);
+const title = override?.title ?? t(lang, `pages.${pageKey}.title`);
+const description = override?.description ?? t(lang, `pages.${pageKey}.description`);
+const selfPath = override ? override.paths[lang] : isRoot ? '/' : path(pageKey, lang);
 const canonical = `${site}${selfPath}`;
 const isNotFound = pageKey === 'notFound';
 // Alternates: the same page in every language (404 links to each language's home page instead)
-const alternates = Object.fromEntries(locales.map((l) => [l, path(isNotFound ? 'home' : pageKey, l)])) as Record<Locale, string>;
-const xDefault = pageKey === 'home' ? '/' : alternates.en;
-const ogImage = `${site}/og/${lang}/${isNotFound ? 'home' : pageKey}.png`;
+const alternates = (override?.paths ?? Object.fromEntries(locales.map((l) => [l, path(isNotFound ? 'home' : pageKey, l)]))) as Record<Locale, string>;
+const xDefault = pageKey === 'home' && !override ? '/' : alternates.en;
+const ogImage = override?.ogImage ?? `${site}/og/${lang}/${isNotFound ? 'home' : pageKey}.png`;
 
 const [band, settings, members, releases] = await Promise.all([getBand(), getSettings(), getMembers(), getReleases()]);
 const showBreadcrumb = pageKey !== 'home' && !isNotFound;
 const crumbs = showBreadcrumb
-  ? [{ name: t(lang, 'pages.home.nav'), url: `${site}${path('home', lang)}` }, { name: t(lang, `pages.${pageKey}.nav`), url: canonical }]
+  ? [
+      { name: t(lang, 'pages.home.nav'), url: `${site}${path('home', lang)}` },
+      { name: t(lang, `pages.${pageKey}.nav`), url: override ? `${site}${path(pageKey, lang)}` : canonical },
+      ...(override ? [{ name: override.crumbName, url: canonical }] : []),
+    ]
   : [];
 const graph = isNotFound ? [] : [
   website(site, lang), logoNode(site), musicGroup(site, lang, band, members, releases, ogImage),
@@ -77,8 +83,8 @@ const sv = settings.services;
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${band.name}: ${t(lang, `pages.${pageKey}.nav`)}`} />
+    <meta property="og:image:height" content={override?.ogImage ? "1200" : "630"} />
+    <meta property="og:image:alt" content={`${band.name}: ${override?.crumbName ?? t(lang, `pages.${pageKey}.nav`)}`} />
     <meta property="og:locale" content={info.og} />
     {locales.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={localeInfo[l].og} />)}
     <meta name="twitter:card" content="summary_large_image" />
@@ -104,7 +110,12 @@ const sv = settings.services;
         <nav class="breadcrumb container" aria-label={t(lang, 'ui.breadcrumb')}>
           <ol>
             <li><a href={path('home', lang)}>{t(lang, 'pages.home.nav')}</a></li>
-            <li aria-current="page">{t(lang, `pages.${pageKey}.nav`)}</li>
+            {override ? (
+              <>
+                <li><a href={path(pageKey, lang)}>{t(lang, `pages.${pageKey}.nav`)}</a></li>
+                <li aria-current="page" translate="no">{override.crumbName}</li>
+              </>
+            ) : <li aria-current="page">{t(lang, `pages.${pageKey}.nav`)}</li>}
           </ol>
         </nav>
       )}
