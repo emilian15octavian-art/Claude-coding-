@@ -6,7 +6,7 @@ import { fileFor, htmlFiles, requireDist, result, root, urlOf } from './lib.mjs'
 
 const r = result('links', 'Links: no broken internal links, anchors or images');
 requireDist(r);
-const site = (process.env.SITE_URL || 'https://bleedingdebts316.pages.dev').replace(/\/$/, '');
+const site = (process.env.SITE_URL || 'https://claude-coding.emilian15octavian.workers.dev').replace(/\/$/, '');
 const idsCache = new Map();
 const idsOf = (file) => {
   if (!idsCache.has(file)) idsCache.set(file, new Set([...fs.readFileSync(file, 'utf8').matchAll(/\sid="([^"]+)"/g)].map((m) => m[1])));

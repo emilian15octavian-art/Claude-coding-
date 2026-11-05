@@ -21,7 +21,7 @@ interface Props {
   noindex?: boolean;
 }
 const { lang, pageKey, schema = [], pageType = 'WebPage', isRoot = false, noindex = false } = Astro.props;
-const site = (Astro.site?.toString() ?? 'https://bleedingdebts316.pages.dev/').replace(/\/$/, '');
+const site = (Astro.site?.toString() ?? 'https://claude-coding.emilian15octavian.workers.dev/').replace(/\/$/, '');
 const info = localeInfo[lang];
 const title = t(lang, `pages.${pageKey}.title`);
 const description = t(lang, `pages.${pageKey}.description`);

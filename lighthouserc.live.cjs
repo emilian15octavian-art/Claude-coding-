@@ -1,5 +1,5 @@
 // Monthly Lighthouse run against the LIVE site, every language. Used by .github/workflows/monthly-lighthouse.yml
-const base = (process.env.SITE_URL || 'https://bleedingdebts316.pages.dev').replace(/\/$/, '');
+const base = (process.env.SITE_URL || 'https://claude-coding.emilian15octavian.workers.dev').replace(/\/$/, '');
 const slugs = {
   en: ['', 'music/', 'shows/', 'shop/', 'about/'], fr: ['', 'musique/', 'concerts/', 'boutique/', 'a-propos/'],
   ro: ['', 'muzica/', 'concerte/', 'magazin/', 'despre/'], it: ['', 'musica/', 'concerti/', 'negozio/', 'chi-siamo/'],
