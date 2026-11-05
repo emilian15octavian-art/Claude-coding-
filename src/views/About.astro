@@ -13,6 +13,8 @@ const [band, members, bio] = await Promise.all([getBand(), getMembers(), getPage
 const { Content } = await render(bio.entry);
 const origin = [band.city, countryName(lang, band.countryCode)].filter(Boolean).join(', ');
 const named = members.filter((m) => !isPlaceholder(m.data.name));
+// Member cards: only members with a real photo (name, or role when the name is not public yet)
+const withPhoto = members.filter((m) => m.data.photo);
 ---
 <Base lang={lang} pageKey="about" pageType="AboutPage">
   <PageHead lang={lang} pageKey="about" lead={pick(lang, band.shortBio)} />
@@ -38,15 +40,14 @@ const named = members.filter((m) => !isPlaceholder(m.data.name));
       <p>{pick(lang, band.creed)}</p>
     </blockquote>
   </section>
-  {named.length > 0 && <section class="container" aria-labelledby="members">
+  {withPhoto.length > 0 && <section class="container" aria-labelledby="members">
     <h2 id="members" class="mh">{t(lang, 'about.members')}</h2>
     <ul class="grid members" role="list">
-      {named.map((m) => (
+      {withPhoto.map((m) => (
         <li class="card">
-          <Picture src={m.data.photo} alt={pick(lang, m.data.photoAlt)} formats={['avif', 'webp']} widths={[320, 480, 720]} sizes="(min-width: 48rem) 24rem, 100vw" loading="lazy" class="m-img" />
+          <Picture src={m.data.photo!} alt={m.data.photoAlt ? pick(lang, m.data.photoAlt) : ''} formats={['avif', 'webp']} widths={[320, 480, 720]} sizes="(min-width: 48rem) 24rem, 100vw" loading="lazy" class="m-img" />
           <div class="card-body">
-            <h3 translate="no">{m.data.name}</h3>
-            <p class="muted">{pick(lang, m.data.role)}</p>
+            {isPlaceholder(m.data.name) ? <h3>{pick(lang, m.data.role)}</h3> : <><h3 translate="no">{m.data.name}</h3><p class="muted">{pick(lang, m.data.role)}</p></>}
             {m.data.bio && <p>{pick(lang, m.data.bio)}</p>}
           </div>
         </li>

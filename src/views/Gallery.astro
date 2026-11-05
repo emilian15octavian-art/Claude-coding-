@@ -16,7 +16,7 @@ const items = await Promise.all(photos.map(async (p) => {
 }));
 const schema = items.map((p) => ({
   '@type': 'ImageObject', contentUrl: `${site}${p.full}`, caption: p.alt,
-  creator: { '@type': 'Person', name: p.data.photographer }, creditText: p.data.photographer, copyrightNotice: p.data.photographer,
+  creator: p.data.photographer === 'Bleeding Debts 316' ? { '@id': `${site}/#band` } : { '@type': 'Person', name: p.data.photographer }, creditText: p.data.photographer, copyrightNotice: p.data.photographer,
 }));
 ---
 <Base lang={lang} pageKey="gallery" pageType="CollectionPage" schema={schema}>

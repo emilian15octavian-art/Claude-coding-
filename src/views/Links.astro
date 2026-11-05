@@ -4,7 +4,7 @@ import Icon from '../components/Icon.astro';
 import { type Locale } from '../i18n/locales';
 import { path } from '../i18n/routes';
 import { pick, t } from '../i18n/t';
-import { getBand, getLinks, getSettings, socialNames, socialOrder } from '../lib/data';
+import { getBand, getLinks, getSettings } from '../lib/data';
 import { withUtm } from '../lib/utm';
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -16,7 +16,6 @@ const items = links
     href: l.data.page ? path(l.data.page, lang) : withUtm(l.data.url!, settings.utm, l.id),
     external: !l.data.page,
   }));
-const socials = socialOrder.filter((k) => band.profiles[k] && k !== 'linktree').map((k) => ({ key: k, name: socialNames[k], href: withUtm(band.profiles[k]!, settings.utm, `icon-${k}`) }));
 ---
 <Base lang={lang} pageKey="links">
   <section class="links-page narrow">
@@ -30,11 +29,6 @@ const socials = socialOrder.filter((k) => band.profiles[k] && k !== 'linktree').
         </a></li>
       ))}
     </ul>
-    {socials.length > 0 && (
-      <ul class="socials" role="list" aria-label={t(lang, 'footer.follow')}>
-        {socials.map((s) => <li><a href={s.href} rel="me noopener noreferrer"><Icon name={s.key} size={24} /><span class="visually-hidden">{s.name}</span></a></li>)}
-      </ul>
-    )}
     <p class="muted small" translate="no">{band.hashtags.join(' ')}</p>
   </section>
 </Base>

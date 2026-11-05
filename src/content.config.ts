@@ -108,8 +108,8 @@ const members = defineCollection({
     name: z.string().min(1),
     role: localized,
     order: z.number().int(),
-    photo: image(),
-    photoAlt: localized,
+    photo: image().optional(),
+    photoAlt: localized.optional(),
     bio: localized.optional(),
   }),
 });
@@ -221,7 +221,7 @@ const links = defineCollection({
   schema: z.object({
     label: localized,
     url: url.nullable(),
-    icon: z.enum(['spotify', 'appleMusic', 'youtube', 'instagram', 'facebook', 'tiktok', 'bandcamp', 'linktree', 'shop', 'shows', 'mail', 'link', 'newsletter', 'soundcloud', 'deezer', 'x']),
+    icon: z.enum(['spotify', 'appleMusic', 'youtube', 'instagram', 'facebook', 'tiktok', 'bandcamp', 'linktree', 'shop', 'shows', 'mail', 'link', 'newsletter', 'soundcloud', 'deezer', 'x', 'threads']),
     order: z.number().int(),
     featured: z.boolean().default(false),
     /** Internal links (to this site) use a page key instead of a url. */
