@@ -28,7 +28,7 @@ else {
   if (!/^\/\*$/m.test(h)) r.error('_headers has no rule for /*');
 }
 if (!fs.existsSync(path.join(dist, '.well-known/security.txt'))) r.error('/.well-known/security.txt is missing');
-else if (/example\.com/.test(fs.readFileSync(path.join(dist, '.well-known/security.txt'), 'utf8'))) r.note('security.txt still uses an example.com address.');
+
 const exp = fs.existsSync(path.join(dist, '.well-known/security.txt')) && fs.readFileSync(path.join(dist, '.well-known/security.txt'), 'utf8').match(/Expires: (\S+)/)?.[1];
 if (exp && Date.parse(exp) < Date.now() + 30 * 86400000) r.error('security.txt expires within 30 days', 'Update the Expires date in public/.well-known/security.txt (max one year ahead).');
 

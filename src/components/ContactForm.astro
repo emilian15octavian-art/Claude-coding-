@@ -45,6 +45,7 @@ const ready = services.web3formsEnabled;
   {services.turnstileSiteKey && <div class="cf-turnstile" data-sitekey={services.turnstileSiteKey} data-language={lang} data-theme="auto"></div>}
   <p class="muted small">{t(lang, 'contact.privacy')} <a href={path('privacy', lang)}>{t(lang, 'pages.privacy.nav')}</a></p>
   {services.turnstileSiteKey && <p class="muted small">{t(lang, 'contact.turnstile')}</p>}
+  {!ready && <p class="muted small" role="note">{t(lang, 'ui.comingSoon')}</p>}
   <div>
     <button class="btn btn-primary" type="submit" disabled={!ready}>{t(lang, 'contact.send')}</button>
   </div>

@@ -38,10 +38,10 @@ const named = members.filter((m) => !isPlaceholder(m.data.name));
       <p>{pick(lang, band.creed)}</p>
     </blockquote>
   </section>
-  <section class="container" aria-labelledby="members">
+  {named.length > 0 && <section class="container" aria-labelledby="members">
     <h2 id="members" class="mh">{t(lang, 'about.members')}</h2>
     <ul class="grid members" role="list">
-      {members.map((m) => (
+      {named.map((m) => (
         <li class="card">
           <Picture src={m.data.photo} alt={pick(lang, m.data.photoAlt)} formats={['avif', 'webp']} widths={[320, 480, 720]} sizes="(min-width: 48rem) 24rem, 100vw" loading="lazy" class="m-img" />
           <div class="card-body">
@@ -52,7 +52,7 @@ const named = members.filter((m) => !isPlaceholder(m.data.name));
         </li>
       ))}
     </ul>
-  </section>
+  </section>}
 </Base>
 <style>
   .about { display: grid; gap: var(--space-xl); }

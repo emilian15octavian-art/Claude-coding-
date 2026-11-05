@@ -1,6 +1,5 @@
 # Security contact for bleedingdebts316.pages.dev (RFC 9116)
-# TODO: replace the address below with a real one you read, and update Expires every year.
-Contact: mailto:security@example.com
+# Update Expires every year. You can add a line "Contact: mailto:you@domain" too.
 Contact: https://bleedingdebts316.pages.dev/en/contact/
 Expires: 2027-11-05T00:00:00.000Z
 Preferred-Languages: en, ro
