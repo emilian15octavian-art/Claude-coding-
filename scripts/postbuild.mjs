@@ -46,7 +46,7 @@ const CSP = {
   'style-src-attr': ["'unsafe-inline'"], // Cloudflare Turnstile sets inline style attributes on its widget
   'img-src': ["'self'", 'data:'],
   'font-src': ["'self'"],
-  'connect-src': ["'self'", 'https://cloudflareinsights.com', 'https://challenges.cloudflare.com'],
+  'connect-src': ["'self'", 'https://cloudflareinsights.com', 'https://challenges.cloudflare.com', 'https://api.web3forms.com'],
   'frame-src': ['https://www.youtube-nocookie.com', 'https://open.spotify.com', 'https://bandcamp.com', 'https://challenges.cloudflare.com'],
   'form-action': ["'self'", 'https://*.sibforms.com', 'https://api.web3forms.com'],
   'media-src': ["'self'"],

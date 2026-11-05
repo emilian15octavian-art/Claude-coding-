@@ -24,7 +24,7 @@ const named = members.filter((m) => !isPlaceholder(m.data.name));
         <div><dt>{t(lang, 'about.factGenre')}</dt><dd>{band.genre.join(', ')}</dd></div>
         <div><dt>{t(lang, 'about.factOrigin')}</dt><dd>{origin}</dd></div>
         {band.foundingYear && <div><dt>{t(lang, 'about.factFounded')}</dt><dd>{band.foundingYear}</dd></div>}
-        <div><dt>{t(lang, 'about.factMembers')}</dt><dd>{named.length ? named.map((m) => `${m.data.name} (${pick(lang, m.data.role)})`).join(', ') : members.length}</dd></div>
+        <div><dt>{t(lang, 'about.factMembers')}</dt><dd>{members.length}: {members.map((m) => (isPlaceholder(m.data.name) ? pick(lang, m.data.role) : `${m.data.name} (${pick(lang, m.data.role)})`)).join('; ')}</dd></div>
       </dl>
     </div>
     <div class="prose" lang={bio.isFallback ? 'en' : undefined}>

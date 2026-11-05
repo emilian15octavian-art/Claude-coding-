@@ -85,6 +85,8 @@ const settings = defineCollection({
     services: z.object({
       brevoFormAction: optionalUrl,
       web3formsEnabled: z.boolean(),
+      /** Web3Forms access key (public by design: it only lets people send messages TO your inbox). */
+      web3formsAccessKey: z.string().uuid().nullable().default(null),
       turnstileSiteKey: z.string().nullable(),
       cloudflareAnalyticsToken: z.string().nullable(),
       googleSiteVerification: z.string().nullable(),

@@ -25,7 +25,6 @@ const logos = [
   ['logoBlackTransparent', '/press/logo/bleeding-debts-316-logo-black-transparent.png'],
 ];
 const docs = [['techRider', '/press/bleeding-debts-316-tech-rider.pdf'], ['stagePlot', '/press/bleeding-debts-316-stage-plot.pdf']];
-const named = members.filter((m) => !isPlaceholder(m.data.name));
 ---
 <Base lang={lang} pageKey="press">
   <PageHead lang={lang} pageKey="press" lead={t(lang, 'press.intro')} />
@@ -41,7 +40,7 @@ const named = members.filter((m) => !isPlaceholder(m.data.name));
         <li><strong>{t(lang, 'about.factGenre')}:</strong> {band.genre.join(', ')}</li>
         <li><strong>{t(lang, 'about.factOrigin')}:</strong> {[band.city, countryName(lang, band.countryCode)].filter(Boolean).join(', ')}</li>
         {band.foundingYear && <li><strong>{t(lang, 'about.factFounded')}:</strong> {band.foundingYear}</li>}
-        {named.length > 0 && <li><strong>{t(lang, 'about.factMembers')}:</strong> {named.map((m) => `${m.data.name} (${pick(lang, m.data.role)})`).join(', ')}</li>}
+        <li><strong>{t(lang, 'about.factMembers')}:</strong> {members.length}: {members.map((m) => (isPlaceholder(m.data.name) ? pick(lang, m.data.role) : `${m.data.name} (${pick(lang, m.data.role)})`)).join('; ')}</li>
       </ul>
     </section>
     <section aria-labelledby="long" class="block">

@@ -1,7 +1,25 @@
 {
   "name": "[Member 1 name]",
-  "role": { "en": "[Role / instrument]", "ro": "[Rol / instrument]" },
+  "role": {
+    "en": "Producer, mixer and composer",
+    "fr": "Producteur, mixeur et compositeur",
+    "ro": "Producător, mixaj și compozitor",
+    "it": "Produttore, mixer e compositore",
+    "es": "Productor, mezclador y compositor",
+    "ar": "منتج ومهندس مزج وملحّن",
+    "ru": "Продюсер, звукорежиссёр сведения и композитор",
+    "el": "Παραγωγός, μιξάζ και συνθέτης"
+  },
   "order": 1,
   "photo": "../../assets/images/members/member-1.jpg",
-  "photoAlt": { "en": "Portrait of a member of Bleeding Debts 316", "fr": "Portrait d'un membre de Bleeding Debts 316", "ro": "Portret al unui membru Bleeding Debts 316", "it": "Ritratto di un membro dei Bleeding Debts 316", "es": "Retrato de un miembro de Bleeding Debts 316", "ar": "صورة شخصية لأحد أعضاء Bleeding Debts 316", "ru": "Портрет участника Bleeding Debts 316", "el": "Πορτρέτο μέλους των Bleeding Debts 316" }
+  "photoAlt": {
+    "en": "Portrait of a member of Bleeding Debts 316",
+    "fr": "Portrait d'un membre de Bleeding Debts 316",
+    "ro": "Portret al unui membru Bleeding Debts 316",
+    "it": "Ritratto di un membro dei Bleeding Debts 316",
+    "es": "Retrato de un miembro de Bleeding Debts 316",
+    "ar": "صورة شخصية لأحد أعضاء Bleeding Debts 316",
+    "ru": "Портрет участника Bleeding Debts 316",
+    "el": "Πορτρέτο μέλους των Bleeding Debts 316"
+  }
 }

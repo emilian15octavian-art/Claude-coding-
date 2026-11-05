@@ -1,16 +1,23 @@
 {
   "name": "Bleeding Debts 316",
-  "alternateName": ["Bleeding Debts", "BleedingDebts316", "bleeding debts316"],
-  "genre": ["Metal", "Original metal"],
+  "alternateName": [
+    "Bleeding Debts",
+    "BleedingDebts316",
+    "bleeding debts316"
+  ],
+  "genre": [
+    "Metal",
+    "Original metal"
+  ],
   "city": null,
   "region": null,
   "country": "Romania",
   "countryCode": "RO",
-  "foundingYear": null,
-  "email": "contact@example.com",
-  "bookingEmail": "booking@example.com",
-  "pressEmail": "press@example.com",
-  "shopEmail": "shop@example.com",
+  "foundingYear": 2026,
+  "email": "bleedingdebts316@gmail.com",
+  "bookingEmail": "bleedingdebts316@gmail.com",
+  "pressEmail": "bleedingdebts316@gmail.com",
+  "shopEmail": "bleedingdebts316@gmail.com",
   "tagline": {
     "en": "The scars don't get the final word.",
     "fr": "Les cicatrices n'ont pas le dernier mot.",
@@ -41,7 +48,13 @@
     "ru": "Смотреть правде в глаза, отвечать за свой выбор и не переставать искать благодать. Дать вопросам голос. Превратить боль во что-то честное.",
     "el": "Κοίτα την αλήθεια κατάματα, ανάλαβε τις επιλογές σου και συνέχισε να αναζητάς τη χάρη. Δώσε φωνή στα ερωτήματα. Κάνε ό,τι πονάει κάτι ειλικρινές."
   },
-  "hashtags": ["#BleedingDebts316", "#OriginalMetal", "#MetalMusic", "#FaithAndDoubt", "#RegretAndRedemption"],
+  "hashtags": [
+    "#BleedingDebts316",
+    "#OriginalMetal",
+    "#MetalMusic",
+    "#FaithAndDoubt",
+    "#RegretAndRedemption"
+  ],
   "profiles": {
     "spotify": null,
     "appleMusic": null,
