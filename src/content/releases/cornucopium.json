@@ -27,7 +27,8 @@
     "deezer": null,
     "amazonMusic": null,
     "tidal": null,
-    "soundcloud": "https://soundcloud.com/bleedingdebts316/cornocopium"
+    "soundcloud": "https://soundcloud.com/bleedingdebts316/cornocopium",
+    "youtube": "https://www.youtube.com/watch?v=vG2KedemovY"
   },
   "soundcloudEmbed": "https://soundcloud.com/bleedingdebts316/cornocopium",
   "hook": {
@@ -48,5 +49,6 @@
     "#ModernMetal",
     "#RomanianMetal",
     "#UndergroundMetal"
-  ]
+  ],
+  "youtubeId": "vG2KedemovY"
 }

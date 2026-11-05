@@ -46,7 +46,7 @@ export const getPage = async (lang: string, key: string) => {
 /** Streaming platforms in display order, with their official names (never translated). */
 export const platforms = {
   spotify: 'Spotify', appleMusic: 'Apple Music', youtubeMusic: 'YouTube Music', bandcamp: 'Bandcamp',
-  deezer: 'Deezer', amazonMusic: 'Amazon Music', tidal: 'TIDAL', soundcloud: 'SoundCloud',
+  deezer: 'Deezer', amazonMusic: 'Amazon Music', tidal: 'TIDAL', soundcloud: 'SoundCloud', youtube: 'YouTube',
 } as const;
 
 /** Social profiles shown as footer icons, in order. */

@@ -11,7 +11,7 @@ import Icon from '../../../components/Icon.astro';
 import { locales, type Locale } from '../../../i18n/locales';
 import { path, slugs } from '../../../i18n/routes';
 import { pick, t } from '../../../i18n/t';
-import { getReleases } from '../../../lib/data';
+import { getReleases, getVideos } from '../../../lib/data';
 import { formatDate, formatDuration } from '../../../lib/format';
 import { releaseNode } from '../../../lib/schema';
 
@@ -35,6 +35,12 @@ const schema = [{ ...releaseNode(site, lang, release, ogImage), url: `${site}${s
 const about = d.description ? pick(lang, d.description) : '';
 const aboutIsFallback = d.description ? !d.description[lang] : false;
 const others = releases.filter((r) => r.id !== release.id);
+const video = (await getVideos()).find((v) => v.data.song === release.id || v.data.youtubeId === d.youtubeId);
+if (video) schema.push({
+  '@type': 'VideoObject', '@id': `${site}/#video-${video.data.youtubeId}`, name: video.data.title, description: video.data.description ? pick(lang, video.data.description) : hook,
+  uploadDate: video.data.date, thumbnailUrl: `https://i.ytimg.com/vi/${video.data.youtubeId}/maxresdefault.jpg`, embedUrl: `https://www.youtube-nocookie.com/embed/${video.data.youtubeId}`,
+  contentUrl: `https://www.youtube.com/watch?v=${video.data.youtubeId}`, author: { '@id': `${site}/#band` },
+} as never);
 ---
 <Base lang={lang} pageKey="music" schema={schema} pageType="ItemPage" override={{ title, description: hook, paths, crumbName: d.title, ogImage }}>
   <article class="container song">
@@ -44,6 +50,7 @@ const others = releases.filter((r) => r.id !== release.id);
       <h1 class="title"><span translate="no">{d.title}</span> <span class="by muted">{t(lang, 'music.by')} <span translate="no">Bleeding Debts 316</span></span></h1>
       <p class="lead" dir="auto" lang={d.hook && !d.hook[lang] ? 'en' : undefined}>{hook}</p>
       <ListenButtons lang={lang} release={release} />
+      {video && <Embed lang={lang} service="YouTube" src={`https://www.youtube-nocookie.com/embed/${video.data.youtubeId}?autoplay=1&rel=0`} title={video.data.title} label={t(lang, 'videos.play', { title: video.data.title })} thumbnail={video.data.thumbnail ?? `https://i.ytimg.com/vi/${video.data.youtubeId}/hqdefault.jpg`} />}
       {d.soundcloudEmbed && <Embed lang={lang} service="SoundCloud" src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(d.soundcloudEmbed)}&color=%23e5383b&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`} title={`${d.title}: SoundCloud`} label={t(lang, 'music.playEmbed', { service: 'SoundCloud' })} />}
       {d.spotifyEmbed && <Embed lang={lang} service="Spotify" src={`https://open.spotify.com/embed/${d.spotifyEmbed}?theme=0`} title={`${d.title}: Spotify`} label={t(lang, 'music.playEmbed', { service: 'Spotify' })} />}
     </div>

@@ -10,11 +10,13 @@ import hero from '../assets/images/hero.jpg';
 import { type Locale } from '../i18n/locales';
 import { path } from '../i18n/routes';
 import { pick, t } from '../i18n/t';
-import { getBand, getReleases, getShows } from '../lib/data';
+import { getBand, getReleases, getShows, getVideos } from '../lib/data';
+import Embed from '../components/Embed.astro';
 
 interface Props { lang: Locale; isRoot?: boolean }
 const { lang, isRoot = false } = Astro.props;
-const [band, releases, shows] = await Promise.all([getBand(), getReleases(), getShows()]);
+const [band, releases, shows, videos] = await Promise.all([getBand(), getReleases(), getShows(), getVideos()]);
+const video = videos[0];
 const latest = releases[0];
 const next = shows.upcoming[0];
 const heroImg = await getImage({ src: hero, format: 'avif', widths: [640, 1024, 1600, 2400], sizes: '100vw' });
@@ -43,6 +45,16 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
     </div>
     {latest ? <ReleaseCard lang={lang} release={latest} tracklist={false} /> : <p class="empty">{t(lang, 'music.noReleases')}</p>}
   </section>
+
+  {video && (
+    <section class="section container" aria-labelledby="latest-video">
+      <div class="section-head">
+        <h2 id="latest-video">{t(lang, 'pages.videos.heading')}</h2>
+        <a class="btn btn-small" href={path('videos', lang)}>{t(lang, 'pages.videos.nav')} <Icon name="arrow" size={18} /></a>
+      </div>
+      <Embed lang={lang} service="YouTube" src={`https://www.youtube-nocookie.com/embed/${video.data.youtubeId}?autoplay=1&rel=0`} title={video.data.title} label={t(lang, 'videos.play', { title: video.data.title })} thumbnail={video.data.thumbnail ?? `https://i.ytimg.com/vi/${video.data.youtubeId}/hqdefault.jpg`} />
+    </section>
+  )}
 
   <section class="section container" aria-labelledby="next-show">
     <div class="section-head">

@@ -132,8 +132,10 @@ const releases = defineCollection({
     })).min(1),
     links: z.object({
       spotify: optionalUrl, appleMusic: optionalUrl, youtubeMusic: optionalUrl, bandcamp: optionalUrl,
-      deezer: optionalUrl, amazonMusic: optionalUrl, tidal: optionalUrl, soundcloud: optionalUrl,
+      deezer: optionalUrl, amazonMusic: optionalUrl, tidal: optionalUrl, soundcloud: optionalUrl, youtube: optionalUrl,
     }),
+    /** YouTube id of the official video (shown on the song page, click to play). */
+    youtubeId: z.string().regex(/^[A-Za-z0-9_-]{11}$/).optional(),
     /** Spotify album/track id, e.g. "4aawyAB9vmqN3uQ7FjRGTy" (for the click-to-load player). */
     spotifyEmbed: z.string().regex(/^(album|track)\/[A-Za-z0-9]{22}$/, 'Use album/<id> or track/<id>').optional(),
     /** SoundCloud track or playlist link (for the click-to-load player), e.g. https://soundcloud.com/bleedingdebts316/song */
@@ -195,6 +197,8 @@ const videos = defineCollection({
     date: isoDate,
     description: localized.optional(),
     duration: z.string().regex(/^PT(\d+H)?(\d+M)?(\d+S)?$/).optional(),
+    /** id of the song (file name in src/content/releases) this video belongs to */
+    song: z.string().optional(),
   }),
 });
 

@@ -27,7 +27,8 @@
     "deezer": null,
     "amazonMusic": null,
     "tidal": null,
-    "soundcloud": "https://soundcloud.com/bleedingdebts316/insurrextion-mania"
+    "soundcloud": "https://soundcloud.com/bleedingdebts316/insurrextion-mania",
+    "youtube": "https://www.youtube.com/watch?v=6a5vW-o_RiQ"
   },
   "soundcloudEmbed": "https://soundcloud.com/bleedingdebts316/insurrextion-mania",
   "hook": {
@@ -48,5 +49,6 @@
     "#GrooveMetal",
     "#RomanianMetal",
     "#UndergroundMetal"
-  ]
+  ],
+  "youtubeId": "6a5vW-o_RiQ"
 }
