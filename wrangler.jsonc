@@ -1,0 +1,13 @@
+// Cloudflare Workers config (used when the site is connected as a Worker in the Cloudflare dashboard).
+// The site is fully static: Cloudflare serves the built files from dist/ (including _headers and the
+// per-language 404.html pages). `build.command` makes sure the site is built before every deploy.
+{
+  "name": "claude-coding",
+  "compatibility_date": "2025-09-01",
+  "build": { "command": "npm run build" },
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
