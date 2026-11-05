@@ -9,7 +9,8 @@ export const reportDir = path.join(root, 'reports');
 fs.mkdirSync(reportDir, { recursive: true });
 
 export const walk = (d) => (fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)])) : []);
-export const htmlFiles = () => walk(dist).filter((f) => f.endsWith('.html'));
+// Search-engine verification files (e.g. google1234abcd.html) are not web pages, so they are not checked.
+export const htmlFiles = () => walk(dist).filter((f) => f.endsWith('.html') && !/(^|[\\/])google[0-9a-f]+\.html$/.test(f));
 /** URL path of an HTML file in dist, e.g. dist/fr/concerts/index.html → /fr/concerts/ */
 export const urlOf = (file) => '/' + path.relative(dist, file).replace(/\\/g, '/').replace(/index\.html$/, '');
 /** File in dist for a site URL path, or null. Mirrors how Cloudflare Pages resolves paths. */
