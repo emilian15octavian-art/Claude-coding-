@@ -1,0 +1,68 @@
+---
+import { Picture } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { type Locale } from '../i18n/locales';
+import { pick, t } from '../i18n/t';
+import { getBand, getMembers, getPage, isPlaceholder } from '../lib/data';
+import { countryName } from '../lib/format';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const [band, members, bio] = await Promise.all([getBand(), getMembers(), getPage(lang, 'bio')]);
+const { Content } = await render(bio.entry);
+const origin = [band.city, countryName(lang, band.countryCode)].filter(Boolean).join(', ');
+const named = members.filter((m) => !isPlaceholder(m.data.name));
+---
+<Base lang={lang} pageKey="about" pageType="AboutPage">
+  <PageHead lang={lang} pageKey="about" lead={pick(lang, band.shortBio)} />
+  <section class="container about" aria-labelledby="facts">
+    <div class="facts-box">
+      <h2 id="facts">{t(lang, 'about.facts')}</h2>
+      <dl>
+        <div><dt>{t(lang, 'about.factName')}</dt><dd translate="no">Bleeding Debts 316</dd></div>
+        <div><dt>{t(lang, 'about.factGenre')}</dt><dd>{band.genre.join(', ')}</dd></div>
+        <div><dt>{t(lang, 'about.factOrigin')}</dt><dd>{origin}</dd></div>
+        {band.foundingYear && <div><dt>{t(lang, 'about.factFounded')}</dt><dd>{band.foundingYear}</dd></div>}
+        <div><dt>{t(lang, 'about.factMembers')}</dt><dd>{named.length ? named.map((m) => `${m.data.name} (${pick(lang, m.data.role)})`).join(', ') : members.length}</dd></div>
+      </dl>
+    </div>
+    <div class="prose" lang={bio.isFallback ? 'en' : undefined}>
+      <h2>{t(lang, 'about.story')}</h2>
+      <Content />
+    </div>
+  </section>
+  <section class="container section" aria-labelledby="creed">
+    <blockquote class="creed">
+      <h2 id="creed" class="visually-hidden">{t(lang, 'about.creed')}</h2>
+      <p>{pick(lang, band.creed)}</p>
+    </blockquote>
+  </section>
+  {named.length > 0 && <section class="container" aria-labelledby="members">
+    <h2 id="members" class="mh">{t(lang, 'about.members')}</h2>
+    <ul class="grid members" role="list">
+      {named.map((m) => (
+        <li class="card">
+          <Picture src={m.data.photo} alt={pick(lang, m.data.photoAlt)} formats={['avif', 'webp']} widths={[320, 480, 720]} sizes="(min-width: 48rem) 24rem, 100vw" loading="lazy" class="m-img" />
+          <div class="card-body">
+            <h3 translate="no">{m.data.name}</h3>
+            <p class="muted">{pick(lang, m.data.role)}</p>
+            {m.data.bio && <p>{pick(lang, m.data.bio)}</p>}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>}
+</Base>
+<style>
+  .about { display: grid; gap: var(--space-xl); }
+  @media (min-width: 60rem) { .about { grid-template-columns: 20rem 1fr; align-items: start; } .facts-box { position: sticky; inset-block-start: calc(var(--header-h) + 1rem); } }
+  .facts-box { padding: var(--space-l); background: var(--surface); border-radius: calc(var(--radius) * 2); }
+  .facts-box h2 { font-size: var(--step-1); margin-block-end: var(--space-m); }
+  dl { display: grid; gap: var(--space-s); } dt { font-size: var(--step--1); color: var(--text-muted); font-weight: 800; } dd { font-weight: 700; }
+  .creed { padding: var(--space-xl) var(--space-l); border-inline-start: 6px solid var(--accent); background: var(--surface); border-radius: var(--radius); }
+  .creed p { font-size: var(--step-2); font-weight: 900; line-height: 1.25; max-inline-size: 40ch; }
+  .mh { font-size: var(--step-2); margin-block-end: var(--space-m); }
+  .members { --min: 15rem; list-style: none; padding: 0; }
+  .m-img, .m-img :global(img) { inline-size: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+</style>

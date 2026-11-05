@@ -1,0 +1,6 @@
+---
+// Root 404 (English). Each language also gets its own /xx/404.html (see scripts/postbuild.mjs);
+// Cloudflare Pages serves the closest 404.html, so visitors see it in their language.
+import NotFound from '../views/NotFound.astro';
+---
+<NotFound lang="en" />

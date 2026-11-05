@@ -1,0 +1,42 @@
+---
+/**
+ * Brevo (free plan) signup as a plain HTML form: no Brevo script, no cookies.
+ * Double opt-in is switched on in the Brevo form settings (see README → Newsletter).
+ * Paste your Brevo form action URL into src/content/settings/site.json → services.brevoFormAction.
+ */
+import { type Locale } from '../i18n/locales';
+import { path } from '../i18n/routes';
+import { t } from '../i18n/t';
+import { getSettings } from '../lib/data';
+interface Props { lang: Locale; id?: string; compact?: boolean }
+const { lang, id = 'nl', compact = false } = Astro.props;
+const { services } = await getSettings();
+const action = services.brevoFormAction;
+---
+<form class:list={['nl', compact && 'compact']} method="post" action={action ?? undefined} target="_self">
+  <div class="row">
+    <div class="field grow">
+      <label for={`${id}-email`}>{t(lang, 'newsletter.emailLabel')}</label>
+      <input class="input ltr" id={`${id}-email`} type="email" name="EMAIL" autocomplete="email" required inputmode="email" />
+    </div>
+    <button class="btn btn-primary" type="submit" disabled={!action}>{t(lang, 'newsletter.submit')}</button>
+  </div>
+  <div class="check">
+    <input id={`${id}-optin`} type="checkbox" name="OPT_IN" value="1" required />
+    <label for={`${id}-optin`}>{t(lang, 'newsletter.consent')}</label>
+  </div>
+  <input class="hp" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <input type="hidden" name="locale" value={lang} />
+  <input type="hidden" name="html_type" value="simple" />
+  <p class="muted small">
+    {t(lang, 'newsletter.privacy')} <a href={path('privacy', lang)}>{t(lang, 'pages.privacy.nav')}</a>
+  </p>
+  {!action && <p class="muted small" role="note">{t(lang, 'ui.comingSoon')}</p>}
+</form>
+
+<style>
+  .nl { display: grid; gap: var(--space-m); max-inline-size: 40rem; }
+  .row { display: flex; flex-wrap: wrap; gap: var(--space-s); align-items: end; }
+  .grow { flex: 1 1 16rem; }
+  .small { font-size: var(--step--1); }
+</style>

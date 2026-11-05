@@ -1,0 +1,63 @@
+---
+import { type Locale } from '../i18n/locales';
+import { pick, t } from '../i18n/t';
+import type { Show } from '../lib/data';
+import { countryName, formatMoney, formatShowDate, formatShowTime, showBadge } from '../lib/format';
+import Icon from './Icon.astro';
+interface Props { lang: Locale; show: Show; past?: boolean; headingLevel?: 'h2' | 'h3' }
+const { lang, show, past = false, headingLevel: H = 'h3' } = Astro.props;
+const d = show.data;
+const b = showBadge(lang, d.start, d.timeZone);
+const date = formatShowDate(lang, d.start, d.timeZone);
+const time = formatShowTime(lang, d.start, d.timeZone);
+const inactive = ['cancelled', 'postponed'].includes(d.status);
+---
+<div class="show-cq">
+<article class:list={['show', past && 'past', inactive && 'inactive']} id={show.id}>
+  <div class="date ltr" aria-hidden="true"><span class="d">{b.day}</span><span class="m">{b.month}</span><span class="y">{b.year}</span></div>
+  <div class="body">
+    <H class="venue">{d.venue.city}: {d.venue.name}</H>
+    <p class="when"><time datetime={show.startDate.toISOString()}>{date}, {time}</time>{d.doors && <span class="muted"> · {t(lang, 'shows.doors', { time: d.doors })}</span>}</p>
+    <p class="muted where"><Icon name="pin" size={16} /> {d.venue.street}, {d.venue.city}, {countryName(lang, d.venue.country)}</p>
+    {d.lineup.length > 1 && <p class="muted lineup" translate="no">{d.lineup.join(' · ')}</p>}
+    {d.notes && <p dir="auto" lang={d.notes[lang] ? undefined : 'en'}>{pick(lang, d.notes)}</p>}
+    <p class="tags">
+      {d.status !== 'scheduled' && <span class="badge">{t(lang, `shows.status.${d.status}`)}</span>}
+      {d.free && <span class="badge badge-neutral">{t(lang, 'shows.free')}</span>}
+      {!d.free && d.price && <span class="badge badge-neutral">{formatMoney(lang, d.price.amount, d.price.currency)}</span>}
+    </p>
+  </div>
+  {!past && (
+    <div class="actions">
+      {d.ticketUrl && !inactive && d.status !== 'soldout' && (
+        <a class="btn btn-primary" href={d.ticketUrl} rel="noopener noreferrer">
+          <Icon name="ticket" size={18} />{t(lang, 'shows.tickets')}<span class="visually-hidden">: {d.venue.name}, {date}</span>
+        </a>
+      )}
+      {!inactive && (
+        <a class="btn" href={`/shows/${show.id}.ics`} download={`bleeding-debts-316-${show.id}.ics`}>
+          <Icon name="calendar" size={18} />{t(lang, 'shows.addToCalendar')}<span class="visually-hidden">: {d.venue.name}, {date}</span>
+        </a>
+      )}
+    </div>
+  )}
+</article>
+</div>
+<style>
+  .show-cq { container-type: inline-size; }
+  .show { display: grid; gap: var(--space-m); padding: var(--space-m); background: var(--surface); border-radius: calc(var(--radius) * 1.5); grid-template-columns: auto 1fr; align-items: start; }
+  .date { display: grid; justify-items: center; inline-size: 4.5rem; padding: 0.5rem; border-radius: var(--radius); background: var(--primary); color: var(--on-primary); line-height: 1.05; font-weight: 900; text-align: center; }
+  .d { font-size: 1.9rem; } .m { text-transform: uppercase; font-size: 0.85rem; } .y { font-size: 0.75rem; font-weight: 700; }
+  .body { display: grid; gap: 0.35rem; min-inline-size: 0; }
+  .venue { font-size: var(--step-1); }
+  .where { display: flex; gap: 0.35rem; align-items: center; font-size: var(--step--1); }
+  .lineup { font-size: var(--step--1); }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; } .tags:empty { display: none; }
+  .actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+  .past .date { background: var(--surface-2); color: var(--text); }
+  .inactive .venue { text-decoration: line-through; text-decoration-thickness: 2px; }
+  @container (min-width: 44rem) {
+    .show { grid-template-columns: auto 1fr auto; align-items: center; }
+    .actions { grid-column: auto; flex-direction: column; align-items: stretch; }
+  }
+</style>

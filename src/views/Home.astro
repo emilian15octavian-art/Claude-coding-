@@ -1,0 +1,77 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ReleaseCard from '../components/ReleaseCard.astro';
+import ShowCard from '../components/ShowCard.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import Icon from '../components/Icon.astro';
+import logoSvg from '../assets/logo.svg?raw';
+import hero from '../assets/images/hero.jpg';
+import { type Locale } from '../i18n/locales';
+import { path } from '../i18n/routes';
+import { pick, t } from '../i18n/t';
+import { getBand, getReleases, getShows } from '../lib/data';
+
+interface Props { lang: Locale; isRoot?: boolean }
+const { lang, isRoot = false } = Astro.props;
+const [band, releases, shows] = await Promise.all([getBand(), getReleases(), getShows()]);
+const latest = releases[0];
+const next = shows.upcoming[0];
+const heroImg = await getImage({ src: hero, format: 'avif', widths: [640, 1024, 1600, 2400], sizes: '100vw' });
+const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false" width="1224" height="616" class="hero-logo ltr" ');
+---
+<Base lang={lang} pageKey="home" isRoot={isRoot}>
+  <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={heroImg.srcSet.attribute} imagesizes="100vw" fetchpriority="high" />
+  {isRoot && <slot name="notice" />}
+  <section class="hero" aria-labelledby="hero-title">
+    <Picture src={hero} alt="" formats={['avif', 'webp']} widths={[640, 1024, 1600, 2400]} sizes="100vw" loading="eager" fetchpriority="high" class="hero-bg" />
+    <div class="container hero-inner">
+      <h1 id="hero-title" class="logo-wrap"><Fragment set:html={logo} /><span class="visually-hidden">Bleeding Debts 316</span></h1>
+      <p class="tagline">{pick(lang, band.tagline)}</p>
+      <p class="intro">{pick(lang, band.shortBio)}</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href={path('music', lang)}><Icon name="shows" size={18} />{t(lang, 'pages.music.nav')}</a>
+        <a class="btn" href={path('shows', lang)}><Icon name="ticket" size={18} />{t(lang, 'pages.shows.nav')}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="latest">
+    <div class="section-head">
+      <h2 id="latest"><span class="box">{t(lang, 'home.latestRelease').split(' ')[0]}</span> {t(lang, 'home.latestRelease').split(' ').slice(1).join(' ')}</h2>
+      {latest && <a class="btn btn-small" href={path('music', lang)}>{t(lang, 'home.allMusic')} <Icon name="arrow" size={18} /></a>}
+    </div>
+    {latest ? <ReleaseCard lang={lang} release={latest} tracklist={false} /> : <p class="empty">{t(lang, 'music.noReleases')}</p>}
+  </section>
+
+  <section class="section container" aria-labelledby="next-show">
+    <div class="section-head">
+      <h2 id="next-show">{t(lang, 'home.nextShow')}</h2>
+      <a class="btn btn-small" href={path('shows', lang)}>{t(lang, 'home.allShows')} <Icon name="arrow" size={18} /></a>
+    </div>
+    {next ? <ShowCard lang={lang} show={next} /> : <p class="empty">{t(lang, 'home.noShows')}</p>}
+  </section>
+
+  <section class="section container" aria-labelledby="nl-title">
+    <div class="nl-box">
+      <h2 id="nl-title">{t(lang, 'home.newsletterTitle')}</h2>
+      <p class="muted">{t(lang, 'home.newsletterText')}</p>
+      <NewsletterForm lang={lang} id="home-nl" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { position: relative; isolation: isolate; overflow: hidden; padding-block: clamp(4rem, 12vw, 9rem) clamp(3rem, 8vw, 6rem); background: #000; color: #fff; }
+  .hero-bg, .hero-bg :global(img) { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; z-index: -1; }
+  .hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.75)); }
+  .hero-inner { display: grid; gap: var(--space-m); justify-items: start; }
+  .logo-wrap { color: #fff; inline-size: min(100%, 36rem); }
+  .logo-wrap :global(.hero-logo) { inline-size: 100%; block-size: auto; }
+  .tagline { font-size: var(--step-2); font-weight: 900; line-height: 1.2; }
+  .intro { color: #e0e0e0; max-inline-size: 56ch; }
+  .hero .btn { color: #fff; border-color: #fff; }
+  .hero .btn-primary { background: #fff; color: #000; }
+  .hero .btn:not(.btn-primary):hover { background: rgb(255 255 255 / 0.12); }
+  .nl-box { padding: var(--space-xl) var(--space-l); background: var(--surface); border-radius: calc(var(--radius) * 2); display: grid; gap: var(--space-m); }
+</style>

@@ -1,0 +1,56 @@
+---
+import { getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import ProductCard from '../components/ProductCard.astro';
+import AnpcBadges from '../components/AnpcBadges.astro';
+import Email from '../components/Email.astro';
+import { type Locale } from '../i18n/locales';
+import { path } from '../i18n/routes';
+import { t } from '../i18n/t';
+import { getBand, getMerch, getSettings } from '../lib/data';
+import { countryName, formatMoney } from '../lib/format';
+import { productNode } from '../lib/schema';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const site = Astro.site!.toString().replace(/\/$/, '');
+const [products, settings, band] = await Promise.all([getMerch(), getSettings(), getBand()]);
+const pageUrl = `${site}${path('shop', lang)}`;
+const schema = await Promise.all(products.map(async (p) => {
+  const imgs = await Promise.all(p.data.images.map(async (i) => `${site}${(await getImage({ src: i, width: 1200, format: 'jpg' })).src}`));
+  return productNode(site, lang, p, imgs, pageUrl, settings);
+}));
+const sh = settings.shipping;
+---
+<Base lang={lang} pageKey="shop" pageType="CollectionPage" schema={schema}>
+  <PageHead lang={lang} pageKey="shop" lead={t(lang, 'shop.intro')} />
+  <section class="container">
+    {products.length ? (
+      <ul class="grid products" role="list">{products.map((p) => <li><ProductCard lang={lang} product={p} /></li>)}</ul>
+    ) : <p class="empty">{t(lang, 'shop.noProducts')}</p>}
+    <p class="muted small note">{t(lang, 'shop.priceNote')} {t(lang, 'shop.stripeNote')}</p>
+  </section>
+  <section class="container section" aria-labelledby="ship">
+    <div class="ship">
+      <div class="stack">
+        <h2 id="ship">{t(lang, 'shop.shippingTitle')}</h2>
+        <p>{t(lang, 'shop.shippingSummary')}</p>
+        <ul class="facts">
+          <li>{countryName(lang, 'RO')}: <strong>{formatMoney(lang, sh.romaniaRON, 'RON')}</strong> · <span class="ltr">{sh.romaniaDays.join('–')}</span></li>
+          <li>EU: <strong>{formatMoney(lang, sh.europeEUR, 'EUR')}</strong> · <span class="ltr">{sh.europeDays.join('–')}</span></li>
+        </ul>
+        <p><a href={path('shipping', lang)}>{t(lang, 'shop.shippingLink')}</a> · <a href={path('terms', lang)}>{t(lang, 'pages.terms.nav')}</a></p>
+        <p>{t(lang, 'shop.questions')} <Email lang={lang} email={band.shopEmail} /></p>
+      </div>
+      <AnpcBadges lang={lang} />
+    </div>
+  </section>
+</Base>
+<style>
+  .products { --min: 15rem; list-style: none; padding: 0; }
+  .small { font-size: var(--step--1); } .note { margin-block-start: var(--space-l); }
+  .ship { display: grid; gap: var(--space-l); padding: var(--space-l); background: var(--surface); border-radius: calc(var(--radius) * 2); }
+  @media (min-width: 56rem) { .ship { grid-template-columns: 1fr auto; } }
+  .ship h2 { font-size: var(--step-2); }
+  .facts { padding-inline-start: 1.2em; }
+</style>

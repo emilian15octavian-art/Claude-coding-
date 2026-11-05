@@ -1,0 +1,118 @@
+# Checks the whole site and deploys it to Cloudflare Pages ONLY if every check passes.
+# Runs on every push to main, every day at 04:23 UTC (so past shows move to the archive and the
+# copyright year stays current) and on demand (Actions tab → "Check and deploy" → Run workflow).
+# If anything fails, the live site keeps the last working version and a GitHub issue explains what broke.
+name: Check and deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://bleedingdebts316.pages.dev' }}
+  CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT || 'bleedingdebts316' }}
+  HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+
+jobs:
+  check-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Install browser for accessibility tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Run all checks (build, content, translations, HTML, links, schema, hreflang, security, accessibility)
+        run: npm run check
+
+      - name: Lighthouse (scores 95+ and performance budgets, mobile)
+        run: npm run check:lighthouse
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-reports
+          path: reports/
+          retention-days: 30
+
+      - name: Get the live site's page fingerprints (for IndexNow)
+        if: github.ref == 'refs/heads/main'
+        run: curl -fsS "$SITE_URL/page-hashes.json" -o previous-hashes.json || echo '{}' > previous-hashes.json
+
+      - name: Deploy to Cloudflare Pages
+        if: github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::warning::Cloudflare secrets are not set yet, so nothing was deployed. See LAUNCH-CHECKLIST.md step 3."
+            exit 0
+          fi
+          # Create the Pages project the first time (no-op afterwards)
+          npx wrangler pages project list | grep -qw "$CF_PAGES_PROJECT" || npx wrangler pages project create "$CF_PAGES_PROJECT" --production-branch=main
+          npx wrangler pages deploy dist --project-name="$CF_PAGES_PROJECT" --branch=main --commit-hash="$GITHUB_SHA" --commit-dirty=true
+
+      - name: Smoke test the live site
+        if: github.ref == 'refs/heads/main' && env.HAS_CF == 'true'
+        run: |
+          for i in 1 2 3 4 5 6; do
+            commit=$(curl -fsS "$SITE_URL/health.json?ts=$(date +%s)" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).commit))" || true)
+            [ "$commit" = "$GITHUB_SHA" ] && echo "Live site is running this version." && exit 0
+            sleep 20
+          done
+          echo "::error::The live site does not show the new version yet (health.json commit: $commit)."
+          exit 1
+
+      - name: Tell search engines about changed pages (IndexNow)
+        if: github.ref == 'refs/heads/main' && env.HAS_CF == 'true'
+        continue-on-error: true
+        run: node scripts/indexnow.mjs previous-hashes.json dist
+
+      - name: Open an issue explaining what failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create site-check --color B60205 --description "Automatic site check failed" --force >/dev/null
+          {
+            echo "@${{ github.repository_owner }} the site check failed, so **nothing was deployed**. The live site still shows the last working version."
+            echo
+            echo "**What to do:** read the ❌ sections below. Each problem has a *How to fix* line. Fix it, commit, and push: the checks run again automatically. Run \`npm run check\` on your computer to test before pushing."
+            echo
+            echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} (download *check-reports* for the full details)"
+            echo
+            [ -f reports/summary.md ] && head -c 60000 reports/summary.md || echo "The build stopped before the reports were written. Open the run link above and look at the first red step."
+          } > issue.md
+          existing=$(gh issue list --label site-check --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then gh issue comment "$existing" --body-file issue.md; else gh issue create --title "Site check failed: deploy blocked" --label site-check --body-file issue.md; fi
+
+      - name: Close the failure issue when everything passes again
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for n in $(gh issue list --label site-check --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "✅ All checks pass again and the site was deployed ($GITHUB_SHA)."
+          done

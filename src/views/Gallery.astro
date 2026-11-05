@@ -1,0 +1,109 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Icon from '../components/Icon.astro';
+import { type Locale } from '../i18n/locales';
+import { pick, t } from '../i18n/t';
+import { getGallery } from '../lib/data';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const site = Astro.site!.toString().replace(/\/$/, '');
+const photos = await getGallery();
+const items = await Promise.all(photos.map(async (p) => {
+  const full = await getImage({ src: p.data.image, width: 1800, format: 'webp' });
+  return { ...p, full: full.src, alt: pick(lang, p.data.alt) };
+}));
+const schema = items.map((p) => ({
+  '@type': 'ImageObject', contentUrl: `${site}${p.full}`, caption: p.alt,
+  creator: { '@type': 'Person', name: p.data.photographer }, creditText: p.data.photographer, copyrightNotice: p.data.photographer,
+}));
+---
+<Base lang={lang} pageKey="gallery" pageType="CollectionPage" schema={schema}>
+  <PageHead lang={lang} pageKey="gallery" />
+  <section class="container">
+    {items.length ? (
+      <ul class="gallery" role="list" data-gallery>
+        {items.map((p, i) => (
+          <li>
+            <figure>
+              <a href={p.full} data-index={i} data-full={p.full} data-alt={p.alt} data-credit={t(lang, 'gallery.photoBy', { name: p.data.photographer })}>
+                <span class="visually-hidden">{t(lang, 'gallery.open', { alt: '' })}</span>
+                <Picture src={p.data.image} alt={p.alt} formats={['avif', 'webp']} widths={[320, 480, 720, 960]} sizes="(min-width: 72rem) 23rem, (min-width: 40rem) 45vw, 100vw" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} />
+              </a>
+              <figcaption class="muted">
+                {p.data.photographerUrl ? <a href={p.data.photographerUrl} rel="noopener noreferrer">{t(lang, 'gallery.photoBy', { name: p.data.photographer })}</a> : t(lang, 'gallery.photoBy', { name: p.data.photographer })}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    ) : <p class="empty">{t(lang, 'gallery.noPhotos')}</p>}
+  </section>
+
+  {items.length > 0 && (
+    <dialog class="lightbox" data-lightbox aria-label={t(lang, 'pages.gallery.heading')}
+      data-counter={t(lang, 'gallery.counter', { n: '{n}', total: '{total}' })}>
+      <div class="lb-inner">
+        <button type="button" class="lb-btn lb-close" data-lb-close><Icon name="close" /><span class="visually-hidden">{t(lang, 'gallery.close')}</span></button>
+        <figure class="lb-figure">
+          <img data-lb-img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="1800" height="1200" />
+          <figcaption><span data-lb-caption></span> <span class="muted" data-lb-credit></span> <span class="muted ltr" data-lb-count></span></figcaption>
+        </figure>
+        <div class="lb-nav">
+          <button type="button" class="lb-btn" data-lb-prev><Icon name="chevronLeft" /><span class="visually-hidden">{t(lang, 'gallery.previous')}</span></button>
+          <button type="button" class="lb-btn" data-lb-next><Icon name="chevronRight" /><span class="visually-hidden">{t(lang, 'gallery.next')}</span></button>
+        </div>
+      </div>
+    </dialog>
+  )}
+</Base>
+
+<style>
+  .gallery { list-style: none; padding: 0; display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
+  figure { display: grid; gap: var(--space-xs); }
+  .gallery a { display: block; border-radius: var(--radius); overflow: hidden; }
+  .gallery :global(img) { inline-size: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: scale 0.4s var(--ease); }
+  .gallery a:hover :global(img) { scale: 1.03; }
+  figcaption { font-size: var(--step--1); }
+  .lightbox { inline-size: 100vw; block-size: 100dvh; max-inline-size: none; max-block-size: none; margin: 0; padding: 0; border: 0; background: rgb(0 0 0 / 0.94); color: #fff; }
+  .lightbox::backdrop { background: rgb(0 0 0 / 0.8); }
+  .lb-inner { display: grid; grid-template-rows: auto 1fr auto; block-size: 100%; padding: var(--space-m); gap: var(--space-s); }
+  .lb-close { justify-self: end; }
+  .lb-figure { display: grid; place-items: center; min-block-size: 0; gap: var(--space-s); }
+  .lb-figure img { max-block-size: 75dvh; inline-size: auto; max-inline-size: 100%; object-fit: contain; }
+  .lb-figure figcaption { text-align: center; color: #fff; } .lightbox .muted { color: #cfcfcf; }
+  .lb-nav { display: flex; justify-content: space-between; }
+  .lb-btn { display: grid; place-items: center; inline-size: 48px; block-size: 48px; border: 2px solid #fff; border-radius: 999px; background: transparent; color: #fff; cursor: pointer; &:hover { background: rgb(255 255 255 / 0.15); } }
+</style>
+
+<script>
+  // Accessible lightbox: native <dialog> (focus trap + Escape), arrow keys, mirrored in RTL.
+  const dlg = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-gallery] a[data-full]')];
+  if (dlg && links.length) {
+    const img = dlg.querySelector<HTMLImageElement>('[data-lb-img]')!;
+    const cap = dlg.querySelector<HTMLElement>('[data-lb-caption]')!;
+    const credit = dlg.querySelector<HTMLElement>('[data-lb-credit]')!;
+    const count = dlg.querySelector<HTMLElement>('[data-lb-count]')!;
+    const rtl = document.documentElement.dir === 'rtl';
+    let idx = 0; let opener: HTMLElement | null = null;
+    const show = (i: number) => {
+      idx = (i + links.length) % links.length;
+      const a = links[idx];
+      img.src = a.dataset.full!; img.alt = a.dataset.alt!;
+      cap.textContent = a.dataset.alt!; credit.textContent = a.dataset.credit!;
+      count.textContent = dlg.dataset.counter!.replace('{n}', String(idx + 1)).replace('{total}', String(links.length));
+    };
+    links.forEach((a, i) => a.addEventListener('click', (e) => { e.preventDefault(); opener = a; show(i); dlg.showModal(); }));
+    dlg.querySelector('[data-lb-prev]')!.addEventListener('click', () => show(idx - 1));
+    dlg.querySelector('[data-lb-next]')!.addEventListener('click', () => show(idx + 1));
+    dlg.querySelector('[data-lb-close]')!.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('close', () => opener?.focus());
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') show(idx + (rtl ? -1 : 1));
+      if (e.key === 'ArrowLeft') show(idx + (rtl ? 1 : -1));
+    });
+  }
+</script>

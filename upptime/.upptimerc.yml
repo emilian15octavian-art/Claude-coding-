@@ -1,0 +1,25 @@
+# Optional public status page with Upptime (free, runs on GitHub Actions + GitHub Pages).
+# 1. Create a NEW public repository from the template: https://github.com/upptime/upptime (Use this template)
+#    and name it e.g. bleedingdebts316-status.
+# 2. Replace that repository's .upptimerc.yml with this file and set "owner" below to your GitHub username.
+# 3. Follow the Upptime "Getting started" steps (add a GH_PAT secret, enable GitHub Pages).
+# Upptime checks every 5 minutes, opens an issue (= e-mail) when the site is down, and publishes
+# a status page at https://<owner>.github.io/bleedingdebts316-status/
+owner: YOUR-GITHUB-USERNAME
+repo: bleedingdebts316-status
+sites:
+  - name: Website (English)
+    url: https://bleedingdebts316.pages.dev/en/
+  - name: Health check
+    url: https://bleedingdebts316.pages.dev/health.json
+  - name: Website (Romanian)
+    url: https://bleedingdebts316.pages.dev/ro/
+status-website:
+  baseUrl: /bleedingdebts316-status
+  name: Bleeding Debts 316 status
+  introTitle: "Is the Bleeding Debts 316 website up?"
+  navbar:
+    - title: Website
+      href: https://bleedingdebts316.pages.dev/
+workflowSchedule:
+  uptime: "*/5 * * * *"

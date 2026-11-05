@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-examples/
+.astro/
+.lighthouseci/
+reports/
+.env
+.env.*
+!.env.example
+.wrangler/
+.DS_Store
+*.zip

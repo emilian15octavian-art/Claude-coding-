@@ -1,0 +1,52 @@
+---
+import { locales, localeInfo, type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import Icon from './Icon.astro';
+
+interface Props { lang: Locale; alternates: Record<Locale, string>; variant?: 'menu' | 'list' }
+const { lang, alternates, variant = 'menu' } = Astro.props;
+---
+{variant === 'menu' ? (
+  <details class="lang-switch" data-close-outside>
+    <summary>
+      <Icon name="globe" size={20} />
+      <span class="current">{localeInfo[lang].nativeName}</span>
+      <span class="visually-hidden">: {t(lang, 'ui.chooseLanguage')}</span>
+    </summary>
+    <ul role="list">
+      {locales.map((l) => (
+        <li><a href={alternates[l]} hreflang={l} lang={l} dir={localeInfo[l].dir} aria-current={l === lang ? 'true' : undefined}>{localeInfo[l].nativeName}</a></li>
+      ))}
+    </ul>
+  </details>
+) : (
+  <nav aria-label={t(lang, 'ui.language')} class="lang-list">
+    <ul role="list">
+      {locales.map((l) => (
+        <li><a href={alternates[l]} hreflang={l} lang={l} dir={localeInfo[l].dir} aria-current={l === lang ? 'true' : undefined}>{localeInfo[l].nativeName}</a></li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .lang-switch { position: relative; }
+  summary {
+    display: flex; align-items: center; justify-content: center; gap: 0.4em; min-block-size: 44px; min-inline-size: 44px; padding-inline: 0.6em; border-radius: 999px;
+    cursor: pointer; list-style: none; font-weight: 800; font-size: var(--step--1);
+    &::-webkit-details-marker { display: none; }
+    &:hover { background: var(--surface-2); }
+  }
+  .lang-switch ul {
+    position: absolute; inset-inline-end: 0; inset-block-start: calc(100% + 0.4rem); z-index: 60; min-inline-size: 11rem;
+    list-style: none; padding: 0.4rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+  }
+  a { display: flex; align-items: center; min-block-size: 44px; padding-inline: 0.8rem; border-radius: calc(var(--radius) - 2px); text-decoration: none; }
+  a:hover { background: var(--surface-2); }
+  a[aria-current='true'] { font-weight: 900; box-shadow: inset 3px 0 0 var(--accent); }
+  [dir='rtl'] a[aria-current='true'] { box-shadow: inset -3px 0 0 var(--accent); }
+  .lang-list ul { display: flex; flex-wrap: wrap; gap: 0 0.25rem; list-style: none; padding: 0; }
+  .lang-list a { padding-inline: 0.6rem; font-size: var(--step--1); }
+  @media (max-width: 30rem) { .current { display: none; } }
+</style>

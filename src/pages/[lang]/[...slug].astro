@@ -1,0 +1,31 @@
+---
+/**
+ * One route for every page in every language, using the translated slugs
+ * from src/i18n/routes.ts (e.g. /fr/concerts/, /ro/concerte/, /ar/hafalat/).
+ */
+import { locales, type Locale } from '../../i18n/locales';
+import { pageKeys, slugs, type PageKey } from '../../i18n/routes';
+import Home from '../../views/Home.astro';
+import Music from '../../views/Music.astro';
+import Videos from '../../views/Videos.astro';
+import Shows from '../../views/Shows.astro';
+import Shop from '../../views/Shop.astro';
+import About from '../../views/About.astro';
+import Gallery from '../../views/Gallery.astro';
+import Press from '../../views/Press.astro';
+import Newsletter from '../../views/Newsletter.astro';
+import Contact from '../../views/Contact.astro';
+import Links from '../../views/Links.astro';
+import Legal from '../../views/Legal.astro';
+import NotFound from '../../views/NotFound.astro';
+
+export function getStaticPaths() {
+  return locales.flatMap((lang) => pageKeys.map((key) => ({ params: { lang, slug: slugs[key][lang] || undefined }, props: { key } })));
+}
+const lang = Astro.params.lang as Locale;
+const { key } = Astro.props as { key: PageKey };
+const views = { home: Home, music: Music, videos: Videos, shows: Shows, shop: Shop, about: About, gallery: Gallery, press: Press, newsletter: Newsletter, contact: Contact, links: Links, notFound: NotFound } as const;
+const isLegal = key === 'privacy' || key === 'cookies' || key === 'terms' || key === 'shipping';
+const View = isLegal ? null : views[key as keyof typeof views];
+---
+{isLegal ? <Legal lang={lang} pageKey={key as 'privacy'} /> : View && <View lang={lang} />}

@@ -1,0 +1,85 @@
+---
+/**
+ * Contact form → /api/contact (Cloudflare Pages Function, see functions/api/contact.ts)
+ * which checks Cloudflare Turnstile + the honeypot, then forwards to Web3Forms.
+ * Works without JavaScript (normal form post + redirect); with JavaScript it sends in place.
+ */
+import { type Locale } from '../i18n/locales';
+import { path } from '../i18n/routes';
+import { t } from '../i18n/t';
+import { getSettings } from '../lib/data';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const { services } = await getSettings();
+const ready = services.web3formsEnabled;
+---
+<form class="contact stack" method="post" action="/api/contact" data-contact-form
+  data-msg-sending={t(lang, 'contact.sending')} data-msg-success={t(lang, 'contact.success')} data-msg-error={t(lang, 'contact.error')}>
+  <input type="hidden" name="lang" value={lang} />
+  <input type="hidden" name="redirect" value={path('contact', lang)} />
+  <div class="field">
+    <label for="c-name">{t(lang, 'contact.name')} <span class="muted">({t(lang, 'contact.required')})</span></label>
+    <input class="input" id="c-name" type="text" name="name" autocomplete="name" required maxlength="120" />
+  </div>
+  <div class="field">
+    <label for="c-email">{t(lang, 'contact.email')} <span class="muted">({t(lang, 'contact.required')})</span></label>
+    <input class="input ltr" id="c-email" name="email" type="email" autocomplete="email" required maxlength="200" />
+  </div>
+  <div class="field">
+    <label for="c-subject">{t(lang, 'contact.subject')}</label>
+    <select class="input" id="c-subject" name="subject">
+      <option value="Booking">{t(lang, 'contact.subjectBooking')}</option>
+      <option value="Press">{t(lang, 'contact.subjectPress')}</option>
+      <option value="Shop">{t(lang, 'contact.subjectShop')}</option>
+      <option value="Other">{t(lang, 'contact.subjectOther')}</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="c-message">{t(lang, 'contact.message')} <span class="muted">({t(lang, 'contact.required')})</span></label>
+    <textarea class="input" id="c-message" name="message" required maxlength="5000"></textarea>
+  </div>
+  <div class="hp" aria-hidden="true">
+    <label for="c-website">{t(lang, 'contact.honeypot')}</label>
+    <input id="c-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+  {services.turnstileSiteKey && <div class="cf-turnstile" data-sitekey={services.turnstileSiteKey} data-language={lang} data-theme="auto"></div>}
+  <p class="muted small">{t(lang, 'contact.privacy')} <a href={path('privacy', lang)}>{t(lang, 'pages.privacy.nav')}</a></p>
+  {services.turnstileSiteKey && <p class="muted small">{t(lang, 'contact.turnstile')}</p>}
+  {!ready && <p class="muted small" role="note">{t(lang, 'ui.comingSoon')}</p>}
+  <div>
+    <button class="btn btn-primary" type="submit" disabled={!ready}>{t(lang, 'contact.send')}</button>
+  </div>
+  <p class="status" role="status" aria-live="polite" data-status></p>
+</form>
+{services.turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
+<style>
+  .contact { max-inline-size: 40rem; }
+  .small { font-size: var(--step--1); }
+  .status:empty { display: none; }
+  .status { padding: var(--space-m); border-radius: var(--radius); background: var(--surface); border-inline-start: 4px solid var(--accent); }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const status = form?.querySelector<HTMLElement>('[data-status]');
+  if (new URLSearchParams(location.search).get('sent') === '1' && status && form) status.textContent = form.dataset.msgSuccess!;
+  if (new URLSearchParams(location.search).get('sent') === '0' && status && form) status.textContent = form.dataset.msgError!;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    btn.disabled = true;
+    status!.textContent = form.dataset.msgSending!;
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      const ok = res.ok && (await res.json()).success;
+      status!.textContent = ok ? form.dataset.msgSuccess! : form.dataset.msgError!;
+      if (ok) form.reset();
+    } catch {
+      status!.textContent = form.dataset.msgError!;
+    } finally {
+      btn.disabled = false;
+      (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+    }
+  });
+</script>

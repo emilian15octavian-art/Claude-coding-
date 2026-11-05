@@ -1,0 +1,20 @@
+{
+  "title": "Example EP Title",
+  "type": "ep",
+  "date": "2026-09-16",
+  "cover": "../../../assets/images/covers/example-cover.jpg",
+  "description": { "en": "EXAMPLE ONLY. This file shows how a release looks. Copy it to src/content/releases/ and edit it." },
+  "tracks": [
+    { "title": "Example Track One", "duration": "PT4M12S" },
+    { "title": "Example Track Two", "duration": "PT3M48S" },
+    { "title": "Example Track Three", "duration": "PT5M01S" }
+  ],
+  "links": {
+    "spotify": "https://open.spotify.com/",
+    "appleMusic": "https://music.apple.com/",
+    "youtubeMusic": "https://music.youtube.com/",
+    "bandcamp": "https://bandcamp.com/",
+    "deezer": null, "amazonMusic": null, "tidal": null, "soundcloud": null
+  },
+  "spotifyEmbed": "album/4aawyAB9vmqN3uQ7FjRGTy"
+}

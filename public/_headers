@@ -1,0 +1,36 @@
+# Security and caching headers for Cloudflare Pages.
+# The Content-Security-Policy line is completed at build time by scripts/postbuild.mjs
+# (it adds the hashes of the few inline scripts/styles). Edit the allowed services in
+# scripts/postbuild.mjs → CSP, not here.
+
+/*
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=(), browsing-topics=()
+  Cross-Origin-Opener-Policy: same-origin
+  X-Frame-Options: DENY
+  Content-Security-Policy: __CSP__
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/og/*
+  Cache-Control: public, max-age=86400
+
+/press/*
+  Cache-Control: public, max-age=86400
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/health.json
+  Cache-Control: no-store
+  Access-Control-Allow-Origin: *
+
+/shows/*
+  Content-Type: text/calendar; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8

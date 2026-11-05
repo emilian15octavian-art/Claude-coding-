@@ -1,0 +1,35 @@
+---
+/**
+ * E-mail address hidden from spam bots: it is not in the HTML as plain text.
+ * A small script rebuilds it when the visitor presses the button.
+ * Without JavaScript the address is shown as "name [at] domain".
+ */
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import { path } from '../i18n/routes';
+import { isPlaceholder } from '../lib/data';
+interface Props { lang: Locale; email: string }
+const { lang, email } = Astro.props;
+const missing = isPlaceholder(email);
+const [user, domain] = email.split('@');
+const enc = (s: string) => Buffer.from(s.split('').reverse().join('')).toString('base64');
+---
+{missing ? <a href={path('contact', lang)}>{t(lang, 'pages.contact.nav')}</a> : (
+<span class="email ltr" data-email data-u={enc(user)} data-d={enc(domain)}>
+  <button type="button" class="btn btn-small" data-email-reveal>{t(lang, 'contact.showEmail')}</button>
+  <noscript>{user} [at] {domain.replace(/\./g, ' [dot] ')}</noscript>
+</span>
+)}
+<script>
+  document.querySelectorAll<HTMLElement>('[data-email]').forEach((el) => {
+    el.querySelector('[data-email-reveal]')?.addEventListener('click', () => {
+      const dec = (s: string) => atob(s).split('').reverse().join('');
+      const addr = `${dec(el.dataset.u!)}@${dec(el.dataset.d!)}`;
+      const a = document.createElement('a');
+      a.href = `mailto:${addr}`;
+      a.textContent = addr;
+      el.replaceChildren(a);
+      a.focus();
+    });
+  });
+</script>

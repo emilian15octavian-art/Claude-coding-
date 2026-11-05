@@ -1,0 +1,44 @@
+---
+import { getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import ShowCard from '../components/ShowCard.astro';
+import { type Locale } from '../i18n/locales';
+import { path } from '../i18n/routes';
+import { t } from '../i18n/t';
+import { getShows } from '../lib/data';
+import { eventNode } from '../lib/schema';
+import hero from '../assets/images/hero.jpg';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const site = Astro.site!.toString().replace(/\/$/, '');
+const { upcoming, past } = await getShows();
+const pageUrl = `${site}${path('shows', lang)}`;
+const fallbackImg = `${site}${(await getImage({ src: hero, width: 1200, format: 'jpg' })).src}`;
+const schema = await Promise.all(upcoming.map(async (s) => {
+  const img = s.data.image ? `${site}${(await getImage({ src: s.data.image, width: 1200, format: 'jpg' })).src}` : fallbackImg;
+  const name = s.data.name ?? `Bleeding Debts 316 · ${s.data.venue.city}, ${s.data.venue.name}`;
+  return eventNode(site, lang, s, img, name, pageUrl);
+}));
+---
+<Base lang={lang} pageKey="shows" pageType="CollectionPage" schema={schema}>
+  <PageHead lang={lang} pageKey="shows" lead={t(lang, 'shows.localTime')} />
+  <section class="container section-tight" aria-labelledby="up">
+    <h2 id="up" class="sh">{t(lang, 'shows.upcoming')}</h2>
+    {upcoming.length ? (
+      <ul class="list" role="list">{upcoming.map((s) => <li><ShowCard lang={lang} show={s} /></li>)}</ul>
+    ) : <p class="empty">{t(lang, 'shows.noUpcoming')}</p>}
+    <p class="book"><a class="btn" href={path('contact', lang)}>{t(lang, 'shows.bookUs')}</a></p>
+  </section>
+  <section class="container section" aria-labelledby="past">
+    <h2 id="past" class="sh">{t(lang, 'shows.past')}</h2>
+    {past.length ? (
+      <ul class="list" role="list">{past.map((s) => <li><ShowCard lang={lang} show={s} past /></li>)}</ul>
+    ) : <p class="empty">{t(lang, 'shows.noPast')}</p>}
+  </section>
+</Base>
+<style>
+  .sh { font-size: var(--step-2); margin-block-end: var(--space-m); }
+  .list { list-style: none; padding: 0; display: grid; gap: var(--space-m); }
+  .book { margin-block-start: var(--space-l); }
+</style>

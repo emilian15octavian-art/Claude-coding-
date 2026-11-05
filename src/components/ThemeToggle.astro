@@ -1,0 +1,44 @@
+---
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import Icon from './Icon.astro';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+---
+<button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false"
+  data-label-light={t(lang, 'ui.themeLight')} data-label-dark={t(lang, 'ui.themeDark')}>
+  <span class="visually-hidden">{t(lang, 'ui.themeToggle')}</span>
+  <span class="i-sun"><Icon name="sun" size={20} /></span>
+  <span class="i-moon"><Icon name="moon" size={20} /></span>
+</button>
+
+<style>
+  .theme-toggle { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border: 0; border-radius: 999px; background: transparent; cursor: pointer; }
+  .theme-toggle:hover { background: var(--surface-2); }
+  .i-sun { display: none; }
+  /* show the icon of the theme you would switch TO */
+  :global(:root[data-theme='dark']) .i-sun { display: block; }
+  :global(:root[data-theme='dark']) .i-moon { display: none; }
+  :global(:root[data-theme='light']) .i-sun { display: none; }
+  :global(:root[data-theme='light']) .i-moon { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme])) .i-sun { display: block; }
+    :global(:root:not([data-theme])) .i-moon { display: none; }
+  }
+</style>
+
+<script>
+  // Remembers the visitor's choice in localStorage (a functional preference, not a cookie).
+  const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const root = document.documentElement;
+  const current = () => (root.dataset.theme as 'light' | 'dark' | undefined) ?? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  const sync = () => btn?.setAttribute('aria-pressed', String(current() === 'dark'));
+  sync();
+  btn?.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch {}
+    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute('content', next === 'dark' ? '#000000' : '#ffffff'));
+    sync();
+  });
+</script>

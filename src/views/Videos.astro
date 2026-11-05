@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Embed from '../components/Embed.astro';
+import { type Locale } from '../i18n/locales';
+import { pick, t } from '../i18n/t';
+import { getVideos } from '../lib/data';
+import { formatDate } from '../lib/format';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const site = Astro.site!.toString().replace(/\/$/, '');
+const videos = await getVideos();
+const schema = videos.map((v) => ({
+  '@type': 'VideoObject', '@id': `${site}/#video-${v.data.youtubeId}`, name: v.data.title,
+  description: v.data.description ? pick(lang, v.data.description) : v.data.title, uploadDate: v.data.date,
+  thumbnailUrl: `https://i.ytimg.com/vi/${v.data.youtubeId}/hqdefault.jpg`, embedUrl: `https://www.youtube-nocookie.com/embed/${v.data.youtubeId}`,
+  contentUrl: `https://www.youtube.com/watch?v=${v.data.youtubeId}`, ...(v.data.duration ? { duration: v.data.duration } : {}),
+  author: { '@id': `${site}/#band` },
+}));
+---
+<Base lang={lang} pageKey="videos" pageType="CollectionPage" schema={schema}>
+  <PageHead lang={lang} pageKey="videos" />
+  <section class="container">
+    {videos.length ? (
+      <ul class="grid videos" role="list">
+        {videos.map((v) => (
+          <li class="stack">
+            <Embed lang={lang} service="YouTube" src={`https://www.youtube-nocookie.com/embed/${v.data.youtubeId}?autoplay=1&rel=0`}
+              title={v.data.title} label={t(lang, 'videos.play', { title: v.data.title })}
+              thumbnail={v.data.thumbnail ?? `https://i.ytimg.com/vi/${v.data.youtubeId}/hqdefault.jpg`} />
+            <h2 class="v-title" translate="no">{v.data.title}</h2>
+            <p class="muted"><time datetime={v.data.date}>{formatDate(lang, v.data.date)}</time></p>
+            {v.data.description && <p>{pick(lang, v.data.description)}</p>}
+          </li>
+        ))}
+      </ul>
+    ) : <p class="empty">{t(lang, 'videos.noVideos')}</p>}
+  </section>
+</Base>
+<style>
+  .videos { --min: 20rem; list-style: none; padding: 0; }
+  .v-title { font-size: var(--step-1); }
+</style>

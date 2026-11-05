@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+---
+<Base lang={lang} pageKey="newsletter">
+  <PageHead lang={lang} pageKey="newsletter" lead={t(lang, 'home.newsletterText')} />
+  <section class="container"><NewsletterForm lang={lang} id="page-nl" /></section>
+</Base>

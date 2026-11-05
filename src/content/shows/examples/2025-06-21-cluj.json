@@ -1,0 +1,7 @@
+{
+  "start": "2025-06-21T19:00",
+  "timeZone": "Europe/Bucharest",
+  "status": "scheduled",
+  "venue": { "name": "Example Past Venue", "street": "Strada Trecut 9", "city": "Cluj-Napoca", "country": "RO" },
+  "free": true
+}
