@@ -53,6 +53,7 @@ export const fallback = (text, lang) => {
   return pickOne(DEFAULTS);
 };
 
+const unknownDefault = (r) => DEFAULTS.includes(r);
 const domChat = async (request, env) => {
   if (request.method !== 'POST') return json({ error: 'POST only' }, 405);
   if ((request.headers.get('Content-Type') || '').indexOf('application/json') !== 0) return json({ error: 'JSON only' }, 415);
@@ -66,21 +67,25 @@ const domChat = async (request, env) => {
   const last = history.filter((m) => m.role === 'user').pop();
   if (!last) return json({ error: 'No question' }, 400);
 
-  if (!env.AI) return json({ reply: fallback(last.content, lang), source: 'faq', aiError: 'no AI binding' });
+  if (!env.AI) { const reply = fallback(last.content, lang); return json({ reply, source: 'faq', unknown: unknownDefault(reply), aiError: 'no AI binding' }); }
   let facts = '';
-  try {
-    const r = await env.ASSETS.fetch(new Request(new URL('/llms.txt', request.url)));
-    facts = (await r.text()).slice(0, 6000);
-  } catch { /* answer without facts */ }
+  for (const file of [`/dom/${lang}.txt`, '/llms.txt']) {
+    try {
+      const r = await env.ASSETS.fetch(new Request(new URL(file, request.url)));
+      if (r.ok) { facts = (await r.text()).slice(0, 14000); break; }
+    } catch { /* try the next file */ }
+  }
   const system = [
-    'You are Mr. D.O.M., the funny, warm monkey assistant of the Romanian metal band Bleeding Debts 316.',
-    'Personality: playful, short sentences, the occasional monkey joke or banana reference, never rude, never preachy. Max 90 words.',
+    'You are Mr. D.O.M., the funny, warm monkey assistant of the Romanian metal band Bleeding Debts 316. You help every kind of visitor: fans, promoters, journalists, venues, curious people.',
+    'Personality: playful, short sentences, the occasional monkey joke or banana reference, never rude, never preachy. Max 80 words.',
     `Reply in the same language as the visitor's last message (the page language is ${LANGS[lang]}).`,
-    'Only state facts that appear in the FACTS below. If something is not there (prices, show dates, private info), say you do not know yet and point to the newsletter or the contact form.',
+    'Your job is to GUIDE: answer briefly, then point to the one best page with its exact path from the FACTS (for example /en/shows/). Write paths and links as plain text, no markdown.',
+    'Promoters, venues, festivals and journalists: point to the contact form page and the press kit page, and the booking e-mail.',
+    'Only state facts that appear in the FACTS. Never invent shows, prices, dates, members, lyrics, quotes or links.',
+    'If the FACTS do not contain the answer, start your reply with [?] and say honestly that you do not know yet, then offer to pass the question to the band through the contact form.',
     'The band is NOT on Spotify on purpose; if asked, joke about it (you searched every banana crate) and point to SoundCloud and YouTube.',
-    'Never invent shows, prices, release dates, members or quotes. Never give personal opinions on religion or politics; the band speaks for itself in its songs.',
-    'Never ask for or repeat personal data. Booking/press: the contact form on the site or bleedingdebts316@gmail.com.',
-    'Song titles and the band name are never translated.',
+    'Never give personal opinions on religion or politics; the band speaks for itself in its songs.',
+    'Never ask for or repeat personal data. Song titles and the band name are never translated.',
     'FACTS:', facts,
   ].join('\n');
   const errors = [];
@@ -88,15 +93,18 @@ const domChat = async (request, env) => {
     try {
       const out = await env.AI.run(model, { messages: [{ role: 'system', content: system }, ...history], max_tokens: 220, temperature: 0.7 });
       const raw = typeof out === 'string' ? out : out?.response ?? out?.result?.response ?? out?.choices?.[0]?.message?.content ?? '';
-      const reply = String(typeof raw === 'string' ? raw : JSON.stringify(raw)).trim();
-      if (reply) return json({ reply, source: 'ai', model });
+      let reply = String(typeof raw === 'string' ? raw : JSON.stringify(raw)).trim();
+      const unknown = /^\s*\[\?\]/.test(reply) || reply.includes('[?]');
+      reply = reply.replace(/\[\?\]\s*/g, '').replace(/\*\*/g, '').trim();
+      if (reply) return json({ reply, source: 'ai', model, unknown });
       errors.push(`${model}: empty answer`);
     } catch (e) {
       errors.push(`${model}: ${String(e?.message || e).slice(0, 160)}`);
     }
   }
   console.log('Mr. D.O.M. AI failed', errors);
-  return json({ reply: fallback(last.content, lang), source: 'faq', aiError: errors.join(' | ') });
+  const reply = fallback(last.content, lang);
+  return json({ reply, source: 'faq', unknown: unknownDefault(reply), aiError: errors.join(' | ') });
 };
 
 export default {

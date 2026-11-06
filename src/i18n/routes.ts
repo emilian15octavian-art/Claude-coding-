@@ -4,7 +4,7 @@ import { locales, type Locale } from './locales';
 // Slugs use Latin letters only so links stay readable when shared.
 export const pageKeys = [
   'home', 'music', 'videos', 'shows', 'shop', 'about', 'gallery', 'press', 'newsletter', 'contact', 'links',
-  'privacy', 'cookies', 'terms', 'shipping', 'notFound',
+  'faq', 'accessibility', 'privacy', 'cookies', 'terms', 'shipping', 'notFound',
 ] as const;
 export type PageKey = (typeof pageKeys)[number];
 
@@ -20,6 +20,8 @@ export const slugs: Record<PageKey, Record<Locale, string>> = {
   newsletter: { en: 'newsletter', fr: 'newsletter', ro: 'newsletter', it: 'newsletter', es: 'boletin', ar: 'nashra', ru: 'rassylka', el: 'enimerotiko' },
   contact: { en: 'contact', fr: 'contact', ro: 'contact', it: 'contatti', es: 'contacto', ar: 'ittisal', ru: 'kontakty', el: 'epikoinonia' },
   links: { en: 'links', fr: 'liens', ro: 'linkuri', it: 'link', es: 'enlaces', ar: 'rawabit', ru: 'ssylki', el: 'syndesmoi' },
+  faq: { en: 'faq', fr: 'faq', ro: 'intrebari-frecvente', it: 'domande-frequenti', es: 'preguntas-frecuentes', ar: 'asila', ru: 'voprosy', el: 'syxnes-erotiseis' },
+  accessibility: { en: 'accessibility', fr: 'accessibilite', ro: 'accesibilitate', it: 'accessibilita', es: 'accesibilidad', ar: 'wusul', ru: 'dostupnost', el: 'prosvasimotita' },
   privacy: { en: 'privacy', fr: 'confidentialite', ro: 'confidentialitate', it: 'privacy', es: 'privacidad', ar: 'khususiya', ru: 'konfidentsialnost', el: 'aporrito' },
   cookies: { en: 'cookies', fr: 'cookies', ro: 'cookies', it: 'cookie', es: 'cookies', ar: 'cookies', ru: 'cookies', el: 'cookies' },
   terms: { en: 'terms', fr: 'conditions', ro: 'termeni', it: 'termini', es: 'condiciones', ar: 'shurut', ru: 'usloviya', el: 'oroi' },

@@ -1,0 +1,28 @@
+---
+/** FAQ and accessibility statement: Markdown pages from src/content/pages/<lang>/. The FAQ also gets FAQPage data for search engines and AI assistants. */
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import { getPage } from '../lib/data';
+import { formatDate } from '../lib/format';
+interface Props { lang: Locale; pageKey: 'faq' | 'accessibility' }
+const { lang, pageKey } = Astro.props;
+const { entry, isFallback } = await getPage(lang, pageKey);
+const { Content } = await render(entry);
+const site = Astro.site!.toString().replace(/\/$/, '');
+const plain = (md: string) => md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, txt, href) => `${txt} (${href.startsWith('/') ? site + href : href})`).replace(/\*\*/g, '').trim();
+const qa = pageKey === 'faq'
+  ? (entry.body ?? '').split(/^## /m).slice(1).map((block) => { const [q, ...rest] = block.split('\n'); return { q: q.trim(), a: plain(rest.join('\n')) }; })
+  : [];
+const schema = qa.length ? [{ '@type': 'FAQPage', mainEntity: qa.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }] : [];
+---
+<Base lang={lang} pageKey={pageKey} schema={schema}>
+  <PageHead lang={lang} pageKey={pageKey}>
+    {pageKey === 'accessibility' && entry.data.updated && <p class="muted">{t(lang, 'legal.updated', { date: formatDate(lang, entry.data.updated) })}</p>}
+  </PageHead>
+  <div class="narrow">
+    <article class="prose" lang={isFallback ? 'en' : undefined}><Content /></article>
+  </div>
+</Base>

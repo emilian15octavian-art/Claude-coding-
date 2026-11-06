@@ -17,7 +17,7 @@ const ready = Boolean(key) || services.web3formsEnabled;
 const action = key ? 'https://api.web3forms.com/submit' : '/api/contact';
 const site = (Astro.site?.toString() ?? '').replace(/\/$/, '');
 ---
-<form class="contact stack" method="post" action={action} data-contact-form
+<form id="contact-form" class="contact stack" method="post" action={action} data-contact-form
   data-msg-sending={t(lang, 'contact.sending')} data-msg-success={t(lang, 'contact.success')} data-msg-error={t(lang, 'contact.error')}>
   <input type="hidden" name="lang" value={lang} />
   {key ? (
@@ -76,6 +76,10 @@ const site = (Astro.site?.toString() ?? '').replace(/\/$/, '');
   const status = form?.querySelector<HTMLElement>('[data-status]');
   if (new URLSearchParams(location.search).get('sent') === '1' && status && form) status.textContent = form.dataset.msgSuccess!;
   if (new URLSearchParams(location.search).get('sent') === '0' && status && form) status.textContent = form.dataset.msgError!;
+  // Question passed on by Mr. D.O.M. ("Ask the band"): pre-fill the message so the visitor only adds their e-mail.
+  const asked = new URLSearchParams(location.search).get('q');
+  const msg = form?.querySelector<HTMLTextAreaElement>('#c-message');
+  if (asked && msg && !msg.value) { msg.value = `🐒 Mr. D.O.M.: ${asked.slice(0, 500)}\n\n`; const sel = form!.querySelector<HTMLSelectElement>('#c-subject'); if (sel) sel.value = 'Other'; }
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;

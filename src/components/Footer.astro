@@ -12,7 +12,7 @@ const { lang, alternates } = Astro.props;
 const band = await getBand();
 const socials = socialOrder.filter((k) => band.profiles[k]).map((k) => ({ key: k, href: band.profiles[k]!, name: socialNames[k] }));
 const site: PageKey[] = ['newsletter', 'links', 'press', 'contact'];
-const legal: PageKey[] = ['privacy', 'cookies', 'terms', 'shipping'];
+const legal: PageKey[] = ['faq', 'privacy', 'cookies', 'terms', 'shipping', 'accessibility'];
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
