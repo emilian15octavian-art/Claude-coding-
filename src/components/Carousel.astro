@@ -1,0 +1,94 @@
+---
+/**
+ * Auto-sliding row (photos, songs, videos, news, socials) that respects every visitor:
+ * - swipe / scroll with the finger or mouse (CSS scroll snap), Previous / Next buttons;
+ * - moves by itself every few seconds only while it is on screen, and stops when the visitor
+ *   hovers, touches, focuses or presses Pause (WCAG 2.2.2 Pause, Stop, Hide);
+ * - never moves for people who asked their device to reduce motion;
+ * - works right-to-left (Arabic).
+ */
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import Icon from './Icon.astro';
+interface Props { lang: Locale; label: string; interval?: number; variant?: 'wide' | 'square' | 'small' }
+const { lang, label, interval = 5000, variant = 'square' } = Astro.props;
+---
+<div class={`carousel ${variant}`} data-carousel data-interval={interval}>
+  <ul class="track" role="list" data-track tabindex="-1"><slot /></ul>
+  <div class="controls">
+    <button type="button" class="ctl" data-prev><Icon name="chevronLeft" size={20} /><span class="visually-hidden">{t(lang, 'carousel.prev')}</span></button>
+    <button type="button" class="ctl" data-toggle aria-pressed="false" data-label-pause={t(lang, 'carousel.pause')} data-label-play={t(lang, 'carousel.play')}>
+      <span aria-hidden="true" data-toggle-icon>❚❚</span><span class="visually-hidden" data-toggle-text>{t(lang, 'carousel.pause')}</span>
+    </button>
+    <button type="button" class="ctl" data-next><Icon name="chevronRight" size={20} /><span class="visually-hidden">{t(lang, 'carousel.next')}</span></button>
+  </div>
+</div>
+
+<style>
+  .carousel { display: grid; gap: var(--space-s); }
+  .track {
+    display: grid; grid-auto-flow: column; gap: var(--space-m); overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; padding-block-end: 0.25rem; list-style: none; margin: 0; padding-inline: 0;
+    &::-webkit-scrollbar { display: none; }
+  }
+  .square .track { grid-auto-columns: min(78%, 17rem); }
+  .wide .track { grid-auto-columns: min(88%, 28rem); }
+  .small .track { grid-auto-columns: max-content; }
+  .track > :global(li) { scroll-snap-align: start; min-inline-size: 0; }
+  .controls { display: flex; gap: 0.5rem; justify-content: flex-end; }
+  .ctl { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); cursor: pointer; font-size: 0.8rem; &:hover { background: var(--surface-2); } }
+  :global([dir='rtl']) .ctl :global(svg) { transform: scaleX(-1); }
+  @media (prefers-reduced-motion: reduce) { .track { scroll-behavior: auto; } }
+</style>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]')!;
+    const items = () => [...track.children] as HTMLElement[];
+    const toggle = root.querySelector<HTMLButtonElement>('[data-toggle]')!;
+    const toggleText = root.querySelector<HTMLElement>('[data-toggle-text]')!;
+    const toggleIcon = root.querySelector<HTMLElement>('[data-toggle-icon]')!;
+    const interval = Number(root.dataset.interval) || 5000;
+    const rtl = getComputedStyle(root).direction === 'rtl';
+    let stopped = reduce; // stopped by the visitor (Pause) or by "reduce motion"
+    let held = false; // paused for a moment while hovered / touched / focused
+    let visible = false;
+    let timer: number | undefined;
+
+    const current = () => {
+      const start = track.getBoundingClientRect()[rtl ? 'right' : 'left'];
+      let best = 0, dist = Infinity;
+      items().forEach((el, i) => { const d = Math.abs(el.getBoundingClientRect()[rtl ? 'right' : 'left'] - start); if (d < dist) { dist = d; best = i; } });
+      return best;
+    };
+    const go = (i: number) => {
+      const list = items(); if (!list.length) return;
+      const el = list[(i + list.length) % list.length];
+      const delta = el.getBoundingClientRect()[rtl ? 'right' : 'left'] - track.getBoundingClientRect()[rtl ? 'right' : 'left'];
+      track.scrollBy({ left: delta, behavior: reduce ? 'auto' : 'smooth' });
+    };
+    const atEnd = () => (rtl ? Math.abs(track.scrollLeft) : track.scrollLeft) + track.clientWidth >= track.scrollWidth - 4;
+    const tick = () => { if (!stopped && !held && visible && document.visibilityState === 'visible') atEnd() ? go(0) : go(current() + 1); };
+    const restart = () => { clearInterval(timer); if (!stopped) timer = window.setInterval(tick, interval); };
+    const setStopped = (v: boolean) => {
+      stopped = v;
+      toggle.setAttribute('aria-pressed', String(v));
+      toggleText.textContent = v ? toggle.dataset.labelPlay! : toggle.dataset.labelPause!;
+      toggleIcon.textContent = v ? '▶' : '❚❚';
+      restart();
+    };
+    root.querySelector('[data-prev]')!.addEventListener('click', () => { go(current() - 1); restart(); });
+    root.querySelector('[data-next]')!.addEventListener('click', () => { atEnd() ? go(0) : go(current() + 1); restart(); });
+    toggle.addEventListener('click', () => setStopped(!stopped));
+    root.addEventListener('pointerenter', () => { held = true; });
+    root.addEventListener('pointerleave', () => { held = false; });
+    root.addEventListener('focusin', () => { held = true; });
+    root.addEventListener('focusout', () => { held = false; });
+    track.addEventListener('pointerdown', () => { held = true; }, { passive: true });
+    // Playing a video inside the row stops the slideshow for good.
+    track.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('[data-embed-play]')) setStopped(true); });
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0.5 }).observe(root);
+    setStopped(stopped);
+  });
+</script>

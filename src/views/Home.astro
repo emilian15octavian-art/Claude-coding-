@@ -10,13 +10,21 @@ import hero from '../assets/images/hero.jpg';
 import { type Locale } from '../i18n/locales';
 import { path } from '../i18n/routes';
 import { pick, t } from '../i18n/t';
-import { getBand, getReleases, getShows, getVideos } from '../lib/data';
+import { getBand, getGallery, getReleases, getShows, getVideos, socialNames, socialOrder } from '../lib/data';
+import Carousel from '../components/Carousel.astro';
+import { formatDate } from '../lib/format';
 import Embed from '../components/Embed.astro';
 
 interface Props { lang: Locale; isRoot?: boolean }
 const { lang, isRoot = false } = Astro.props;
-const [band, releases, shows, videos] = await Promise.all([getBand(), getReleases(), getShows(), getVideos()]);
-const video = videos[0];
+const [band, releases, shows, videos, gallery] = await Promise.all([getBand(), getReleases(), getShows(), getVideos(), getGallery()]);
+const socials = socialOrder.filter((k) => band.profiles[k]).map((k) => ({ key: k, href: band.profiles[k]!, name: socialNames[k] }));
+// News: newest releases, videos and upcoming shows in one sliding row
+const news = [
+  ...releases.map((r) => ({ date: r.data.date, kind: t(lang, 'home.newSingle'), title: r.data.title, href: `${path('music', lang)}${r.id}/` })),
+  ...videos.map((v) => ({ date: v.data.date, kind: t(lang, 'home.newVideo'), title: v.data.title, href: path('videos', lang) })),
+  ...shows.upcoming.map((sh) => ({ date: sh.data.start.slice(0, 10), kind: t(lang, 'home.liveAt'), title: `${sh.data.venue.name}, ${sh.data.venue.city}`, href: path('shows', lang) })),
+].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 8);
 const latest = releases[0];
 const next = shows.upcoming[0];
 const heroImg = await getImage({ src: hero, format: 'avif', widths: [640, 1024, 1600, 2400], sizes: '100vw' });
@@ -46,13 +54,74 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
     {latest ? <ReleaseCard lang={lang} release={latest} tracklist={false} /> : <p class="empty">{t(lang, 'music.noReleases')}</p>}
   </section>
 
-  {video && (
+  {videos.length > 0 && (
     <section class="section container" aria-labelledby="latest-video">
       <div class="section-head">
         <h2 id="latest-video">{t(lang, 'pages.videos.heading')}</h2>
-        <a class="btn btn-small" href={path('videos', lang)}>{t(lang, 'pages.videos.nav')} <Icon name="arrow" size={18} /></a>
+        <a class="btn btn-small" href={path('videos', lang)}>{t(lang, 'home.seeAll')} <Icon name="arrow" size={18} /></a>
       </div>
-      <Embed lang={lang} service="YouTube" src={`https://www.youtube-nocookie.com/embed/${video.data.youtubeId}?autoplay=1&rel=0`} title={video.data.title} label={t(lang, 'videos.play', { title: video.data.title })} thumbnail={video.data.thumbnail ?? `https://i.ytimg.com/vi/${video.data.youtubeId}/hqdefault.jpg`} />
+      <Carousel lang={lang} label={t(lang, 'pages.videos.heading')} variant="wide" interval={7000}>
+        {videos.map((v) => (
+          <li class="slide">
+            <Embed lang={lang} service="YouTube" src={`https://www.youtube-nocookie.com/embed/${v.data.youtubeId}?autoplay=1&rel=0`} title={v.data.title} label={t(lang, 'videos.play', { title: v.data.title })} thumbnail={v.data.thumbnail ?? `https://i.ytimg.com/vi/${v.data.youtubeId}/hqdefault.jpg`} />
+            <p class="slide-title" translate="no">{v.data.title}</p>
+          </li>
+        ))}
+      </Carousel>
+    </section>
+  )}
+
+  {releases.length > 1 && (
+    <section class="section container" aria-labelledby="songs">
+      <div class="section-head">
+        <h2 id="songs">{t(lang, 'home.songs')}</h2>
+        <a class="btn btn-small" href={path('music', lang)}>{t(lang, 'home.seeAll')} <Icon name="arrow" size={18} /></a>
+      </div>
+      <Carousel lang={lang} label={t(lang, 'home.songs')}>
+        {releases.map((r) => (
+          <li class="slide">
+            <a class="card-link" href={`${path('music', lang)}${r.id}/`}>
+              <Picture src={r.data.cover} alt="" formats={['avif', 'webp']} widths={[280, 420, 560]} sizes="17rem" loading="lazy" class="slide-img" />
+              <span class="slide-title" translate="no">{r.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </Carousel>
+    </section>
+  )}
+
+  {gallery.length > 0 && (
+    <section class="section container" aria-labelledby="photos">
+      <div class="section-head">
+        <h2 id="photos">{t(lang, 'pages.gallery.heading')}</h2>
+        <a class="btn btn-small" href={path('gallery', lang)}>{t(lang, 'home.seeAll')} <Icon name="arrow" size={18} /></a>
+      </div>
+      <Carousel lang={lang} label={t(lang, 'pages.gallery.heading')} interval={4000}>
+        {gallery.map((g) => (
+          <li class="slide">
+            <a class="card-link" href={path('gallery', lang)}>
+              <Picture src={g.data.image} alt={pick(lang, g.data.alt)} formats={['avif', 'webp']} widths={[280, 420, 560]} sizes="17rem" loading="lazy" class="slide-img photo" />
+            </a>
+          </li>
+        ))}
+      </Carousel>
+    </section>
+  )}
+
+  {news.length > 0 && (
+    <section class="section container" aria-labelledby="news">
+      <h2 id="news">{t(lang, 'home.news')}</h2>
+      <Carousel lang={lang} label={t(lang, 'home.news')} variant="wide" interval={6000}>
+        {news.map((n) => (
+          <li class="slide">
+            <a class="news-card" href={n.href}>
+              <span class="badge">{n.kind}</span>
+              <span class="news-title" translate="no">{n.title}</span>
+              <time class="muted" datetime={n.date}>{formatDate(lang, n.date)}</time>
+            </a>
+          </li>
+        ))}
+      </Carousel>
     </section>
   )}
 
@@ -63,6 +132,19 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
     </div>
     {next ? <ShowCard lang={lang} show={next} /> : <p class="empty">{t(lang, 'home.noShows')}</p>}
   </section>
+
+  {socials.length > 0 && (
+    <section class="section container" aria-labelledby="follow">
+      <h2 id="follow">{t(lang, 'home.follow')}</h2>
+      <Carousel lang={lang} label={t(lang, 'home.follow')} variant="small" interval={3000}>
+        {socials.map((so) => (
+          <li class="slide">
+            <a class="social-card" href={so.href} rel="me noopener noreferrer" target="_blank"><Icon name={so.key} size={28} /><span>{so.name}</span></a>
+          </li>
+        ))}
+      </Carousel>
+    </section>
+  )}
 
   <section class="section container" aria-labelledby="nl-title">
     <div class="nl-box">
@@ -85,5 +167,14 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
   .hero .btn { color: #fff; border-color: #fff; }
   .hero .btn-primary { background: #fff; color: #000; }
   .hero .btn:not(.btn-primary):hover { background: rgb(255 255 255 / 0.12); }
+  .slide { display: grid; gap: 0.5rem; }
+  .card-link { display: grid; gap: 0.5rem; color: inherit; text-decoration: none; &:hover .slide-title { text-decoration: underline; } }
+  .slide-img, .slide-img :global(img) { inline-size: 100%; block-size: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
+  .slide-img.photo, .slide-img.photo :global(img) { aspect-ratio: 4 / 5; }
+  .slide-title { font-weight: 800; }
+  .news-card { display: grid; gap: 0.5rem; align-content: start; min-block-size: 9rem; padding: var(--space-m); border: 1px solid var(--border); border-radius: calc(var(--radius) * 2); background: var(--surface); color: inherit; text-decoration: none; &:hover { border-color: var(--primary); } }
+  .news-card .badge { justify-self: start; }
+  .news-title { font-size: var(--step-1); font-weight: 900; line-height: 1.2; }
+  .social-card { display: inline-flex; align-items: center; gap: 0.6rem; min-block-size: 56px; padding: 0.6rem 1.1rem; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); font-weight: 800; text-decoration: none; &:hover { border-color: var(--primary); } }
   .nl-box { padding: var(--space-xl) var(--space-l); background: var(--surface); border-radius: calc(var(--radius) * 2); display: grid; gap: var(--space-m); }
 </style>

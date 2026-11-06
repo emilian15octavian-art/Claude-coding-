@@ -127,6 +127,13 @@
     "comingSoon": "În curând."
   },
   "home": {
+    "news": "Noutăți",
+    "newSingle": "Single nou",
+    "newVideo": "Videoclip nou",
+    "liveAt": "Concert",
+    "songs": "Toate piesele",
+    "follow": "Urmărește-ne",
+    "seeAll": "Vezi tot",
     "tagline": "Cicatricile nu au ultimul cuvânt.",
     "latestRelease": "Cea mai nouă lansare",
     "nextShow": "Următorul concert",
@@ -284,6 +291,7 @@
     "text": "Pagina pe care o cauți nu există sau a fost mutată.",
     "home": "Înapoi la pagina principală"
   },
+  "carousel": {"prev": "Înapoi", "next": "Înainte", "pause": "Oprește derularea", "play": "Pornește derularea"},
   "dom": {
     "chip1": "Unde pot asculta?",
     "chip2": "Următorul concert?",
