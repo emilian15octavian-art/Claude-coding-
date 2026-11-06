@@ -35,16 +35,25 @@ const tasks = {
 };
 const handles = {
   Bandcamp: `https://${HANDLE}.bandcamp.com`, Audiomack: `https://audiomack.com/${HANDLE}`, Mixcloud: `https://www.mixcloud.com/${HANDLE}/`,
-  Twitch: `https://www.twitch.tv/${HANDLE}`, Reddit: `https://www.reddit.com/user/${HANDLE}/`, Bluesky: `https://bsky.app/profile/${HANDLE}.bsky.social`,
+  Twitch: `https://www.twitch.tv/${HANDLE}`, Reddit: `https://www.reddit.com/user/${HANDLE}/`,
   Pinterest: `https://www.pinterest.com/${HANDLE}/`, Tumblr: `https://${HANDLE}.tumblr.com`, Kick: `https://kick.com/${HANDLE}`,
 };
 for (const [p, fn] of Object.entries(tasks)) { try { await fn(); } catch (e) { notes.push(`${p}: could not search (${String(e).slice(0, 80)})`); } }
+// A handle only counts when the page itself names the band: many sites answer 200 for any name.
 for (const [p, url] of Object.entries(handles)) {
   try {
-    const r = await fetch(url, { headers: { 'User-Agent': UA }, redirect: 'manual', signal: AbortSignal.timeout(15000) });
-    if (r.status === 200) add(p, url, `the handle "${HANDLE}" exists (check it is really you)`);
+    const r = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' }, redirect: 'follow', signal: AbortSignal.timeout(15000) });
+    if (r.status !== 200 || new URL(r.url).hostname !== new URL(url).hostname) continue;
+    const html = (await r.text()).slice(0, 300000);
+    const title = (html.match(/<title[^>]*>([^<]*)<\/title>/i) || [])[1]?.trim() ?? '';
+    if (/bleeding\s*debts/i.test(html)) add(p, url, `page title: "${title.slice(0, 80)}"`);
   } catch { /* not reachable: skip */ }
 }
+// Bluesky: official public lookup (the web page exists for any name)
+try {
+  const { status, body } = await get(`https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${HANDLE}.bsky.social`);
+  if (status === 200 && body?.handle) add('Bluesky', `https://bsky.app/profile/${body.handle}`, `Bluesky profile "${body.displayName ?? body.handle}"`);
+} catch { /* skip */ }
 fs.mkdirSync('reports', { recursive: true });
 const report = found.length
   ? `🐒 Mr. D.O.M. found ${found.length} possible Bleeding Debts 316 profile(s) that are not on the website yet:\n\n${found.map((f) => `- **${f.platform}**: ${f.url} _(${f.how})_`).join('\n')}\n\n**If one is really yours:** add it to \`src/content/band/band.json\` → \`profiles\` (or tell Claude), and it appears in the footer, on the Links page and in Google's data.\n**If it is a fake or someone else:** ignore it, or report it to that platform.\n${notes.length ? `\nNotes: ${notes.join('; ')}\n` : ''}`
