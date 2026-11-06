@@ -22,7 +22,7 @@ Le responsable du traitement est l'entité juridique indiquée dans l'encadré c
 
 **Commandes en boutique.** Les paiements sont traités par Stripe. Stripe collecte directement vos données de carte ; nous ne les voyons jamais. Pour livrer votre commande, nous recevons votre nom, votre adresse de livraison, votre e-mail et le détail de la commande. Base légale : exécution du contrat (art. 6, par. 1, b)) et nos obligations légales (art. 6, par. 1, c)), par exemple la conservation des documents comptables pendant la durée prévue par la loi roumaine (loi n° 82/1991).
 
-**Vidéos et lecteurs audio.** Les lecteurs YouTube, Spotify et Bandcamp ne se chargent **qu'après votre clic**. Avant cela, aucune donnée n'est envoyée à ces services. Après le clic, leurs propres politiques de confidentialité s'appliquent.
+**Vidéos et lecteurs audio.** Les lecteurs YouTube et SoundCloud ne se chargent **qu'après votre clic**. Avant cela, aucune donnée n'est envoyée à ces services. Après le clic, leurs propres politiques de confidentialité s'appliquent.
 
 **Assistant de chat (Mr. D.O.M.).** Si vous tapez une question dans le chat, la question et la conversation en cours sont envoyées à Cloudflare Workers AI pour générer la réponse. Nous ne conservons pas les conversations et ne les utilisons à aucune autre fin. Merci de ne pas saisir de données personnelles. Base légale : notre intérêt légitime à répondre aux questions des visiteurs (art. 6, par. 1, f)).
 

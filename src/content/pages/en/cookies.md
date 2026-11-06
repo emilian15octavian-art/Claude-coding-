@@ -17,7 +17,7 @@ These two entries are only created when you use those features, never leave your
 
 ## Third-party services
 
-- **Videos and music players** (YouTube, Spotify, Bandcamp) load only when you press play. Those services may then set their own cookies, under their own policies.
+- **Videos and music players** (YouTube, SoundCloud) load only when you press play. Those services may then set their own cookies, under their own policies.
 - **Checkout**: when you press Buy you go to Stripe's secure payment page, which uses its own cookies for fraud prevention.
 - **Contact form**: Cloudflare Turnstile checks that you are human. It is designed to work without tracking cookies.
 

@@ -24,7 +24,9 @@ const logos = [
   ['logoWhiteTransparent', '/press/logo/bleeding-debts-316-logo-white-transparent.png'],
   ['logoBlackTransparent', '/press/logo/bleeding-debts-316-logo-black-transparent.png'],
 ];
-const docs = [['techRider', '/press/bleeding-debts-316-tech-rider.pdf'], ['stagePlot', '/press/bleeding-debts-316-stage-plot.pdf']];
+// The tech rider and stage plot in public/press/ are still templates, so they are not offered yet.
+// When the real PDFs are in place, add back: ['techRider', '/press/bleeding-debts-316-tech-rider.pdf'], ['stagePlot', '/press/bleeding-debts-316-stage-plot.pdf'],
+const docs = [['qrCode', '/press/bleeding-debts-316-website-qr.svg']];
 ---
 <Base lang={lang} pageKey="press">
   <PageHead lang={lang} pageKey="press" lead={t(lang, 'press.intro')} />

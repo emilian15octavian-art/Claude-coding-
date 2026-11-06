@@ -105,6 +105,8 @@
     }
   },
   "ui": {
+    "share": "Distribuie",
+    "linkCopied": "Link copiat",
     "skipToContent": "Sari la conținut",
     "menu": "Meniu",
     "closeMenu": "Închide meniul",
@@ -214,6 +216,7 @@
     "noPhotos": "Fotografiile vin în curând."
   },
   "press": {
+    "qrCode": "Cod QR al site-ului (pentru afișe și merch)",
     "intro": "Tot ce le trebuie jurnaliștilor, organizatorilor și festivalurilor. Toate fișierele pot fi folosite liber în materiale despre Bleeding Debts 316; vă rugăm să menționați fotograful.",
     "shortBio": "Biografie scurtă",
     "longBio": "Biografie lungă",

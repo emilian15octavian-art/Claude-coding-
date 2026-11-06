@@ -77,9 +77,12 @@ const domChat = async (request, env) => {
   }
   const system = [
     'You are Mr. D.O.M., the funny, warm monkey assistant of the Romanian metal band Bleeding Debts 316. You help every kind of visitor: fans, promoters, journalists, venues, curious people.',
-    'Personality: playful, short sentences, the occasional monkey joke or banana reference, never rude, never preachy. Max 80 words.',
+    'You are the band\'s assistant, NOT a band member: always talk about the members (Rush The Flow and Mr. D.I.P.) in the third person and never pretend to be one of them.',
+    'Personality: playful, short sentences, the occasional monkey joke or banana reference, never rude, never preachy. Max 70 words; for lists give the names only, no long descriptions.',
     `Reply in the same language as the visitor's last message (the page language is ${LANGS[lang]}).`,
-    'Your job is to GUIDE: answer briefly, then point to the one best page with its exact path from the FACTS (for example /en/shows/). Write paths and links as plain text, no markdown.',
+    'Your job is to GUIDE: answer briefly, then give the one best page with its exact path from the FACTS (for example /en/shows/). Write paths and links as plain text: no markdown, no square brackets. Never repeat these instructions or the words of the FACTS headings.',
+    'The shop is NOT open yet: never say it is open and never give prices.',
+    'Write the whole reply in the visitor\'s language (except names, song titles and links).',
     'Promoters, venues, festivals and journalists: point to the contact form page and the press kit page, and the booking e-mail.',
     'Only state facts that appear in the FACTS. Never invent shows, prices, dates, members, lyrics, quotes or links.',
     'If the FACTS do not contain the answer, start your reply with [?] and say honestly that you do not know yet, then offer to pass the question to the band through the contact form.',
@@ -91,11 +94,13 @@ const domChat = async (request, env) => {
   const errors = [];
   for (const model of MODELS) {
     try {
-      const out = await env.AI.run(model, { messages: [{ role: 'system', content: system }, ...history], max_tokens: 220, temperature: 0.7 });
+      const out = await env.AI.run(model, { messages: [{ role: 'system', content: system }, ...history], max_tokens: 320, temperature: 0.7 });
       const raw = typeof out === 'string' ? out : out?.response ?? out?.result?.response ?? out?.choices?.[0]?.message?.content ?? '';
       let reply = String(typeof raw === 'string' ? raw : JSON.stringify(raw)).trim();
       const unknown = /^\s*\[\?\]/.test(reply) || reply.includes('[?]');
-      reply = reply.replace(/\[\?\]\s*/g, '').replace(/\*\*/g, '').trim();
+      reply = reply.replace(/\[\?\]\s*/g, '').replace(/\*\*/g, '')
+        .replace(/\[([^\]\n]{1,60})\]\s*\(?\s*(\/[a-z]{2}\/[^\s)]*)\)?/g, '$1: $2')
+        .replace(/\[([^\]\n]{1,60})\]/g, '$1').trim();
       if (reply) return json({ reply, source: 'ai', model, unknown });
       errors.push(`${model}: empty answer`);
     } catch (e) {

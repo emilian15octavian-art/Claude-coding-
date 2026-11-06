@@ -44,6 +44,10 @@ for (const [lang, q] of exam) {
     const clean = p.endsWith('/') ? p : `${p}/`;
     if (!known.has(clean)) problems.push(`links to ${p}, which does not exist`);
   }
+  if (/\b(shop|store|negozio|magazin(ul)?|boutique|tienda|matjar|магазин|κατάστημα)\b[^.!?]{0,40}?\s(is open|now open|è aperto|e deschis|este deschis|est ouverte|está abierta|открыт|είναι ανοιχτό)/i.test(a)) problems.push('said the shop is open (it is not)');
+  if (/\b(I am|I'm|Eu sunt|Sunt|Eu,)\s+(Mr\. D\.I\.P|RUSH|Rush The Flow|un membru)/i.test(a)) problems.push('pretended to be a band member');
+  if (/\bpoint to\b|FACTS|\[[^\]]+\]/i.test(a)) problems.push('leaked instructions or markdown');
+  if (a.length > 40 && !/[.!?…)\]"»]\s*$|\/\s*$|[\u{1F300}-\u{1FAFF}]\s*$/u.test(a)) problems.push('answer looks cut off');
   if (/open\.spotify\.com|spotify\.com\/artist/i.test(a)) problems.push('gave a Spotify link');
   if (/(tickets? (are|cost)|bilete costă|\b\d{1,3} ?(lei|ron|€|eur)\b)/i.test(a)) problems.push('may have invented a price');
   if (problems.length) failed++;

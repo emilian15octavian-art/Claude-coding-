@@ -81,6 +81,8 @@ const settings = defineCollection({
     legalEntity: z.object({
       name: z.string(), type: z.string(), cui: z.string(), regCom: z.string(), address: z.string(),
       phone: z.string().nullable(), vatPayer: z.boolean(),
+      // false = the company details stay private (not shown on the site). Set true when the shop opens: Romanian law then requires them.
+      showOnSite: z.boolean().default(false),
     }),
     services: z.object({
       brevoFormAction: optionalUrl,

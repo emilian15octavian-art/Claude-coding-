@@ -24,11 +24,11 @@ const le = settings.legalEntity;
       {t(lang, 'legal.binding')}
       {lang !== 'ro' && <> <a href={path(pageKey, 'ro')} hreflang="ro" lang="ro">{t(lang, 'legal.readRomanian')}</a></>}
     </p>
-    {!isPlaceholder(le.name) && <div class="entity notice">
+    {le.showOnSite && !isPlaceholder(le.name) && <div class="entity notice">
       <p><strong>{le.name}</strong> ({le.type}) · CUI <span class="ltr">{le.cui}</span> · <span class="ltr">{le.regCom}</span></p>
       <p>{le.address}</p>
     </div>}
-    {isPlaceholder(le.name) && <div class="entity notice"><p><strong translate="no">Bleeding Debts 316</strong> · Romania · <a href={path('contact', lang)}>{t(lang, 'pages.contact.nav')}</a></p></div>}
+    {(!le.showOnSite || isPlaceholder(le.name)) && <div class="entity notice"><p><strong translate="no">Bleeding Debts 316</strong> · {new Intl.DisplayNames([lang], { type: 'region' }).of('RO')} · <a href={path('contact', lang)}>{t(lang, 'pages.contact.nav')}</a></p></div>}
     <article class="prose" lang={isFallback ? 'en' : undefined}><Content /></article>
   </div>
 </Base>

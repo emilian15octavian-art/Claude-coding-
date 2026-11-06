@@ -58,6 +58,7 @@
     "cspell": "^10.4.0",
     "html-validate": "^11.18.0",
     "playwright": "^1.63.0",
+    "qrcode": "^1.5.4",
     "typescript": "^6.0.3",
     "ultrahtml": "^1.7.0"
   },

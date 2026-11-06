@@ -105,6 +105,8 @@
     }
   },
   "ui": {
+    "share": "Condividi",
+    "linkCopied": "Link copiato",
     "skipToContent": "Vai al contenuto",
     "menu": "Menu",
     "closeMenu": "Chiudi menu",
@@ -214,6 +216,7 @@
     "noPhotos": "Le foto arriveranno presto."
   },
   "press": {
+    "qrCode": "Codice QR del sito (per poster e merch)",
     "intro": "Tutto ciò che serve a giornalisti, promoter e festival. Tutti i file sono liberamente utilizzabili per parlare dei Bleeding Debts 316; si prega di citare il fotografo.",
     "shortBio": "Biografia breve",
     "longBio": "Biografia completa",
