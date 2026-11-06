@@ -9,17 +9,17 @@ owner: YOUR-GITHUB-USERNAME
 repo: bleedingdebts316-status
 sites:
   - name: Website (English)
-    url: https://claude-coding.emilian15octavian.workers.dev/en/
+    url: https://claude-coding.bleedingdebts316.workers.dev/en/
   - name: Health check
-    url: https://claude-coding.emilian15octavian.workers.dev/health.json
+    url: https://claude-coding.bleedingdebts316.workers.dev/health.json
   - name: Website (Romanian)
-    url: https://claude-coding.emilian15octavian.workers.dev/ro/
+    url: https://claude-coding.bleedingdebts316.workers.dev/ro/
 status-website:
   baseUrl: /bleedingdebts316-status
   name: Bleeding Debts 316 status
   introTitle: "Is the Bleeding Debts 316 website up?"
   navbar:
     - title: Website
-      href: https://claude-coding.emilian15octavian.workers.dev/
+      href: https://claude-coding.bleedingdebts316.workers.dev/
 workflowSchedule:
   uptime: "*/5 * * * *"

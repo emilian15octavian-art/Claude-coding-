@@ -23,7 +23,7 @@ interface Props {
   override?: { title: string; description: string; paths: Record<Locale, string>; crumbName: string; ogImage?: string };
 }
 const { lang, pageKey, schema = [], pageType = 'WebPage', isRoot = false, noindex = false, override } = Astro.props;
-const site = (Astro.site?.toString() ?? 'https://claude-coding.emilian15octavian.workers.dev/').replace(/\/$/, '');
+const site = (Astro.site?.toString() ?? 'https://claude-coding.bleedingdebts316.workers.dev/').replace(/\/$/, '');
 const info = localeInfo[lang];
 const title = override?.title ?? t(lang, `pages.${pageKey}.title`);
 const description = override?.description ?? t(lang, `pages.${pageKey}.description`);

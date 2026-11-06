@@ -88,7 +88,7 @@ Cloudflare renews `pages.dev` certificates automatically. If this appears for mo
 ## Optional: status page and faster uptime alerts
 
 - **Upptime** (free, 5-minute checks, public status page): see `upptime/.upptimerc.yml` for the 3 setup steps.
-- **UptimeRobot** (free plan, 5-minute checks, e-mail alerts): <https://uptimerobot.com> → Add New Monitor → HTTP(s) → `https://claude-coding.emilian15octavian.workers.dev/health.json` → keyword monitor for `"status": "ok"` → add your e-mail as alert contact.
+- **UptimeRobot** (free plan, 5-minute checks, e-mail alerts): <https://uptimerobot.com> → Add New Monitor → HTTP(s) → `https://claude-coding.bleedingdebts316.workers.dev/health.json` → keyword monitor for `"status": "ok"` → add your e-mail as alert contact.
 
 ## Run the checks on your computer
 

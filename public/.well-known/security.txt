@@ -1,6 +1,6 @@
-# Security contact for claude-coding.emilian15octavian.workers.dev (RFC 9116)
+# Security contact for claude-coding.bleedingdebts316.workers.dev (RFC 9116)
 # Update Expires every year. You can add a line "Contact: mailto:you@domain" too.
-Contact: https://claude-coding.emilian15octavian.workers.dev/en/contact/
+Contact: https://claude-coding.bleedingdebts316.workers.dev/en/contact/
 Expires: 2027-11-05T00:00:00.000Z
 Preferred-Languages: en, ro
-Canonical: https://claude-coding.emilian15octavian.workers.dev/.well-known/security.txt
+Canonical: https://claude-coding.bleedingdebts316.workers.dev/.well-known/security.txt
