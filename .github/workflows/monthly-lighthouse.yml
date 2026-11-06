@@ -27,7 +27,7 @@ jobs:
       - run: npm ci
       - name: Run Lighthouse on the live site (all 8 languages)
         run: npx lhci collect --config=./lighthouserc.live.cjs && npx lhci upload --config=./lighthouserc.live.cjs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: lighthouse-live-${{ github.run_number }}
           path: reports/lighthouse-live/

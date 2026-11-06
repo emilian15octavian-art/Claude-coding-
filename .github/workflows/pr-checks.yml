@@ -25,7 +25,7 @@ jobs:
       - run: npm run check:lighthouse
       - name: Also check the example content (exercises shows, shop, releases and their schema)
         run: npm run check:examples
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: check-reports
