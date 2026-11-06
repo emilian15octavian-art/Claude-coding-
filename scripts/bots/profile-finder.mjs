@@ -46,7 +46,7 @@ for (const [p, url] of Object.entries(handles)) {
     if (r.status !== 200 || new URL(r.url).hostname !== new URL(url).hostname) continue;
     const html = (await r.text()).slice(0, 300000);
     const title = (html.match(/<title[^>]*>([^<]*)<\/title>/i) || [])[1]?.trim() ?? '';
-    if (/bleeding\s*debts/i.test(html)) add(p, url, `page title: "${title.slice(0, 80)}"`);
+    if (/bleeding\s+debts/i.test(html.replace(/https?:\/\/[^"'\s<>]+/g, ""))) add(p, url, `page title: "${title.slice(0, 80)}"`);
   } catch { /* not reachable: skip */ }
 }
 // Bluesky: official public lookup (the web page exists for any name)
