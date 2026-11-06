@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-05
+updated: 2026-11-06
 status: needs native review
 ---
 ## In breve
@@ -12,8 +12,10 @@ Questo sito **non** usa cookie pubblicitari o di tracciamento, quindi non vedrai
 |---|---|---|---|
 | `theme` | Il tuo browser (local storage) | Ricorda se hai scelto il tema chiaro o scuro | Finché non lo cancelli |
 | `langNoticeDismissed` | Il tuo browser (local storage) | Ricorda che hai chiuso il suggerimento della lingua | Finché non lo cancelli |
+| `domChat` | Il tuo browser (session storage) | Conserva la conversazione con Mr. D.O.M. mentre passi da una pagina all'altra | Finché non chiudi la scheda |
+| `bd316-…` | Il tuo browser (cache storage) | Copie delle pagine già aperte, così si caricano anche senza internet | Fino al prossimo aggiornamento del sito o finché non le cancelli |
 
-Queste due voci vengono create solo se usi quelle funzioni, non lasciano mai il tuo dispositivo e non sono cookie. Sono strettamente necessarie per fornire una funzione che hai richiesto.
+Queste voci vengono create solo se usi quelle funzioni, non lasciano mai il tuo dispositivo e non sono cookie. Sono strettamente necessarie per fornire una funzione che hai richiesto. Nulla del loro contenuto viene inviato a noi o ad altri.
 
 ## Servizi di terze parti
 

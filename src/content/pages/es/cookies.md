@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-05
+updated: 2026-11-06
 status: needs native review
 ---
 ## En resumen
@@ -12,8 +12,10 @@ Esta web **no** usa cookies publicitarias ni de seguimiento, por eso no verás u
 |---|---|---|---|
 | `theme` | Tu navegador (almacenamiento local) | Recuerda si elegiste el modo claro u oscuro | Hasta que lo borres |
 | `langNoticeDismissed` | Tu navegador (almacenamiento local) | Recuerda que cerraste la sugerencia de idioma | Hasta que lo borres |
+| `domChat` | Tu navegador (almacenamiento de sesión) | Guarda tu conversación con Mr. D.O.M. mientras pasas de una página a otra | Hasta que cierres la pestaña |
+| `bd316-…` | Tu navegador (almacenamiento en caché) | Copias de las páginas que ya abriste, para que carguen sin internet | Hasta la próxima actualización del sitio o hasta que las borres |
 
-Estas dos entradas solo se crean si usas esas funciones, nunca salen de tu dispositivo y no son cookies. Son estrictamente necesarias para ofrecer una función que has pedido.
+Estas entradas solo se crean si usas esas funciones, nunca salen de tu dispositivo y no son cookies. Son estrictamente necesarias para ofrecer una función que has pedido. Nada de su contenido se nos envía a nosotros ni a nadie.
 
 ## Servicios de terceros
 

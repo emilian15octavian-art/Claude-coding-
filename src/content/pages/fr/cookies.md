@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-05
+updated: 2026-11-06
 status: needs native review
 ---
 ## En bref
@@ -12,8 +12,10 @@ Ce site n'utilise **aucun** cookie publicitaire ou de suivi : vous ne verrez don
 |---|---|---|---|
 | `theme` | Votre navigateur (stockage local) | Mémorise votre choix de mode clair ou sombre | Jusqu'à suppression |
 | `langNoticeDismissed` | Votre navigateur (stockage local) | Mémorise que vous avez fermé la suggestion de langue | Jusqu'à suppression |
+| `domChat` | Votre navigateur (stockage de session) | Garde votre conversation avec Mr. D.O.M. quand vous changez de page | Jusqu'à la fermeture de l'onglet |
+| `bd316-…` | Votre navigateur (stockage de cache) | Copies des pages déjà ouvertes, pour qu'elles s'affichent sans internet | Jusqu'à la prochaine mise à jour du site ou suppression |
 
-Ces deux entrées ne sont créées que si vous utilisez ces fonctions, ne quittent jamais votre appareil et ne sont pas des cookies. Elles sont strictement nécessaires pour fournir une fonction que vous avez demandée.
+Ces entrées ne sont créées que si vous utilisez ces fonctions, ne quittent jamais votre appareil et ne sont pas des cookies. Elles sont strictement nécessaires pour fournir une fonction que vous avez demandée. Rien de ce qu'elles contiennent ne nous est envoyé, ni à personne d'autre.
 
 ## Services tiers
 

@@ -75,7 +75,12 @@ const { lang } = Astro.props;
   const root = document.querySelector<HTMLElement>('[data-dom]');
   const form = root?.querySelector<HTMLFormElement>('[data-dom-form]');
   const log = root?.querySelector<HTMLElement>('[data-dom-log]');
-  const history: Array<{ role: 'user' | 'assistant'; content: string }> = [];
+  type Msg = { role: 'user' | 'assistant'; content: string };
+  // The conversation is kept for this tab only (sessionStorage), so it survives moving between pages.
+  const KEY = 'domChat';
+  let history: Msg[] = [];
+  try { history = JSON.parse(sessionStorage.getItem(KEY) || '[]').filter((m: Msg) => m && typeof m.content === 'string').slice(-20); } catch { history = []; }
+  const save = () => { try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-20))); } catch { /* private mode */ } };
   // Turns site paths (/en/shows/), https links and e-mail addresses in a reply into safe, clickable links.
   const LINK = /(https?:\/\/[^\s<>"')]+[^\s<>"').,!?]|\/(?:en|fr|ro|it|es|ar|ru|el)\/[a-z0-9\-/]*|[\w.+-]+@[\w-]+\.[\w.]+)/g;
   const fill = (el: HTMLElement, text: string) => {
@@ -112,6 +117,7 @@ const { lang } = Astro.props;
     root!.querySelector('[data-chips]')?.remove();
     add(q, 'me');
     history.push({ role: 'user', content: q });
+    save();
     const typing = add('🐒 …', 'bot', 'typing');
     try {
       const res = await fetch('/api/dom', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lang: root!.dataset.lang, messages: history.slice(-8) }) });
@@ -120,12 +126,17 @@ const { lang } = Astro.props;
       const reply = String(data.reply || root!.dataset.error);
       add(reply, 'bot');
       history.push({ role: 'assistant', content: reply });
+      save();
       if (data.unknown) askBand(q);
     } catch {
       typing.remove();
       add(root!.dataset.error!, 'bot');
     }
   };
+  if (history.length && log) {
+    root!.querySelector('[data-chips]')?.remove();
+    for (const m of history) add(m.content, m.role === 'user' ? 'me' : 'bot');
+  }
   root?.querySelectorAll<HTMLButtonElement>('[data-chip]').forEach((b) => b.addEventListener('click', () => ask(b.textContent!.trim())));
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
