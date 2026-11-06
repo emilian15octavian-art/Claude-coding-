@@ -10,10 +10,13 @@ Every issue says what broke and has a **How to fix** line for each problem.
 | When | Workflow (GitHub → Actions) | What it does | If it fails |
 |---|---|---|---|
 | Every push to `main` | **Check and deploy** | Builds the site, runs all checks below, deploys to Cloudflare, confirms the live site shows the new version, tells search engines (IndexNow) which pages changed | Nothing is deployed. Issue **"Site check failed: deploy blocked"** (label `site-check`). It closes itself when a later run passes. |
-| Every day 04:23 UTC | **Check and deploy** (scheduled) | Rebuilds so past shows move to *Past shows* and the © year stays current | Same as above |
+| Every day 04:23 UTC | **Check and deploy** (scheduled) | Runs every check (including spelling in all 8 languages) on the latest code | Same as above |
+| Every day 03:17 UTC | **🐒 Mr. D.O.M. daily refresh** | Opens every page of the **live** site (all languages), the Google file and the chat. Then saves today's date in `public/heartbeat.json` and pushes it, so Cloudflare rebuilds the site (past shows move, dates stay current, the repository stays active) and tells Bing/Yandex (IndexNow) which pages changed | Issue **"🐒 Mr. D.O.M.: live site problems"** (label `live-site`), closed automatically when fixed |
+| When a release, show or video is added | **🐒 Mr. D.O.M. newsletter draft** | Writes the newsletter (English + Romanian) for you | Issue **"🐒 Newsletter draft"** (label `newsletter`): copy it into Brevo/e-mail and send |
+| Every Sunday | **Weekly backup** | Zip of the source and of the built website, kept 90 days (Actions → Weekly backup → Artifacts) | Re-run it |
 | Every day 05:41 UTC | **Daily show check** | Opens every future show's ticket link and checks the show has full details | Issue **"Upcoming show needs attention"** (label `shows`) |
 | Every Monday | **Weekly link and SSL check** | Opens every external link (Spotify, Apple Music, YouTube, socials, ticket shops, Stripe, Linktree) and checks the HTTPS certificate, HSTS and that `http://` redirects to `https://` | Issue **"Weekly check: broken links or SSL problem"** (label `links`) |
-| Every 10 minutes | **Uptime** | Loads `/en/` and `/health.json` | Issue **"🔴 Site is down"** (label `downtime`), closed automatically when it is back |
+| About every hour (GitHub delays the 10-minute schedule) | **Uptime** | Loads `/en/` and `/health.json` | Issue **"🔴 Site is down"** (label `downtime`), closed automatically when it is back |
 | Every Monday | **Dependabot** | Opens pull requests to update libraries | The update is merged **automatically** only if every check passes. Otherwise it waits for you. |
 | 1st of every month | **Monthly Lighthouse report** | Speed/accessibility/SEO scores for 5 pages in each of the 8 languages on the live site; full reports as a downloadable artifact | Issue **"Lighthouse report YYYY-MM"** comparing with last month (informational) |
 
@@ -29,6 +32,7 @@ Every issue says what broke and has a **How to fix** line for each problem.
 | 6 | **Structured data** | Every JSON-LD block parses, uses real Schema.org types and has the fields Google needs for the band, events and products; the band is one entity in all languages | `npm run check:jsonld` |
 | 7 | **hreflang** | Every page lists all 8 languages + x-default, each pointing to a real page that links back; canonical URLs; the sitemap matches | `npm run check:hreflang` |
 | 8 | **Accessibility** | axe-core WCAG 2.2 AA tests on key pages in English, Arabic (right-to-left), Russian and Greek, at phone and desktop width, dark and light mode; no sideways scrolling; touch targets at least 44×44 px | `npm run check:a11y` |
+| 3b | **Spelling** | Every visible word on every page in all 8 languages (cspell dictionaries). Band words and names are in `src/content/i18n/spelling-allowed.txt`: add a word there if it is spelled right on purpose | `npm run check:spelling` |
 | 8b | **Interactive parts** | Menu, language suggestion, theme toggle, click-to-load videos, lightbox keys (also mirrored in Arabic), 404 language; and **no request to another website before the visitor clicks** (GDPR) | `npm run check:interactive` |
 | 9 | **Lighthouse** | Mobile scores ≥ 95 in Performance, Accessibility, Best Practices and SEO; LCP < 2.5 s, CLS < 0.1; budgets: JS ≤ 30 KB, CSS ≤ 40 KB, fonts ≤ 185 KB, images ≤ 400 KB, page ≤ 700 KB, zero third-party requests | `npm run check:lighthouse` |
 | 10 | **Security** | No high/critical vulnerable dependencies, the `_headers` file has HSTS, CSP, nosniff, Referrer-Policy, Permissions-Policy and frame protection, security.txt is valid, no secret keys in the files | `npm run check:security` |
@@ -70,7 +74,7 @@ A streaming or social link no longer works. Update the address in `band.json` �
 **"🔴 Site is down"**
 1. Open the site yourself. If it works, it was a short glitch and the issue closes itself.
 2. Check <https://www.cloudflarestatus.com>.
-3. Cloudflare dashboard → **Workers & Pages** → **bleedingdebts316** → **Deployments**. If the latest deploy is broken, choose the previous one → **Rollback**.
+3. Cloudflare dashboard → **Workers & Pages** → **claude-coding** → **Deployments**. If the latest deploy is broken, choose the previous one → **Rollback**.
 
 **"Cloudflare secrets are not set yet, so nothing was deployed"** (a warning, not a failure)
 Finish step 3 of LAUNCH-CHECKLIST.md.
@@ -83,7 +87,8 @@ Cloudflare renews `pages.dev` certificates automatically. If this appears for mo
 - **GitHub pauses scheduled jobs after 60 days without any commit** in a public repository. The weekly Dependabot merges usually count as activity. If you get an e-mail from GitHub saying a workflow was disabled, open **Actions**, pick the workflow and click **Enable workflow**.
 - **Keep the repository public** for unlimited free Actions minutes. In a private repository the free plan gives 2,000 minutes per month, which the 10-minute uptime check alone would use up. If you make the repository private, delete `.github/workflows/uptime.yml` and use UptimeRobot (below) instead.
 - **Every year:** update `Expires:` in `public/.well-known/security.txt` (the security check warns 30 days before). Review the legal pages and the `updated:` dates.
-- **Dependabot merges do not deploy immediately** (GitHub does not let automatic merges start another workflow). They go live with the next daily rebuild.
+- **Dependabot merges deploy right away**: Cloudflare builds every push to `main`.
+- **Mr. D.O.M. (the chat 🐒)** runs on Cloudflare Workers AI's free daily allowance. If it is used up, he answers from a built-in FAQ until midnight UTC. The free plan never bills. He knows what is in `/llms.txt`, which is built from your content files, so he learns new songs and shows automatically.
 
 ## Optional: status page and faster uptime alerts
 

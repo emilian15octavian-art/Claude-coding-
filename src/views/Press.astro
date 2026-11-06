@@ -40,7 +40,7 @@ const docs = [['techRider', '/press/bleeding-debts-316-tech-rider.pdf'], ['stage
         <li><strong>{t(lang, 'about.factGenre')}:</strong> {band.genre.join(', ')}</li>
         <li><strong>{t(lang, 'about.factOrigin')}:</strong> {[band.city, countryName(lang, band.countryCode)].filter(Boolean).join(', ')}</li>
         {band.foundingYear && <li><strong>{t(lang, 'about.factFounded')}:</strong> {band.foundingYear}</li>}
-        <li><strong>{t(lang, 'about.factMembers')}:</strong> {members.length}: {members.map((m) => (isPlaceholder(m.data.name) ? pick(lang, m.data.role) : `${m.data.name} (${pick(lang, m.data.role)})`)).join('; ')}</li>
+        <li><strong>{t(lang, 'about.factMembers')}:</strong> {members.map((m) => (isPlaceholder(m.data.name) ? pick(lang, m.data.role) : `${m.data.name}: ${pick(lang, m.data.role).toLowerCase()}`)).join(' · ')}</li>
       </ul>
     </section>
     <section aria-labelledby="long" class="block">

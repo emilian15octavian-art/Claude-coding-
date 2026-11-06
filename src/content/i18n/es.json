@@ -14,7 +14,7 @@
     "music": {
       "nav": "Música",
       "title": "Música y discografía | Bleeding Debts 316",
-      "description": "Todos los lanzamientos de Bleeding Debts 316 con portadas, fechas de lanzamiento y enlaces a Spotify, Apple Music, YouTube Music y Bandcamp.",
+      "description": "Todos los lanzamientos de Bleeding Debts 316 con portadas, fechas de lanzamiento y reproductores de SoundCloud y vídeos oficiales en YouTube.",
       "heading": "Música"
     },
     "videos": {
@@ -133,6 +133,7 @@
     "newsletterText": "Música nueva, anuncios de conciertos y nuevo merch. Pocos correos al año, nunca spam."
   },
   "music": {
+    "noSpotify": "🐒 ¿Nos buscas en Spotify? Mr. D.O.M. revolvió todas las cajas de plátanos del edificio. No estamos allí. No perdidos, solo alérgicos. Toca SoundCloud y YouTube.",
     "discography": "Discografía",
     "released": "Lanzamiento",
     "tracklist": "Canciones",
@@ -277,5 +278,15 @@
   "notFound": {
     "text": "La página que buscas no existe o se ha movido.",
     "home": "Volver al inicio"
+  },
+  "dom": {
+    "open": "Pregunta a Mr. D.O.M.",
+    "title": "Mr. D.O.M., el mono asistente de la banda",
+    "greeting": "¡Uh uh! Soy Mr. D.O.M. 🐒 Pregúntame lo que quieras sobre Bleeding Debts 316: canciones, vídeos, conciertos, merch o booking.",
+    "placeholder": "Escribe tu pregunta…",
+    "send": "Enviar",
+    "close": "Cerrar",
+    "note": "Mr. D.O.M. es un mono con ordenador: un asistente de IA que puede equivocarse. No compartas datos personales. Para booking, usa el formulario de contacto.",
+    "error": "Mi teléfono-plátano ha colgado. Inténtalo de nuevo o usa el formulario de contacto."
   }
 }

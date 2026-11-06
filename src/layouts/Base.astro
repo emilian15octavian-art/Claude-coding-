@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Fonts from '../components/Fonts.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import DomChat from '../components/DomChat.astro';
 import { locales, localeInfo, type Locale } from '../i18n/locales';
 import { path, type PageKey } from '../i18n/routes';
 import { t } from '../i18n/t';
@@ -122,6 +123,7 @@ const sv = settings.services;
       <slot />
     </main>
     <Footer lang={lang} alternates={alternates} />
+    <DomChat lang={lang} />
     {sv.cloudflareAnalyticsToken && (
       <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token":"${sv.cloudflareAnalyticsToken}"}`}></script>
     )}

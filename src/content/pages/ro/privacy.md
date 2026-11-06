@@ -24,6 +24,8 @@ Operatorul de date este entitatea juridică indicată în caseta de mai sus (den
 
 **Videoclipuri și playere audio.** Playerele YouTube, Spotify și Bandcamp se încarcă **doar după ce dai clic** pe ele. Până atunci nu se trimit date către aceste servicii. După clic, se aplică politicile lor de confidențialitate.
 
+**Asistentul de chat (Mr. D.O.M.).** Dacă scrii o întrebare în chat, întrebarea și conversația de până atunci sunt trimise către Cloudflare Workers AI pentru a genera răspunsul. Nu stocăm conversațiile și nu le folosim în alt scop. Te rugăm să nu scrii date personale. Temei legal: interesul nostru legitim de a răspunde întrebărilor vizitatorilor (art. 6 alin. (1) lit. f)).
+
 ## Cine primește datele
 
 Folosim următorii împuterniciți, fiecare obligat printr-un acord de prelucrare a datelor: Cloudflare (găzduire, statistici, protecție anti-spam), Web3Forms (transmiterea formularului de contact), Brevo (newsletter), Stripe (plăți) și firma de curierat pentru livrări. Nu vindem niciodată datele tale.

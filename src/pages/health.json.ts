@@ -11,7 +11,7 @@ export const GET: APIRoute = async () => {
     status: 'ok',
     builtAt: new Date().toISOString(),
     version: pkg.version,
-    commit: process.env.GITHUB_SHA ?? process.env.CF_PAGES_COMMIT_SHA ?? 'local',
+    commit: process.env.GITHUB_SHA ?? process.env.WORKERS_CI_COMMIT_SHA ?? process.env.CF_PAGES_COMMIT_SHA ?? 'local',
     languages: locales.length,
     pages: indexablePages.length * locales.length + 1,
     content: { releases: releases.length, upcomingShows: shows.upcoming.length, pastShows: shows.past.length, products: merch.length, videos: videos.length, photos: gallery.length },

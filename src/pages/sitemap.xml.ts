@@ -1,12 +1,16 @@
 import type { APIRoute } from 'astro';
 import { locales } from '../i18n/locales';
 import { indexablePages, path } from '../i18n/routes';
+import { execSync } from 'node:child_process';
 import { getReleases } from '../lib/data';
 
 /** sitemap.xml with hreflang alternates (all 8 languages + x-default) for every page. */
 export const GET: APIRoute = async ({ site }) => {
   const base = site!.toString().replace(/\/$/, '');
-  const today = new Date().toISOString().slice(0, 10);
+  // lastmod = the day the site's content or code last really changed (from git), not simply "today":
+  // search engines trust lastmod only when it moves with real changes. Falls back to today without git.
+  let today = new Date().toISOString().slice(0, 10);
+  try { today = execSync('git log -1 --format=%cs -- src', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim() || today; } catch {}
   const alt = (key: (typeof indexablePages)[number]) =>
     locales.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${base}${path(key, l)}"/>`).join('\n') +
     `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${base}${key === 'home' ? '/' : path(key, 'en')}"/>`;

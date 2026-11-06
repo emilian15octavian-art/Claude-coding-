@@ -24,6 +24,8 @@ Le responsable du traitement est l'entité juridique indiquée dans l'encadré c
 
 **Vidéos et lecteurs audio.** Les lecteurs YouTube, Spotify et Bandcamp ne se chargent **qu'après votre clic**. Avant cela, aucune donnée n'est envoyée à ces services. Après le clic, leurs propres politiques de confidentialité s'appliquent.
 
+**Assistant de chat (Mr. D.O.M.).** Si vous tapez une question dans le chat, la question et la conversation en cours sont envoyées à Cloudflare Workers AI pour générer la réponse. Nous ne conservons pas les conversations et ne les utilisons à aucune autre fin. Merci de ne pas saisir de données personnelles. Base légale : notre intérêt légitime à répondre aux questions des visiteurs (art. 6, par. 1, f)).
+
 ## Destinataires des données
 
 Nous faisons appel aux sous-traitants suivants, chacun lié par un accord de traitement des données : Cloudflare (hébergement, statistiques, protection anti-spam), Web3Forms (transmission du formulaire de contact), Brevo (newsletter), Stripe (paiements) et notre transporteur pour les livraisons. Nous ne vendons jamais vos données.

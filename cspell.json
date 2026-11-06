@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "import": [
+    "@cspell/dict-en-gb/cspell-ext.json",
+    "@cspell/dict-ro-ro/cspell-ext.json",
+    "@cspell/dict-fr-fr/cspell-ext.json",
+    "@cspell/dict-it-it/cspell-ext.json",
+    "@cspell/dict-es-es/cspell-ext.json",
+    "@cspell/dict-ru_ru/cspell-ext.json",
+    "@cspell/dict-el/cspell-ext.json",
+    "@cspell/dict-ar/cspell-ext.json"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "band-words",
+      "path": "./src/content/i18n/spelling-allowed.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": [
+    "band-words"
+  ],
+  "minWordLength": 3,
+  "ignoreRegExpList": [
+    "Urls",
+    "Email",
+    "/#[\\p{L}\\d_]+/gu",
+    "/(?<![\\p{L}\\d])[\\p{Lu}\\d][\\p{Lu}\\d.'-]+(?![\\p{L}\\d])/gu"
+  ],
+  "languageSettings": [
+    {
+      "languageId": "*",
+      "locale": "ar,ru,el",
+      "ignoreRegExpList": [
+        "/[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ0-9'’-]*/gu"
+      ]
+    }
+  ]
+}

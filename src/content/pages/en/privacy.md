@@ -24,6 +24,8 @@ The data controller is the legal entity shown in the box above (name, registrati
 
 **Videos and music players.** YouTube, Spotify and Bandcamp players load **only after you click** on them. Until then no data is sent to those services. After you click, their own privacy policies apply.
 
+**Chat assistant (Mr. D.O.M.).** If you type a question into the chat, the question and the conversation so far are sent to Cloudflare Workers AI to create the answer. We do not store conversations and do not use them for anything else. Please do not type personal data. Legal basis: our legitimate interest in answering visitors' questions (Art. 6(1)(f)).
+
 ## Who receives data
 
 We use these processors, each bound by a data processing agreement: Cloudflare (hosting, statistics, spam protection), Web3Forms (contact form delivery), Brevo (newsletter), Stripe (payments) and our courier for deliveries. We never sell your data.

@@ -24,6 +24,8 @@ Il titolare del trattamento è il soggetto giuridico indicato nel riquadro qui s
 
 **Video e lettori musicali.** I lettori YouTube, Spotify e Bandcamp si caricano **solo dopo il tuo clic**. Prima di allora nessun dato viene inviato a questi servizi. Dopo il clic si applicano le loro informative.
 
+**Assistente in chat (Mr. D.O.M.).** Se scrivi una domanda nella chat, la domanda e la conversazione fino a quel momento vengono inviate a Cloudflare Workers AI per generare la risposta. Non conserviamo le conversazioni e non le usiamo per altri scopi. Non inserire dati personali. Base giuridica: il nostro legittimo interesse a rispondere alle domande dei visitatori (art. 6, par. 1, lett. f)).
+
 ## Destinatari dei dati
 
 Ci avvaliamo dei seguenti responsabili del trattamento, vincolati da un accordo sul trattamento dei dati: Cloudflare (hosting, statistiche, protezione antispam), Web3Forms (inoltro del modulo di contatto), Brevo (newsletter), Stripe (pagamenti) e il corriere per le consegne. Non vendiamo mai i tuoi dati.
