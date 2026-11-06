@@ -11,6 +11,11 @@ on:
   schedule:
     - cron: '17 3 * * *'
   workflow_dispatch:
+    inputs:
+      patrol_only:
+        description: 'Only check the live site (no daily refresh push)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -45,6 +50,7 @@ jobs:
             gh issue close "$open" --comment "🐒 Mr. D.O.M.: all good again ($(date -u '+%F'))."
           fi
       - name: Save today's date and push (Cloudflare rebuilds the site)
+        if: ${{ !inputs.patrol_only }}
         run: |
           curl -fsS "$SITE_URL/page-hashes.json" -o previous-hashes.json || echo '{}' > previous-hashes.json
           printf '{ "refreshed": "%s", "by": "Mr. D.O.M." }\n' "$(date -u +%F)" > public/heartbeat.json
@@ -53,6 +59,7 @@ jobs:
           git add public/heartbeat.json
           git diff --cached --quiet || { git commit -m "Daily refresh $(date -u +%F)" && git push; }
       - name: Wait for the new version, then tell search engines what changed (IndexNow)
+        if: ${{ !inputs.patrol_only }}
         continue-on-error: true
         run: |
           sha=$(git rev-parse HEAD)

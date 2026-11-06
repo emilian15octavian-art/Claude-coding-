@@ -27,9 +27,11 @@ const check = async () => {
 };
 await Promise.all(Array.from({ length: 6 }, check));
 const chat = await get(`${SITE}/api/dom`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lang: 'en', messages: [{ role: 'user', content: 'hi' }] }) });
-let reply = '';
-try { reply = (await chat.json()).reply || ''; } catch {}
+let reply = '', chatData = {};
+try { chatData = await chat.json(); reply = chatData.reply || ''; } catch {}
+console.log('Mr. D.O.M. test:', JSON.stringify(chatData));
 if (chat.status !== 200 || !reply) problems.push(`Mr. D.O.M. chat (/api/dom) did not answer (status ${chat.status})`);
+else if (chatData.source !== 'ai') problems.push(`Mr. D.O.M. answered from his backup FAQ, not the AI (${chatData.aiError || 'no reason given'}). If it says "limit" or "quota", the free daily allowance is used up and it fixes itself after midnight UTC.`);
 const total = urls.length + extra.length + 1;
 fs.mkdirSync('reports', { recursive: true });
 fs.writeFileSync('reports/live-crawl.md', problems.length

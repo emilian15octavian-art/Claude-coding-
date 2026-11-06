@@ -6,12 +6,31 @@ const VERIFY = {
   '/google853763245a87759b.html': 'google-site-verification: google853763245a87759b.html',
 };
 
-const MODEL = '@cf/meta/llama-3.1-8b-instruct';
+// Tried in order: if Cloudflare retires or limits one model, the next one answers.
+const MODELS = ['@cf/meta/llama-3.1-8b-instruct-fast', '@cf/meta/llama-3.1-8b-instruct', '@cf/meta/llama-3.2-3b-instruct', '@cf/mistral/mistral-7b-instruct-v0.1'];
 const LANGS = { en: 'English', fr: 'French', ro: 'Romanian', it: 'Italian', es: 'Spanish', ar: 'Arabic', ru: 'Russian', el: 'Greek' };
 
 const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' },
 });
+
+const pickOne = (list) => list[Math.floor(Math.random() * list.length)];
+const JOKES = [
+  '🐒 Why did the metalhead monkey get kicked out of the zoo? Too much head-banana-ing.',
+  '🐒 I tried a stage dive once. Landed in a fruit bowl. Best show of my life.',
+  '🐒 My favourite genre? Groove metal. Groove because I dance, metal because the banana cage is steel.',
+  '🐒 RUSH asked me to tune the guitar. I peeled it instead. We do not talk about it.',
+];
+const HELLOS = [
+  '🐒 Ooh ooh, hello! Mr. D.O.M. here. Want songs, videos, shows or booking info?',
+  '🐒 Hey hey! The monkey is in. Ask me anything about Bleeding Debts 316.',
+  '🐒 Salut! Banana break is over, I am all yours. What do you want to know?',
+];
+const DEFAULTS = [
+  '🐒 Hmm, that one is above my branch. Try asking about the songs, the videos, shows, merch or booking.',
+  '🐒 My banana brain did not catch that. I know about the music, the videos, shows and how to contact the band.',
+  '🐒 Good question, wrong monkey! For anything special, use the contact form or write to bleedingdebts316@gmail.com.',
+];
 
 /** Answers without AI (used when Workers AI is unavailable or the daily free allowance is used up). */
 export const fallback = (text, lang) => {
@@ -24,11 +43,14 @@ export const fallback = (text, lang) => {
     [/show|concert|gig|tour|ticket|bilet|billet|концерт|συναυλ|حفل/, '🎟️ No shows announced yet. Join the newsletter and you will be the first to know.'],
     [/merch|shop|buy|t-shirt|tricou|magazin|boutique|tienda|negozio|мерч|магазин|κατάστημα|متجر/, '👕 The merch shop opens soon. Bananas not included. Sign up for the newsletter to be first in line.'],
     [/book|contact|email|mail|booking|rezerv|контакт|επικοινων|حجز|اتصال/, '📩 Booking and messages: use the contact form on the site, or write to bleedingdebts316@gmail.com'],
+    [/joke|funny|glum|banc|blague|barzelletta|chiste|шутк|ανέκδοτ|نكتة/, () => pickOne(JOKES)],
+    [/d\.?o\.?m|monkey|maimu|singe|scimmia|mono|обезьян|μαϊμού|قرد|who are you|cine e[sș]ti/, '🐒 I am Mr. D.O.M., the band\'s monkey assistant. I know the songs, the videos, the shows and how to book the band. Ask away!'],
+    [/^(hi|hey|hello|salut|buna|bună|ciao|hola|bonjour|привет|γεια|مرحبا)\b/, () => pickOne(HELLOS)],
     [/member|who|band|trup|groupe|gruppo|grupo|группа|συγκρότημα|فرقة/, '🤘 Bleeding Debts 316 is original metal from Romania, formed in 2026: Rush The Flow (RUSH) on production, mixing and composing, and Mr. D.I.P. (D\'8ONE) on vocals, lyrics and performance.'],
     [/newsletter|subscribe|abon|inscri|iscri|suscri|подпис|εγγραφ|اشترك/, '📰 The newsletter sign-up is on the home page and the Newsletter page. A few e-mails a year, never spam.'],
   ];
-  for (const [rx, answer] of topics) if (rx.test(q)) return answer;
-  return '🐒 Ooh ooh! I am Mr. D.O.M., the band\'s monkey assistant. Ask me about the songs, the videos, shows, merch, booking or the newsletter.';
+  for (const [rx, answer] of topics) if (rx.test(q)) return typeof answer === 'function' ? answer() : answer;
+  return pickOne(DEFAULTS);
 };
 
 const domChat = async (request, env) => {
@@ -44,7 +66,7 @@ const domChat = async (request, env) => {
   const last = history.filter((m) => m.role === 'user').pop();
   if (!last) return json({ error: 'No question' }, 400);
 
-  if (!env.AI) return json({ reply: fallback(last.content, lang), source: 'faq' });
+  if (!env.AI) return json({ reply: fallback(last.content, lang), source: 'faq', aiError: 'no AI binding' });
   let facts = '';
   try {
     const r = await env.ASSETS.fetch(new Request(new URL('/llms.txt', request.url)));
@@ -61,13 +83,20 @@ const domChat = async (request, env) => {
     'Song titles and the band name are never translated.',
     'FACTS:', facts,
   ].join('\n');
-  try {
-    const out = await env.AI.run(MODEL, { messages: [{ role: 'system', content: system }, ...history], max_tokens: 220, temperature: 0.7 });
-    const reply = (out?.response || '').trim();
-    return json({ reply: reply || fallback(last.content, lang), source: reply ? 'ai' : 'faq' });
-  } catch {
-    return json({ reply: fallback(last.content, lang), source: 'faq' });
+  const errors = [];
+  for (const model of MODELS) {
+    try {
+      const out = await env.AI.run(model, { messages: [{ role: 'system', content: system }, ...history], max_tokens: 220, temperature: 0.7 });
+      const raw = typeof out === 'string' ? out : out?.response ?? out?.result?.response ?? out?.choices?.[0]?.message?.content ?? '';
+      const reply = String(typeof raw === 'string' ? raw : JSON.stringify(raw)).trim();
+      if (reply) return json({ reply, source: 'ai', model });
+      errors.push(`${model}: empty answer`);
+    } catch (e) {
+      errors.push(`${model}: ${String(e?.message || e).slice(0, 160)}`);
+    }
   }
+  console.log('Mr. D.O.M. AI failed', errors);
+  return json({ reply: fallback(last.content, lang), source: 'faq', aiError: errors.join(' | ') });
 };
 
 export default {
