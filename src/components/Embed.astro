@@ -23,8 +23,8 @@ const { lang, service, src, title, label, thumbnail, thumbnailAlt = '' } = Astro
 <div class="embed ltr" data-embed data-kind={service.toLowerCase()} data-src={src} data-title={title}>
   {thumbnail && (
     typeof thumbnail === 'string'
-      ? <Image src={thumbnail} alt={thumbnailAlt} width={640} height={360} loading="lazy" class="thumb" inferSize={false} />
-      : <Image src={thumbnail} alt={thumbnailAlt} widths={[480, 800, 1200]} sizes="(min-width: 72rem) 36rem, 100vw" loading="lazy" class="thumb" />
+      ? <Image src={thumbnail} alt={thumbnailAlt} width={640} height={360} loading="lazy" fetchpriority="low" class="thumb" inferSize={false} />
+      : <Image src={thumbnail} alt={thumbnailAlt} widths={[480, 800, 1200]} sizes="(min-width: 72rem) 36rem, 100vw" loading="lazy" fetchpriority="low" class="thumb" />
   )}
   <button type="button" class="play" data-embed-play>
     <span class="play-icon"><Icon name="play" size={28} /></span>

@@ -1,5 +1,6 @@
 ---
 import { Picture, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Base from '../layouts/Base.astro';
 import ReleaseCard from '../components/ReleaseCard.astro';
 import ShowCard from '../components/ShowCard.astro';
@@ -18,6 +19,14 @@ import Embed from '../components/Embed.astro';
 interface Props { lang: Locale; isRoot?: boolean }
 const { lang, isRoot = false } = Astro.props;
 const [band, releases, shows, videos, gallery] = await Promise.all([getBand(), getReleases(), getShows(), getVideos(), getGallery()]);
+// Slider images are only fetched when the visitor scrolls near them (Carousel script), so the top photo loads first.
+const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
+const slideImg = async (src: ImageMetadata, ratio: number) => {
+  const img = await getImage({ src, widths: [280, 420, 560], format: 'webp', width: 560, height: Math.round(560 * ratio) });
+  return { src: img.src, srcset: img.srcSet.attribute, width: 560, height: Math.round(560 * ratio) };
+};
+const coverImgs = await Promise.all(releases.map((r) => slideImg(r.data.cover, 1)));
+const photoImgs = await Promise.all(gallery.slice(0, 6).map((g) => slideImg(g.data.image, 1.25)));
 const socials = socialOrder.filter((k) => band.profiles[k]).map((k) => ({ key: k, href: band.profiles[k]!, name: socialNames[k] }));
 // News: newest releases, videos and upcoming shows in one sliding row
 const news = [
@@ -78,10 +87,10 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
         <a class="btn btn-small" href={path('music', lang)}>{t(lang, 'home.seeAll')} <Icon name="arrow" size={18} /></a>
       </div>
       <Carousel lang={lang} label={t(lang, 'home.songs')}>
-        {releases.map((r) => (
+        {releases.map((r, i) => (
           <li class="slide">
             <a class="card-link" href={`${path('music', lang)}${r.id}/`}>
-              <Picture src={r.data.cover} alt="" formats={['avif', 'webp']} widths={[280, 420, 560]} sizes="17rem" loading="lazy" class="slide-img" />
+              <img src={PIXEL} data-src={coverImgs[i].src} data-srcset={coverImgs[i].srcset} sizes="17rem" width={coverImgs[i].width} height={coverImgs[i].height} alt="" decoding="async" class="slide-img" />
               <span class="slide-title" translate="no">{r.data.title}</span>
             </a>
           </li>
@@ -97,10 +106,10 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
         <a class="btn btn-small" href={path('gallery', lang)}>{t(lang, 'home.seeAll')} <Icon name="arrow" size={18} /></a>
       </div>
       <Carousel lang={lang} label={t(lang, 'pages.gallery.heading')} interval={4000}>
-        {gallery.map((g) => (
+        {gallery.slice(0, 6).map((g, i) => (
           <li class="slide">
             <a class="card-link" href={path('gallery', lang)}>
-              <Picture src={g.data.image} alt={pick(lang, g.data.alt)} formats={['avif', 'webp']} widths={[280, 420, 560]} sizes="17rem" loading="lazy" class="slide-img photo" />
+              <img src={PIXEL} data-src={photoImgs[i].src} data-srcset={photoImgs[i].srcset} sizes="17rem" width={photoImgs[i].width} height={photoImgs[i].height} alt={pick(lang, g.data.alt)} decoding="async" class="slide-img photo" />
             </a>
           </li>
         ))}
@@ -169,7 +178,7 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
   .hero .btn:not(.btn-primary):hover { background: rgb(255 255 255 / 0.12); }
   .slide { display: grid; gap: 0.5rem; }
   .card-link { display: grid; gap: 0.5rem; color: inherit; text-decoration: none; &:hover .slide-title { text-decoration: underline; } }
-  .slide-img, .slide-img :global(img) { inline-size: 100%; block-size: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
+  .slide-img, .slide-img :global(img) { background: var(--surface-2); inline-size: 100%; block-size: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
   .slide-img.photo, .slide-img.photo :global(img) { aspect-ratio: 4 / 5; }
   .slide-title { font-weight: 800; }
   .news-card { display: grid; gap: 0.5rem; align-content: start; min-block-size: 9rem; padding: var(--space-m); border: 1px solid var(--border); border-radius: calc(var(--radius) * 2); background: var(--surface); color: inherit; text-decoration: none; &:hover { border-color: var(--primary); } }

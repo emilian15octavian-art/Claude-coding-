@@ -89,6 +89,17 @@ const { lang, label, interval = 5000, variant = 'square' } = Astro.props;
     // Playing a video inside the row stops the slideshow for good.
     track.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('[data-embed-play]')) setStopped(true); });
     new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0.5 }).observe(root);
+    // Load the row's images only when it comes near the screen.
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      root.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((img) => {
+        if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+        img.src = img.dataset.src!;
+        img.removeAttribute('data-src');
+      });
+      io.disconnect();
+    }, { rootMargin: '300px 0px' });
+    io.observe(root);
     setStopped(stopped);
   });
 </script>
