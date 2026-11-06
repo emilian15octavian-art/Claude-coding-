@@ -8,7 +8,7 @@ for i, p in enumerate(src, 1):
     h, w = img.shape[:2]
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     # yellow-green subtitle text + its glow, only in the bottom band
-    band = np.zeros((h, w), np.uint8); band[int(h*0.86):int(h*0.96), :] = 255
+    band = np.zeros((h, w), np.uint8); band[int(h*0.84):h, :] = 255
     text = cv2.inRange(hsv, (18, 35, 45), (48, 255, 255))
     text = cv2.bitwise_and(text, band)
     found = int(text.sum() / 255)

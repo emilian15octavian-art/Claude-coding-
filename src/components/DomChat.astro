@@ -7,17 +7,18 @@
 import { type Locale } from '../i18n/locales';
 import { path } from '../i18n/routes';
 import { t } from '../i18n/t';
+import DomFace from './DomFace.astro';
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 ---
 <div class="dom" data-dom data-lang={lang} data-error={t(lang, 'dom.error')} data-ask={t(lang, 'dom.askBand')} data-contact={path('contact', lang)}>
   <button type="button" class="dom-open" popovertarget="dom-panel" aria-controls="dom-panel">
-    <span aria-hidden="true" class="dom-face">🐒</span>
+    <span class="dom-face"><DomFace size={38} /></span>
     <span class="dom-label">{t(lang, 'dom.open')}</span>
   </button>
   <div id="dom-panel" popover class="dom-panel" role="dialog" aria-labelledby="dom-title">
     <div class="dom-head">
-      <p id="dom-title" class="dom-title"><span aria-hidden="true">🐒</span> {t(lang, 'dom.title')}</p>
+      <p id="dom-title" class="dom-title"><span class="dom-title-face"><DomFace size={32} /></span> {t(lang, 'dom.title')}</p>
       <button type="button" class="dom-x" popovertarget="dom-panel" popovertargetaction="hide">
         <span aria-hidden="true">✕</span><span class="visually-hidden">{t(lang, 'dom.close')}</span>
       </button>
@@ -45,7 +46,9 @@ const { lang } = Astro.props;
     font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px rgb(0 0 0 / 0.35);
     &:hover { background: var(--surface-2); }
   }
-  .dom-face { font-size: 1.6rem; line-height: 1; }
+  .dom-face { display: grid; place-items: center; }
+  .dom-title { display: flex; align-items: center; gap: 0.5rem; }
+  .dom-title-face { flex: none; }
   @media (max-width: 30rem) { .dom-label { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } .dom-open { padding: 0.4rem; inline-size: 52px; justify-content: center; } }
   .dom-panel {
     inset: auto 1rem 1rem auto; margin: 0; inline-size: min(24rem, calc(100vw - 2rem)); max-block-size: min(36rem, calc(100dvh - 2rem));
@@ -118,11 +121,13 @@ const { lang } = Astro.props;
     add(q, 'me');
     history.push({ role: 'user', content: q });
     save();
-    const typing = add('🐒 …', 'bot', 'typing');
+    const typing = add('…', 'bot', 'typing');
+    root!.classList.add('dom-talking');
     try {
       const res = await fetch('/api/dom', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lang: root!.dataset.lang, messages: history.slice(-8) }) });
       const data = await res.json();
       typing.remove();
+      root!.classList.remove('dom-talking');
       const reply = String(data.reply || root!.dataset.error);
       add(reply, 'bot');
       history.push({ role: 'assistant', content: reply });
@@ -130,6 +135,7 @@ const { lang } = Astro.props;
       if (data.unknown) askBand(q);
     } catch {
       typing.remove();
+      root!.classList.remove('dom-talking');
       add(root!.dataset.error!, 'bot');
     }
   };
