@@ -5,7 +5,7 @@ import { htmlFiles, requireDist, result } from './lib.mjs';
 
 const r = result('external-links', 'External links: streaming, social, tickets, shop');
 requireDist(r);
-const site = (process.env.SITE_URL || 'https://claude-coding.emilian15octavian.workers.dev').replace(/\/$/, '');
+const site = (process.env.SITE_URL || 'https://claude-coding.bleedingdebts316.workers.dev').replace(/\/$/, '');
 const urls = new Map();
 for (const f of htmlFiles()) {
   const html = fs.readFileSync(f, 'utf8');

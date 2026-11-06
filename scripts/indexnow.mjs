@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const [, , prevFile = '-', dist = 'dist'] = process.argv;
-const site = (process.env.SITE_URL || 'https://claude-coding.emilian15octavian.workers.dev').replace(/\/$/, '');
+const site = (process.env.SITE_URL || 'https://claude-coding.bleedingdebts316.workers.dev').replace(/\/$/, '');
 const key = fs.readdirSync('public').find((f) => /^[0-9a-f]{32}\.txt$/.test(f))?.replace('.txt', '');
 if (!key) { console.log('No IndexNow key file in public/. Skipping.'); process.exit(0); }
 const next = JSON.parse(fs.readFileSync(path.join(dist, 'page-hashes.json'), 'utf8'));
