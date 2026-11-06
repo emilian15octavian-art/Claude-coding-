@@ -125,6 +125,10 @@ const sv = settings.services;
     </main>
     <Footer lang={lang} alternates={alternates} />
     <DomChat lang={lang} />
+    <script>
+      // Offline support (public/sw.js): pages you opened keep working without internet.
+      if ('serviceWorker' in navigator && location.protocol === 'https:') addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+    </script>
     {sv.cloudflareAnalyticsToken && (
       <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token":"${sv.cloudflareAnalyticsToken}"}`}></script>
     )}

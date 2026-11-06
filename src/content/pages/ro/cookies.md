@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-05
+updated: 2026-11-06
 status: needs legal review
 ---
 ## Pe scurt
@@ -12,8 +12,10 @@ Acest site **nu** folosește cookie-uri de publicitate sau de urmărire, de acee
 |---|---|---|---|
 | `theme` | Browserul tău (local storage) | Ține minte dacă ai ales modul luminos sau întunecat | Până îl ștergi |
 | `langNoticeDismissed` | Browserul tău (local storage) | Ține minte că ai închis sugestia de limbă | Până îl ștergi |
+| `domChat` | Browserul tău (session storage) | Păstrează conversația cu Mr. D.O.M. cât timp treci de la o pagină la alta | Până închizi fila |
+| `bd316-…` | Browserul tău (cache storage) | Copii ale paginilor deja deschise, ca să se încarce și fără internet | Până la următoarea actualizare a site-ului sau până le ștergi |
 
-Aceste două înregistrări sunt create doar când folosești funcțiile respective, nu părăsesc niciodată dispozitivul și nu sunt cookie-uri. Sunt strict necesare pentru a oferi o funcție pe care ai solicitat-o.
+Aceste înregistrări sunt create doar când folosești funcțiile respective, nu părăsesc niciodată dispozitivul și nu sunt cookie-uri. Sunt strict necesare pentru a oferi o funcție pe care ai solicitat-o. Nimic din ele nu ne este trimis nouă sau altcuiva.
 
 ## Servicii terțe
 
