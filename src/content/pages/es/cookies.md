@@ -17,7 +17,7 @@ Estas dos entradas solo se crean si usas esas funciones, nunca salen de tu dispo
 
 ## Servicios de terceros
 
-- **Vídeos y reproductores de música** (YouTube, Spotify, Bandcamp) se cargan solo cuando pulsas reproducir. Esos servicios pueden entonces instalar sus propias cookies, según sus políticas.
+- **Vídeos y reproductores de música** (YouTube, SoundCloud) se cargan solo cuando pulsas reproducir. Esos servicios pueden entonces instalar sus propias cookies, según sus políticas.
 - **Pago**: al pulsar Comprar vas a la página de pago segura de Stripe, que usa sus propias cookies para prevenir el fraude.
 - **Formulario de contacto**: Cloudflare Turnstile comprueba que eres una persona. Está diseñado para funcionar sin cookies de seguimiento.
 

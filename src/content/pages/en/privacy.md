@@ -22,7 +22,7 @@ The data controller is the legal entity shown in the box above (name, registrati
 
 **Shop orders.** Payments are processed by Stripe. Stripe collects your card details directly; we never see them. To deliver your order we receive your name, delivery address, e-mail address and order details. Legal basis: performance of the contract (Art. 6(1)(b)) and our legal obligations (Art. 6(1)(c)), for example keeping accounting records for the period required by Romanian law (Law no. 82/1991).
 
-**Videos and music players.** YouTube, Spotify and Bandcamp players load **only after you click** on them. Until then no data is sent to those services. After you click, their own privacy policies apply.
+**Videos and music players.** YouTube and SoundCloud players load **only after you click** on them. Until then no data is sent to those services. After you click, their own privacy policies apply.
 
 **Chat assistant (Mr. D.O.M.).** If you type a question into the chat, the question and the conversation so far are sent to Cloudflare Workers AI to create the answer. We do not store conversations and do not use them for anything else. Please do not type personal data. Legal basis: our legitimate interest in answering visitors' questions (Art. 6(1)(f)).
 

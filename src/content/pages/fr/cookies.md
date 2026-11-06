@@ -17,7 +17,7 @@ Ces deux entrées ne sont créées que si vous utilisez ces fonctions, ne quitte
 
 ## Services tiers
 
-- **Vidéos et lecteurs audio** (YouTube, Spotify, Bandcamp) ne se chargent que lorsque vous appuyez sur lecture. Ces services peuvent alors déposer leurs propres cookies, selon leurs propres politiques.
+- **Vidéos et lecteurs audio** (YouTube, SoundCloud) ne se chargent que lorsque vous appuyez sur lecture. Ces services peuvent alors déposer leurs propres cookies, selon leurs propres politiques.
 - **Paiement** : lorsque vous cliquez sur Acheter, vous arrivez sur la page de paiement sécurisée de Stripe, qui utilise ses propres cookies pour prévenir la fraude.
 - **Formulaire de contact** : Cloudflare Turnstile vérifie que vous êtes humain. Il est conçu pour fonctionner sans cookies de suivi.
 

@@ -17,7 +17,7 @@ Aceste două înregistrări sunt create doar când folosești funcțiile respect
 
 ## Servicii terțe
 
-- **Videoclipuri și playere audio** (YouTube, Spotify, Bandcamp) se încarcă doar când apeși pe redare. Aceste servicii pot seta apoi propriile cookie-uri, conform politicilor lor.
+- **Videoclipuri și playere audio** (YouTube, SoundCloud) se încarcă doar când apeși pe redare. Aceste servicii pot seta apoi propriile cookie-uri, conform politicilor lor.
 - **Plata**: când apeși Cumpără, ajungi pe pagina securizată de plată Stripe, care folosește propriile cookie-uri pentru prevenirea fraudei.
 - **Formularul de contact**: Cloudflare Turnstile verifică dacă ești om. Este conceput să funcționeze fără cookie-uri de urmărire.
 

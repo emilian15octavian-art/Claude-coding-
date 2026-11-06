@@ -105,6 +105,8 @@
     }
   },
   "ui": {
+    "share": "Share",
+    "linkCopied": "Link copied",
     "skipToContent": "Skip to content",
     "menu": "Menu",
     "closeMenu": "Close menu",
@@ -214,6 +216,7 @@
     "noPhotos": "Photos are coming soon."
   },
   "press": {
+    "qrCode": "Website QR code (for posters and merch)",
     "intro": "Everything journalists, promoters and festivals need. All files are free to use for coverage of Bleeding Debts 316; please credit the photographer.",
     "shortBio": "Short bio",
     "longBio": "Long bio",

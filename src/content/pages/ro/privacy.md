@@ -22,7 +22,7 @@ Operatorul de date este entitatea juridică indicată în caseta de mai sus (den
 
 **Comenzi din magazin.** Plățile sunt procesate de Stripe. Stripe colectează direct datele cardului; noi nu le vedem niciodată. Pentru a livra comanda primim numele, adresa de livrare, adresa de e-mail și detaliile comenzii. Temei legal: executarea contractului (art. 6 alin. (1) lit. b)) și obligațiile noastre legale (art. 6 alin. (1) lit. c)), de exemplu păstrarea documentelor contabile pe durata prevăzută de Legea contabilității nr. 82/1991.
 
-**Videoclipuri și playere audio.** Playerele YouTube, Spotify și Bandcamp se încarcă **doar după ce dai clic** pe ele. Până atunci nu se trimit date către aceste servicii. După clic, se aplică politicile lor de confidențialitate.
+**Videoclipuri și playere audio.** Playerele YouTube și SoundCloud se încarcă **doar după ce dai clic** pe ele. Până atunci nu se trimit date către aceste servicii. După clic, se aplică politicile lor de confidențialitate.
 
 **Asistentul de chat (Mr. D.O.M.).** Dacă scrii o întrebare în chat, întrebarea și conversația de până atunci sunt trimise către Cloudflare Workers AI pentru a genera răspunsul. Nu stocăm conversațiile și nu le folosim în alt scop. Te rugăm să nu scrii date personale. Temei legal: interesul nostru legitim de a răspunde întrebărilor vizitatorilor (art. 6 alin. (1) lit. f)).
 

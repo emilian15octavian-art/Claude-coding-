@@ -17,7 +17,7 @@ Queste due voci vengono create solo se usi quelle funzioni, non lasciano mai il 
 
 ## Servizi di terze parti
 
-- **Video e lettori musicali** (YouTube, Spotify, Bandcamp) si caricano solo quando premi play. Questi servizi possono poi impostare i propri cookie, secondo le proprie policy.
+- **Video e lettori musicali** (YouTube, SoundCloud) si caricano solo quando premi play. Questi servizi possono poi impostare i propri cookie, secondo le proprie policy.
 - **Pagamento**: quando premi Acquista vai alla pagina di pagamento sicura di Stripe, che usa i propri cookie per prevenire le frodi.
 - **Modulo di contatto**: Cloudflare Turnstile verifica che tu sia una persona. È progettato per funzionare senza cookie di tracciamento.
 
