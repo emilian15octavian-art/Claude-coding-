@@ -27,8 +27,8 @@ export const GET: APIRoute = async ({ params, site }) => {
     `- Booking and press e-mail: ${band.bookingEmail}`,
     `- The site is in ${locales.map((l) => localeInfo[l].nativeName).join(', ')}.`,
     '',
-    '## Pages of this site in this language (link to them with these exact paths)',
-    ...indexablePages.map((k) => `- ${t(lang, `pages.${k}.nav`)}: ${path(k, lang)} (${t(lang, `pages.${k}.description`)})`),
+    '## Pages of this site in this language (give visitors these exact paths)',
+    ...indexablePages.map((k) => `- ${t(lang, `pages.${k}.nav`)}: ${path(k, lang)}${k === 'shop' ? ' (NOT OPEN YET: no products, no prices; it opens soon)' : ` (${t(lang, `pages.${k}.description`)})`}`),
     '',
     '## Songs (titles are never translated)',
     ...releases.map((r) => `- ${r.data.title} (${r.data.type}, released ${r.data.date}): ${r.data.hook ? pick(lang, r.data.hook) : ''} Page: ${path('music', lang)}${r.id}/${r.data.links.soundcloud ? ` SoundCloud: ${r.data.links.soundcloud}` : ''}${r.data.youtubeId ? ` Video: https://youtu.be/${r.data.youtubeId}` : ''}`),
@@ -39,17 +39,17 @@ export const GET: APIRoute = async ({ params, site }) => {
     '## Shows',
     ...(shows.upcoming.length
       ? shows.upcoming.map((s) => `- ${s.data.start.replace('T', ' ')}: ${s.data.venue.name}, ${s.data.venue.city}${s.data.ticketUrl ? `, tickets: ${s.data.ticketUrl}` : s.data.free ? ', free entry' : ''}`)
-      : ['- No upcoming shows announced yet. Point to the newsletter.']),
+      : ['- No upcoming shows announced yet; fans hear first through the newsletter.']),
     '',
     '## Shop',
-    '- The merch shop is not open yet (opens soon). Point to the newsletter.',
+    '- The merch shop is NOT open yet: there are no products and no prices. It opens soon; newsletter subscribers hear first.',
     '',
     '## Official profiles',
     ...profiles.map(([k, v]) => `- ${k}: ${v}`),
     '- NOT on Spotify, on purpose.',
     '',
     '## FAQ (official answers, use them)',
-    (faq.entry.body ?? '').replace(/\]\((\/[^)]*)\)/g, '] $1').trim(),
+    (faq.entry.body ?? '').replace(/\[([^\]]+)\]\((\/[^)]*)\)/g, '$1 ($2)').trim(),
   ];
   return new Response(lines.join('\n').replace(/\n{3,}/g, '\n\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };
