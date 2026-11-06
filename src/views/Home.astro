@@ -13,6 +13,8 @@ import { path } from '../i18n/routes';
 import { pick, t } from '../i18n/t';
 import { getBand, getGallery, getReleases, getShows, getVideos, socialNames, socialOrder } from '../lib/data';
 import Carousel from '../components/Carousel.astro';
+import FanWall from '../components/FanWall.astro';
+import SupportBox from '../components/SupportBox.astro';
 import { formatDate } from '../lib/format';
 import Embed from '../components/Embed.astro';
 
@@ -154,6 +156,10 @@ const logo = logoSvg.replace('<svg ', '<svg aria-hidden="true" focusable="false"
       </Carousel>
     </section>
   )}
+
+  <FanWall lang={lang} />
+
+  <SupportBox lang={lang} wrap />
 
   <section class="section container" aria-labelledby="nl-title">
     <div class="nl-box">

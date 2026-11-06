@@ -8,8 +8,17 @@ for i, p in enumerate(src, 1):
     h, w = img.shape[:2]
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     # yellow-green subtitle text + its glow, only in the bottom band
-    band = np.zeros((h, w), np.uint8); band[int(h*0.84):h, :] = 255
-    text = cv2.inRange(hsv, (18, 35, 45), (48, 255, 255))
+    # Subtitle area: bottom of the frame by default. For frames where gold light sits near the text,
+    # narrow it with SUB_BOX="y0,y1,x0,x1" (fractions) and only bright saturated yellow is treated as text.
+    box = os.environ.get('SUB_BOX')
+    band = np.zeros((h, w), np.uint8)
+    if box:
+        y0, y1, x0, x1 = (float(v) for v in box.split(','))
+        band[int(h*y0):int(h*y1), int(w*x0):int(w*x1)] = 255
+        text = cv2.inRange(hsv, (18, 110, 140), (42, 255, 255))
+    else:
+        band[int(h*0.84):h, :] = 255
+        text = cv2.inRange(hsv, (18, 35, 45), (48, 255, 255))
     text = cv2.bitwise_and(text, band)
     found = int(text.sum() / 255)
     if found > 50:

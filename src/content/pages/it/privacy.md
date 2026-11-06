@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-05
+updated: 2026-11-06
 status: needs native review
 ---
 Questa informativa spiega quali dati personali vengono trattati quando usi questo sito, perché, e quali sono i tuoi diritti ai sensi del Regolamento generale sulla protezione dei dati (GDPR, Regolamento (UE) 2016/679).
@@ -23,6 +23,9 @@ Il titolare del trattamento è il soggetto giuridico indicato nel riquadro qui s
 **Ordini nel negozio.** I pagamenti sono gestiti da Stripe, che raccoglie direttamente i dati della carta; noi non li vediamo mai. Per consegnare l'ordine riceviamo nome, indirizzo di consegna, email e dettagli dell'ordine. Base giuridica: esecuzione del contratto (art. 6, par. 1, lett. b)) e obblighi di legge (art. 6, par. 1, lett. c)), ad esempio la conservazione delle scritture contabili per il periodo previsto dalla legge rumena (Legge n. 82/1991).
 
 **Video e lettori musicali.** I lettori YouTube e SoundCloud si caricano **solo dopo il tuo clic**. Prima di allora nessun dato viene inviato a questi servizi. Dopo il clic si applicano le loro informative.
+
+
+**Bacheca dei fan.** Se commenti un post nella home page, il nome scelto e il commento vengono pubblicati lì e conservati presso Cloudflare (Workers KV) finché non li eliminiamo. Prima della pubblicazione, il commento viene controllato automaticamente per insulti, odio e spam (filtro di parole e Cloudflare Workers AI). Il tuo indirizzo IP non viene conservato; un indicatore anonimo di breve durata (eliminato entro un giorno) impedisce i messaggi ripetuti. Per far rimuovere un commento, usa il modulo di contatto. Base giuridica: il tuo consenso quando pubblichi (art. 6, par. 1, lett. a)) e il nostro legittimo interesse a una comunità sicura (art. 6, par. 1, lett. f)).
 
 **Assistente in chat (Mr. D.O.M.).** Se scrivi una domanda nella chat, la domanda e la conversazione fino a quel momento vengono inviate a Cloudflare Workers AI per generare la risposta. Non conserviamo le conversazioni e non le usiamo per altri scopi. Non inserire dati personali. Base giuridica: il nostro legittimo interesse a rispondere alle domande dei visitatori (art. 6, par. 1, lett. f)).
 

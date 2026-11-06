@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin: fan wall | Bleeding Debts 316</title>
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<main>
+  <h1>🐒 Fan wall admin</h1>
+  <p class="muted">Post news and photos to the home page. Comments from fans are checked by Mr. D.O.M. automatically; you can delete anything here.</p>
+  <section id="login">
+    <label for="key">Admin key</label>
+    <input id="key" type="password" autocomplete="current-password">
+    <label class="row"><input id="remember" type="checkbox"> Remember on this device</label>
+    <button id="enter" type="button">Enter</button>
+    <p id="login-msg" role="status"></p>
+  </section>
+  <section id="panel" hidden>
+    <h2>New post</h2>
+    <label for="text">Message</label>
+    <textarea id="text" maxlength="2000" rows="5"></textarea>
+    <label for="photo">Photo (optional)</label>
+    <input id="photo" type="file" accept="image/*">
+    <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" hidden>
+    <button id="post" type="button">Post to the wall</button>
+    <p id="post-msg" role="status"></p>
+    <h2>Posts</h2>
+    <div id="posts"></div>
+  </section>
+</main>
+<script src="/admin/admin.js"></script>
+</body>
+</html>
