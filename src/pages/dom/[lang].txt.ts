@@ -31,7 +31,7 @@ export const GET: APIRoute = async ({ params, site }) => {
     ...indexablePages.map((k) => `- ${t(lang, `pages.${k}.nav`)}: ${path(k, lang)}${k === 'shop' ? ' (NOT OPEN YET: no products, no prices; it opens soon)' : ` (${t(lang, `pages.${k}.description`)})`}`),
     '',
     '## Songs (titles are never translated)',
-    ...releases.map((r) => `- ${r.data.title} (${r.data.type}, released ${r.data.date}): ${r.data.hook ? pick(lang, r.data.hook) : ''} Page: ${path('music', lang)}${r.id}/${r.data.links.soundcloud ? ` SoundCloud: ${r.data.links.soundcloud}` : ''}${r.data.youtubeId ? ` Video: https://youtu.be/${r.data.youtubeId}` : ''}`),
+    ...releases.map((r) => `- ${r.data.title} (${r.data.type}, released ${r.data.date}): ${r.data.hook ? pick(lang, r.data.hook) : ''} → ${path('music', lang)}${r.id}/${r.data.links.soundcloud ? ` SoundCloud: ${r.data.links.soundcloud}` : ''}${r.data.youtubeId ? ` Video: https://youtu.be/${r.data.youtubeId}` : ''}`),
     '',
     '## Videos',
     ...videos.map((v) => `- ${v.data.title}: https://youtu.be/${v.data.youtubeId}`),
