@@ -48,21 +48,28 @@ export const GET: APIRoute = async ({ params, site }) => {
   const lang = params.lang as Locale;
   const page = params.page as PageKey;
   const rtl = lang === 'ar';
-  const heading = page === 'home' ? t(lang, 'home.tagline') : t(lang, `pages.${page}.heading`);
+  // Home and Links (the page shared in bios) lead with the tagline; every other page shows its title with the tagline underneath.
+  const tagline = t(lang, 'home.tagline');
+  const big = page === 'home' || page === 'links';
+  const heading = big ? tagline : t(lang, `pages.${page}.heading`);
+  // Satori cannot shape Arabic, so the small line stays in Latin letters on Arabic images.
+  const small = big || rtl ? 'Bleeding Debts 316' : tagline;
   const tree = h('div', { display: 'flex', position: 'relative', width: 1200, height: 630, background: '#000', fontFamily: 'Nunito, NunitoExt, NunitoCyr, Noto Sans' }, [
     h('img', { position: 'absolute', top: 60, left: 72, width: 440, height: 221 }, undefined, { src: logoData, width: 440, height: 221 }),
     h('div', { display: 'flex', flexDirection: 'column', alignItems: rtl ? 'flex-end' : 'flex-start', gap: 16, position: 'absolute', left: 72, bottom: 56, width: 1056 }, [
       h('div', { display: 'flex', width: 120, height: 10, background: '#e5383b', borderRadius: 4 }),
       rtl
         ? h('div', { display: 'flex', height: 96 }, ' ')
-        : h('div', { display: 'flex', fontSize: page === 'home' ? 58 : 76, fontWeight: 900, color: '#fff', lineHeight: 1.1, maxWidth: 1050 }, heading),
-      h('div', { display: 'flex', fontSize: 28, color: '#b3b3b3', fontWeight: 900 }, 'Bleeding Debts 316'),
+        : h('div', { display: 'flex', fontSize: big ? 58 : 76, fontWeight: 900, color: '#fff', lineHeight: 1.1, maxWidth: 1050 }, heading),
+      h('div', { display: 'flex', fontSize: 30, color: '#b3b3b3', fontWeight: 900 }, small),
     ]),
   ]);
   let svg = await satori(tree as never, { width: 1200, height: 630, fonts: loadFonts() });
   if (rtl) {
     const size = heading.length > 22 ? 56 : 68;
-    svg = svg.replace(/<\/svg>\s*$/, `<text x="1128" y="500" direction="rtl" text-anchor="end" font-family="Noto Sans Arabic" font-weight="700" font-size="${size}" fill="#ffffff">${esc(heading)}</text></svg>`);
+    // The Arabic font subset has no Latin full stop, so trailing punctuation is dropped.
+    const arabic = heading.replace(/[.!]+\s*$/, '');
+    svg = svg.replace(/<\/svg>\s*$/, `<text x="1128" y="500" direction="rtl" text-anchor="end" font-family="Noto Sans Arabic" font-weight="700" font-size="${size}" fill="#ffffff">${esc(arabic)}</text></svg>`);
   }
   const png = new Resvg(svg, {
     fitTo: { mode: 'width', value: 1200 },
