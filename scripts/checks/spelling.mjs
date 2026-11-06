@@ -10,6 +10,12 @@ import { htmlFiles, langs, reportDir, requireDist, result, root, urlOf } from '.
 
 const r = result('spelling', 'Spelling: every page in its own language');
 requireDist(r);
+// The example content (npm run check:examples) is made-up test data that is never published: skip it.
+if (process.env.EXAMPLES === '1' || /examples/.test(process.env.OUT_DIR || '')) {
+  r.note('Skipped for the example content (it is never published).');
+  r.finish();
+  process.exit(0);
+}
 const locale = { en: 'en-GB', fr: 'fr', ro: 'ro', it: 'it', es: 'es', ar: 'ar', ru: 'ru', el: 'el' };
 const skip = new Set(['script', 'style', 'svg', 'noscript', 'template', 'code', 'pre']);
 const decode = (s) => s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n));
