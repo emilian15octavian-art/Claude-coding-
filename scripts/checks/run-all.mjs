@@ -15,6 +15,7 @@ const steps = [
   ...(args.includes('--skip-build') ? [] : [['build', 'Build (zero errors, zero warnings)']]),
   ['content', 'Content files'],
   ['i18n', 'Translations'],
+  ['spelling', 'Spelling'],
   ['html', 'HTML validation'],
   ['links', 'Internal links'],
   ['jsonld', 'Structured data'],

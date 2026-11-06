@@ -1,5 +1,5 @@
 {
-  "name": "[Name not public]",
+  "name": "Rush The Flow (RUSH)",
   "role": {
     "en": "Producer, mixer and composer",
     "fr": "Producteur, mixeur et compositeur",
@@ -10,5 +10,16 @@
     "ru": "Продюсер, звукорежиссёр сведения и композитор",
     "el": "Παραγωγός, μιξάζ και συνθέτης"
   },
-  "order": 1
+  "order": 1,
+  "photo": "../../assets/images/members/member-1.jpg",
+  "photoAlt": {
+    "en": "Cartoon avatar of Rush The Flow (RUSH): a smiling character in a Romanian straw hat and studio headphones, holding a red book",
+    "fr": "Avatar dessiné de Rush The Flow (RUSH) : un personnage souriant avec un chapeau de paille roumain et un casque de studio, tenant un livre rouge",
+    "ro": "Avatar desenat al lui Rush The Flow (RUSH): un personaj zâmbitor cu pălărie țărănească de paie și căști de studio, ținând o carte roșie",
+    "it": "Avatar disegnato di Rush The Flow (RUSH): un personaggio sorridente con cappello di paglia romeno e cuffie da studio, che tiene un libro rosso",
+    "es": "Avatar dibujado de Rush The Flow (RUSH): un personaje sonriente con sombrero de paja rumano y auriculares de estudio, sosteniendo un libro rojo",
+    "ar": "صورة كرتونية لـ Rush The Flow (RUSH): شخصية مبتسمة بقبعة قش رومانية وسماعات استوديو تحمل كتابًا أحمر",
+    "ru": "Мультяшный аватар Rush The Flow (RUSH): улыбающийся персонаж в румынской соломенной шляпе и студийных наушниках, с красной книгой в руках",
+    "el": "Καρτούν άβαταρ του Rush The Flow (RUSH): ένας χαμογελαστός χαρακτήρας με ρουμάνικο ψάθινο καπέλο και ακουστικά στούντιο, που κρατά ένα κόκκινο βιβλίο"
+  }
 }

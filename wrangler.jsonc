@@ -8,10 +8,12 @@
   "build": { "command": "npm run build" },
   // Needed by `wrangler preview`, which Cloudflare runs for pull-request preview builds.
   "previews": {},
+  // Mr. D.O.M. 🐒 uses Cloudflare Workers AI (free daily allowance; on the free plan it never bills).
+  "ai": { "binding": "AI" },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/google*.html"],
+    "run_worker_first": ["/google*.html", "/api/*"],
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   }

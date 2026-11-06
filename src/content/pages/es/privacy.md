@@ -24,6 +24,8 @@ El responsable del tratamiento es la entidad jurídica que aparece en el recuadr
 
 **Vídeos y reproductores de música.** Los reproductores de YouTube, Spotify y Bandcamp se cargan **solo después de que hagas clic**. Hasta entonces no se envía ningún dato a esos servicios. Después del clic se aplican sus propias políticas.
 
+**Asistente de chat (Mr. D.O.M.).** Si escribes una pregunta en el chat, la pregunta y la conversación hasta ese momento se envían a Cloudflare Workers AI para generar la respuesta. No guardamos las conversaciones ni las usamos para nada más. No escribas datos personales. Base jurídica: nuestro interés legítimo en responder a los visitantes (art. 6.1.f).
+
 ## Quién recibe los datos
 
 Trabajamos con estos encargados del tratamiento, todos vinculados por un acuerdo de tratamiento de datos: Cloudflare (alojamiento, estadísticas, protección antispam), Web3Forms (envío del formulario), Brevo (boletín), Stripe (pagos) y la empresa de mensajería para las entregas. Nunca vendemos tus datos.

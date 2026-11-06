@@ -23,6 +23,8 @@ const schema = await Promise.all(releases.map(async (r) => {
     {releases.length ? (
       <div class="stack-l list">{releases.map((r, i) => <ReleaseCard lang={lang} release={r} eager={i === 0} />)}</div>
     ) : <p class="empty">{t(lang, 'music.noReleases')}</p>}
+    <p class="no-spotify">{t(lang, 'music.noSpotify')}</p>
   </section>
 </Base>
-<style>.list > :global(* + *) { padding-block-start: var(--space-xl); border-block-start: 1px solid var(--border); }</style>
+<style>.no-spotify { margin-block-start: var(--space-xl); padding: 1rem 1.25rem; border: 1px dashed var(--border); border-radius: var(--radius); color: var(--text-muted); font-style: italic; }
+.list > :global(* + *) { padding-block-start: var(--space-xl); border-block-start: 1px solid var(--border); }</style>

@@ -1,0 +1,40 @@
+# 🐒 Mr. D.O.M.'s newsletter secretary: when a new release, show or video is added on main,
+# he writes the newsletter for you (English + Romanian) and posts it as an issue (= e-mail).
+# You copy it into Brevo or your e-mail and press send. (Sending stays in your hands on purpose:
+# nobody gets mail you have not read.)
+name: Mr. D.O.M. newsletter draft
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/content/releases/*.json', 'src/content/shows/*.json', 'src/content/videos/*.json']
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://claude-coding.bleedingdebts316.workers.dev' }}
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Write the draft
+        run: |
+          added=$(git diff --name-only --diff-filter=A "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null || true)
+          node scripts/bots/newsletter-draft.mjs $added
+      - name: Post it as an issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -f reports/newsletter-draft.md ] || exit 0
+          gh label create newsletter --color 0E8A16 --description "Newsletter drafts from Mr. D.O.M." --force >/dev/null
+          { echo "@${{ github.repository_owner }}"; echo; cat reports/newsletter-draft.md; } > issue.md
+          gh issue create --label newsletter --title "🐒 Newsletter draft: $(date -u +%F)" --body-file issue.md

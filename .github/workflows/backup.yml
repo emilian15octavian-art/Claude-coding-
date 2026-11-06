@@ -1,0 +1,34 @@
+# 🐒 Weekly backup (Sundays): a zip of the whole project and of the built website, kept for 90 days
+# under Actions → "Weekly backup" → the run → Artifacts. Even if Cloudflare disappeared, the zip can be
+# uploaded to any free host (Netlify Drop, GitHub Pages) in minutes.
+name: Weekly backup
+
+on:
+  schedule:
+    - cron: '9 2 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: |
+          mkdir backup
+          git archive --format=zip -o backup/source.zip HEAD
+          (cd dist && zip -qr ../backup/website.zip .)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: backup-${{ github.run_number }}
+          path: backup/
+          retention-days: 90

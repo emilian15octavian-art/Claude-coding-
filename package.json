@@ -27,7 +27,8 @@
     "check:examples": "npm run build:examples && OUT_DIR=dist-examples node scripts/checks/run-all.mjs --skip-build",
     "check:external": "node scripts/checks/external-links.mjs",
     "check:tickets": "node scripts/checks/tickets.mjs",
-    "check:interactive": "node scripts/checks/interactive.mjs"
+    "check:interactive": "node scripts/checks/interactive.mjs",
+    "check:spelling": "node scripts/checks/spelling.mjs"
   },
   "dependencies": {
     "@fontsource-variable/noto-sans": "^5.3.0",
@@ -45,10 +46,20 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@axe-core/playwright": "^4.14.0",
+    "@cspell/dict-ar": "^1.1.8",
+    "@cspell/dict-el": "^3.1.10",
+    "@cspell/dict-en-gb": "^5.0.38",
+    "@cspell/dict-es-es": "^3.0.9",
+    "@cspell/dict-fr-fr": "^2.3.2",
+    "@cspell/dict-it-it": "^3.1.7",
+    "@cspell/dict-ro-ro": "^2.0.9",
+    "@cspell/dict-ru_ru": "^2.3.4",
     "@lhci/cli": "^0.16.0",
+    "cspell": "^10.4.0",
     "html-validate": "^11.18.0",
     "playwright": "^1.63.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "ultrahtml": "^1.7.0"
   },
   "overrides": {
     "basic-ftp": "^6.2.6",

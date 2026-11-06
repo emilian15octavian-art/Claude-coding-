@@ -27,13 +27,13 @@ const schema = items.map((p) => ({
         {items.map((p, i) => (
           <li>
             <figure>
-              <a href={p.full} data-index={i} data-full={p.full} data-alt={p.alt} data-credit={t(lang, 'gallery.photoBy', { name: p.data.photographer })}>
+              <a href={p.full} data-index={i} data-full={p.full} data-alt={p.alt} data-credit={p.data.photographer === 'Bleeding Debts 316' ? '' : t(lang, 'gallery.photoBy', { name: p.data.photographer })}>
                 <span class="visually-hidden">{t(lang, 'gallery.open', { alt: '' })}</span>
                 <Picture src={p.data.image} alt={p.alt} formats={['avif', 'webp']} widths={[320, 480, 720, 960]} sizes="(min-width: 72rem) 23rem, (min-width: 40rem) 45vw, 100vw" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} />
               </a>
-              <figcaption class="muted">
+              {p.data.photographer !== 'Bleeding Debts 316' && <figcaption class="muted">
                 {p.data.photographerUrl ? <a href={p.data.photographerUrl} rel="noopener noreferrer">{t(lang, 'gallery.photoBy', { name: p.data.photographer })}</a> : t(lang, 'gallery.photoBy', { name: p.data.photographer })}
-              </figcaption>
+              </figcaption>}
             </figure>
           </li>
         ))}
@@ -48,7 +48,7 @@ const schema = items.map((p) => ({
         <button type="button" class="lb-btn lb-close" data-lb-close><Icon name="close" /><span class="visually-hidden">{t(lang, 'gallery.close')}</span></button>
         <figure class="lb-figure">
           <img data-lb-img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="1800" height="1200" />
-          <figcaption><span data-lb-caption></span> <span class="muted" data-lb-credit></span> <span class="muted ltr" data-lb-count></span></figcaption>
+          <figcaption><span class="visually-hidden" data-lb-caption></span> <span class="muted" data-lb-credit></span> <span class="muted ltr" data-lb-count></span></figcaption>
         </figure>
         <div class="lb-nav">
           <button type="button" class="lb-btn" data-lb-prev><Icon name="chevronLeft" /><span class="visually-hidden">{t(lang, 'gallery.previous')}</span></button>

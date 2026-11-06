@@ -1,0 +1,71 @@
+# 🐒 Mr. D.O.M.'s night shift (every day, ~03:17 UTC = 05:17 in Bucharest):
+# 1. Patrols the LIVE site: opens every page in the sitemap (all 8 languages), robots.txt, llms.txt,
+#    the Google verification file and the chat. Opens an issue (= e-mail) if something is broken,
+#    closes it by itself when everything works again.
+# 2. Saves today's date in public/heartbeat.json and pushes it. Cloudflare rebuilds on every push, so
+#    the live site is rebuilt daily: past shows move to "Past shows", dates and the © year stay current,
+#    and the repository stays active (GitHub pauses scheduled jobs after 60 quiet days).
+name: Mr. D.O.M. daily refresh
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      patrol_only:
+        description: 'Only check the live site (no daily refresh push)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://claude-coding.bleedingdebts316.workers.dev' }}
+
+jobs:
+  patrol-and-refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Patrol the live site
+        id: crawl
+        continue-on-error: true
+        run: node scripts/bots/live-crawl.mjs
+      - name: Open or close the patrol issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          open=$(gh issue list --label live-site --state open --json number --jq '.[0].number')
+          if [ "${{ steps.crawl.outcome }}" = "failure" ]; then
+            gh label create live-site --color D93F0B --description "Problems found on the live site" --force >/dev/null
+            { echo "@${{ github.repository_owner }}"; echo; cat reports/live-crawl.md; } > issue.md
+            if [ -n "$open" ]; then gh issue comment "$open" --body-file issue.md; else gh issue create --label live-site --title "🐒 Mr. D.O.M.: live site problems" --body-file issue.md; fi
+          elif [ -n "$open" ]; then
+            gh issue close "$open" --comment "🐒 Mr. D.O.M.: all good again ($(date -u '+%F'))."
+          fi
+      - name: Save today's date and push (Cloudflare rebuilds the site)
+        if: ${{ !inputs.patrol_only }}
+        run: |
+          curl -fsS "$SITE_URL/page-hashes.json" -o previous-hashes.json || echo '{}' > previous-hashes.json
+          printf '{ "refreshed": "%s", "by": "Mr. D.O.M." }\n' "$(date -u +%F)" > public/heartbeat.json
+          git config user.name "Mr. D.O.M. (bot)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/heartbeat.json
+          git diff --cached --quiet || { git commit -m "Daily refresh $(date -u +%F)" && git push; }
+      - name: Wait for the new version, then tell search engines what changed (IndexNow)
+        if: ${{ !inputs.patrol_only }}
+        continue-on-error: true
+        run: |
+          sha=$(git rev-parse HEAD)
+          for i in $(seq 1 36); do
+            [ "$(curl -fsS "$SITE_URL/health.json?ts=$(date +%s)" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).commit))")" = "$sha" ] && break
+            sleep 20
+          done
+          mkdir -p live && curl -fsS "$SITE_URL/page-hashes.json" -o live/page-hashes.json
+          node scripts/indexnow.mjs previous-hashes.json live

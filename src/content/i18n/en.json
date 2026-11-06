@@ -14,7 +14,7 @@
     "music": {
       "nav": "Music",
       "title": "Music and discography | Bleeding Debts 316",
-      "description": "Every Bleeding Debts 316 release with cover art, release dates and links to Spotify, Apple Music, YouTube Music and Bandcamp.",
+      "description": "Every Bleeding Debts 316 release with cover art, release dates and SoundCloud players and official videos on YouTube.",
       "heading": "Music"
     },
     "videos": {
@@ -133,6 +133,7 @@
     "newsletterText": "New music, show announcements and merch drops. A few emails a year, never spam."
   },
   "music": {
+    "noSpotify": "🐒 Looking for us on Spotify? Mr. D.O.M. searched every banana crate in the building. We are not there. Not lost, just allergic. SoundCloud and YouTube it is.",
     "discography": "Discography",
     "released": "Released",
     "tracklist": "Tracklist",
@@ -277,5 +278,15 @@
   "notFound": {
     "text": "The page you are looking for does not exist or has moved.",
     "home": "Back to the home page"
+  },
+  "dom": {
+    "open": "Ask Mr. D.O.M.",
+    "title": "Mr. D.O.M., the band's monkey assistant",
+    "greeting": "Ooh ooh! I'm Mr. D.O.M. 🐒 Ask me anything about Bleeding Debts 316: songs, videos, shows, merch or booking.",
+    "placeholder": "Type your question…",
+    "send": "Send",
+    "close": "Close",
+    "note": "Mr. D.O.M. is a monkey with a computer: an AI helper that can make mistakes. Don't share personal data. For booking, use the contact form.",
+    "error": "My banana phone dropped the call. Try again, or use the contact form."
   }
 }

@@ -1,7 +1,7 @@
 # Bleeding Debts 316: official website
 
 The official website of **Bleeding Debts 316** in 8 languages (English, Français, Română, Italiano, Español, العربية, Русский, Ελληνικά).
-It is free to run: the code lives on GitHub, it is hosted on Cloudflare Pages at `https://claude-coding.bleedingdebts316.workers.dev`, and it checks and maintains itself with GitHub Actions.
+It is free to run: the code lives on GitHub, it is hosted on Cloudflare (Workers, free plan) at `https://claude-coding.bleedingdebts316.workers.dev`, and it checks and maintains itself with GitHub Actions.
 
 - First time? Follow **[LAUNCH-CHECKLIST.md](LAUNCH-CHECKLIST.md)** step by step.
 - Got an e-mail about a failed check? Read **[MAINTENANCE.md](MAINTENANCE.md)**.
@@ -160,7 +160,7 @@ Open `src/content/band/band.json` → `profiles` and replace `null` with the ful
 
 Any push to `main` redeploys. To redeploy without changing anything: GitHub → **Actions** → **Check and deploy** → **Run workflow**.
 
-To roll back to an earlier version: Cloudflare dashboard → **Workers & Pages** → **bleedingdebts316** → **Deployments** → choose an earlier one → **Rollback**.
+To roll back to an earlier version: Cloudflare dashboard → **Workers & Pages** → **claude-coding** → **Deployments** → choose an earlier one → **Rollback**.
 
 ---
 
@@ -178,4 +178,4 @@ To roll back to an earlier version: Cloudflare dashboard → **Workers & Pages**
 
 ## Technology (for developers)
 
-Astro 7 (static output, no server), plain CSS (custom properties, nesting, container queries, logical properties, cross-document View Transitions), about 3 KB of JavaScript, self-hosted fonts (Nunito, Noto Sans Greek, Noto Sans Arabic; SIL OFL), Zod content schemas, a single Cloudflare Pages Function for the contact form, Playwright + axe-core, html-validate and Lighthouse CI for checks. Fonts © their authors under the SIL Open Font License; brand icons from Simple Icons (CC0).
+Astro 7 (static output, no server), plain CSS (custom properties, nesting, container queries, logical properties, cross-document View Transitions), about 3 KB of JavaScript, self-hosted fonts (Nunito, Noto Sans Greek, Noto Sans Arabic; SIL OFL), Zod content schemas, a small Cloudflare Worker (`worker/index.js`) for the Google file and the Mr. D.O.M. chat (Workers AI); the forms post to Web3Forms, Playwright + axe-core, html-validate and Lighthouse CI for checks. Fonts © their authors under the SIL Open Font License; brand icons from Simple Icons (CC0).

@@ -5,7 +5,6 @@ import Embed from '../components/Embed.astro';
 import { type Locale } from '../i18n/locales';
 import { pick, t } from '../i18n/t';
 import { getVideos } from '../lib/data';
-import { formatDate } from '../lib/format';
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 const site = Astro.site!.toString().replace(/\/$/, '');
@@ -29,7 +28,6 @@ const schema = videos.map((v) => ({
               title={v.data.title} label={t(lang, 'videos.play', { title: v.data.title })}
               thumbnail={v.data.thumbnail ?? `https://i.ytimg.com/vi/${v.data.youtubeId}/hqdefault.jpg`} />
             <h2 class="v-title" translate="no">{v.data.title}</h2>
-            <p class="muted"><time datetime={v.data.date}>{formatDate(lang, v.data.date)}</time></p>
             {v.data.description && <p>{pick(lang, v.data.description)}</p>}
           </li>
         ))}

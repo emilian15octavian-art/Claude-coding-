@@ -14,7 +14,7 @@
     "music": {
       "nav": "Muzică",
       "title": "Muzică și discografie | Bleeding Debts 316",
-      "description": "Toate lansările Bleeding Debts 316, cu coperți, date de lansare și linkuri către Spotify, Apple Music, YouTube Music și Bandcamp.",
+      "description": "Toate lansările Bleeding Debts 316, cu coperți, date de lansare și playere SoundCloud și videoclipuri oficiale pe YouTube.",
       "heading": "Muzică"
     },
     "videos": {
@@ -133,6 +133,7 @@
     "newsletterText": "Muzică nouă, anunțuri de concerte și merch nou. Câteva e-mailuri pe an, niciodată spam."
   },
   "music": {
+    "noSpotify": "🐒 Ne cauți pe Spotify? Mr. D.O.M. a scotocit toate lăzile cu banane din clădire. Nu suntem acolo. Nu ne-am pierdut, suntem doar alergici. Rămâne SoundCloud și YouTube.",
     "discography": "Discografie",
     "released": "Lansat",
     "tracklist": "Piese",
@@ -277,5 +278,15 @@
   "notFound": {
     "text": "Pagina pe care o cauți nu există sau a fost mutată.",
     "home": "Înapoi la pagina principală"
+  },
+  "dom": {
+    "open": "Întreabă-l pe Mr. D.O.M.",
+    "title": "Mr. D.O.M., maimuța-asistent a trupei",
+    "greeting": "U-u-u! Sunt Mr. D.O.M. 🐒 Întreabă-mă orice despre Bleeding Debts 316: piese, videoclipuri, concerte, merch sau booking.",
+    "placeholder": "Scrie întrebarea ta…",
+    "send": "Trimite",
+    "close": "Închide",
+    "note": "Mr. D.O.M. e o maimuță cu calculator: un asistent AI care poate greși. Nu trimite date personale. Pentru booking, folosește formularul de contact.",
+    "error": "Telefonul meu-banană a închis. Mai încearcă sau folosește formularul de contact."
   }
 }

@@ -14,7 +14,7 @@
     "music": {
       "nav": "Musica",
       "title": "Musica e discografia | Bleeding Debts 316",
-      "description": "Tutte le uscite dei Bleeding Debts 316 con copertine, date di uscita e link a Spotify, Apple Music, YouTube Music e Bandcamp.",
+      "description": "Tutte le uscite dei Bleeding Debts 316 con copertine, date di uscita e player SoundCloud e video ufficiali su YouTube.",
       "heading": "Musica"
     },
     "videos": {
@@ -133,6 +133,7 @@
     "newsletterText": "Nuova musica, annunci di concerti e nuovo merch. Poche email all'anno, mai spam."
   },
   "music": {
+    "noSpotify": "🐒 Ci cerchi su Spotify? Mr. D.O.M. ha frugato in ogni cassa di banane dell'edificio. Non ci siamo. Non persi, solo allergici. Quindi SoundCloud e YouTube.",
     "discography": "Discografia",
     "released": "Uscita",
     "tracklist": "Tracce",
@@ -277,5 +278,15 @@
   "notFound": {
     "text": "La pagina che cerchi non esiste o è stata spostata.",
     "home": "Torna alla home"
+  },
+  "dom": {
+    "open": "Chiedi a Mr. D.O.M.",
+    "title": "Mr. D.O.M., la scimmia assistente della band",
+    "greeting": "Uh uh! Sono Mr. D.O.M. 🐒 Chiedimi tutto sui Bleeding Debts 316: brani, video, concerti, merch o booking.",
+    "placeholder": "Scrivi la tua domanda…",
+    "send": "Invia",
+    "close": "Chiudi",
+    "note": "Mr. D.O.M. è una scimmia con un computer: un assistente IA che può sbagliare. Non condividere dati personali. Per il booking usa il modulo di contatto.",
+    "error": "Il mio telefono-banana ha perso la linea. Riprova o usa il modulo di contatto."
   }
 }
