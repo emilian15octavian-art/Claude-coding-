@@ -71,6 +71,8 @@
       "description": "Tous les liens officiels de Bleeding Debts 316 au même endroit : musique, vidéos, réseaux sociaux, concerts et merch.",
       "heading": "Bleeding Debts 316"
     },
+    "faq": {"nav": "FAQ", "title": "FAQ | Bleeding Debts 316", "description": "Les réponses aux questions les plus posées par les fans, les organisateurs et la presse : écoute, concerts, réservations, merch, newsletter et Mr. D.O.M.", "heading": "Questions fréquentes"},
+    "accessibility": {"nav": "Accessibilité", "title": "Déclaration d'accessibilité | Bleeding Debts 316", "description": "Comment le site de Bleeding Debts 316 est conçu pour être utilisable par tous (WCAG 2.2 AA), ses limites connues et comment signaler un problème.", "heading": "Déclaration d'accessibilité"},
     "privacy": {
       "nav": "Politique de confidentialité",
       "title": "Politique de confidentialité | Bleeding Debts 316",
@@ -280,6 +282,11 @@
     "home": "Retour à l'accueil"
   },
   "dom": {
+    "chip1": "Où écouter ?",
+    "chip2": "Prochain concert ?",
+    "chip3": "Comment programmer le groupe ?",
+    "chip4": "Qui fait partie du groupe ?",
+    "askBand": "Poser la question au groupe",
     "open": "Demander à Mr. D.O.M.",
     "title": "Mr. D.O.M., le singe assistant du groupe",
     "greeting": "Ouh ouh ! Je suis Mr. D.O.M. 🐒 Pose-moi tes questions sur Bleeding Debts 316 : morceaux, vidéos, concerts, merch ou booking.",

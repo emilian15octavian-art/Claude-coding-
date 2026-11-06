@@ -1,0 +1,46 @@
+# 🐒 Every Monday (and on demand): Mr. D.O.M. answers 17 real-visitor questions on the live site
+# in 7 languages. The full answers are attached to the run; if any answer is wrong you get an issue
+# that says which, and how to teach him (add the answer to the FAQ).
+name: Mr. D.O.M. weekly exam
+
+on:
+  schedule:
+    - cron: '33 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://claude-coding.bleedingdebts316.workers.dev' }}
+
+jobs:
+  exam:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Ask the questions
+        id: exam
+        continue-on-error: true
+        run: node scripts/bots/dom-exam.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dom-exam
+          path: reports/dom-exam.md
+      - name: Report wrong answers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          open=$(gh issue list --label dom-exam --state open --json number --jq '.[0].number')
+          if [ "${{ steps.exam.outcome }}" = "failure" ]; then
+            gh label create dom-exam --color FBCA04 --description "Mr. D.O.M. gave a wrong answer" --force >/dev/null
+            { echo "@${{ github.repository_owner }}"; echo; cat reports/dom-exam.md; } > issue.md
+            if [ -n "$open" ]; then gh issue comment "$open" --body-file issue.md; else gh issue create --label dom-exam --title "🐒 Mr. D.O.M. needs a lesson" --body-file issue.md; fi
+          elif [ -n "$open" ]; then
+            gh issue close "$open" --comment "🐒 Passed every question this week."
+          fi

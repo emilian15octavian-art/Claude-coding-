@@ -17,6 +17,7 @@ import Newsletter from '../../views/Newsletter.astro';
 import Contact from '../../views/Contact.astro';
 import Links from '../../views/Links.astro';
 import Legal from '../../views/Legal.astro';
+import Info from '../../views/Info.astro';
 import NotFound from '../../views/NotFound.astro';
 
 export function getStaticPaths() {
@@ -28,4 +29,4 @@ const views = { home: Home, music: Music, videos: Videos, shows: Shows, shop: Sh
 const isLegal = key === 'privacy' || key === 'cookies' || key === 'terms' || key === 'shipping';
 const View = isLegal ? null : views[key as keyof typeof views];
 ---
-{isLegal ? <Legal lang={lang} pageKey={key as 'privacy'} /> : View && <View lang={lang} />}
+{key === 'faq' || key === 'accessibility' ? <Info lang={lang} pageKey={key} /> : isLegal ? <Legal lang={lang} pageKey={key as 'privacy'} /> : View && <View lang={lang} />}

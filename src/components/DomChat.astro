@@ -10,7 +10,7 @@ import { t } from '../i18n/t';
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 ---
-<div class="dom" data-dom data-lang={lang} data-error={t(lang, 'dom.error')}>
+<div class="dom" data-dom data-lang={lang} data-error={t(lang, 'dom.error')} data-ask={t(lang, 'dom.askBand')} data-contact={path('contact', lang)}>
   <button type="button" class="dom-open" popovertarget="dom-panel" aria-controls="dom-panel">
     <span aria-hidden="true" class="dom-face">🐒</span>
     <span class="dom-label">{t(lang, 'dom.open')}</span>
@@ -24,6 +24,9 @@ const { lang } = Astro.props;
     </div>
     <div class="dom-log" data-dom-log role="log" aria-live="polite">
       <p class="msg bot">{t(lang, 'dom.greeting')}</p>
+      <div class="chips" data-chips>
+        {[1, 2, 3, 4].map((n) => <button type="button" class="chip" data-chip>{t(lang, `dom.chip${n}`)}</button>)}
+      </div>
     </div>
     <form class="dom-form" data-dom-form>
       <label for="dom-q" class="visually-hidden">{t(lang, 'dom.placeholder')}</label>
@@ -59,6 +62,10 @@ const { lang } = Astro.props;
   .msg.bot { background: var(--surface-2); justify-self: start; border-end-start-radius: 0.25rem; }
   .msg.me { background: var(--primary); color: var(--on-primary); justify-self: end; border-end-end-radius: 0.25rem; }
   .msg.typing { opacity: 0.7; }
+  .msg :global(a) { color: inherit; text-decoration: underline; overflow-wrap: anywhere; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip { min-block-size: 44px; padding: 0.35rem 0.8rem; border: 1px solid var(--primary); border-radius: 999px; background: transparent; color: var(--text); font: inherit; font-size: var(--step--1); cursor: pointer; &:hover { background: var(--surface-2); } }
+  .ask { display: inline-flex; align-items: center; min-block-size: 44px; justify-self: start; font-size: var(--step--1); font-weight: 700; }
   .dom-form { display: flex; gap: 0.5rem; padding: 0.75rem; border-block-start: 1px solid var(--border); }
   .dom-form .input { min-inline-size: 0; flex: 1; }
   .dom-note { padding: 0 0.75rem 0.75rem; font-size: 0.75rem; color: var(--text-muted); }
@@ -69,20 +76,40 @@ const { lang } = Astro.props;
   const form = root?.querySelector<HTMLFormElement>('[data-dom-form]');
   const log = root?.querySelector<HTMLElement>('[data-dom-log]');
   const history: Array<{ role: 'user' | 'assistant'; content: string }> = [];
+  // Turns site paths (/en/shows/), https links and e-mail addresses in a reply into safe, clickable links.
+  const LINK = /(https?:\/\/[^\s<>"')]+[^\s<>"').,!?]|\/(?:en|fr|ro|it|es|ar|ru|el)\/[a-z0-9\-/]*|[\w.+-]+@[\w-]+\.[\w.]+)/g;
+  const fill = (el: HTMLElement, text: string) => {
+    let last = 0;
+    for (const m of text.matchAll(LINK)) {
+      const raw = m[0];
+      el.append(text.slice(last, m.index));
+      const a = document.createElement('a');
+      a.textContent = raw;
+      if (raw.includes('@') && !raw.startsWith('http')) a.href = `mailto:${raw}`;
+      else { a.href = raw; if (raw.startsWith('http')) { a.target = '_blank'; a.rel = 'noopener noreferrer'; } }
+      el.append(a);
+      last = (m.index ?? 0) + raw.length;
+    }
+    el.append(text.slice(last));
+  };
   const add = (text: string, who: 'me' | 'bot', extra = '') => {
     const p = document.createElement('p');
     p.className = `msg ${who} ${extra}`.trim();
-    p.textContent = text;
+    if (who === 'bot') fill(p, text); else p.textContent = text;
     log!.append(p);
     log!.scrollTop = log!.scrollHeight;
     return p;
   };
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const input = form.querySelector<HTMLInputElement>('input')!;
-    const q = input.value.trim();
-    if (!q) return;
-    input.value = '';
+  const askBand = (q: string) => {
+    const a = document.createElement('a');
+    a.className = 'ask';
+    a.href = `${root!.dataset.contact}?q=${encodeURIComponent(q)}#contact-form`;
+    a.textContent = `📩 ${root!.dataset.ask}`;
+    log!.append(a);
+    log!.scrollTop = log!.scrollHeight;
+  };
+  const ask = async (q: string) => {
+    root!.querySelector('[data-chips]')?.remove();
     add(q, 'me');
     history.push({ role: 'user', content: q });
     const typing = add('🐒 …', 'bot', 'typing');
@@ -93,10 +120,19 @@ const { lang } = Astro.props;
       const reply = String(data.reply || root!.dataset.error);
       add(reply, 'bot');
       history.push({ role: 'assistant', content: reply });
+      if (data.unknown) askBand(q);
     } catch {
       typing.remove();
       add(root!.dataset.error!, 'bot');
     }
-    input.focus();
+  };
+  root?.querySelectorAll<HTMLButtonElement>('[data-chip]').forEach((b) => b.addEventListener('click', () => ask(b.textContent!.trim())));
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = form.querySelector<HTMLInputElement>('input')!;
+    const q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    ask(q).then(() => input.focus());
   });
 </script>

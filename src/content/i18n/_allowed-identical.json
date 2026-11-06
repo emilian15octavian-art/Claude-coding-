@@ -1,7 +1,23 @@
 {
   "_help": "Texts that are correctly identical to English in some languages (names, brands, international words). The translation check ignores these.",
   "values": [
-    "Bleeding Debts 316", "EP", "Album", "Single", "Newsletter", "Newsletter | Bleeding Debts 316", "Booking", "Stage plot (PDF)",
-    "Sold out", "Menu", "Contact", "Message", "Home", "Genre", "Cookie policy", "Cookie policy | Bleeding Debts 316"
+    "Bleeding Debts 316",
+    "EP",
+    "Album",
+    "Single",
+    "Newsletter",
+    "Newsletter | Bleeding Debts 316",
+    "Booking",
+    "Stage plot (PDF)",
+    "Sold out",
+    "Menu",
+    "Contact",
+    "Message",
+    "Home",
+    "Genre",
+    "Cookie policy",
+    "Cookie policy | Bleeding Debts 316",
+    "FAQ",
+    "FAQ | Bleeding Debts 316"
   ]
 }
