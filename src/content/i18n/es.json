@@ -127,6 +127,13 @@
     "comingSoon": "Próximamente."
   },
   "home": {
+    "news": "Últimas noticias",
+    "newSingle": "Nuevo single",
+    "newVideo": "Nuevo vídeo",
+    "liveAt": "Concierto",
+    "songs": "Todas las canciones",
+    "follow": "Síguenos",
+    "seeAll": "Ver todo",
     "tagline": "Las cicatrices no tienen la última palabra.",
     "latestRelease": "Último lanzamiento",
     "nextShow": "Próximo concierto",
@@ -284,6 +291,7 @@
     "text": "La página que buscas no existe o se ha movido.",
     "home": "Volver al inicio"
   },
+  "carousel": {"prev": "Anterior", "next": "Siguiente", "pause": "Pausar el carrusel", "play": "Reanudar el carrusel"},
   "dom": {
     "chip1": "¿Dónde escuchar?",
     "chip2": "¿Próximo concierto?",

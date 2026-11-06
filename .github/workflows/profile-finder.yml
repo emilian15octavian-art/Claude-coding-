@@ -1,0 +1,36 @@
+# 🐒 Every Wednesday (and on demand): Mr. D.O.M. looks for Bleeding Debts 316 profiles on music platforms
+# (Apple Music, Deezer, MusicBrainz, Bandcamp, Last.fm, Audiomack, Mixcloud, Twitch, Bluesky…) that are not on
+# the website yet, and opens an issue (= e-mail) listing them so you can confirm which are really yours.
+name: Mr. D.O.M. profile hunter
+
+on:
+  schedule:
+    - cron: '47 7 * * 3'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Look for profiles
+        id: hunt
+        continue-on-error: true
+        run: node scripts/bots/profile-finder.mjs
+      - name: Report new profiles
+        if: steps.hunt.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create profiles --color 1D76DB --description "Possible new band profiles to confirm" --force >/dev/null
+          { echo "@${{ github.repository_owner }}"; echo; cat reports/profile-finder.md; } > issue.md
+          open=$(gh issue list --label profiles --state open --json number --jq '.[0].number')
+          if [ -n "$open" ]; then gh issue edit "$open" --body-file issue.md; else gh issue create --label profiles --title "🐒 Possible new Bleeding Debts 316 profiles" --body-file issue.md; fi

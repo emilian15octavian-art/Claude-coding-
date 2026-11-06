@@ -127,6 +127,13 @@
     "comingSoon": "Coming soon."
   },
   "home": {
+    "news": "Latest news",
+    "newSingle": "New single",
+    "newVideo": "New video",
+    "liveAt": "Live",
+    "songs": "All songs",
+    "follow": "Follow us",
+    "seeAll": "See all",
     "tagline": "The scars don't get the final word.",
     "latestRelease": "Latest release",
     "nextShow": "Next show",
@@ -284,6 +291,7 @@
     "text": "The page you are looking for does not exist or has moved.",
     "home": "Back to the home page"
   },
+  "carousel": {"prev": "Previous", "next": "Next", "pause": "Pause slideshow", "play": "Play slideshow"},
   "dom": {
     "chip1": "Where can I listen?",
     "chip2": "Next show?",
