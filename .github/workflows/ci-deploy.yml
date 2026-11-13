@@ -61,24 +61,29 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: curl -fsS "$SITE_URL/page-hashes.json" -o previous-hashes.json || echo '{}' > previous-hashes.json
 
-      # The site is deployed by Cloudflare Workers Builds (it builds every push to main by itself).
-      # This old direct-deploy step only runs if the repository variable DEPLOY_FROM_ACTIONS is "true".
-      - name: Deploy to Cloudflare Pages
-        if: github.ref == 'refs/heads/main' && vars.DEPLOY_FROM_ACTIONS == 'true'
+      # Deploy straight from Actions with Wrangler. This site is a Cloudflare WORKER
+      # (worker/index.js + the dist/ static assets and the Mr. D.O.M. "AI" binding, all in
+      # wrangler.jsonc), so the correct command is `wrangler deploy` — not `wrangler pages deploy`,
+      # which would push only the static files to a separate Pages project and drop the AI binding.
+      # Runs automatically once a Cloudflare API token is present in the repo secrets; it does not
+      # depend on Cloudflare's own Git auto-build. `wrangler deploy` runs the build itself
+      # (build.command in wrangler.jsonc), so health.json records this commit via $GITHUB_SHA.
+      - name: Deploy to Cloudflare (Workers)
+        if: github.ref == 'refs/heads/main'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || secrets.CFTOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || secrets.CFACCOUNT }}
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "::warning::Cloudflare secrets are not set yet, so nothing was deployed. See LAUNCH-CHECKLIST.md step 3."
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::warning::No Cloudflare API token set, so nothing was deployed. Add CLOUDFLARE_API_TOKEN (and CLOUDFLARE_ACCOUNT_ID) in Settings → Secrets and variables → Actions."
             exit 0
           fi
-          # Create the Pages project the first time (no-op afterwards)
-          npx wrangler pages project list | grep -qw "$CF_PAGES_PROJECT" || npx wrangler pages project create "$CF_PAGES_PROJECT" --production-branch=main
-          npx wrangler pages deploy dist --project-name="$CF_PAGES_PROJECT" --branch=main --commit-hash="$GITHUB_SHA" --commit-dirty=true
+          npx --yes wrangler@4 deploy
 
-      - name: Smoke test the live site (waits for Cloudflare's build)
-        if: github.ref == 'refs/heads/main' && github.event_name != 'schedule'
+      # Only verifies the live site once a Cloudflare token is configured and a deploy actually ran.
+      # Before that, the workflow still builds and checks the site but does not fail on an un-deployed change.
+      - name: Smoke test the live site (waits for the deploy to go live)
+        if: github.ref == 'refs/heads/main' && github.event_name != 'schedule' && env.HAS_CF == 'true'
         run: |
           for i in $(seq 1 36); do
             commit=$(curl -fsS "$SITE_URL/health.json?ts=$(date +%s)" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).commit))" || true)
