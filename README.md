@@ -1,5 +1,7 @@
 # Bleeding Debts 316: official website
 
+> **This repository is an outdated copy.** The live site moved to GitLab (`bleedingdebts316-group/bleedingdebts316-website`) on 6 November 2026 and Cloudflare deploys from there. Changes made here do not reach the live site. See [CLAUDE.md](CLAUDE.md).
+
 The official website of **Bleeding Debts 316** in 8 languages (English, Français, Română, Italiano, Español, العربية, Русский, Ελληνικά).
 It is free to run: the code lives on GitHub, it is hosted on Cloudflare (Workers, free plan) at `https://claude-coding.bleedingdebts316.workers.dev`, and it checks and maintains itself with GitHub Actions.
 
