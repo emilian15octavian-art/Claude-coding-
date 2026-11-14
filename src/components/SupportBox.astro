@@ -1,0 +1,31 @@
+---
+/**
+ * "Keep the fire burning": a friendly, no-guilt support box. Honest about why (no label, studio costs),
+ * one small concrete amount (€5), a personal thank-you promise, and the trust line (Ko-fi, PayPal/card).
+ * Hidden until settings → services.kofiUrl is set.
+ */
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+import { getSettings } from '../lib/data';
+interface Props { lang: Locale; compact?: boolean; wrap?: boolean }
+const { lang, compact = false, wrap = false } = Astro.props;
+const url = (await getSettings()).services.kofiUrl;
+---
+{url && (
+  <div class:list={{ 'section container': wrap }}><aside class:list={['support', { compact }]} aria-labelledby={compact ? undefined : 'support-title'}>
+    {!compact && <h2 id="support-title" class="support-title"><span aria-hidden="true">🔥</span> {t(lang, 'support.title')}</h2>}
+    {!compact && <p class="support-text">{t(lang, 'support.text')}</p>}
+    <p><a class="btn btn-primary support-btn" href={url} target="_blank" rel="noopener noreferrer">☕ {t(lang, 'support.button')}</a></p>
+    <p class="support-note">{t(lang, 'support.note')}</p>
+    {!compact && <p class="support-secure muted">🔒 {t(lang, 'support.secure')}</p>}
+  </aside></div>
+)}
+<style>
+  .support { display: grid; gap: var(--space-s); padding: var(--space-l); border: 1px solid var(--border); border-inline-start: 4px solid var(--primary); border-radius: calc(var(--radius) * 2); background: var(--surface); }
+  .support.compact { padding: var(--space-m); border-inline-start-width: 3px; }
+  .support-title { font-size: var(--step-1); }
+  .support-text { max-inline-size: 60ch; }
+  .support-btn { font-size: var(--step-0); }
+  .support-note { font-weight: 700; }
+  .support-secure { font-size: var(--step--1); }
+</style>

@@ -1,0 +1,15 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #0b0b0b; color: #f2f2f2; }
+body { margin: 0; }
+main { max-inline-size: 44rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; display: grid; gap: 0.75rem; }
+h1 { font-size: 1.6rem; margin: 0; } h2 { font-size: 1.2rem; margin: 1.5rem 0 0; }
+.muted { color: #b3b3b3; }
+label { font-weight: 700; }
+.row { display: flex; gap: 0.5rem; align-items: center; font-weight: 400; }
+input[type='password'], textarea, input[type='file'] { inline-size: 100%; box-sizing: border-box; padding: 0.7rem; border: 1px solid #444; border-radius: 8px; background: #161616; color: inherit; font: inherit; }
+button { min-block-size: 44px; padding: 0.6rem 1.2rem; border: 0; border-radius: 999px; background: #e5383b; color: #fff; font: inherit; font-weight: 800; cursor: pointer; justify-self: start; }
+button.ghost { background: transparent; border: 1px solid #555; color: #f2f2f2; padding: 0.4rem 0.9rem; min-block-size: 44px; }
+#preview { max-inline-size: 100%; border-radius: 8px; }
+.post { border: 1px solid #333; border-radius: 12px; padding: 0.9rem; display: grid; gap: 0.5rem; background: #121212; }
+.post img { max-inline-size: 100%; border-radius: 8px; }
+.comment { display: flex; gap: 0.5rem; align-items: center; justify-content: space-between; background: #1c1c1c; border-radius: 8px; padding: 0.4rem 0.6rem; }
+[role='status'] { font-weight: 700; min-block-size: 1.2em; }

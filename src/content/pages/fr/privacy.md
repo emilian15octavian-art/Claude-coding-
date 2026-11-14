@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-05
+updated: 2026-11-06
 status: needs native review
 ---
 Cette politique explique quelles données personnelles sont traitées lorsque vous utilisez ce site, pourquoi, et quels sont vos droits au titre du Règlement général sur la protection des données (RGPD, règlement (UE) 2016/679).
@@ -23,6 +23,9 @@ Le responsable du traitement est l'entité juridique indiquée dans l'encadré c
 **Commandes en boutique.** Les paiements sont traités par Stripe. Stripe collecte directement vos données de carte ; nous ne les voyons jamais. Pour livrer votre commande, nous recevons votre nom, votre adresse de livraison, votre e-mail et le détail de la commande. Base légale : exécution du contrat (art. 6, par. 1, b)) et nos obligations légales (art. 6, par. 1, c)), par exemple la conservation des documents comptables pendant la durée prévue par la loi roumaine (loi n° 82/1991).
 
 **Vidéos et lecteurs audio.** Les lecteurs YouTube et SoundCloud ne se chargent **qu'après votre clic**. Avant cela, aucune donnée n'est envoyée à ces services. Après le clic, leurs propres politiques de confidentialité s'appliquent.
+
+
+**Mur des fans.** Si vous commentez une publication sur la page d'accueil, le nom choisi et votre commentaire y sont publiés et conservés chez Cloudflare (Workers KV) jusqu'à leur suppression. Avant publication, le commentaire est vérifié automatiquement (insultes, haine, spam) par un filtre de mots et Cloudflare Workers AI. Votre adresse IP n'est pas conservée ; un marqueur anonyme de courte durée (supprimé en moins d'un jour) empêche les envois répétés. Pour faire retirer un commentaire, utilisez le formulaire de contact. Base légale : votre consentement lors de la publication (art. 6, par. 1, a)) et notre intérêt légitime à une communauté sûre (art. 6, par. 1, f)).
 
 **Assistant de chat (Mr. D.O.M.).** Si vous tapez une question dans le chat, la question et la conversation en cours sont envoyées à Cloudflare Workers AI pour générer la réponse. Nous ne conservons pas les conversations et ne les utilisons à aucune autre fin. Merci de ne pas saisir de données personnelles. Base légale : notre intérêt légitime à répondre aux questions des visiteurs (art. 6, par. 1, f)).
 

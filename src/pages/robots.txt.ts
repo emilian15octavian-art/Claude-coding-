@@ -6,7 +6,7 @@ export const GET: APIRoute = ({ site }) => {
   const body = [
     '# Bleeding Debts 316: search engines and AI assistants are welcome.',
     ...bots.flatMap((b) => [`User-agent: ${b}`, 'Allow: /', '']),
-    'User-agent: *', 'Allow: /', 'Disallow: /api/', 'Disallow: /dom/', '',
+    'User-agent: *', 'Allow: /', 'Disallow: /api/', 'Disallow: /dom/', 'Disallow: /admin/', '',
     `Sitemap: ${new URL('/sitemap.xml', site)}`, '',
   ].join('\n');
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
