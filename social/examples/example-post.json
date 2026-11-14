@@ -1,0 +1,10 @@
+{
+  "when": "2099-12-01T21:00:00+02:00",
+  "platforms": ["facebook", "instagram"],
+  "type": "image",
+  "media": ["example.jpg"],
+  "caption": {
+    "facebook": "EXAMPLE ONLY. Copy this file to social/queue/ and edit it. Listen: https://claude-coding.bleedingdebts316.workers.dev/en/links/",
+    "instagram": "EXAMPLE ONLY. Copy this file to social/queue/ and edit it. Link in bio.\n\n#BleedingDebts316 #metal"
+  }
+}

@@ -105,3 +105,30 @@ npx playwright install chromium   # once, for the accessibility and interaction 
 npm run check                     # everything except Lighthouse
 npm run check:all                 # including Lighthouse (uses your Chrome; set CHROME_PATH if not found)
 ```
+
+---
+
+## The hive's post scheduler
+
+**What it does.** Every 15 minutes the "Hive post scheduler" action reads `social/queue/`. A post whose `when`
+has passed is published to the Facebook Page and the Instagram account, then its file moves to `social/done/`
+with the links. GitHub can start a run 5 to 30 minutes late, so a post set for 21:00 may go out at 21:20.
+
+**To schedule a post.** Put the picture or video in `public/social/` (JPEG for pictures, MP4 for reels), copy
+`social/examples/example-post.json` to `social/queue/`, edit it, and commit both to `main`. The media must be
+live on the site before the post can go out, so commit at least 15 minutes before the post's time.
+
+**One-time setup (until this is done, the action only reports what it would publish).** In the repository's
+Settings → Secrets and variables → Actions, add three secrets:
+
+| Secret | What it is |
+|---|---|
+| `META_PAGE_ID` | The Facebook Page's numeric ID |
+| `META_PAGE_TOKEN` | A Page access token that does not expire, from your own app at developers.facebook.com, with the permissions `pages_manage_posts`, `pages_read_engagement` and `instagram_content_publish` |
+| `META_IG_USER_ID` | The numeric ID of the Instagram professional account linked to that Page |
+
+The Instagram account must be a Creator or Business account linked to the Page. Never put the token in a file.
+
+**If the action fails.** Open the failed run: each problem is one line starting with ❌ that names the file.
+A post that reached one platform but not the other stays in the queue and only the missing platform is retried.
+"Meta said: …" is Meta's own error text; the usual causes are an expired token or a media file Meta could not fetch.

@@ -61,6 +61,8 @@ You can do everything on github.com:
 | Legal entity, services (Brevo, Turnstile…), shipping costs | `src/content/settings/site.json` |
 | Press kit downloads (rider, stage plot, logos) | `public/press/` |
 | Colours and fonts | `src/styles/global.css` (top of the file) |
+| Posts waiting to be published by the hive's own scheduler | `social/queue/*.json` + media in `public/social/` (example: `social/examples/example-post.json`; setup in `MAINTENANCE.md`) |
+| Social visuals made by the promo hive (feed post, story, short video) | made automatically, see `scripts/hive/make-media.mjs`; tools and licences in `OPEN-SOURCE.md` |
 
 Every folder has an **`examples/`** subfolder with a complete example file. **Copy it one level up and edit it.** Files in `examples/` are never published.
 

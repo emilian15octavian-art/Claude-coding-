@@ -27,14 +27,37 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Write the draft
+        id: draft
         run: |
-          added=$(git diff --name-only --diff-filter=A "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null || true)
+          added=$(git diff --name-only --diff-filter=A "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null | tr '\n' ' ' || true)
+          echo "added=$added" >> "$GITHUB_OUTPUT"
           node scripts/bots/newsletter-draft.mjs $added
+      # 🐝 The hive's media kit: a feed post, a story and a short video for each new item (open-source tools only).
+      # If it fails, the newsletter draft is still posted.
+      - name: Make the visuals
+        id: media
+        continue-on-error: true
+        run: |
+          [ -f reports/newsletter-draft.md ] || exit 0
+          npm ci --no-audit --no-fund
+          node scripts/hive/make-media.mjs $added
+          if ls reports/hive/*.jpg >/dev/null 2>&1; then echo "made=true" >> "$GITHUB_OUTPUT"; fi
+        env:
+          added: ${{ steps.draft.outputs.added }}
+      - name: Keep the visuals for download
+        if: steps.media.outputs.made == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hive-media
+          path: reports/hive/
+          retention-days: 30
       - name: Post it as an issue
         env:
           GH_TOKEN: ${{ github.token }}
+          MEDIA: ${{ steps.media.outputs.made }}
         run: |
           [ -f reports/newsletter-draft.md ] || exit 0
+          if [ "$MEDIA" = "true" ]; then printf '\n---\n\n## 🐝 Visuals\n\nA feed post, a story and a short video for each item are ready: open %s and download **hive-media** (kept for 30 days).\n' "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> reports/newsletter-draft.md; fi
           gh label create newsletter --color 0E8A16 --description "Newsletter drafts from Mr. D.O.M." --force >/dev/null
           { echo "@${{ github.repository_owner }}"; echo; cat reports/newsletter-draft.md; } > issue.md
           gh issue create --label newsletter --title "🐒 Newsletter draft: $(date -u +%F)" --body-file issue.md

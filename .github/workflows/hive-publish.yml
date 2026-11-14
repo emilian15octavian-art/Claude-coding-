@@ -1,0 +1,51 @@
+# 🐝 The promo hive's own scheduler: every 15 minutes it looks in social/queue/ and publishes the posts
+# whose time has come to the Facebook Page and the Instagram account, then moves them to social/done/.
+# It needs three secrets (META_PAGE_ID, META_PAGE_TOKEN, META_IG_USER_ID); until they are set it only
+# reports what it would do. GitHub can start a scheduled run 5 to 30 minutes late: plan around that.
+name: Hive post scheduler
+
+on:
+  schedule:
+    - cron: '6,21,36,51 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Only show what would be published (send nothing)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hive-publish
+  cancel-in-progress: false
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://claude-coding.bleedingdebts316.workers.dev' }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - name: Publish what is due
+        env:
+          META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+        run: node scripts/hive/publish.mjs ${{ inputs.dry_run && '--dry-run' || '' }}
+      # Runs even when one post failed, so the posts that did go out are recorded and never sent twice.
+      - name: Record what was published
+        if: always()
+        run: |
+          git add social
+          git diff --cached --quiet && exit 0
+          git config user.name "promo-hive[bot]"
+          git config user.email "promo-hive@users.noreply.github.com"
+          git commit -m "Hive: record published posts [skip ci]"
+          git pull --rebase --autostash
+          git push
