@@ -7,6 +7,11 @@ The live Bleeding Debts 316 website moved to **GitLab** on 6 November 2026:
 - This GitHub repository is an **outdated copy**. Changes made here never reach the live site.
   Its "Check and deploy" workflow fails at the live-site smoke test for that reason; that is expected.
 
+## Owner's rule (14 November 2026)
+
+- **Deploy only from GitLab.** Never deploy the site from GitHub, and do not add Cloudflare tokens or deploy steps here.
+- **GitHub is for research only:** searching open-source projects that can help, then applying what is useful in the GitLab project.
+
 ## Before changing anything for the site
 
 1. Work in the GitLab project, not here. From a cloud session without a GitLab checkout, GitLab is
