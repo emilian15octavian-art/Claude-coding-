@@ -12,6 +12,9 @@ only *run* as a separate program (like ffmpeg). AGPL tools are fine to self-host
 
 | Job | Tool | Licence | Where |
 |---|---|---|---|
+| Cold-view Reel engine (instead of CapCut templates) | OpenCV, NumPy, Pillow + ffmpeg | Apache-2.0, BSD, HPND, LGPL/GPL | `scripts/hive/cold/make-reel3.py` |
+| Viral exam: scores 3+ hook versions per post on visual, audio, text, captions, description; blocks failures (instead of paid "virality score" apps) | OpenCV, NumPy + ffmpeg (ebur128, silencedetect) | Apache-2.0, BSD, LGPL/GPL | `scripts/hive/cold/viral_exam.py`, `gate_payloads.py` |
+| Static Nunito fonts for the video engine | fontTools (to cut the variable font) | MIT (tool), OFL-1.1 (font) | `scripts/hive/cold/fonts/` |
 | Feed posts, stories and Reel frames (instead of Canva) | satori | MPL-2.0 | `scripts/hive/make-media.mjs`, `scripts/tools/make-covers.mjs` |
 | SVG to PNG | @resvg/resvg-js | MPL-2.0 | same |
 | Image resize and export | sharp | Apache-2.0 | same |

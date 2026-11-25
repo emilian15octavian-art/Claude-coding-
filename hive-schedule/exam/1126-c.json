@@ -1,0 +1,248 @@
+{
+ "id": "1126-c",
+ "date": "2026-11-26",
+ "time": "21:30",
+ "status": "PASS",
+ "winner": {
+  "variant": 1,
+  "hook": "Why metal singers *don't* lose their voice",
+  "video": "/home/user/dip8one_campaign/cold/out/1126-c_v1.mp4",
+  "total": 95,
+  "pass": true,
+  "scores": {
+   "visual": {
+    "points": 20,
+    "notes": [
+     "hook readable on frame 0 (8.0% text pixels) +5",
+     "scene motion in first 3 s 12.0 +4",
+     "4.1 scene cuts per 10 s +6",
+     "brightness 60 +2",
+     "bottom zone clear of text +3"
+    ]
+   },
+   "audio": {
+    "points": 20,
+    "notes": [
+     "loudness -11.2 LUFS +6",
+     "starts with energy (first second 100% of average) +7",
+     "no dead air +4",
+     "length 12.1 s (loops well) +3"
+    ]
+   },
+   "text": {
+    "points": 20,
+    "notes": [
+     "7 words +4",
+     "curiosity trigger +4",
+     "specific detail +3",
+     "open loop +3",
+     "no self-promo in the hook +3",
+     "plain words +3"
+    ]
+   },
+   "captions": {
+    "points": 15,
+    "notes": [
+     "max 7 words per card +5",
+     "cards [0] flash by too fast +0",
+     "hook is the first frame +4",
+     "ending loops back into the hook +3",
+     "big text in the safe zone (engine layout) +3"
+    ]
+   },
+   "description": {
+    "points": 20,
+    "notes": [
+     "first line short and adds to the hook +4",
+     "niche keywords for Instagram search +3",
+     "one-word-answer question +4",
+     "4 hashtags incl. niche +3",
+     "rules ok (no Spotify, no link-first) +3",
+     "232 characters +3"
+    ]
+   }
+  }
+ },
+ "variants": [
+  {
+   "variant": 1,
+   "hook": "Why metal singers *don't* lose their voice",
+   "video": "/home/user/dip8one_campaign/cold/out/1126-c_v1.mp4",
+   "total": 95,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (8.0% text pixels) +5",
+      "scene motion in first 3 s 12.0 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 60 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.2 LUFS +6",
+      "starts with energy (first second 100% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 20,
+     "notes": [
+      "7 words +4",
+      "curiosity trigger +4",
+      "specific detail +3",
+      "open loop +3",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 15,
+     "notes": [
+      "max 7 words per card +5",
+      "cards [0] flash by too fast +0",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 20,
+     "notes": [
+      "first line short and adds to the hook +4",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "232 characters +3"
+     ]
+    }
+   }
+  },
+  {
+   "variant": 2,
+   "hook": "Screaming wrecks your voice? *Not if* you do this",
+   "video": "/home/user/dip8one_campaign/cold/out/1126-c_v2.mp4",
+   "total": 88,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (9.3% text pixels) +5",
+      "scene motion in first 3 s 12.8 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 61 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.2 LUFS +6",
+      "starts with energy (first second 100% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 13,
+     "notes": [
+      "9 words +4",
+      "no curiosity trigger (why/how/nobody/mistake/truth/never/because...) +0",
+      "specific detail +3",
+      "no open loop +0",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 15,
+     "notes": [
+      "max 9 words per card +5",
+      "cards [0] flash by too fast +0",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 20,
+     "notes": [
+      "first line short and adds to the hook +4",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "232 characters +3"
+     ]
+    }
+   }
+  },
+  {
+   "variant": 3,
+   "hook": "The truth about screaming: your *voice* is fine",
+   "video": "/home/user/dip8one_campaign/cold/out/1126-c_v3.mp4",
+   "total": 92,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (8.6% text pixels) +5",
+      "scene motion in first 3 s 12.8 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 60 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.2 LUFS +6",
+      "starts with energy (first second 100% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 17,
+     "notes": [
+      "8 words +4",
+      "curiosity trigger +4",
+      "specific detail +3",
+      "no open loop +0",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 15,
+     "notes": [
+      "max 8 words per card +5",
+      "cards [0] flash by too fast +0",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 20,
+     "notes": [
+      "first line short and adds to the hook +4",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "232 characters +3"
+     ]
+    }
+   }
+  }
+ ]
+}

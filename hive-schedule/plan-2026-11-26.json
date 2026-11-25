@@ -1,0 +1,182 @@
+[
+ {
+  "id": "1126-a",
+  "date": "2026-11-26",
+  "time": "12:30",
+  "song": "audio/insurrextion_mania.mp3",
+  "start": 40.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-01.jpg",
+   "src/assets/images/gallery/bd316-09.jpg",
+   "src/assets/images/gallery/bd316-14.jpg",
+   "src/assets/images/gallery/bd316-22.jpg",
+   "src/assets/images/gallery/bd316-30.jpg"
+  ],
+  "hooks": [
+   "Why your song got *12 plays*",
+   "Your song didn't flop. *Nobody* saw it.",
+   "*3 reasons* your new song got ignored"
+  ],
+  "beats": [
+   "You posted a song, not a *reason*.",
+   "Your first 2 seconds: a *logo*.",
+   "You asked before they *felt* anything."
+  ],
+  "payoff": "We made all 3 mistakes. This is the fix.",
+  "loop": "Why your song got 12 plays...",
+  "caption": "We made every one of these mistakes with our own songs, so we are fixing them in public.\n\nWhich one hit you hardest: 1, 2 or 3? Comment the number 👇\n\n#musicianlife #independentartist #metal #musicmarketing",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1126-b",
+  "date": "2026-11-26",
+  "time": "17:00",
+  "song": "audio/cornocopium.flac",
+  "start": 42.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-05.jpg",
+   "src/assets/images/gallery/bd316-12.jpg",
+   "src/assets/images/gallery/bd316-24.jpg",
+   "src/assets/images/gallery/bd316-33.jpg",
+   "src/assets/images/gallery/bd316-41.jpg"
+  ],
+  "hooks": [
+   "Why *Christian metal* makes both sides angry",
+   "Church: too loud. Metalheads: too holy. *Us?*",
+   "Why the church and metal fans *don't trust* us"
+  ],
+  "beats": [
+   "Church people: *too loud* to be holy.",
+   "Metalheads: *too holy* to be metal.",
+   "Read the Psalms. They were *never quiet*."
+  ],
+  "payoff": "Heavy music. Honest faith. Pick a side.",
+  "loop": "Too loud for church. Too holy for metal. Why?",
+  "caption": "We hear it from both sides every week. The Psalms are full of shouting, doubt and anger, and they still end in praise.\n\nTeam church or team metal? Comment one word 👇\n\n#christianmetal #metal #metalhead #faith",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1126-c",
+  "date": "2026-11-26",
+  "time": "21:30",
+  "song": "audio/insurrextion_mania.mp3",
+  "start": 108.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-36.jpg",
+   "src/assets/images/gallery/bd316-04.jpg",
+   "src/assets/images/gallery/bd316-18.jpg",
+   "src/assets/images/gallery/bd316-27.jpg",
+   "src/assets/images/gallery/bd316-38.jpg"
+  ],
+  "hooks": [
+   "Why metal singers *don't* lose their voice",
+   "Screaming wrecks your voice? *Not if* you do this",
+   "The truth about screaming: your *voice* is fine"
+  ],
+  "beats": [
+   "Real screams use the *false* folds.",
+   "Power comes from *breath*, not your neck.",
+   "If it hurts, it's *wrong*. Stop."
+  ],
+  "payoff": "Technique, not damage.",
+  "loop": "Why screaming doesn't wreck a metal voice",
+  "caption": "Healthy screaming is a technique: false vocal folds, breath support, no pain. If it hurts, stop and see a vocal coach.\n\nScreamers: which scream did you learn first? Reply in one word 👇\n\n#metalvocals #screaming #metal #christianmetal",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1127-a",
+  "date": "2026-11-27",
+  "time": "12:30",
+  "song": "audio/cornocopium.flac",
+  "start": 81.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-06.jpg",
+   "src/assets/images/gallery/bd316-13.jpg",
+   "src/assets/images/gallery/bd316-25.jpg",
+   "src/assets/images/gallery/bd316-34.jpg",
+   "src/assets/images/gallery/bd316-42.jpg"
+  ],
+  "hooks": [
+   "Why angry people *calm down* with metal",
+   "Metal makes you angry? Science says *no*",
+   "Why heavy music *calms* some people down"
+  ],
+  "beats": [
+   "2015 study: angry metal fans hit play.",
+   "Their anger did *not* go up.",
+   "They felt more *inspired* instead."
+  ],
+  "payoff": "Heavy music carries the heavy stuff.",
+  "loop": "Why metal calms angry people down",
+  "caption": "Sharman and Dingle, University of Queensland (2015): metal fans who listened to extreme music while angry did not get angrier. They felt more active and inspired. Same for us.\n\nWhat song do you play when you are angry? Comment it 👇\n\n#metal #metalhead #musicpsychology #christianmetal",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1127-b",
+  "date": "2026-11-27",
+  "time": "17:00",
+  "song": "audio/insurrextion_mania.mp3",
+  "start": 38.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-10.jpg",
+   "src/assets/images/gallery/bd316-16.jpg",
+   "src/assets/images/gallery/bd316-26.jpg",
+   "src/assets/images/gallery/bd316-35.jpg",
+   "src/assets/images/gallery/bd316-43.jpg"
+  ],
+  "hooks": [
+   "Why this *drop* hits harder than it should",
+   "Wait for the *drop*. Turn it up first.",
+   "Why silence makes this *drop* heavier"
+  ],
+  "beats": [
+   "Your brain needs *contrast*.",
+   "Quiet first. Then *everything*.",
+   "That's InsurREXion (MANIA)."
+  ],
+  "payoff": "Play it again. You'll feel it coming.",
+  "loop": "Why this drop hits harder. Turn it up.",
+  "caption": "Producers call it contrast: a quiet bar right before the drop makes the drop feel twice as big. Full song on our profile.\n\nDid you feel it? Yes or no 👇\n\n#metal #musicproduction #numetal #christianmetal",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1127-c",
+  "date": "2026-11-27",
+  "time": "21:30",
+  "song": "audio/cornocopium.flac",
+  "start": 63.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-07.jpg",
+   "src/assets/images/gallery/bd316-21.jpg",
+   "src/assets/images/gallery/bd316-29.jpg",
+   "src/assets/images/gallery/bd316-37.jpg",
+   "src/assets/images/gallery/bd316-44.jpg"
+  ],
+  "hooks": [
+   "Why most bands *quit* in year two",
+   "Nobody tells you year two is the *hardest*",
+   "The real reason most bands *quit*"
+  ],
+  "beats": [
+   "Money runs out *before* fans arrive.",
+   "The day job takes your *best* hours.",
+   "Nobody claps for practice at *midnight*."
+  ],
+  "payoff": "We're still here. Day jobs and all.",
+  "loop": "Why most bands quit in year two",
+  "caption": "Most bands we know stopped in year two. Not because the music was bad, but because the money, the hours and the silence wear you down.\n\nMusicians: which year are you in? Comment the number 👇\n\n#bandlife #musicianlife #independentartist #metal",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ }
+]

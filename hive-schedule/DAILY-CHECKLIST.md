@@ -46,6 +46,12 @@ this checklist is the part that only you can do, plus what to check so the next 
 - **Cross-post every Reel** to Facebook, TikTok and YouTube Shorts: same video, extra free reach
 - **Saves and shares** count more than likes: "save this" and "send this to…" prompts work
 
+## The viral exam (since 26 Nov)
+
+- Every post is written with **3 hook versions**; `scripts/hive/cold/viral_exam.py` scores each on visual, audio, hook text, captions and description
+- **80+ and at least 12/20 in every area** to pass; the best passing version is posted; no pass = not posted
+- Hooks: "why X" / "N reasons", readable on frame 0, max ~7 words. No logo, countdown or "link in bio" inside the video
+
 ## Rules
 
 - English only, for now
