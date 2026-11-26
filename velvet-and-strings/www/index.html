@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#14060c">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: blob: capacitor: https://localhost http://localhost; media-src 'self' data: blob:;">
+<title>Velvet &amp; Strings</title>
+<style>
+:root{
+  --bg:#14060c; --bg2:#1f0a14; --card:#2a0e1b; --card2:#361225; --line:#4d1d33;
+  --text:#f6e9ee; --muted:#c7a3b3; --gold:#e8b74a; --gold2:#ffd77a; --teal:#2ec4b6; --rose:#d9466f;
+  --radius:16px; --tap:48px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{
+  font-family:Georgia,"Times New Roman",serif; font-size:16px; line-height:1.4;
+  background:radial-gradient(120% 60% at 50% 0%,#3a0f22 0%,var(--bg) 60%) fixed;
+  padding:calc(env(safe-area-inset-top) + 8px) 12px calc(env(safe-area-inset-bottom) + 96px);
+  -webkit-user-select:none; user-select:none; overscroll-behavior-y:contain;
+}
+input,textarea,select{-webkit-user-select:text;user-select:text}
+h1{font-size:1.45rem;margin:4px 0 0;letter-spacing:.5px;color:var(--gold2);font-style:italic}
+h2{font-size:1.02rem;margin:0 0 10px;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;font-family:system-ui,sans-serif;font-weight:700}
+.sub{color:var(--muted);font-size:.85rem;margin:0}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin-bottom:12px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.badge{background:var(--card2);border:1px solid var(--gold);color:var(--gold2);padding:4px 10px;border-radius:999px;font:700 .85rem system-ui,sans-serif;white-space:nowrap}
+.card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.presets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(min-width:600px){.presets{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.presets{grid-template-columns:repeat(4,1fr)}}
+.preset{min-height:var(--tap);text-align:left;padding:8px 10px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--text);font:600 .9rem system-ui,sans-serif}
+.preset small{display:block;color:var(--muted);font-weight:400;font-size:.75rem;margin-top:2px}
+.preset.on{border-color:var(--gold);background:#4a1730;box-shadow:inset 0 0 0 1px var(--gold)}
+.vibe{margin:12px 0 0;font-size:.95rem}
+.secret{margin:8px 0 0;padding:10px;border-left:3px solid var(--gold);background:rgba(232,183,74,.08);border-radius:8px;font-size:.9rem;color:#f3dca9}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button,.btn{min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--text);font:600 .88rem system-ui,sans-serif;flex:1 1 auto}
+.seg button.on{background:var(--gold);color:#2a0e1b;border-color:var(--gold)}
+.btn.primary{background:var(--rose);border-color:var(--rose);color:#fff}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#2a0e1b}
+.btn:active,.seg button:active,.preset:active,.chord:active{transform:scale(.97)}
+label.row{display:flex;align-items:center;gap:10px;margin:10px 0;font:600 .9rem system-ui,sans-serif;color:var(--muted)}
+.lbl{font:600 .78rem system-ui,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:12px 0 6px}
+input[type=range]{flex:1;accent-color:var(--gold);height:32px}
+.chords{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.chord{min-height:84px;border-radius:14px;border:1px solid var(--line);background:var(--card2);color:var(--text);padding:8px 4px;text-align:center}
+.chord .nm{font:700 1.15rem system-ui,sans-serif;color:var(--gold2);word-break:break-word}
+.chord .rn{font-size:.85rem;color:var(--muted);font-style:italic;margin-top:4px}
+.chord.sel{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.chord.play{background:#5a1a37;border-color:var(--teal);box-shadow:0 0 0 2px var(--teal)}
+.chord.twisted .rn{color:var(--teal)}
+.twistnote{font-size:.85rem;color:var(--teal);margin:8px 0 0;min-height:1.2em}
+pre.tab{margin:0;background:#0d0408;border:1px solid var(--line);border-radius:12px;padding:12px;font:15px/1.5 "Courier New",ui-monospace,monospace;color:#f0d9e2;overflow-x:auto}
+.pianowrap{overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+.piano{position:relative;display:flex;min-width:612px;height:170px;touch-action:none}
+.wk{flex:1;position:relative;background:linear-gradient(#fbf6f0,#e7dccf);border:1px solid #6b4a55;border-radius:0 0 8px 8px;margin-right:1px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font:600 10px system-ui,sans-serif;color:#7b5b66}
+.bk{position:absolute;top:0;height:60%;background:linear-gradient(#2b1a20,#0b0507);border:1px solid #000;border-radius:0 0 6px 6px;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font:600 8px system-ui,sans-serif;color:#998}
+.wk.chordt{background:linear-gradient(#ffe7a3,var(--gold));color:#3a1a00}
+.bk.chordt{background:linear-gradient(#f2c45a,#a87a14);color:#2a1500}
+.wk.voc{box-shadow:inset 0 -26px 0 var(--teal);color:#002a26}
+.bk.voc{box-shadow:inset 0 -18px 0 var(--teal);color:#002a26}
+.wk.down{filter:brightness(.8)}
+.bk.down{filter:brightness(1.8)}
+.legend{display:flex;gap:14px;font:600 .78rem system-ui,sans-serif;color:var(--muted);margin-top:8px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
+table.voc{width:100%;border-collapse:collapse;font:500 .9rem system-ui,sans-serif}
+table.voc td,table.voc th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:left}
+table.voc th{color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase}
+table.voc td.hz{color:var(--teal);font-variant-numeric:tabular-nums}
+.section{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px}
+.section .top{display:flex;gap:6px;align-items:center}
+.section select,.section textarea,.addrow select,input[type=text]{background:#12050a;color:var(--text);border:1px solid var(--line);border-radius:10px;font:500 .95rem system-ui,sans-serif;padding:10px;min-height:44px}
+.section select{flex:1}
+.section textarea{width:100%;min-height:56px;margin-top:6px;resize:vertical}
+.ib{min-width:44px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:#12050a;color:var(--text);font:700 1rem system-ui,sans-serif}
+.ib.del{color:var(--rose)}
+.addrow{display:flex;gap:6px;margin-top:6px}
+.addrow select{flex:1}
+input[type=text]{width:100%}
+.prog{font:600 .8rem system-ui,sans-serif;color:var(--gold2);margin-top:6px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(20,6,12,.96);border-top:1px solid var(--line);padding:10px 12px calc(env(safe-area-inset-bottom) + 10px);display:flex;gap:8px;align-items:center;backdrop-filter:blur(6px)}
+.dock .btn{flex:0 0 auto;min-height:52px;font-size:1rem}
+.dock .playbtn{flex:1 1 auto}
+.dock .now{font:700 1.05rem system-ui,sans-serif;color:var(--gold2);min-width:62px;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 92px);transform:translateX(-50%);background:var(--teal);color:#002a26;padding:10px 16px;border-radius:999px;font:700 .9rem system-ui,sans-serif;opacity:0;transition:opacity .25s;pointer-events:none;z-index:30;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+footer{color:var(--muted);font-size:.75rem;text-align:center;margin:10px 0}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Velvet &amp; Strings</h1>
+    <p class="sub">Romance Songwriting Studio</p>
+  </div>
+  <div class="badges">
+    <span class="badge" id="keyBadge">Key</span>
+    <span class="badge" id="bpmBadge">BPM</span>
+  </div>
+</header>
+
+<section class="card">
+  <h2>Artist &amp; Archetype</h2>
+  <div class="presets" id="presets"></div>
+  <p class="vibe" id="vibe"></p>
+  <p class="secret" id="secret"></p>
+</section>
+
+<section class="card">
+  <h2>Tuning &amp; Harmonic Twist</h2>
+  <div class="lbl">Guitar tuning</div>
+  <div class="seg" id="tuningSeg"></div>
+  <div class="lbl">Harmonic twist</div>
+  <div class="seg" id="twistSeg"></div>
+  <p class="twistnote" id="twistNote"></p>
+</section>
+
+<section class="card">
+  <h2>Progression</h2>
+  <div class="chords" id="chords"></div>
+  <p class="sub" style="margin-top:8px">Tap a chord to select and hear it.</p>
+</section>
+
+<section class="card">
+  <h2>Studio Engine</h2>
+  <label class="row">Tempo <input type="range" id="tempo" min="55" max="130" step="1"><span id="tempoVal" style="min-width:64px;text-align:right;color:var(--gold2)"></span></label>
+  <label class="row"><input type="checkbox" id="metro" style="width:24px;height:24px;accent-color:var(--gold)"> Metronome click</label>
+  <label class="row">Volume <input type="range" id="vol" min="0" max="100" step="1" value="80"></label>
+  <div class="lbl">Groove</div>
+  <div class="seg" id="grooveSeg"></div>
+  <div class="lbl">Voice / choir</div>
+  <div class="seg" id="voiceSeg"></div>
+</section>
+
+<section class="card">
+  <h2>Guitar Tab <span id="tabChord" style="color:var(--text);text-transform:none;letter-spacing:0"></span></h2>
+  <pre class="tab" id="tab"></pre>
+</section>
+
+<section class="card">
+  <h2>Piano C3 – E5</h2>
+  <div class="pianowrap"><div class="piano" id="piano"></div></div>
+  <div class="legend"><span><i class="dot" style="background:var(--gold)"></i>Chord tones</span><span><i class="dot" style="background:var(--teal)"></i>Vocal / choir</span></div>
+</section>
+
+<section class="card">
+  <h2>Vocal &amp; Choir Pitches</h2>
+  <table class="voc"><thead><tr><th>Part</th><th>Note</th><th>Frequency</th></tr></thead><tbody id="vocTable"></tbody></table>
+</section>
+
+<section class="card">
+  <h2>Song Structure</h2>
+  <input type="text" id="songTitle" placeholder="Song title" maxlength="80">
+  <div class="lbl">Sections</div>
+  <div id="sections"></div>
+  <div class="addrow">
+    <select id="addType"></select>
+    <button class="btn gold" id="addBtn" style="flex:0 0 auto">+ Add</button>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:12px">
+    <button class="btn primary" id="exportBtn">Export song sheet (.txt)</button>
+  </div>
+</section>
+
+<footer>Works fully offline · synthesized with the Web Audio API</footer>
+
+<div class="dock">
+  <button class="btn primary playbtn" id="playBtn">&#9654; Play</button>
+  <div class="now" id="nowChord">–</div>
+  <button class="btn" id="cueBtn">&#9835; Sing Cue</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* ================= Music theory helpers ================= */
+const SHARP = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const DISPLAY = ['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'];
+const PC = {C:0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,F:5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11};
+const QUAL = {
+  '':[0,4,7], m:[0,3,7], '7':[0,4,7,10], maj7:[0,4,7,11], m7:[0,3,7,10], maj9:[0,4,7,11,14],
+  '6':[0,4,7,9], m6:[0,3,7,9], add9:[0,4,7,14], '7sus4':[0,5,7,10], sus4:[0,5,7], sus2:[0,2,7],
+  dim:[0,3,6], aug:[0,4,8], '9':[0,4,7,10,14], m9:[0,3,7,10,14]
+};
+const mod = (n, m) => ((n % m) + m) % m;
+const midiName = m => DISPLAY[mod(m,12)] + (Math.floor(m/12) - 1);
+const midiHz = m => 440 * Math.pow(2, (m - 69) / 12);
+
+function parseChord(name){
+  const r = /^([A-G][#b]?)(.*?)(?:\/([A-G][#b]?))?$/.exec(name);
+  if (!r || !(r[2] in QUAL)) throw new Error('Unknown chord ' + name);
+  return { root:r[1], rootPc:PC[r[1]], qual:r[2], bass:r[3] || null, bassPc: r[3] ? PC[r[3]] : PC[r[1]] };
+}
+
+/* Build piano voicing + vocal parts from a chord definition. */
+function voiceChord(def, prevLead){
+  const p = parseChord(def.name);
+  const ints = QUAL[p.qual];
+  const pcs = [...new Set(ints.map(i => mod(p.rootPc + i, 12)))];
+  const upper = [...new Set(ints.map(i => 60 + mod(p.rootPc + i, 12)))].sort((a,b)=>a-b);
+  const piano = [48 + p.bassPc, ...upper];
+  const tones = [];
+  for (let m = 48; m <= 81; m++) if (pcs.includes(mod(m,12))) tones.push(m);
+  let best = null;
+  for (const t of tones) {
+    if (t < 62 || t > 74) continue;
+    const score = Math.abs(t - prevLead) + (mod(t,12) === p.rootPc ? 0.5 : 0);
+    if (best === null || score < best.s) best = { t, s: score };
+  }
+  const lead = best.t, k = tones.indexOf(lead);
+  return { piano, lead, harmony:[lead, tones[k-1]], choir:[lead, tones[k-1], tones[k-2]] };
+}
+
+/* Barre/open shape generator for twist chords (standard tuning, low E -> high e). */
+function shapeFor(rootPc, minor){
+  const eF = mod(rootPc - 4, 12), aF = mod(rootPc - 9, 12);
+  if (aF <= eF) return minor ? [-1,aF,aF+2,aF+2,aF+1,aF] : [-1,aF,aF+2,aF+2,aF+2,aF];
+  return minor ? [eF,eF+2,eF+2,eF,eF,eF] : [eF,eF+2,eF+2,eF+1,eF,eF];
+}
+
+/* ================= Presets ================= */
+const X = -1;
+const RAW = [
+  { id:'isaak', artist:'Chris Isaak', style:'Noir Surf-Nocturne', bpm:108, key:'B', minor:true,
+    vibe:'Moonlit reverb-drenched twang, a lonely highway after midnight and a heart that will not stop wanting.',
+    secret:'Tremolo-picked single notes on a hollow-body drowned in spring reverb; sing breathy and close, then flip into falsetto on the last word of each line.',
+    chords:[['Bm','i',[X,2,4,4,3,2]],['A','VII',[X,0,2,2,2,0]],['E','IV',[0,2,2,1,0,0]],['E','IV',[0,2,2,1,0,0]]] },
+  { id:'him', artist:'HIM', style:'Gothic Love Metal', bpm:122, key:'C#', minor:true,
+    vibe:'Velvet darkness and heavy guitars: love and death in the same breath, sung like a dark serenade.',
+    secret:'Down-tune, double the riff with a clean chorus guitar, and keep the vocal low and seductive in the verse before a soaring baritone chorus.',
+    chords:[['C#m','i',[X,4,6,6,5,4]],['A','VI',[X,0,2,2,2,0]],['E','III',[0,2,2,1,0,0]],['B','VII',[X,2,4,4,4,2]]] },
+  { id:'elvis', artist:'Elvis Presley', style:'1950s Crooner Ballad', bpm:70, key:'C', minor:false,
+    vibe:'A slow-dance doo-wop progression under a silky, trembling croon.',
+    secret:'12/8 triplet piano feel, warm slapback echo on the voice, and a gospel-style backing "ooh" choir answering every line.',
+    chords:[['C','I',[X,3,2,0,1,0]],['Em','iii',[0,2,2,0,0,0]],['Am','vi',[X,0,2,2,1,0]],['F','IV',[1,3,3,2,1,1]]] },
+  { id:'orbison', artist:'Roy Orbison', style:'Operatic Heartbreak', bpm:78, key:'G', minor:false,
+    vibe:'Grand, cinematic heartache that keeps climbing until the voice breaks open.',
+    secret:'The borrowed minor iv (C to Cm) is the tear in the voice; build the melody in steps so the final chorus lands an octave higher.',
+    chords:[['G','I',[3,2,0,0,0,3]],['C','IV',[X,3,2,0,1,0]],['Cm','iv',[X,3,5,5,4,3]],['D7','V7',[X,X,0,2,1,2]]] },
+  { id:'everly', artist:'The Everly Brothers', style:'Acoustic Harmony', bpm:96, key:'E', minor:false,
+    vibe:'Bright open-chord strumming with two voices locked together like siblings.',
+    secret:'Keep the harmony a strict third above the lead and move both voices in parallel; a capo and big open chords keep it ringing.',
+    chords:[['E','I',[0,2,2,1,0,0]],['C#m','vi',[X,4,6,6,5,4]],['A','IV',[X,0,2,2,2,0]],['B7','V7',[X,2,1,2,0,2]]] },
+  { id:'aerosmith', artist:'Aerosmith', style:'Arena Power Ballad', bpm:68, key:'D', minor:false,
+    vibe:'Lighters up: a piano intro grows into strings and an arena-size chorus.',
+    secret:'The A/C# walk-down bass line is the emotional engine; save the full band and the screamed high note for the last chorus.',
+    chords:[['D','I',[X,X,0,2,3,2]],['A/C#','V/3',[X,4,2,2,2,0]],['Bm','vi',[X,2,4,4,3,2]],['G','IV',[3,2,0,0,0,3]]] },
+  { id:'beatles', artist:'The Beatles', style:'Baroque Pop Ballad', bpm:66, key:'C', minor:false,
+    vibe:'A descending inner line under a string quartet and a tender, plain-spoken vocal.',
+    secret:'Hold the C chord and move only one note down (C, B, Bb) — the line-cliché pulls the ear toward the IV without leaving home.',
+    chords:[['C','I',[X,3,2,0,1,0]],['Cmaj7','Imaj7',[X,3,2,0,0,0]],['C7','I7',[X,3,2,3,1,0]],['F','IV',[1,3,3,2,1,1]]] },
+  { id:'modern', artist:'Modern Talking', style:'80s Euro-Disco Romance', bpm:115, key:'D', minor:true,
+    vibe:'Neon heartbreak on the dance floor: four-on-the-floor beat, sparkling synths and a falsetto hook.',
+    secret:'Double the chorus hook with a high falsetto an octave up and a low unison under it; octave-bouncing bass on every eighth note.',
+    chords:[['Dm','i',[X,X,0,2,3,1]],['Gm','iv',[3,5,5,3,3,3]],['C','VII',[X,3,2,0,1,0]],['F','III',[1,3,3,2,1,1]]] },
+  { id:'jones', artist:'Tom Jones', style:'Brass-Fueled Dramatic Soul', bpm:118, key:'A', minor:true,
+    vibe:'Big band brass stabs, a swaggering groove and a voice that could fill a stadium without a mic.',
+    secret:'Hit the E7 with horn stabs on the off-beats, and push the vocal from a growl in the verse to a full-chest belt on the chorus.',
+    chords:[['Am','i',[X,0,2,2,1,0]],['E7','V7',[0,2,0,1,0,0]],['Dm','iv',[X,X,0,2,3,1]],['E7','V7',[0,2,0,1,0,0]]] },
+  { id:'zeppelin', artist:'Led Zeppelin', style:'Mystical Folk-Rock Ballad', bpm:74, key:'D', minor:false,
+    vibe:'Fingerpicked open strings, ringing drones and a slow build from a whisper to thunder.',
+    secret:'Keep the top two strings ringing as a drone while the bass walks down (D, C, B, A); add recorder or mellotron flutes over the intro.',
+    chords:[['D','I',[X,X,0,2,3,2]],['Cadd9','bVII',[X,3,2,0,3,0]],['G/B','IV/3',[X,2,0,0,0,3]],['A7sus4','V7sus4',[X,0,2,0,3,0]]] },
+  { id:'buckley', artist:'Jeff Buckley', style:'Ethereal Art-Rock', bpm:60, key:'B', minor:true,
+    vibe:'Shimmering clean guitar, open extended chords and a voice that floats between a whisper and a cry.',
+    secret:'Let the maj7 and 9th extensions ring through a chorus and long reverb; sing in a fragile head voice and leave lots of space.',
+    chords:[['Bm7','i7',[X,2,4,2,3,2]],['Gmaj7','VImaj7',[3,2,0,0,0,2]],['Dmaj9','IIImaj9',[X,X,0,2,2,0]],['A6','VII6',[X,0,2,2,2,2]]] },
+  { id:'muddy', artist:'Muddy Waters', style:'Smoldering Chicago Blues', bpm:68, key:'E', minor:false,
+    vibe:'Slow-burning electric blues: slide guitar, harmonica cries and a voice full of gravel and pride.',
+    secret:'Use call and response — sing a line, let the slide guitar answer — and lean on the flat 7th in every chord.',
+    chords:[['E7','I7',[0,2,0,1,0,0]],['A7','IV7',[X,0,2,0,2,0]],['E7','I7',[0,2,0,1,0,0]],['B7','V7',[X,2,1,2,0,2]]] }
+];
+
+function buildChord(name, roman, frets, prevLead){
+  const v = voiceChord({name}, prevLead);
+  return { name, roman, frets, piano:v.piano, lead:v.lead, harmony:v.harmony, choir:v.choir };
+}
+const PRESETS = RAW.map(p => {
+  let prev = 67;
+  const chords = p.chords.map(([n,r,f]) => { const c = buildChord(n,r,f,prev); prev = c.lead; return c; });
+  return { ...p, tonicPc: PC[p.key], chords };
+});
+
+/* ================= State ================= */
+const TUNINGS = [
+  { id:'std',  label:'Standard E (0)',              shift:0,  drop:false, strings:['E','A','D','G','B','e'] },
+  { id:'dstd', label:'D Standard (-2)',             shift:-2, drop:false, strings:['D','G','C','F','A','d'] },
+  { id:'dropd',label:'Drop D (0, low string -2)',   shift:0,  drop:true,  strings:['D','A','D','G','B','e'] },
+  { id:'dropc',label:'Drop C (-2, low string -2)',  shift:-2, drop:true,  strings:['C','G','C','F','A','d'] }
+];
+const TWISTS = [
+  { id:'orig', label:'Original Progression' },
+  { id:'heart', label:'IV → iv Heartbreak Twist' },
+  { id:'dorian', label:'Dorian Major IV Lift' }
+];
+const GROOVES = [
+  { id:'arp', label:'Arpeggio + Bass' }, { id:'pad', label:'Lush Pad + Chords' }, { id:'68', label:'6/8 Ballad Pulse' }
+];
+const VOICES = [
+  { id:'off', label:'Voice Off' }, { id:'lead', label:'Lead' }, { id:'harm', label:'2-Part Harmony' }, { id:'choir', label:'3-Part Choir' }
+];
+const SECTION_TYPES = ['Intro','Verse','Pre-Chorus','Chorus','Bridge (Twist)','Solo','Climactic Chorus','Outro'];
+const DEFAULT_NOTES = {
+  'Intro':'Hum softly, no words yet', 'Verse':'Low, intimate, conversational', 'Pre-Chorus':'Build breath, rise in pitch',
+  'Chorus':'Open throat, full chest voice', 'Bridge (Twist)':'Fragile head voice over the twist', 'Solo':'Let the guitar sing; vocal ad-libs only',
+  'Climactic Chorus':'Key-change energy, belt the top note', 'Outro':'Whispered last line, let it ring'
+};
+const DEFAULT_INT = { 'Intro':35,'Verse':50,'Pre-Chorus':65,'Chorus':85,'Bridge (Twist)':60,'Solo':75,'Climactic Chorus':100,'Outro':30 };
+
+const store = {
+  get(k, d){ try { const v = localStorage.getItem('vs_' + k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem('vs_' + k, JSON.stringify(v)); } catch(e){} }
+};
+
+const S = {
+  preset: store.get('preset', 'isaak'),
+  tuning: store.get('tuning', 'std'),
+  twist: store.get('twist', 'orig'),
+  groove: store.get('groove', 'arp'),
+  voice: store.get('voice', 'lead'),
+  metro: store.get('metro', false),
+  tempo: null,
+  sel: 0,
+  title: store.get('title', ''),
+  sections: store.get('sections', null)
+};
+if (!PRESETS.some(p => p.id === S.preset)) S.preset = 'isaak';
+if (!Array.isArray(S.sections)) S.sections = ['Intro','Verse','Pre-Chorus','Chorus','Verse','Chorus','Bridge (Twist)','Climactic Chorus','Outro']
+  .map(t => ({ type:t, intensity:DEFAULT_INT[t], notes:DEFAULT_NOTES[t] }));
+
+const preset = () => PRESETS.find(p => p.id === S.preset);
+const tuning = () => TUNINGS.find(t => t.id === S.tuning);
+
+/* ================= Twist logic ================= */
+function twistChord(rootPc, minor, roman, prevLead){
+  const c = buildChord(DISPLAY[rootPc] + (minor ? 'm' : ''), roman, shapeFor(rootPc, minor), prevLead);
+  c.twisted = true;
+  return c;
+}
+function progression(){
+  const p = preset();
+  const chords = p.chords.map(c => ({ ...c }));
+  let note = '';
+  if (S.twist === 'orig') return { chords, note };
+  const ivPc = mod(p.tonicPc + 5, 12);
+  let idx = chords.findIndex(c => parseChord(c.name).rootPc === ivPc);
+  if (idx < 0) idx = 2;
+  const prevLead = idx > 0 ? chords[idx-1].lead : 67;
+  const cur = parseChord(chords[idx].name);
+  if (S.twist === 'heart') {
+    if (cur.rootPc === ivPc && cur.qual.startsWith('m')) {
+      // already minor iv: borrow the darker bVI before it for extra heartbreak
+      const j = idx === 0 ? 1 : idx - 1;
+      chords[j] = twistChord(mod(p.tonicPc + 8, 12), false, 'bVI', j > 0 ? chords[j-1].lead : 67);
+      note = 'Progression already uses the minor iv, so the borrowed bVI is added before it for a deeper ache.';
+    } else {
+      chords[idx] = twistChord(ivPc, true, 'iv', prevLead);
+      note = 'Chord ' + (idx+1) + ' becomes the borrowed minor iv: the major third drops a semitone — instant heartbreak.';
+    }
+  } else if (S.twist === 'dorian') {
+    if (cur.rootPc === ivPc && !cur.qual.startsWith('m')) {
+      // progression already has a major IV: lift the vi to a major II (Lydian-bright secondary lift)
+      const j = idx === 0 ? 1 : idx - 1;
+      chords[j] = twistChord(mod(p.tonicPc + 2, 12), false, 'II', j > 0 ? chords[j-1].lead : 67);
+      note = 'Progression already has a major IV, so chord ' + (j+1) + ' lifts to a bright major II leading into it.';
+    } else {
+      chords[idx] = twistChord(ivPc, false, 'IV', prevLead);
+      note = 'Chord ' + (idx+1) + ' becomes a major IV — the raised 6th of the Dorian mode lifts the sadness into hope.';
+    }
+  }
+  return { chords, note };
+}
+
+/* ================= Display transposition ================= */
+function displayName(chordName){
+  const t = tuning();
+  if (t.shift === 0) return chordName;
+  const p = parseChord(chordName);
+  let s = DISPLAY[mod(p.rootPc + t.shift, 12)] + p.qual;
+  if (p.bass) s += '/' + DISPLAY[mod(p.bassPc + t.shift, 12)];
+  return s;
+}
+function displayFrets(frets){
+  const t = tuning();
+  return frets.map((f, i) => (i === 0 && t.drop && f >= 0) ? f + 2 : f);
+}
+const sh = m => m + tuning().shift;
+
+/* ================= Rendering ================= */
+const $ = id => document.getElementById(id);
+
+function renderSeg(el, items, cur, onPick){
+  el.innerHTML = '';
+  items.forEach(it => {
+    const b = document.createElement('button');
+    b.textContent = it.label; b.className = it.id === cur ? 'on' : '';
+    b.addEventListener('click', () => onPick(it.id));
+    el.appendChild(b);
+  });
+}
+
+function renderPresets(){
+  const el = $('presets'); el.innerHTML = '';
+  PRESETS.forEach(p => {
+    const b = document.createElement('button');
+    b.className = 'preset' + (p.id === S.preset ? ' on' : '');
+    b.innerHTML = '<span></span><small></small>';
+    b.firstChild.textContent = p.artist;
+    b.lastChild.textContent = p.style + ' · ' + p.bpm + ' BPM';
+    b.addEventListener('click', () => {
+      S.preset = p.id; S.sel = 0; S.tempo = p.bpm; store.set('preset', p.id);
+      if (Engine.playing) Engine.bar = 0;
+      renderAll();
+    });
+    el.appendChild(b);
+  });
+}
+
+let PROG = progression();
+
+function renderAll(){
+  PROG = progression();
+  const p = preset(), t = tuning();
+  renderPresets();
+  $('vibe').textContent = p.style + ' — ' + p.vibe;
+  $('secret').textContent = 'Studio secret: ' + p.secret;
+  $('keyBadge').textContent = DISPLAY[mod(p.tonicPc + t.shift, 12)] + (p.minor ? ' minor' : ' major');
+  if (S.tempo === null) S.tempo = p.bpm;
+  $('tempo').value = S.tempo; $('tempoVal').textContent = S.tempo + ' BPM';
+  $('bpmBadge').textContent = S.tempo + ' BPM';
+  $('metro').checked = !!S.metro;
+  renderSeg($('tuningSeg'), TUNINGS, S.tuning, id => { S.tuning = id; store.set('tuning', id); renderAll(); });
+  renderSeg($('twistSeg'), TWISTS, S.twist, id => { S.twist = id; store.set('twist', id); renderAll(); });
+  renderSeg($('grooveSeg'), GROOVES, S.groove, id => { S.groove = id; store.set('groove', id); renderAll(); });
+  renderSeg($('voiceSeg'), VOICES, S.voice, id => { S.voice = id; store.set('voice', id); renderAll(); });
+  $('twistNote').textContent = PROG.note;
+  renderChords(); renderChordDetail(); renderSections();
+}
+
+function renderChords(){
+  const el = $('chords'); el.innerHTML = '';
+  PROG.chords.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.className = 'chord' + (i === S.sel ? ' sel' : '') + (c.twisted ? ' twisted' : '') + (Engine.playing && Engine.uiBar === i ? ' play' : '');
+    b.innerHTML = '<div class="nm"></div><div class="rn"></div>';
+    b.firstChild.textContent = displayName(c.name);
+    b.lastChild.textContent = c.roman;
+    b.addEventListener('click', () => { S.sel = i; renderChords(); renderChordDetail(); Engine.auditionChord(i); });
+    el.appendChild(b);
+  });
+}
+
+function voiceParts(c){
+  if (S.voice === 'lead') return [c.lead];
+  if (S.voice === 'harm') return c.harmony;
+  if (S.voice === 'choir') return c.choir;
+  return [];
+}
+
+function renderChordDetail(){
+  const i = (Engine.playing ? Engine.uiBar : S.sel);
+  const c = PROG.chords[i] || PROG.chords[0];
+  const t = tuning();
+  // Tab: top line = highest string
+  const frets = displayFrets(c.frets);
+  const lines = [];
+  for (let s = 5; s >= 0; s--) {
+    const lab = (t.strings[s] + ' ').slice(0, 2);
+    const f = frets[s] < 0 ? 'x' : String(frets[s]);
+    const cell = ('---' + f + '---').slice(f.length > 1 ? 1 : 0);
+    lines.push(lab + '|' + cell + '|' + cell + '|');
+  }
+  $('tab').textContent = lines.join('\n');
+  $('tabChord').textContent = '· ' + displayName(c.name) + ' (' + t.label + ')';
+  $('nowChord').textContent = displayName(c.name);
+  // Piano highlight
+  const fold = m => { m = sh(m); while (m < 48) m += 12; while (m > 76) m -= 12; return m; };
+  const chordSet = new Set(c.piano.map(fold));
+  const vocal = voiceParts(c).length ? voiceParts(c) : c.choir;
+  const vocSet = new Set(vocal.map(fold));
+  document.querySelectorAll('#piano [data-m]').forEach(k => {
+    const m = +k.dataset.m;
+    k.classList.toggle('chordt', chordSet.has(m));
+    k.classList.toggle('voc', vocSet.has(m));
+  });
+  // Vocal table
+  const rows = [['Lead', c.lead]];
+  rows.push(['Harmony (2-part)', c.harmony[1]]);
+  rows.push(['Choir low (3-part)', c.choir[2]]);
+  $('vocTable').innerHTML = '';
+  rows.forEach(([part, m]) => {
+    const tr = document.createElement('tr');
+    const n = sh(m);
+    tr.innerHTML = '<td></td><td></td><td class="hz"></td>';
+    tr.children[0].textContent = part;
+    tr.children[1].textContent = midiName(n);
+    tr.children[2].textContent = midiHz(n).toFixed(2) + ' Hz';
+    $('vocTable').appendChild(tr);
+  });
+}
+
+function buildPiano(){
+  const el = $('piano'); el.innerHTML = '';
+  const whites = [];
+  for (let m = 48; m <= 76; m++) if (!SHARP[m % 12].includes('#')) whites.push(m);
+  const w = 100 / whites.length;
+  whites.forEach(m => {
+    const k = document.createElement('div');
+    k.className = 'wk'; k.dataset.m = m;
+    k.textContent = m % 12 === 0 ? midiName(m) : '';
+    el.appendChild(k);
+  });
+  for (let m = 49; m <= 76; m++) {
+    if (!SHARP[m % 12].includes('#')) continue;
+    const leftWhite = whites.indexOf(m - 1);
+    const k = document.createElement('div');
+    k.className = 'bk'; k.dataset.m = m;
+    k.style.left = ((leftWhite + 1) * w - w * 0.3) + '%';
+    k.style.width = (w * 0.6) + '%';
+    el.appendChild(k);
+  }
+  const press = e => {
+    const k = e.target.closest('[data-m]'); if (!k) return;
+    e.preventDefault();
+    k.classList.add('down'); setTimeout(() => k.classList.remove('down'), 180);
+    Engine.ensure(); Engine.pianoNote(+k.dataset.m);
+  };
+  el.addEventListener('pointerdown', press);
+}
+
+/* ================= Song structure ================= */
+function saveSong(){ store.set('sections', S.sections); store.set('title', S.title); }
+function renderSections(){
+  const el = $('sections'); el.innerHTML = '';
+  const prog = PROG.chords.map(c => displayName(c.name)).join(' – ');
+  S.sections.forEach((sec, i) => {
+    const d = document.createElement('div'); d.className = 'section';
+    const top = document.createElement('div'); top.className = 'top';
+    const sel = document.createElement('select');
+    SECTION_TYPES.forEach(t => { const o = document.createElement('option'); o.value = o.textContent = t; sel.appendChild(o); });
+    sel.value = sec.type;
+    sel.addEventListener('change', () => { sec.type = sel.value; saveSong(); renderSections(); });
+    const up = document.createElement('button'); up.className = 'ib'; up.textContent = '↑'; up.setAttribute('aria-label','Move up');
+    up.addEventListener('click', () => { if (i > 0) { [S.sections[i-1], S.sections[i]] = [S.sections[i], S.sections[i-1]]; saveSong(); renderSections(); } });
+    const dn = document.createElement('button'); dn.className = 'ib'; dn.textContent = '↓'; dn.setAttribute('aria-label','Move down');
+    dn.addEventListener('click', () => { if (i < S.sections.length-1) { [S.sections[i+1], S.sections[i]] = [S.sections[i], S.sections[i+1]]; saveSong(); renderSections(); } });
+    const del = document.createElement('button'); del.className = 'ib del'; del.textContent = '✕'; del.setAttribute('aria-label','Remove section');
+    del.addEventListener('click', () => { S.sections.splice(i, 1); saveSong(); renderSections(); });
+    top.append(sel, up, dn, del);
+    const lab = document.createElement('label'); lab.className = 'row';
+    const rng = document.createElement('input'); rng.type = 'range'; rng.min = 30; rng.max = 100; rng.step = 5; rng.value = sec.intensity;
+    const val = document.createElement('span'); val.style.cssText = 'min-width:48px;text-align:right;color:var(--gold2)'; val.textContent = sec.intensity + '%';
+    rng.addEventListener('input', () => { sec.intensity = +rng.value; val.textContent = rng.value + '%'; saveSong(); });
+    lab.append('Intensity', rng, val);
+    const ta = document.createElement('textarea'); ta.placeholder = 'Vocal delivery notes'; ta.value = sec.notes || '';
+    ta.addEventListener('input', () => { sec.notes = ta.value; saveSong(); });
+    const pr = document.createElement('div'); pr.className = 'prog';
+    pr.textContent = (sec.type === 'Bridge (Twist)' ? 'Try a harmonic twist here · ' : '') + prog;
+    d.append(top, lab, ta, pr);
+    el.appendChild(d);
+  });
+  if (!S.sections.length) { const p = document.createElement('p'); p.className = 'sub'; p.textContent = 'No sections yet — add one below.'; el.appendChild(p); }
+}
+
+function songSheet(){
+  const p = preset(), t = tuning();
+  const tw = TWISTS.find(x => x.id === S.twist).label;
+  const L = [];
+  const title = (S.title || 'Untitled Romance').trim();
+  L.push(title.toUpperCase());
+  L.push('='.repeat(Math.min(60, title.length)));
+  L.push('Velvet & Strings · Romance Songwriting Studio');
+  L.push('');
+  L.push('Archetype : ' + p.artist + ' — ' + p.style);
+  L.push('Key       : ' + $('keyBadge').textContent);
+  L.push('Tempo     : ' + S.tempo + ' BPM');
+  L.push('Tuning    : ' + t.label);
+  L.push('Twist     : ' + tw);
+  L.push('Groove    : ' + GROOVES.find(g => g.id === S.groove).label);
+  L.push('Vocals    : ' + VOICES.find(v => v.id === S.voice).label);
+  L.push('');
+  L.push('Vibe: ' + p.vibe);
+  L.push('Studio secret: ' + p.secret);
+  L.push('');
+  L.push('PROGRESSION');
+  L.push('  ' + PROG.chords.map(c => displayName(c.name) + ' (' + c.roman + ')').join('  |  '));
+  if (PROG.note) L.push('  Twist: ' + PROG.note);
+  L.push('');
+  L.push('GUITAR SHAPES (' + t.strings.join(' ') + ', low to high)');
+  PROG.chords.forEach(c => {
+    L.push('  ' + (displayName(c.name) + '        ').slice(0, 9) + displayFrets(c.frets).map(f => f < 0 ? 'x' : f).join('-'));
+  });
+  L.push('');
+  L.push('VOCAL PITCHES');
+  PROG.chords.forEach(c => {
+    L.push('  ' + (displayName(c.name) + '        ').slice(0, 9) +
+      'Lead ' + midiName(sh(c.lead)) + ' (' + midiHz(sh(c.lead)).toFixed(1) + ' Hz)  ' +
+      'Harmony ' + midiName(sh(c.harmony[1])) + '  Choir ' + c.choir.map(m => midiName(sh(m))).join('/'));
+  });
+  L.push('');
+  L.push('SONG STRUCTURE');
+  S.sections.forEach((s, i) => {
+    const bar = '#'.repeat(Math.round(s.intensity / 10)) + '.'.repeat(10 - Math.round(s.intensity / 10));
+    L.push('  ' + String(i + 1).padStart(2, ' ') + '. ' + (s.type + '                  ').slice(0, 18) + '[' + bar + '] ' + s.intensity + '%');
+    if (s.notes) L.push('      Delivery: ' + s.notes.replace(/\s+/g, ' ').trim());
+  });
+  L.push('');
+  L.push('Exported ' + new Date().toLocaleString());
+  return L.join('\n') + '\n';
+}
+
+function toast(msg){
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+async function exportSheet(){
+  const text = songSheet();
+  const fname = ((S.title || 'velvet-song').trim().replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase() || 'velvet-song') + '.txt';
+  const cap = window.Capacitor;
+  const plugins = cap && cap.Plugins;
+  // Native Android: write to cache with Filesystem, then open the share sheet.
+  if (cap && cap.isNativePlatform && cap.isNativePlatform() && plugins && plugins.Filesystem && plugins.Share) {
+    try {
+      const res = await plugins.Filesystem.writeFile({ path: fname, data: text, directory: 'CACHE', encoding: 'utf8' });
+      await plugins.Share.share({ title: fname, text: text.slice(0, 200), files: [res.uri], dialogTitle: 'Share song sheet' });
+      return;
+    } catch (e) {
+      if (e && /cancel/i.test(String(e.message || e))) return;
+      try {
+        await plugins.Filesystem.writeFile({ path: fname, data: text, directory: 'DOCUMENTS', encoding: 'utf8' });
+        toast('Saved to Documents/' + fname); return;
+      } catch (e2) {}
+    }
+  }
+  // Web Share API with a file
+  try {
+    const file = new File([text], fname, { type: 'text/plain' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: fname }); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  // Download fallback
+  try {
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
+    const a = document.createElement('a'); a.href = url; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    toast('Downloaded ' + fname);
+  } catch (e) {
+    try { await navigator.clipboard.writeText(text); toast('Song sheet copied to clipboard'); } catch (e2) { toast('Export failed'); }
+  }
+}
+
+/* ================= Audio engine ================= */
+const Engine = {
+  ctx:null, master:null, dry:null, verb:null, playing:false, bar:0, step:0, nextTime:0, timer:null, uiBar:0, queue:[],
+  ensure(){
+    if (!this.ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      this.ctx = new AC();
+      const c = this.ctx;
+      const comp = c.createDynamicsCompressor();
+      comp.threshold.value = -14; comp.ratio.value = 4;
+      this.master = c.createGain(); this.master.gain.value = (+$('vol').value) / 100;
+      this.master.connect(comp); comp.connect(c.destination);
+      this.dry = c.createGain(); this.dry.connect(this.master);
+      // generated impulse response reverb (offline, no files)
+      const len = Math.floor(c.sampleRate * 2.4), ir = c.createBuffer(2, len, c.sampleRate);
+      for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/len, 3); }
+      this.verb = c.createConvolver(); this.verb.buffer = ir;
+      const vg = c.createGain(); vg.gain.value = 0.35; this.verb.connect(vg); vg.connect(this.master);
+    }
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+    return this.ctx;
+  },
+  out(node, wet){ node.connect(this.dry); if (wet) { const g = this.ctx.createGain(); g.gain.value = wet; node.connect(g); g.connect(this.verb); } },
+  env(g, t, a, peak, d, sus, rel){
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(peak, t + a);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak * sus), t + a + d);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + a + d + rel);
+  },
+  pluck(m, t, dur, vel){
+    const c = this.ctx, f = midiHz(m);
+    const o1 = c.createOscillator(), o2 = c.createOscillator(), lp = c.createBiquadFilter(), g = c.createGain();
+    o1.type = 'triangle'; o1.frequency.value = f; o2.type = 'sine'; o2.frequency.value = f * 2;
+    lp.type = 'lowpass'; lp.frequency.setValueAtTime(Math.min(9000, f * 8), t); lp.frequency.exponentialRampToValueAtTime(Math.max(200, f * 1.5), t + dur);
+    const g2 = c.createGain(); g2.gain.value = 0.3;
+    o1.connect(lp); o2.connect(g2); g2.connect(lp); lp.connect(g);
+    this.env(g, t, 0.005, 0.32 * vel, 0.18, 0.35, dur);
+    this.out(g, 0.5);
+    o1.start(t); o2.start(t); o1.stop(t + dur + 0.4); o2.stop(t + dur + 0.4);
+  },
+  pad(notes, t, dur, vel){
+    const c = this.ctx, lp = c.createBiquadFilter(), g = c.createGain();
+    lp.type = 'lowpass'; lp.frequency.setValueAtTime(700, t); lp.frequency.linearRampToValueAtTime(1800, t + dur * 0.6); lp.Q.value = 0.7;
+    lp.connect(g);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.09 * vel, t + Math.min(0.6, dur * 0.3));
+    g.gain.setValueAtTime(0.09 * vel, t + dur * 0.85);
+    g.gain.linearRampToValueAtTime(0.0001, t + dur + 0.5);
+    this.out(g, 0.8);
+    notes.forEach(m => [-7, 7].forEach(dt => {
+      const o = c.createOscillator(); o.type = 'sawtooth'; o.frequency.value = midiHz(m); o.detune.value = dt;
+      o.connect(lp); o.start(t); o.stop(t + dur + 0.6);
+    }));
+  },
+  bass(m, t, dur, vel){
+    const c = this.ctx, o = c.createOscillator(), s = c.createOscillator(), lp = c.createBiquadFilter(), g = c.createGain();
+    o.type = 'triangle'; o.frequency.value = midiHz(m); s.type = 'sine'; s.frequency.value = midiHz(m) / 2;
+    lp.type = 'lowpass'; lp.frequency.value = 600;
+    o.connect(lp); s.connect(lp); lp.connect(g);
+    this.env(g, t, 0.01, 0.4 * vel, 0.25, 0.5, dur);
+    this.out(g, 0.05);
+    o.start(t); s.start(t); o.stop(t + dur + 0.4); s.stop(t + dur + 0.4);
+  },
+  voice(m, t, dur, vel, detune){
+    const c = this.ctx, f = midiHz(m);
+    const o = c.createOscillator(); o.type = 'sawtooth'; o.frequency.value = f; o.detune.value = detune || 0;
+    const lfo = c.createOscillator(), lg = c.createGain(); lfo.frequency.value = 5.2; lg.gain.setValueAtTime(0, t); lg.gain.linearRampToValueAtTime(f * 0.012, t + 0.5);
+    lfo.connect(lg); lg.connect(o.frequency);
+    const g = c.createGain();
+    // vowel "ah" formants
+    [[800, 1, 6], [1150, 0.6, 8], [2900, 0.25, 10]].forEach(([fr, amp, q]) => {
+      const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = fr; bp.Q.value = q;
+      const a = c.createGain(); a.gain.value = amp; o.connect(bp); bp.connect(a); a.connect(g);
+    });
+    const body = c.createBiquadFilter(); body.type = 'lowpass'; body.frequency.value = 900; const bg = c.createGain(); bg.gain.value = 0.25;
+    o.connect(body); body.connect(bg); bg.connect(g);
+    const v = c.createGain();
+    v.gain.setValueAtTime(0.0001, t);
+    v.gain.linearRampToValueAtTime(0.5 * vel, t + 0.12);
+    v.gain.setValueAtTime(0.5 * vel, t + Math.max(0.15, dur - 0.25));
+    v.gain.linearRampToValueAtTime(0.0001, t + dur);
+    g.connect(v); this.out(v, 0.9);
+    o.start(t); lfo.start(t); o.stop(t + dur + 0.05); lfo.stop(t + dur + 0.05);
+  },
+  click(t, accent){
+    const c = this.ctx, o = c.createOscillator(), g = c.createGain();
+    o.type = 'square'; o.frequency.value = accent ? 1600 : 1000;
+    g.gain.setValueAtTime(accent ? 0.18 : 0.1, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+    o.connect(g); this.out(g, 0); o.start(t); o.stop(t + 0.05);
+  },
+  pianoNote(m){ const t = this.ctx.currentTime + 0.01; this.pluck(m, t, 1.2, 1); },
+  chordNotes(c){ return c.piano.map(sh); },
+  bassNote(c){ return 36 + mod(sh(c.piano[0]), 12); },
+  singVoices(c, t, dur, parts){
+    parts.forEach((m, i) => {
+      const n = sh(m);
+      if (parts.length >= 3) { this.voice(n, t, dur, 0.55, -6); this.voice(n, t + 0.02, dur, 0.45, 7); }
+      else this.voice(n, t, dur, i === 0 ? 0.8 : 0.6, i ? 4 : 0);
+    });
+  },
+  auditionChord(i){
+    this.ensure(); if (this.playing) return;
+    const c = PROG.chords[i], t = this.ctx.currentTime + 0.02;
+    this.chordNotes(c).forEach((m, k) => this.pluck(m, t + k * 0.035, 1.6, 0.9));
+    this.bass(this.bassNote(c), t, 1.4, 0.8);
+  },
+  singCue(){
+    this.ensure();
+    const i = this.playing ? this.uiBar : S.sel;
+    const c = PROG.chords[i], t = this.ctx.currentTime + 0.03;
+    const parts = voiceParts(c).length ? voiceParts(c) : c.choir;
+    this.singVoices(c, t, 1.8, parts);
+    toast('Sing: ' + parts.map(m => midiName(sh(m))).join(' · '));
+  },
+  start(){
+    this.ensure();
+    this.playing = true; this.bar = S.sel; this.step = 0; this.nextTime = this.ctx.currentTime + 0.08; this.queue = [];
+    this.timer = setInterval(() => this.tick(), 25);
+    this.raf();
+    $('playBtn').innerHTML = '&#9632; Stop';
+  },
+  stop(){
+    this.playing = false; clearInterval(this.timer); this.timer = null;
+    $('playBtn').innerHTML = '&#9654; Play';
+    if (this.master) { const g = this.master.gain, t = this.ctx.currentTime, v = (+$('vol').value) / 100;
+      g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(0.0001, t + 0.15); g.linearRampToValueAtTime(v, t + 0.6); }
+    renderChords(); renderChordDetail();
+  },
+  tick(){
+    const ahead = this.ctx.currentTime + 0.12;
+    while (this.nextTime < ahead) { this.schedule(this.nextTime); this.advance(); }
+  },
+  // Grid: 4/4 grooves use 8 eighth-steps per bar; 6/8 uses 6 eighth-steps (dotted-quarter pulse).
+  steps(){ return S.groove === '68' ? 6 : 8; },
+  stepDur(){ return (60 / S.tempo) / 2; },
+  schedule(t){
+    const c = PROG.chords[this.bar % 4], st = this.step, n = this.steps(), sd = this.stepDur(), barDur = sd * n;
+    const notes = this.chordNotes(c), bassN = this.bassNote(c);
+    if (st === 0) this.queue.push({ t, bar: this.bar % 4 });
+    if (S.groove === 'arp') {
+      const order = [0, 1, 2, 3, 2, 1, 3, 2].map(k => notes[Math.min(k + 1, notes.length - 1)] || notes[1]);
+      this.pluck(st === 0 ? notes[1] : order[st], t, sd * 2.2, st % 2 ? 0.55 : 0.75);
+      if (st === 0) this.bass(bassN, t, sd * 3.5, 0.9);
+      if (st === 4) this.bass(bassN + 7 <= 52 ? bassN + 7 : bassN - 5, t, sd * 3.5, 0.7);
+    } else if (S.groove === 'pad') {
+      if (st === 0) { this.pad(notes.slice(1), t, barDur, 1); this.bass(bassN, t, barDur * 0.9, 0.8); }
+      if (st === 2 || st === 6) notes.slice(1).forEach((m, k) => this.pluck(m + 12 > 84 ? m : m + 12, t + k * 0.012, sd * 1.4, 0.35));
+    } else {
+      const accent = st === 0 || st === 3;
+      if (accent) this.bass(st === 0 ? bassN : bassN + 7 <= 52 ? bassN + 7 : bassN - 5, t, sd * 2.6, 0.85);
+      notes.slice(1).forEach((m, k) => this.pluck(m, t + k * 0.01, sd * 1.6, accent ? 0.5 : 0.28));
+    }
+    if (S.metro) {
+      if (S.groove === '68') this.click(t, st === 0); else if (st % 2 === 0) this.click(t, st === 0);
+    }
+    if (st === 0 && S.voice !== 'off') this.singVoices(c, t + 0.02, barDur * 0.92, voiceParts(c));
+  },
+  advance(){
+    this.nextTime += this.stepDur();
+    this.step++;
+    if (this.step >= this.steps()) { this.step = 0; this.bar = (this.bar + 1) % 4; }
+  },
+  raf(){
+    if (!this.playing) return;
+    const now = this.ctx.currentTime;
+    while (this.queue.length && this.queue[0].t <= now) {
+      this.uiBar = this.queue.shift().bar;
+      renderChords(); renderChordDetail();
+    }
+    requestAnimationFrame(() => this.raf());
+  }
+};
+
+/* ================= Wiring ================= */
+$('playBtn').addEventListener('click', () => Engine.playing ? Engine.stop() : Engine.start());
+$('cueBtn').addEventListener('click', () => Engine.singCue());
+$('tempo').addEventListener('input', e => { S.tempo = +e.target.value; $('tempoVal').textContent = S.tempo + ' BPM'; $('bpmBadge').textContent = S.tempo + ' BPM'; });
+$('metro').addEventListener('change', e => { S.metro = e.target.checked; store.set('metro', S.metro); });
+$('vol').addEventListener('input', e => { if (Engine.master) Engine.master.gain.setTargetAtTime(+e.target.value / 100, Engine.ctx.currentTime, 0.03); });
+$('songTitle').value = S.title;
+$('songTitle').addEventListener('input', e => { S.title = e.target.value; saveSong(); });
+SECTION_TYPES.forEach(t => { const o = document.createElement('option'); o.value = o.textContent = t; $('addType').appendChild(o); });
+$('addBtn').addEventListener('click', () => {
+  const t = $('addType').value;
+  S.sections.push({ type:t, intensity:DEFAULT_INT[t], notes:DEFAULT_NOTES[t] });
+  saveSong(); renderSections();
+});
+$('exportBtn').addEventListener('click', exportSheet);
+document.addEventListener('visibilitychange', () => { if (document.hidden && Engine.playing) Engine.stop(); });
+
+buildPiano();
+renderAll();
+window.__VS = { PRESETS, progression, songSheet, S, Engine, displayName, displayFrets };
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "velvet-and-strings",
+  "version": "1.0.0",
+  "description": "Velvet & Strings: Romance Songwriting Studio (Capacitor Android app)",
+  "private": true,
+  "scripts": {
+    "sync": "cap sync android",
+    "build:apk": "cap sync android && cd android && ./gradlew assembleDebug",
+    "check": "node scripts/check.mjs"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.0",
+    "@capacitor/core": "^7.4.0",
+    "@capacitor/filesystem": "^7.1.9",
+    "@capacitor/share": "^7.0.4"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.0"
+  }
+}
