@@ -554,6 +554,19 @@ function sanitizeSong(s){
 }
 
 let songs = (store.get('songs', []) || []).map(sanitizeSong);
+if (!songs.length) {
+  // one-time migration of the single song saved by version 1.x
+  try {
+    const old = k => { const v = localStorage.getItem('vs_' + k); return v === null ? null : JSON.parse(v); };
+    const secs = old('sections');
+    if (Array.isArray(secs) && secs.length) {
+      const sg = newSong(old('preset') || 'isaak', old('title') || '');
+      sg.tuning = old('tuning') || 'std'; sg.twist = old('twist') || 'orig'; sg.groove = old('groove') || sg.groove; sg.voice = old('voice') || 'lead';
+      sg.sections = secs.map(x => ({ ...x, loops: 2, lyrics: '' }));
+      songs = [sanitizeSong(sg)];
+    }
+  } catch (e) {}
+}
 if (!songs.length) songs = [newSong('isaak')];
 let S = {
   song: songs.find(s => s.id === store.get('current', '')) || songs[0],
