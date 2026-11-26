@@ -3,6 +3,8 @@
   "appName": "Velvet & Strings",
   "webDir": "www",
   "android": {
-    "backgroundColor": "#14060c"
-  }
+    "backgroundColor": "#120509",
+    "adjustMarginsForEdgeToEdge": "force"
+  },
+  "backgroundColor": "#120509"
 }

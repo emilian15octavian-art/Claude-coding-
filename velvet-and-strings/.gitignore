@@ -5,4 +5,3 @@ android/.gradle/
 android/local.properties
 *.apk
 !dist/*.apk
-screenshot.png
