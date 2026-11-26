@@ -8,7 +8,14 @@ Put hand-written notes (settings, external services) in the "Manual entries" tab
 | Artifact | Category | Path | Purpose | Updated |
 | :--- | :--- | :--- | :--- | :--- |
 | autonomous-core | skill | `.claude/skills/autonomous-core/SKILL.md` | Master autonomous engineering, multimodal course ingestion (video, audio, PPTX, PDF, web), free cloud offloading, bookkeeping, Git management, cross-session ... | 2026-11-26 |
+| claude-api-tool-use | skill | `.claude/skills/claude-api-tool-use/SKILL.md` | Implement tool use with the Claude Messages API — tool definitions Claude picks correctly, strict schemas, parallel tool calls, error results, streaming, and... | 2026-11-26 |
+| claude-code-automation | skill | `.claude/skills/claude-code-automation/SKILL.md` | Automate and enforce Claude Code with hooks, headless mode (claude -p), cloud scheduled tasks and CI. Use when adding a PreToolUse/PostToolUse/Stop hook, blo... | 2026-11-26 |
+| mcp-server-python | skill | `.claude/skills/mcp-server-python/SKILL.md` | Build, test and wire an MCP (Model Context Protocol) server in Python with FastMCP — tools, resources, resource templates, prompts, the MCP Inspector, stdio ... | 2026-11-26 |
+| skill-authoring | skill | `.claude/skills/skill-authoring/SKILL.md` | Create, configure, validate, share and troubleshoot Claude Code skills (SKILL.md). Use when writing a new skill, a skill doesn't trigger or load, the wrong s... | 2026-11-26 |
 | tool-registry | skill | `.claude/skills/tool-registry/SKILL.md` | Registry of vetted, smoke-tested tools, MCP connectors and skills installed by autonomous-core. Check here before searching for or installing a new tool. | 2026-11-26 |
+| verify-work | skill | `.claude/skills/verify-work/SKILL.md` | Verify finished code changes before reporting them done. Use after any refactor, bug fix, feature or unattended/scheduled run, or when asked "check your work... | 2026-11-26 |
+| academy.cpython-313 | script/__pycache__ | `.claude/library/scripts/python/__pycache__/academy.cpython-313.pyc` | � | 2026-11-26 |
+| academy | script/python | `.claude/library/scripts/python/academy.py` | Download Claude Academy (academy.claude.com) course outlines and public lesson text into staging/ for study notes. | 2026-11-26 |
 | ingest | script/python | `.claude/library/scripts/python/ingest.py` | Turn course material (PPTX, PDF, video/audio URL or file) into plain-text markdown for study notes. | 2026-11-26 |
 | update_index | script/python | `.claude/library/scripts/python/update_index.py` | Regenerate the auto section of the brain's library INDEX.md (zero LLM tokens). | 2026-11-26 |
 | fetch | mcp | `.mcp.json` | MCP server: `uvx mcp-server-fetch` | 2026-11-26 |
@@ -24,6 +31,7 @@ Put hand-written notes (settings, external services) in the "Manual entries" tab
 | index hook | setting | `.claude/settings.json` | PostToolUse Write\|Edit → `update_index.py` | 2026-11-26 |
 | cloud nodes | registry | `.claude/library/cloud-nodes.md` | Configured + candidate free compute targets | 2026-11-26 |
 | course catalog | registry | `.claude/library/courses/CATALOG.md` | Free courses + certificate status | 2026-11-26 |
+| Claude Academy | courses | `.claude/library/courses/anthropic-academy/` | certificate-checklist.md + notes for 8 studied courses | 2026-11-26 |
 | certificates | folder (local only) | `.claude/library/certificates/` | Earned certificates, git-ignored (public repo) | 2026-11-26 |
 | growth-log | log | `.claude/growth-log.md` | One line per daily run | 2026-11-26 |
 | daily run | scheduled task | claude.ai scheduled tasks | "Daily autonomous-core upgrade", 22:47 Europe/Bucharest | 2026-11-26 |

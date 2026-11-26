@@ -45,7 +45,7 @@ Helper: `library/scripts/python/ingest.py <file|url> [-o out.md] [--model small]
 ---
 
 ## 3. FREE COURSES & CERTIFICATES (INTEGRITY FIRST)
-- **Sources:** Anthropic Academy (`anthropic.skilljar.com`: Claude 101, Claude Code in Action, Building with the Claude API, MCP intro/advanced, Agent Skills, AI Fluency, Claude on Bedrock/Vertex, …), Hugging Face Courses, Kaggle Learn, Google Cloud Skills Boost, AWS Skill Builder, Coursera audit/financial aid. Catalogue them in `library/courses/CATALOG.md` (title, provider, URL, free?, certificate?, status). Verify the current list on the provider's site, never from memory.
+- **Sources:** Claude Academy at `academy.claude.com` (moved from anthropic.skilljar.com; lessons are public, sign-in only saves progress and issues badges: `python3 library/scripts/python/academy.py catalog|fetch <slug>` pulls outlines and lesson text into `staging/`, skipping quiz/assessment pages; checklist in `library/courses/anthropic-academy/`), Hugging Face Courses, Kaggle Learn, Google Cloud Skills Boost, AWS Skill Builder, Coursera audit/financial aid. Catalogue them in `library/courses/CATALOG.md` (title, provider, URL, free?, certificate?, status). Verify the current list on the provider's site, never from memory.
 - **Workflow:**
   1. Ingest lessons the owner has access to; build and test every hands-on lab (locally or on a free node) and commit lab code to the owner's repos.
   2. Write `library/courses/<slug>/practice-exam.md` (questions + explained answers) and quiz the owner interactively on request.

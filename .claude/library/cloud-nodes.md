@@ -10,7 +10,7 @@ Confidence: **official** = stated on the provider's own docs/pricing page · **r
 
 | Node | Type | How to use | Cost | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| Claude Code cloud (scheduled task) | Ephemeral Linux session (has gh, docker, ffmpeg, uvx, npx, python3, Chromium) | "Daily autonomous-core upgrade", 22:47 Europe/Bucharest, fresh session per run | Included in Claude plan | Container deleted after each session: persist via git push only. Outbound hosts limited by network policy: YouTube, Hugging Face model hosts and anthropic.skilljar.com are blocked (2026-11-26), so no Whisper or YouTube here |
+| Claude Code cloud (scheduled task) | Ephemeral Linux session (has gh, docker, ffmpeg, uvx, npx, python3, Chromium) | "Daily autonomous-core upgrade", 22:47 Europe/Bucharest, fresh session per run | Included in Claude plan | Container deleted after each session: persist via git push only. Outbound hosts limited by network policy: YouTube and Hugging Face model hosts are blocked (2026-11-26), so no Whisper or YouTube here; academy.claude.com is allowed |
 
 ## Candidates (audited 2026-11-26, not configured)
 

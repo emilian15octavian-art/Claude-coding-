@@ -1,17 +1,11 @@
 # Free Course Catalog
 
 Status: `todo` · `in-progress` · `notes-done` · `owner-certified`. Verify titles and availability on the provider's site before starting:
-lists drift (Anthropic Academy grew from 13 courses at launch in March 2026 to a reported 21 later in 2026).
+lists drift (Claude Academy: 29 courses on academy.claude.com, read live 2026-11-26).
 
 | Course | Provider | URL | Free? | Certificate? | Status | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Claude 101 | Anthropic Academy | https://anthropic.skilljar.com | yes | yes (free) | todo | non-technical start |
-| Claude Code 101 / Claude Code in Action | Anthropic Academy | https://anthropic.skilljar.com | yes | yes (free) | todo | developer start |
-| Building with the Claude API | Anthropic Academy | https://anthropic.skilljar.com | yes | yes (free) | todo | |
-| Introduction / Advanced Model Context Protocol | Anthropic Academy | https://anthropic.skilljar.com | yes | yes (free) | todo | |
-| Introduction to Agent Skills (+ subagents) | Anthropic Academy | https://anthropic.skilljar.com | yes | verify | todo | |
-| AI Fluency | Anthropic Academy | https://anthropic.skilljar.com | yes | yes (free) | todo | |
-| Claude on Amazon Bedrock / Google Vertex AI | Anthropic Academy | https://anthropic.skilljar.com | yes | verify | todo | |
+| Claude Academy (29 courses, 23 badges) | Anthropic | https://academy.claude.com/courses | yes | yes (free badges) | in-progress | moved from anthropic.skilljar.com; see `anthropic-academy/certificate-checklist.md` |
 | Hugging Face courses (LLM, Agents, MCP) | Hugging Face | https://huggingface.co/learn | yes | verify per course | todo | |
 | Kaggle Learn (Python, ML, GenAI) | Kaggle | https://www.kaggle.com/learn | yes | yes (free) | todo | |
 | Google Cloud Skills Boost (GenAI badges) | Google | https://www.cloudskillsboost.google | verify | badges | todo | |
