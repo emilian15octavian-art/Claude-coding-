@@ -6,7 +6,7 @@
  "winner": {
   "variant": 1,
   "hook": "Why *Christian metal* makes both sides angry",
-  "video": "/home/user/dip8one_campaign/cold/out/1126-b_v1.mp4",
+  "video": "out/1126-b_v1.mp4",
   "total": 95,
   "pass": true,
   "scores": {
@@ -67,7 +67,7 @@
   {
    "variant": 1,
    "hook": "Why *Christian metal* makes both sides angry",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-b_v1.mp4",
+   "video": "out/1126-b_v1.mp4",
    "total": 95,
    "pass": true,
    "scores": {
@@ -127,7 +127,7 @@
   {
    "variant": 2,
    "hook": "Church: too loud. Metalheads: too holy. *Us?*",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-b_v2.mp4",
+   "video": "out/1126-b_v2.mp4",
    "total": 91,
    "pass": true,
    "scores": {
@@ -187,7 +187,7 @@
   {
    "variant": 3,
    "hook": "Why the church and metal fans *don't trust* us",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-b_v3.mp4",
+   "video": "out/1126-b_v3.mp4",
    "total": 95,
    "pass": true,
    "scores": {

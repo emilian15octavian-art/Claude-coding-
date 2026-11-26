@@ -1,0 +1,272 @@
+[
+ {
+  "id": "1128-a",
+  "date": "2026-11-28",
+  "time": "12:30",
+  "song": "audio/insurrextion_mania.mp3",
+  "start": 40.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-24.jpg",
+   "src/assets/images/gallery/bd316-31.jpg",
+   "src/assets/images/gallery/bd316-38.jpg",
+   "src/assets/images/gallery/bd316-01.jpg",
+   "src/assets/images/gallery/bd316-12.jpg"
+  ],
+  "hooks": [
+   "*3 lies* every new musician believes",
+   "Why good music *doesn't* find its fans",
+   "Nobody tells new musicians *these 3 lies*"
+  ],
+  "beats": [
+   "Good music *finds* its audience.",
+   "Better gear makes you *sound pro*.",
+   "One viral post *fixes* everything."
+  ],
+  "payoff": "Consistency beats all three.",
+  "loop": "3 lies musicians believe about good music...",
+  "caption": "We believed all three for years. The only thing that moved the needle was showing up every day.\n\nWhich lie did you believe longest: 1, 2 or 3? Comment the number 👇\n\n#musicianlife #independentartist #metal #musicbusiness",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1128-b",
+  "date": "2026-11-28",
+  "time": "17:00",
+  "song": "audio/cornocopium.flac",
+  "start": 42.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-29.jpg",
+   "src/assets/images/gallery/bd316-36.jpg",
+   "src/assets/images/gallery/bd316-43.jpg",
+   "src/assets/images/gallery/bd316-09.jpg",
+   "src/assets/images/gallery/bd316-21.jpg"
+  ],
+  "hooks": [
+   "Why *support local music* doesn't work",
+   "Guilt won't fill a *venue*. Here's why",
+   "The truth: *guilt* doesn't support local music"
+  ],
+  "beats": [
+   "Guilt doesn't *sell tickets*.",
+   "People back what feels *theirs*.",
+   "Give fans a *role*, not a request."
+  ],
+  "payoff": "That's why we built a community.",
+  "loop": "Why guilt won't make anyone support local music",
+  "caption": "Asking people to support you out of guilt never worked for us. Giving them a part in the story did. That is the whole idea behind The Debt Collectors.\n\nWhat makes you actually support a small band? Comment one word 👇\n\n#localmusic #undergroundmetal #independentartist #metal",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1128-c",
+  "date": "2026-11-28",
+  "time": "21:30",
+  "song": "audio/insurrextion_mania.mp3",
+  "start": 108.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-34.jpg",
+   "src/assets/images/gallery/bd316-41.jpg",
+   "src/assets/images/gallery/bd316-06.jpg",
+   "src/assets/images/gallery/bd316-16.jpg",
+   "src/assets/images/gallery/bd316-26.jpg"
+  ],
+  "hooks": [
+   "Can a Christian *listen to metal*?",
+   "Why some churches *ban* heavy music",
+   "Is heavy *metal* sinful? Honest answer"
+  ],
+  "beats": [
+   "Some say the *sound* itself is sin.",
+   "David *shouted*, danced and wept.",
+   "Sound *carries* a message. It isn't one."
+  ],
+  "payoff": "Your answer below. Keep it kind.",
+  "loop": "Why can't a Christian listen to heavy metal?",
+  "caption": "Some people believe distortion itself is wrong. We think the message matters more than the volume: the Psalms are full of shouting and tears.\n\nCan a Christian listen to metal? Yes or no 👇\n\n#christianmetal #metal #faith #metalhead",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1129-a",
+  "date": "2026-11-29",
+  "time": "12:30",
+  "song": "audio/cornocopium.flac",
+  "start": 63.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-39.jpg",
+   "src/assets/images/gallery/bd316-04.jpg",
+   "src/assets/images/gallery/bd316-13.jpg",
+   "src/assets/images/gallery/bd316-24.jpg",
+   "src/assets/images/gallery/bd316-31.jpg"
+  ],
+  "hooks": [
+   "Why your mix sounds *bad on phones*",
+   "Your bass *disappears* on phones. Here's why",
+   "*3 fixes* when your mix dies on phones"
+  ],
+  "beats": [
+   "Phone speakers can't play *deep bass*.",
+   "Your kick lives *below* what they play.",
+   "Add *grit* so the bass still shows."
+  ],
+  "payoff": "Most fans hear you on a phone.",
+  "loop": "Why your mix sounds bad on phones",
+  "caption": "Phone speakers drop most of the low end, so a mix that slams in headphones can sound empty on a phone. Saturation adds harmonics the phone can play.\n\nProducers: what do you check your mixes on? Comment one word 👇\n\n#mixing #musicproduction #metal #homestudio",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1129-b",
+  "date": "2026-11-29",
+  "time": "17:00",
+  "song": "audio/insurrextion_mania.mp3",
+  "start": 156.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-44.jpg",
+   "src/assets/images/gallery/bd316-10.jpg",
+   "src/assets/images/gallery/bd316-22.jpg",
+   "src/assets/images/gallery/bd316-29.jpg",
+   "src/assets/images/gallery/bd316-36.jpg"
+  ],
+  "hooks": [
+   "Why *Sunday* is the best day for metal",
+   "Sunday church at 10. *Metal* at 6.",
+   "Why we go to church *and* play metal"
+  ],
+  "beats": [
+   "Morning: *hymns* and coffee.",
+   "Evening: *riffs* and noise.",
+   "Both say: you're *not alone*."
+  ],
+  "payoff": "Amen or headbang? Pick one.",
+  "loop": "Why Sunday church and metal go together",
+  "caption": "Sunday is the day both sides of us show up: the church in the morning and the band in the evening. Same message, different volume.\n\nAmen or headbang? Comment one 👇\n\n#christianmetal #sunday #metal #faith",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1129-c",
+  "date": "2026-11-29",
+  "time": "21:30",
+  "song": "audio/cornocopium.flac",
+  "start": 81.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-07.jpg",
+   "src/assets/images/gallery/bd316-18.jpg",
+   "src/assets/images/gallery/bd316-27.jpg",
+   "src/assets/images/gallery/bd316-34.jpg",
+   "src/assets/images/gallery/bd316-41.jpg"
+  ],
+  "hooks": [
+   "Why we sing about *doubt*",
+   "Why Christian songs *need* doubt",
+   "The truth about *doubt* and faith"
+  ],
+  "beats": [
+   "Faith never *tested* isn't faith yet.",
+   "The Psalms *doubt* out loud.",
+   "Honest songs reach *honest* people."
+  ],
+  "payoff": "Doubt isn't the opposite of faith.",
+  "loop": "Why faith songs need doubt",
+  "caption": "A lot of Christian music only sings the happy ending. We sing the middle too: the questions, the anger, the waiting. The Psalms did it first.\n\nDo you think doubt belongs in faith songs? Yes or no 👇\n\n#christianmetal #faith #metal #songwriting",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1130-a",
+  "date": "2026-11-30",
+  "time": "12:30",
+  "song": "audio/insurrextion_mania.mp3",
+  "start": 226.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-14.jpg",
+   "src/assets/images/gallery/bd316-25.jpg",
+   "src/assets/images/gallery/bd316-32.jpg",
+   "src/assets/images/gallery/bd316-39.jpg",
+   "src/assets/images/gallery/bd316-04.jpg"
+  ],
+  "hooks": [
+   "Why your day job *isn't* killing your dream",
+   "*3 ways* a day job helps your music",
+   "Day job = *no music*? Wrong."
+  ],
+  "beats": [
+   "It *pays* for the gear.",
+   "It gives you *stories* to write.",
+   "It forces *short*, sharp sessions."
+  ],
+  "payoff": "Every song we have was made after work.",
+  "loop": "Why a day job helps your music",
+  "caption": "Every song we have released was made after our day jobs. It is slower, but the job pays for the gear and gives us things worth writing about.\n\nMusicians: what is your day job? Reply in one word 👇\n\n#musicianlife #bandlife #independentartist #metal",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1130-b",
+  "date": "2026-11-30",
+  "time": "17:00",
+  "song": "audio/cornocopium.flac",
+  "start": 42.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-23.jpg",
+   "src/assets/images/gallery/bd316-30.jpg",
+   "src/assets/images/gallery/bd316-37.jpg",
+   "src/assets/images/gallery/bd316-44.jpg",
+   "src/assets/images/gallery/bd316-10.jpg"
+  ],
+  "hooks": [
+   "Why *drop tuning* sounds so heavy",
+   "Why low strings hit your *chest*",
+   "*3 reasons* low tuning feels heavy"
+  ],
+  "beats": [
+   "Lower notes mean *longer* waves.",
+   "More low end you *feel* in your chest.",
+   "Looser strings add *growl*."
+  ],
+  "payoff": "That's why our riffs sit so low.",
+  "loop": "Why low tuning sounds so heavy",
+  "caption": "Drop tunings move the riff into the range you feel as much as hear, and the looser strings add that growl. Same riff in standard tuning carries half the weight.\n\nGuitarists: what tuning do you play in? Comment it 👇\n\n#droptuning #guitar #metal #riffs",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ },
+ {
+  "id": "1130-c",
+  "date": "2026-11-30",
+  "time": "21:30",
+  "song": "audio/insurrextion_mania.mp3",
+  "start": 40.0,
+  "photos": [
+   "src/assets/images/gallery/bd316-28.jpg",
+   "src/assets/images/gallery/bd316-35.jpg",
+   "src/assets/images/gallery/bd316-42.jpg",
+   "src/assets/images/gallery/bd316-07.jpg",
+   "src/assets/images/gallery/bd316-18.jpg"
+  ],
+  "hooks": [
+   "Why metal fans are the *most loyal* fans",
+   "Streaming data: *metal* fans don't leave",
+   "Why one metal fan beats *100 likes*"
+  ],
+  "beats": [
+   "Metal listeners *stick* with bands longest.",
+   "They follow *bands*, not trends.",
+   "Earn one, keep them *for life*."
+  ],
+  "payoff": "That's who we make this for.",
+  "loop": "Why metal fans are the most loyal",
+  "caption": "When a big streaming service studied listening habits in 2014, metal fans came out as the most loyal of any genre. That is why we would rather earn one real fan than a thousand passing likes.\n\nMetalheads: which band have you followed longest? Comment it 👇\n\n#metal #metalhead #metalfans #christianmetal",
+  "hook_sec": 2.3,
+  "beat_sec": 2.4,
+  "payoff_sec": 2.6
+ }
+]

@@ -6,7 +6,7 @@
  "winner": {
   "variant": 1,
   "hook": "Why metal singers *don't* lose their voice",
-  "video": "/home/user/dip8one_campaign/cold/out/1126-c_v1.mp4",
+  "video": "out/1126-c_v1.mp4",
   "total": 95,
   "pass": true,
   "scores": {
@@ -67,7 +67,7 @@
   {
    "variant": 1,
    "hook": "Why metal singers *don't* lose their voice",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-c_v1.mp4",
+   "video": "out/1126-c_v1.mp4",
    "total": 95,
    "pass": true,
    "scores": {
@@ -127,7 +127,7 @@
   {
    "variant": 2,
    "hook": "Screaming wrecks your voice? *Not if* you do this",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-c_v2.mp4",
+   "video": "out/1126-c_v2.mp4",
    "total": 88,
    "pass": true,
    "scores": {
@@ -187,7 +187,7 @@
   {
    "variant": 3,
    "hook": "The truth about screaming: your *voice* is fine",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-c_v3.mp4",
+   "video": "out/1126-c_v3.mp4",
    "total": 92,
    "pass": true,
    "scores": {

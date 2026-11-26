@@ -1,0 +1,248 @@
+{
+ "id": "1128-c",
+ "date": "2026-11-28",
+ "time": "21:30",
+ "status": "PASS",
+ "winner": {
+  "variant": 2,
+  "hook": "Why some churches *ban* heavy music",
+  "video": "out/1128-c_v2.mp4",
+  "total": 96,
+  "pass": true,
+  "scores": {
+   "visual": {
+    "points": 20,
+    "notes": [
+     "hook readable on frame 0 (7.2% text pixels) +5",
+     "scene motion in first 3 s 8.9 +4",
+     "4.1 scene cuts per 10 s +6",
+     "brightness 55 +2",
+     "bottom zone clear of text +3"
+    ]
+   },
+   "audio": {
+    "points": 20,
+    "notes": [
+     "loudness -11.2 LUFS +6",
+     "starts with energy (first second 100% of average) +7",
+     "no dead air +4",
+     "length 12.1 s (loops well) +3"
+    ]
+   },
+   "text": {
+    "points": 20,
+    "notes": [
+     "6 words +4",
+     "curiosity trigger +4",
+     "specific detail +3",
+     "open loop +3",
+     "no self-promo in the hook +3",
+     "plain words +3"
+    ]
+   },
+   "captions": {
+    "points": 20,
+    "notes": [
+     "max 7 words per card +5",
+     "every card stays long enough to read +5",
+     "hook is the first frame +4",
+     "ending loops back into the hook +3",
+     "big text in the safe zone (engine layout) +3"
+    ]
+   },
+   "description": {
+    "points": 16,
+    "notes": [
+     "first line too long or just repeats the hook +0",
+     "niche keywords for Instagram search +3",
+     "one-word-answer question +4",
+     "4 hashtags incl. niche +3",
+     "rules ok (no Spotify, no link-first) +3",
+     "229 characters +3"
+    ]
+   }
+  }
+ },
+ "variants": [
+  {
+   "variant": 1,
+   "hook": "Can a Christian *listen to metal*?",
+   "video": "out/1128-c_v1.mp4",
+   "total": 92,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (6.2% text pixels) +5",
+      "scene motion in first 3 s 8.9 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 55 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.2 LUFS +6",
+      "starts with energy (first second 100% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 16,
+     "notes": [
+      "6 words +4",
+      "no curiosity trigger (why/how/nobody/mistake/truth/never/because...) +0",
+      "specific detail +3",
+      "open loop +3",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 20,
+     "notes": [
+      "max 7 words per card +5",
+      "every card stays long enough to read +5",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 16,
+     "notes": [
+      "first line too long or just repeats the hook +0",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "229 characters +3"
+     ]
+    }
+   }
+  },
+  {
+   "variant": 2,
+   "hook": "Why some churches *ban* heavy music",
+   "video": "out/1128-c_v2.mp4",
+   "total": 96,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (7.2% text pixels) +5",
+      "scene motion in first 3 s 8.9 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 55 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.2 LUFS +6",
+      "starts with energy (first second 100% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 20,
+     "notes": [
+      "6 words +4",
+      "curiosity trigger +4",
+      "specific detail +3",
+      "open loop +3",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 20,
+     "notes": [
+      "max 7 words per card +5",
+      "every card stays long enough to read +5",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 16,
+     "notes": [
+      "first line too long or just repeats the hook +0",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "229 characters +3"
+     ]
+    }
+   }
+  },
+  {
+   "variant": 3,
+   "hook": "Is heavy *metal* sinful? Honest answer",
+   "video": "out/1128-c_v3.mp4",
+   "total": 89,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (7.2% text pixels) +5",
+      "scene motion in first 3 s 8.4 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 55 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.2 LUFS +6",
+      "starts with energy (first second 100% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 13,
+     "notes": [
+      "6 words +4",
+      "no curiosity trigger (why/how/nobody/mistake/truth/never/because...) +0",
+      "specific detail +3",
+      "no open loop +0",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 20,
+     "notes": [
+      "max 7 words per card +5",
+      "every card stays long enough to read +5",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 16,
+     "notes": [
+      "first line too long or just repeats the hook +0",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "229 characters +3"
+     ]
+    }
+   }
+  }
+ ]
+}

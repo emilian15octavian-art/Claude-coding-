@@ -6,7 +6,7 @@
  "winner": {
   "variant": 3,
   "hook": "The real reason most bands *quit*",
-  "video": "/home/user/dip8one_campaign/cold/out/1127-c_v3.mp4",
+  "video": "out/1127-c_v3.mp4",
   "total": 96,
   "pass": true,
   "scores": {
@@ -67,7 +67,7 @@
   {
    "variant": 1,
    "hook": "Why most bands *quit* in year two",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-c_v1.mp4",
+   "video": "out/1127-c_v1.mp4",
    "total": 91,
    "pass": true,
    "scores": {
@@ -127,7 +127,7 @@
   {
    "variant": 2,
    "hook": "Nobody tells you year two is the *hardest*",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-c_v2.mp4",
+   "video": "out/1127-c_v2.mp4",
    "total": 88,
    "pass": true,
    "scores": {
@@ -187,7 +187,7 @@
   {
    "variant": 3,
    "hook": "The real reason most bands *quit*",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-c_v3.mp4",
+   "video": "out/1127-c_v3.mp4",
    "total": 96,
    "pass": true,
    "scores": {

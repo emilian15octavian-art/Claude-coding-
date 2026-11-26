@@ -6,7 +6,7 @@
  "winner": {
   "variant": 3,
   "hook": "Why silence makes this *drop* heavier",
-  "video": "/home/user/dip8one_campaign/cold/out/1127-b_v3.mp4",
+  "video": "out/1127-b_v3.mp4",
   "total": 98,
   "pass": true,
   "scores": {
@@ -67,7 +67,7 @@
   {
    "variant": 1,
    "hook": "Why this *drop* hits harder than it should",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-b_v1.mp4",
+   "video": "out/1127-b_v1.mp4",
    "total": 93,
    "pass": true,
    "scores": {
@@ -127,7 +127,7 @@
   {
    "variant": 2,
    "hook": "Wait for the *drop*. Turn it up first.",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-b_v2.mp4",
+   "video": "out/1127-b_v2.mp4",
    "total": 88,
    "pass": true,
    "scores": {
@@ -187,7 +187,7 @@
   {
    "variant": 3,
    "hook": "Why silence makes this *drop* heavier",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-b_v3.mp4",
+   "video": "out/1127-b_v3.mp4",
    "total": 98,
    "pass": true,
    "scores": {

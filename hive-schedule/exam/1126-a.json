@@ -6,7 +6,7 @@
  "winner": {
   "variant": 1,
   "hook": "Why your song got *12 plays*",
-  "video": "/home/user/dip8one_campaign/cold/out/1126-a_v1.mp4",
+  "video": "out/1126-a_v1.mp4",
   "total": 95,
   "pass": true,
   "scores": {
@@ -67,7 +67,7 @@
   {
    "variant": 1,
    "hook": "Why your song got *12 plays*",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-a_v1.mp4",
+   "video": "out/1126-a_v1.mp4",
    "total": 95,
    "pass": true,
    "scores": {
@@ -127,7 +127,7 @@
   {
    "variant": 2,
    "hook": "Your song didn't flop. *Nobody* saw it.",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-a_v2.mp4",
+   "video": "out/1126-a_v2.mp4",
    "total": 92,
    "pass": true,
    "scores": {
@@ -187,7 +187,7 @@
   {
    "variant": 3,
    "hook": "*3 reasons* your new song got ignored",
-   "video": "/home/user/dip8one_campaign/cold/out/1126-a_v3.mp4",
+   "video": "out/1126-a_v3.mp4",
    "total": 85,
    "pass": false,
    "scores": {

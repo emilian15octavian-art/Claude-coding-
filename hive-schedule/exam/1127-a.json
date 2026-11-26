@@ -6,7 +6,7 @@
  "winner": {
   "variant": 1,
   "hook": "Why angry people *calm down* with metal",
-  "video": "/home/user/dip8one_campaign/cold/out/1127-a_v1.mp4",
+  "video": "out/1127-a_v1.mp4",
   "total": 91,
   "pass": true,
   "scores": {
@@ -67,7 +67,7 @@
   {
    "variant": 1,
    "hook": "Why angry people *calm down* with metal",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-a_v1.mp4",
+   "video": "out/1127-a_v1.mp4",
    "total": 91,
    "pass": true,
    "scores": {
@@ -127,7 +127,7 @@
   {
    "variant": 2,
    "hook": "Metal makes you angry? Science says *no*",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-a_v2.mp4",
+   "video": "out/1127-a_v2.mp4",
    "total": 84,
    "pass": true,
    "scores": {
@@ -187,7 +187,7 @@
   {
    "variant": 3,
    "hook": "Why heavy music *calms* some people down",
-   "video": "/home/user/dip8one_campaign/cold/out/1127-a_v3.mp4",
+   "video": "out/1127-a_v3.mp4",
    "total": 88,
    "pass": true,
    "scores": {

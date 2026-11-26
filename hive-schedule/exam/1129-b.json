@@ -1,0 +1,248 @@
+{
+ "id": "1129-b",
+ "date": "2026-11-29",
+ "time": "17:00",
+ "status": "PASS",
+ "winner": {
+  "variant": 1,
+  "hook": "Why *Sunday* is the best day for metal",
+  "video": "out/1129-b_v1.mp4",
+  "total": 91,
+  "pass": true,
+  "scores": {
+   "visual": {
+    "points": 20,
+    "notes": [
+     "hook readable on frame 0 (7.5% text pixels) +5",
+     "scene motion in first 3 s 10.7 +4",
+     "4.1 scene cuts per 10 s +6",
+     "brightness 49 +2",
+     "bottom zone clear of text +3"
+    ]
+   },
+   "audio": {
+    "points": 20,
+    "notes": [
+     "loudness -11.1 LUFS +6",
+     "starts with energy (first second 102% of average) +7",
+     "no dead air +4",
+     "length 12.1 s (loops well) +3"
+    ]
+   },
+   "text": {
+    "points": 20,
+    "notes": [
+     "8 words +4",
+     "curiosity trigger +4",
+     "specific detail +3",
+     "open loop +3",
+     "no self-promo in the hook +3",
+     "plain words +3"
+    ]
+   },
+   "captions": {
+    "points": 15,
+    "notes": [
+     "max 8 words per card +5",
+     "cards [0] flash by too fast +0",
+     "hook is the first frame +4",
+     "ending loops back into the hook +3",
+     "big text in the safe zone (engine layout) +3"
+    ]
+   },
+   "description": {
+    "points": 16,
+    "notes": [
+     "first line too long or just repeats the hook +0",
+     "niche keywords for Instagram search +3",
+     "one-word-answer question +4",
+     "4 hashtags incl. niche +3",
+     "rules ok (no Spotify, no link-first) +3",
+     "202 characters +3"
+    ]
+   }
+  }
+ },
+ "variants": [
+  {
+   "variant": 1,
+   "hook": "Why *Sunday* is the best day for metal",
+   "video": "out/1129-b_v1.mp4",
+   "total": 91,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (7.5% text pixels) +5",
+      "scene motion in first 3 s 10.7 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 49 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.1 LUFS +6",
+      "starts with energy (first second 102% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 20,
+     "notes": [
+      "8 words +4",
+      "curiosity trigger +4",
+      "specific detail +3",
+      "open loop +3",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 15,
+     "notes": [
+      "max 8 words per card +5",
+      "cards [0] flash by too fast +0",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 16,
+     "notes": [
+      "first line too long or just repeats the hook +0",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "202 characters +3"
+     ]
+    }
+   }
+  },
+  {
+   "variant": 2,
+   "hook": "Sunday church at 10. *Metal* at 6.",
+   "video": "out/1129-b_v2.mp4",
+   "total": 84,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (6.4% text pixels) +5",
+      "scene motion in first 3 s 10.4 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 49 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.1 LUFS +6",
+      "starts with energy (first second 102% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 13,
+     "notes": [
+      "7 words +4",
+      "no curiosity trigger (why/how/nobody/mistake/truth/never/because...) +0",
+      "specific detail +3",
+      "no open loop +0",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 15,
+     "notes": [
+      "max 7 words per card +5",
+      "cards [0] flash by too fast +0",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 16,
+     "notes": [
+      "first line too long or just repeats the hook +0",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "202 characters +3"
+     ]
+    }
+   }
+  },
+  {
+   "variant": 3,
+   "hook": "Why we go to church *and* play metal",
+   "video": "out/1129-b_v3.mp4",
+   "total": 91,
+   "pass": true,
+   "scores": {
+    "visual": {
+     "points": 20,
+     "notes": [
+      "hook readable on frame 0 (7.2% text pixels) +5",
+      "scene motion in first 3 s 10.1 +4",
+      "4.1 scene cuts per 10 s +6",
+      "brightness 49 +2",
+      "bottom zone clear of text +3"
+     ]
+    },
+    "audio": {
+     "points": 20,
+     "notes": [
+      "loudness -11.1 LUFS +6",
+      "starts with energy (first second 102% of average) +7",
+      "no dead air +4",
+      "length 12.1 s (loops well) +3"
+     ]
+    },
+    "text": {
+     "points": 20,
+     "notes": [
+      "8 words +4",
+      "curiosity trigger +4",
+      "specific detail +3",
+      "open loop +3",
+      "no self-promo in the hook +3",
+      "plain words +3"
+     ]
+    },
+    "captions": {
+     "points": 15,
+     "notes": [
+      "max 8 words per card +5",
+      "cards [0] flash by too fast +0",
+      "hook is the first frame +4",
+      "ending loops back into the hook +3",
+      "big text in the safe zone (engine layout) +3"
+     ]
+    },
+    "description": {
+     "points": 16,
+     "notes": [
+      "first line too long or just repeats the hook +0",
+      "niche keywords for Instagram search +3",
+      "one-word-answer question +4",
+      "4 hashtags incl. niche +3",
+      "rules ok (no Spotify, no link-first) +3",
+      "202 characters +3"
+     ]
+    }
+   }
+  }
+ ]
+}
