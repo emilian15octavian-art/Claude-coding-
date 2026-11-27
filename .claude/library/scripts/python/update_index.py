@@ -105,7 +105,8 @@ def rows(brain: Path, root: Path) -> list:
         base = brain / "library" / kind
         if not base.is_dir():
             continue
-        for f in sorted(p for p in base.rglob("*") if p.is_file() and not p.name.startswith(".")):
+        for f in sorted(p for p in base.rglob("*") if p.is_file() and not p.name.startswith(".")
+                        and "__pycache__" not in p.parts and p.suffix not in (".pyc", ".pyo")):
             category = f"{kind[:-1]}/{f.parent.name}"
             out.append((category, f.stem, rel(f), first_meaningful_line(f), updated(f)))
     mcp = root / ".mcp.json"
