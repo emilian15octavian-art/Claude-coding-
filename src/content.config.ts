@@ -93,6 +93,8 @@ const settings = defineCollection({
       cloudflareAnalyticsToken: z.string().nullable(),
       googleSiteVerification: z.string().nullable(),
       bingSiteVerification: z.string().nullable(),
+      /** Ko-fi page for the Support box (https://ko-fi.com/yourname). The box stays hidden until this is set. */
+      kofiUrl: optionalUrl,
     }),
     shipping: z.object({
       romaniaRON: z.number().nonnegative(), europeEUR: z.number().nonnegative(),

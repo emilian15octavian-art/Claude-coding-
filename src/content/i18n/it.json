@@ -292,6 +292,8 @@
     "home": "Torna alla home"
   },
   "carousel": {"prev": "Precedente", "next": "Successivo", "pause": "Metti in pausa lo scorrimento", "play": "Avvia lo scorrimento"},
+  "wall": {"title": "Dalla band", "intro": "Notizie, foto e parole da parte nostra. Reagisci, commenta, saluta.", "empty": "Ancora nessun post. Torna presto.", "comments": "commenti", "write": "Scrivi un commento", "name": "Il tuo nome", "comment": "Il tuo commento", "send": "Pubblica", "rules": "Sii gentile. Mr. D.O.M. 🐒 rimuove automaticamente insulti, odio e spam.", "rejected": "Mr. D.O.M. non ha fatto passare il messaggio. Rispetto, per favore 🐒", "slow": "Piano: aspetta qualche secondo prima di pubblicare di nuovo.", "error": "Qualcosa è andato storto. Riprova tra poco.", "thanks": "Grazie! Il tuo commento è online.", "react": "Reagisci con", "loading": "Caricamento…"},
+  "support": {"title": "Tieni acceso il fuoco", "text": "Niente etichetta, niente grandi budget: solo due ragazzi che fanno metal sincero. Se i nostri brani ti hanno aiutato a superare qualcosa, 5 € aiutano a pagare studio, mix e il prossimo video.", "button": "Sostienici con 5 €", "note": "Ogni sostenitore riceve un grazie personale da noi. 🖤", "secure": "Pagamento sicuro con Ko-fi · PayPal o carta · qualsiasi importo"},
   "dom": {
     "chip1": "Dove ascoltare?",
     "chip2": "Prossimo concerto?",

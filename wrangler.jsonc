@@ -10,6 +10,8 @@
   "previews": {},
   // Mr. D.O.M. 🐒 uses Cloudflare Workers AI (free daily allowance; on the free plan it never bills).
   "ai": { "binding": "AI" },
+  // Fan wall storage (free KV). No id: Cloudflare creates the namespace automatically on the first deploy.
+  "kv_namespaces": [{ "binding": "WALL" }],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

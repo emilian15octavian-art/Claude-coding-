@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-05
+updated: 2026-11-06
 status: needs native review
 ---
 Esta política explica qué datos personales se tratan cuando usas esta web, por qué y cuáles son tus derechos según el Reglamento General de Protección de Datos (RGPD, Reglamento (UE) 2016/679).
@@ -23,6 +23,9 @@ El responsable del tratamiento es la entidad jurídica que aparece en el recuadr
 **Pedidos en la tienda.** Los pagos los procesa Stripe, que recoge directamente los datos de tu tarjeta; nosotros nunca los vemos. Para entregar tu pedido recibimos tu nombre, dirección de entrega, correo y detalles del pedido. Base jurídica: ejecución del contrato (art. 6.1.b) y nuestras obligaciones legales (art. 6.1.c), por ejemplo conservar la contabilidad durante el plazo que exige la ley rumana (Ley n.º 82/1991).
 
 **Vídeos y reproductores de música.** Los reproductores de YouTube y SoundCloud se cargan **solo después de que hagas clic**. Hasta entonces no se envía ningún dato a esos servicios. Después del clic se aplican sus propias políticas.
+
+
+**Muro de fans.** Si comentas una publicación en la página de inicio, el nombre que elijas y tu comentario se publican allí y se guardan en Cloudflare (Workers KV) hasta que los borremos. Antes de publicarse, el comentario se revisa automáticamente en busca de insultos, odio y spam (filtro de palabras y Cloudflare Workers AI). No se guarda tu dirección IP; un marcador anónimo de corta duración (borrado en menos de un día) evita publicaciones repetidas. Para que se elimine un comentario, usa el formulario de contacto. Base jurídica: tu consentimiento al publicar (art. 6.1.a) y nuestro interés legítimo en una comunidad segura (art. 6.1.f).
 
 **Asistente de chat (Mr. D.O.M.).** Si escribes una pregunta en el chat, la pregunta y la conversación hasta ese momento se envían a Cloudflare Workers AI para generar la respuesta. No guardamos las conversaciones ni las usamos para nada más. No escribas datos personales. Base jurídica: nuestro interés legítimo en responder a los visitantes (art. 6.1.f).
 

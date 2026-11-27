@@ -292,6 +292,8 @@
     "home": "Back to the home page"
   },
   "carousel": {"prev": "Previous", "next": "Next", "pause": "Pause slideshow", "play": "Play slideshow"},
+  "wall": {"title": "From the band", "intro": "News, photos and words from us. React, comment, say hi.", "empty": "Nothing posted yet. Check back soon.", "comments": "comments", "write": "Write a comment", "name": "Your name", "comment": "Your comment", "send": "Post", "rules": "Be kind. Mr. D.O.M. 🐒 removes insults, hate and spam automatically.", "rejected": "Mr. D.O.M. didn't let that through. Keep it respectful, please 🐒", "slow": "Easy, tiger: wait a few seconds before posting again.", "error": "Something went wrong. Try again in a moment.", "thanks": "Thanks! Your comment is up.", "react": "React with", "loading": "Loading…"},
+  "support": {"title": "Keep the fire burning", "text": "No label, no big budget: just two guys making honest metal. If our songs got you through something, €5 helps pay for studio time, mixing and the next video.", "button": "Support us with €5", "note": "Every supporter gets a personal thank-you from us. 🖤", "secure": "Secure via Ko-fi · PayPal or card · any amount"},
   "dom": {
     "chip1": "Where can I listen?",
     "chip2": "Next show?",

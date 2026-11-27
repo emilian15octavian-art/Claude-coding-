@@ -292,6 +292,8 @@
     "home": "Volver al inicio"
   },
   "carousel": {"prev": "Anterior", "next": "Siguiente", "pause": "Pausar el carrusel", "play": "Reanudar el carrusel"},
+  "wall": {"title": "Desde la banda", "intro": "Noticias, fotos y palabras nuestras. Reacciona, comenta, saluda.", "empty": "Todavía no hay publicaciones. Vuelve pronto.", "comments": "comentarios", "write": "Escribe un comentario", "name": "Tu nombre", "comment": "Tu comentario", "send": "Publicar", "rules": "Sé amable. Mr. D.O.M. 🐒 elimina automáticamente insultos, odio y spam.", "rejected": "Mr. D.O.M. no dejó pasar eso. Con respeto, por favor 🐒", "slow": "Tranqui: espera unos segundos antes de volver a publicar.", "error": "Algo salió mal. Inténtalo de nuevo en un momento.", "thanks": "¡Gracias! Tu comentario ya está publicado.", "react": "Reaccionar con", "loading": "Cargando…"},
+  "support": {"title": "Mantén vivo el fuego", "text": "Sin discográfica ni gran presupuesto: solo dos tipos haciendo metal honesto. Si nuestras canciones te ayudaron a superar algo, 5 € ayudan a pagar el estudio, la mezcla y el próximo vídeo.", "button": "Apóyanos con 5 €", "note": "Cada persona que nos apoya recibe un agradecimiento personal. 🖤", "secure": "Pago seguro con Ko-fi · PayPal o tarjeta · cualquier cantidad"},
   "dom": {
     "chip1": "¿Dónde escuchar?",
     "chip2": "¿Próximo concierto?",

@@ -1,0 +1,119 @@
+---
+/**
+ * Fan wall: posts from the band (written in /admin/), fan reactions and comments.
+ * Data comes from /api/wall (worker/wall.js). Every comment is checked by Mr. D.O.M. before it appears.
+ */
+import { type Locale } from '../i18n/locales';
+import { t } from '../i18n/t';
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const k = ['empty', 'comments', 'write', 'name', 'comment', 'send', 'rules', 'rejected', 'slow', 'error', 'thanks', 'react', 'title'] as const;
+const msgs = Object.fromEntries(k.map((x) => [x, t(lang, `wall.${x}`)]));
+---
+<section class="section container" aria-labelledby="wall-title">
+  <h2 id="wall-title">{t(lang, 'wall.title')}</h2>
+  <p class="muted">{t(lang, 'wall.intro')}</p>
+  <div class="wall" data-wall data-lang={lang} data-msgs={JSON.stringify(msgs)}>
+    <p class="muted" data-wall-status>{t(lang, 'wall.loading')}</p>
+  </div>
+</section>
+
+<style>
+  .wall { display: grid; gap: var(--space-l); margin-block-start: var(--space-m); }
+  .wall :global(.post) { display: grid; gap: var(--space-s); padding: var(--space-m); border: 1px solid var(--border); border-radius: calc(var(--radius) * 2); background: var(--surface); }
+  .wall :global(.post-date) { font-size: var(--step--1); color: var(--text-muted); }
+  .wall :global(.post-text) { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .wall :global(.post-img) { inline-size: 100%; block-size: auto; max-block-size: 32rem; object-fit: cover; border-radius: var(--radius); background: var(--surface-2); }
+  .wall :global(.reacts) { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .wall :global(.react) { display: inline-flex; align-items: center; gap: 0.3rem; min-block-size: 44px; min-inline-size: 44px; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); color: var(--text); font: inherit; cursor: pointer; &:hover { border-color: var(--primary); } &[aria-pressed='true'] { border-color: var(--primary); background: var(--surface-2); } }
+  .wall :global(details summary) { cursor: pointer; min-block-size: 44px; display: flex; align-items: center; font-weight: 700; }
+  .wall :global(.comment) { padding: 0.5rem 0.75rem; border-radius: var(--radius); background: var(--surface-2); overflow-wrap: anywhere; }
+  .wall :global(.comment b) { margin-inline-end: 0.4rem; }
+  .wall :global(.cform) { display: grid; gap: 0.5rem; margin-block-start: 0.5rem; }
+  .wall :global(.cform .row) { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .wall :global(.cform input[name='name']) { flex: 1 1 10rem; }
+  .wall :global(.cform textarea) { min-block-size: 4.5rem; }
+  .wall :global(.hp) { position: absolute; inset-inline-start: -9999px; }
+  .wall :global(.cmsg) { font-size: var(--step--1); font-weight: 700; }
+</style>
+
+<script>
+  type Comment = { id: string; name: string; text: string; date: string };
+  type Post = { id: string; date: string; text: string; image: string | null; reactions: Record<string, number>; comments: Comment[] };
+  const root = document.querySelector<HTMLElement>('[data-wall]');
+  if (root) {
+    const m = JSON.parse(root.dataset.msgs!) as Record<string, string>;
+    const lang = root.dataset.lang!;
+    const fmt = (d: string) => new Date(d).toLocaleDateString(lang, { day: 'numeric', month: 'long', year: 'numeric' });
+    const el = <K extends keyof HTMLElementTagNameMap>(tag: K, props: Record<string, string> = {}, text?: string) => {
+      const e = document.createElement(tag);
+      for (const [a, v] of Object.entries(props)) e.setAttribute(a, v);
+      if (text != null) e.textContent = text;
+      return e;
+    };
+    const status = (text: string) => { root.replaceChildren(el('p', { class: 'muted' }, text)); };
+    const commentEl = (c: Comment) => { const p = el('p', { class: 'comment' }); p.append(el('b', {}, c.name), document.createTextNode(c.text)); return p; };
+
+    const render = (posts: Post[]) => {
+      if (!posts.length) return status(m.empty);
+      root.replaceChildren(...posts.map((post) => {
+        const art = el('article', { class: 'post', 'aria-label': `${m.title} · ${fmt(post.date)}` });
+        art.append(el('time', { class: 'post-date', datetime: post.date }, fmt(post.date)));
+        if (post.text) art.append(el('p', { class: 'post-text' }, post.text));
+        if (post.image) art.append(el('img', { class: 'post-img', src: post.image, alt: m.title, loading: 'lazy', decoding: 'async', width: '1280', height: '960' }));
+        const reacts = el('div', { class: 'reacts' });
+        for (const [emoji, n] of Object.entries(post.reactions)) {
+          const b = el('button', { type: 'button', class: 'react', 'aria-pressed': 'false', 'aria-label': `${m.react} ${emoji}` });
+          const count = el('span', {}, String(n));
+          b.append(document.createTextNode(emoji), count);
+          b.addEventListener('click', async () => {
+            if (b.getAttribute('aria-pressed') === 'true') return;
+            b.setAttribute('aria-pressed', 'true');
+            try {
+              const r = await fetch('/api/wall/react', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ postId: post.id, emoji }) });
+              const d = await r.json();
+              if (d.reactions) count.textContent = String(d.reactions[emoji]);
+            } catch { /* offline */ }
+          });
+          reacts.append(b);
+        }
+        art.append(reacts);
+
+        const det = el('details');
+        const sum = el('summary', {}, `💬 ${post.comments.length} ${m.comments}`);
+        const list = el('div', { class: 'stack' });
+        list.append(...post.comments.map(commentEl));
+        const form = el('form', { class: 'cform' });
+        const nameId = `n-${post.id}`, textId = `t-${post.id}`;
+        form.append(
+          el('label', { for: nameId, class: 'visually-hidden' }, m.name),
+          el('label', { for: textId, class: 'visually-hidden' }, m.comment),
+        );
+        const name = el('input', { id: nameId, class: 'input', name: 'name', maxlength: '40', minlength: '2', required: '', placeholder: m.name, autocomplete: 'nickname' });
+        const text = el('textarea', { id: textId, class: 'input', name: 'text', maxlength: '400', minlength: '2', required: '', placeholder: m.write });
+        const hp = el('input', { class: 'hp', name: 'website', tabindex: '-1', autocomplete: 'off', 'aria-hidden': 'true' });
+        const send = el('button', { class: 'btn btn-primary', type: 'submit' }, m.send);
+        const msg = el('p', { class: 'cmsg', role: 'status' });
+        const row = el('div', { class: 'row' }); row.append(name, send);
+        form.append(row, text, hp, el('p', { class: 'muted small' }, m.rules), msg);
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          send.setAttribute('disabled', '');
+          msg.textContent = '…';
+          try {
+            const r = await fetch('/api/wall/comment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ postId: post.id, name: (name as HTMLInputElement).value, text: (text as HTMLTextAreaElement).value, website: (hp as HTMLInputElement).value, lang }) });
+            const d = await r.json();
+            if (d.ok && d.comment) { list.append(commentEl(d.comment)); (text as HTMLTextAreaElement).value = ''; msg.textContent = m.thanks; post.comments.push(d.comment); sum.textContent = `💬 ${post.comments.length} ${m.comments}`; }
+            else msg.textContent = d.error === 'rejected' ? m.rejected : d.error === 'slow' ? m.slow : m.error;
+          } catch { msg.textContent = m.error; }
+          send.removeAttribute('disabled');
+        });
+        det.append(sum, list, form);
+        art.append(det);
+        return art;
+      }));
+    };
+
+    fetch('/api/wall').then((r) => (r.ok ? r.json() : { posts: [] })).then((d) => render(d.posts ?? [])).catch(() => status(m.empty));
+  }
+</script>

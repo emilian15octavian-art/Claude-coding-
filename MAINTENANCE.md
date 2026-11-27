@@ -105,3 +105,11 @@ npx playwright install chromium   # once, for the accessibility and interaction 
 npm run check                     # everything except Lighthouse
 npm run check:all                 # including Lighthouse (uses your Chrome; set CHROME_PATH if not found)
 ```
+
+## Fan wall (home page) and Support box
+
+- **Post as the band:** open `/admin/` on the site, enter the admin key, write a message and optionally add a photo (it is resized automatically). You can delete any post or comment there.
+- **The admin key** is the secret `ADMIN_KEY` in Cloudflare → Workers & Pages → **claude-coding** → Settings → Variables and Secrets. Change it there any time.
+- **Fans can only react and comment.** Every comment is checked before it appears: word filter (8 languages, disguised spellings too), Cloudflare's Llama Guard safety model, a toxicity check and a link filter; one comment per 30 seconds per visitor. Rejected comments are never saved.
+- **Free limits:** Cloudflare KV allows 1,000 writes a day (each comment or reaction is one write). If the wall ever gets that busy, tell Claude and it will batch reactions.
+- **Support box:** links to Ko-fi (`settings/site.json` → `services.kofiUrl`). Remove the link there to hide it.

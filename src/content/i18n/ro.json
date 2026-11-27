@@ -292,6 +292,8 @@
     "home": "Înapoi la pagina principală"
   },
   "carousel": {"prev": "Înapoi", "next": "Înainte", "pause": "Oprește derularea", "play": "Pornește derularea"},
+  "wall": {"title": "De la trupă", "intro": "Noutăți, fotografii și gânduri de la noi. Reacționează, comentează, salută-ne.", "empty": "Încă nu am postat nimic. Revino curând.", "comments": "comentarii", "write": "Scrie un comentariu", "name": "Numele tău", "comment": "Comentariul tău", "send": "Postează", "rules": "Fii de treabă. Mr. D.O.M. 🐒 șterge automat insultele, ura și spamul.", "rejected": "Mr. D.O.M. nu a lăsat mesajul să treacă. Păstrează respectul, te rog 🐒", "slow": "Ușurel: așteaptă câteva secunde înainte să postezi din nou.", "error": "Ceva n-a mers. Încearcă din nou peste puțin timp.", "thanks": "Mulțumim! Comentariul tău a apărut.", "react": "Reacționează cu", "loading": "Se încarcă…"},
+  "support": {"title": "Ține focul aprins", "text": "Fără casă de discuri, fără buget mare: doar doi oameni care fac metal sincer. Dacă piesele noastre te-au ajutat să treci peste ceva, 5 € ne ajută să plătim studioul, mixajul și următorul videoclip.", "button": "Susține-ne cu 5 €", "note": "Fiecare susținător primește un mulțumesc personal de la noi. 🖤", "secure": "Plată sigură prin Ko-fi · PayPal sau card · orice sumă"},
   "dom": {
     "chip1": "Unde pot asculta?",
     "chip2": "Următorul concert?",

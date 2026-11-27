@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-05
+updated: 2026-11-06
 status: needs legal review
 ---
 This policy explains what personal data is processed when you use this website, why, and what your rights are under the EU General Data Protection Regulation (GDPR, Regulation (EU) 2016/679).
@@ -23,6 +23,9 @@ The data controller is the legal entity shown in the box above (name, registrati
 **Shop orders.** Payments are processed by Stripe. Stripe collects your card details directly; we never see them. To deliver your order we receive your name, delivery address, e-mail address and order details. Legal basis: performance of the contract (Art. 6(1)(b)) and our legal obligations (Art. 6(1)(c)), for example keeping accounting records for the period required by Romanian law (Law no. 82/1991).
 
 **Videos and music players.** YouTube and SoundCloud players load **only after you click** on them. Until then no data is sent to those services. After you click, their own privacy policies apply.
+
+
+**Fan wall.** If you comment on a post on the home page, your chosen name and comment are published there and stored with Cloudflare (Workers KV) until we delete them. Before publishing, the comment is checked automatically for insults, hate and spam (word filter and Cloudflare Workers AI). Your IP address is not stored; a short-lived anonymous marker (deleted within a day) stops repeated posting. To have a comment removed, use the contact form. Legal basis: your consent when you post (Art. 6(1)(a)) and our legitimate interest in a safe community (Art. 6(1)(f)).
 
 **Chat assistant (Mr. D.O.M.).** If you type a question into the chat, the question and the conversation so far are sent to Cloudflare Workers AI to create the answer. We do not store conversations and do not use them for anything else. Please do not type personal data. Legal basis: our legitimate interest in answering visitors' questions (Art. 6(1)(f)).
 

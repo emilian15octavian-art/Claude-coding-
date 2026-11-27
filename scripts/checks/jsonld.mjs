@@ -17,6 +17,7 @@ let blocks = 0;
 for (const f of htmlFiles()) {
   const page = urlOf(f);
   const html = fs.readFileSync(f, 'utf8');
+  if (/name="robots" content="noindex/.test(html)) continue; // private pages (e.g. /admin/) have no search data
   const found = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   if (!found.length && !page.includes('404')) r.error(`${page}: no JSON-LD found`, 'Every page should render the schema graph from src/layouts/Base.astro.');
   for (const m of found) {

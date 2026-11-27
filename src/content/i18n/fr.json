@@ -292,6 +292,8 @@
     "home": "Retour à l'accueil"
   },
   "carousel": {"prev": "Précédent", "next": "Suivant", "pause": "Mettre le diaporama en pause", "play": "Lancer le diaporama"},
+  "wall": {"title": "De la part du groupe", "intro": "Nouvelles, photos et mots de notre part. Réagissez, commentez, dites bonjour.", "empty": "Rien de publié pour l'instant. Revenez bientôt.", "comments": "commentaires", "write": "Écrire un commentaire", "name": "Votre nom", "comment": "Votre commentaire", "send": "Publier", "rules": "Soyez bienveillants. Mr. D.O.M. 🐒 supprime automatiquement insultes, haine et spam.", "rejected": "Mr. D.O.M. n'a pas laissé passer ce message. Restez respectueux, s'il vous plaît 🐒", "slow": "Doucement : attendez quelques secondes avant de republier.", "error": "Un problème est survenu. Réessayez dans un instant.", "thanks": "Merci ! Votre commentaire est en ligne.", "react": "Réagir avec", "loading": "Chargement…"},
+  "support": {"title": "Entretenez la flamme", "text": "Pas de label, pas de gros budget : juste deux gars qui font du metal sincère. Si nos morceaux vous ont aidé à traverser quelque chose, 5 € aident à payer le studio, le mixage et la prochaine vidéo.", "button": "Nous soutenir avec 5 €", "note": "Chaque soutien reçoit un merci personnel de notre part. 🖤", "secure": "Paiement sécurisé via Ko-fi · PayPal ou carte · le montant de votre choix"},
   "dom": {
     "chip1": "Où écouter ?",
     "chip2": "Prochain concert ?",

@@ -2,6 +2,9 @@
 // wrangler.jsonc → assets.run_worker_first; everything else is served straight from dist/.
 //  - /google…html : Google's verification file (Cloudflare would otherwise redirect "/file.html" → "/file")
 //  - /api/dom     : Mr. D.O.M. 🐒, the band's monkey assistant (Cloudflare Workers AI, free daily allowance)
+//  - /api/wall…   : fan wall (band posts, fan reactions and moderated comments; see wall.js)
+import { wall } from './wall.js';
+
 const VERIFY = {
   '/google853763245a87759b.html': 'google-site-verification: google853763245a87759b.html',
 };
@@ -119,6 +122,7 @@ export default {
       return new Response(VERIFY[pathname], { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
     }
     if (pathname === '/api/dom') return domChat(request, env);
+    if (pathname === '/api/wall' || pathname.startsWith('/api/wall/')) return wall(request, env, pathname);
     return env.ASSETS.fetch(request);
   },
 };
