@@ -1,0 +1,10 @@
+{
+  "appId": "com.velvetstrings.studio",
+  "appName": "Velvet & Strings",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#120509",
+    "adjustMarginsForEdgeToEdge": "force"
+  },
+  "backgroundColor": "#120509"
+}
